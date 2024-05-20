@@ -25,12 +25,16 @@ Enter working directory
 
 Install dependencies
 
+    pip install django
+    pip install djangorestframework
+    python -m pip install django-debug-toolbar
+    
     pip install -r requirements.txt
-    py -m pip install "colorama >= 0.4.6"
 
 Migrate to database
 
     python manage.py makemigrations
+
     python manage.py migrate
 
 Create superuser
