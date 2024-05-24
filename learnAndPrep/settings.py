@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'auth_service.apps.AuthServiceConfig',
+    'questions.apps.QuestionsConfig',
     'rest_framework',
     "debug_toolbar",
 ]
