@@ -1,10 +1,10 @@
 from rest_framework import serializers
-from questions.models import Question, Subject, Chapter, Topic, Smcq, Mmcq, IntegerType
+from questions.models import Question, Subject, Chapter, Topic, AnswerSmcq, AnswerMmcq, AnswerIntegerType
   
 class SubjectSerializer(serializers.ModelSerializer):
   class Meta:
     model = Subject
-    fields = ('id', 'subject_name', 'subject_id')
+    fields = ('id', 'subject_name')
     
     
 class ChapterSerializer(serializers.ModelSerializer):
@@ -29,27 +29,26 @@ class TopicSerializer(serializers.ModelSerializer):
 class QuestionSerializer(serializers.ModelSerializer):
   class Meta:
     model = Question
-    fields = ('id', 'question', 'creator', 'created_at', 'topic_id')
+    fields = ('__all__')
     
-  def get_image_url(self, smcq):
+  def get_image_url(self, question):
     request = self.context.get('request')
-    photo_url = smcq.question.url
+    photo_url = question.question.url
     return request.build_absolute_uri(photo_url)
 
-class SmcqSerializer(QuestionSerializer):
+class AnswerSmcqSerializer(QuestionSerializer):
   class Meta:
-    model=Smcq
-    fields = QuestionSerializer.Meta.fields + ('correct_option',)
+    model=AnswerSmcq
+    fields = ('__all__')
     
-class MmcqSerializer(QuestionSerializer):
+class AnswerMmcqSerializer(QuestionSerializer):
   class Meta:
-    model=Mmcq
-    fields = QuestionSerializer.Meta.fields + ('correct_options','new')
-    
-class IntegerTypeSerializer(QuestionSerializer):
+    model=AnswerMmcq
+    fields = ('__all__')
+class AnswerIntegerTypeSerializer(QuestionSerializer):
   class Meta:
-    model=IntegerType
-    fields = QuestionSerializer.Meta.fields + ('correct_answer','new')
+    model=AnswerIntegerType
+    fields = ('__all__')
 
 
 class ChapterSerializer_Nested(serializers.ModelSerializer):

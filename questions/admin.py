@@ -3,20 +3,21 @@ from .models import *
 
 # Register your models here.
 class SmcqAdmin(admin.StackedInline):
-  model = Smcq
+  model = AnswerSmcq
 class MmcqAdmin(admin.StackedInline):
-  model = Mmcq
+  model = AnswerMmcq
 class IntegerTypeAdmin(admin.StackedInline):
-  model = IntegerType
+  model = AnswerIntegerType
 class QuestionAdmin(admin.ModelAdmin):
   inlines = [SmcqAdmin, MmcqAdmin, IntegerTypeAdmin]
   
 
-
-admin.site.register(Question)
-admin.site.register(IntegerType)
-admin.site.register(Mmcq)
-admin.site.register(Smcq)
 admin.site.register(Subject)
 admin.site.register(Chapter)
 admin.site.register(Topic)
+
+admin.site.register(Question)
+# admin.site.register(AnswerBase)
+admin.site.register(AnswerIntegerType)
+admin.site.register(AnswerMmcq)
+admin.site.register(AnswerSmcq)
