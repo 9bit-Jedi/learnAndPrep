@@ -1,0 +1,85 @@
+id,chapter_name,subject_id
+PH01,Units and Dimensions,PH
+PH02,Circular Motion,PH
+PH03,Kinematics,PH
+PH04,Laws of Motion,PH
+PH05,"Cnetre of Mass, Momentum & Collision",PH
+PH06,"Work, Energy, and Power",PH
+PH07,Rotational Motion,PH
+PH08,Gravitation,PH
+PH09,Properties of Solids and Liquids,PH
+PH10,KTG and Thermodynamics,PH
+PH11,Oscillations and Waves,PH
+PH12,SHM,PH
+PH13,Electrostatics,PH
+PH14,Current Electricity,PH
+PH15,Magnetic Effects of Current ,PH
+PH16,Capacitance,PH
+PH17,EMI,PH
+PH18,Alternating Current,PH
+PH19,Electromagnetic Waves,PH
+PH20,Optics,PH
+PH21,Modern Physics-1,PH
+PH22,Modern Physics-2,PH
+PH23,Electronic Devices,PH
+PH24,Communication Systems,PH
+PH25,Experimental Skills,PH
+CH01,Some Basic Concepts of Chemistry,CH
+CH02,Atomic Structure,CH
+CH03,Classification of Elements and Periodicity in Properties,CH
+CH04,Chemical Bonding and Molecular Structure,CH
+CH05,States of Matter: Gases and Liquids,CH
+CH06,Thermodynamics,CH
+CH07,Chemical Equilibrium,CH
+CH08,Redox Reactions,CH
+CH09,Hydrogen,CH
+CH10,s-Block Elements,CH
+CH11,p-Block Elements,CH
+CH12,Organic Chemistry - Some Basic Principles and Techniques,CH
+CH13,Hydrocarbons,CH
+CH14,Environmental Chemistry,CH
+CH15,Solid State,CH
+CH16,Solutions,CH
+CH17,Electrochemistry,CH
+CH18,Chemical Kinetics,CH
+CH19,Surface Chemistry,CH
+CH20,General Principles and Processes of Isolation of Elements,CH
+CH21,p- Block Elements,CH
+CH22,d and f Block Elements,CH
+CH23,Coordination Compounds,CH
+CH24,Haloalkanes and Haloarenes,CH
+CH25,"Alcohols, Phenols, and Ethers",CH
+CH26,"Aldehydes, Ketones, and Carboxylic Acids",CH
+CH27,Organic Compounds Containing Nitrogen,CH
+CH28,Biomolecules,CH
+CH29,Polymers,CH
+CH30,Chemistry in Everyday Life,CH
+CH31,Practical Organic Chemistry,CH
+CH32,Metallurgy,CH
+CH33,Salt Analysis,CH
+MA01,"Sets, Relations, and Functions",MA
+MA02,Straight Line,MA
+MA03,Circle,MA
+MA04,Parabola,MA
+MA05,Ellipse and Hyperbola,MA
+MA06,Complex Numbers,MA
+MA07,Quadratic Equation,MA
+MA08,Matrices and Determinants,MA
+MA09,"Permutations, Combinations",MA
+MA10,Mathematical Induction,MA
+MA11,Binomial Theorem ,MA
+MA12,Sequence and Series,MA
+MA13,Limit,MA
+MA14,Methoda of Differentiation,MA
+MA15,Integral Calculus,MA
+MA16,Aera under curves,MA
+MA17,Differential Equations,MA
+MA18,Coordinate Geometry,MA
+MA19,Three-Dimensional Geometry,MA
+MA20,Vector ,MA
+MA21,Probability,MA
+MA22,Statistics,MA
+MA23,Trigonometric Equations,MA
+MA24,Inverse Trigonometry,MA
+MA25,Properties of Triangle,MA
+MA26,Mathematical Reasoning,MA

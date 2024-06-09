@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSV File Uploader</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Upload CSV File</h1>
+        <form id="uploadForm" enctype="multipart/form-data">
+            <input type="file" id="csvFile" accept=".csv" />
+            <p id="fileName"></p>
+            
+            <select id="contentType" name="contentType">
+                <option value="subject">Subject</option>
+                <option value="chapter">Chapter</option>
+                <!-- <option value="topic">Topic</option> -->
+                <option value="question">Question</option>
+            </select>
+            
+            <button type="submit">Upload CSV</button>
+            <button onclick="logQuestions()">See subject list on console</button>
+        </form>
+        <div id="status"></div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'auth_service.apps.AuthServiceConfig',
     'questions.apps.QuestionsConfig',
     'uploader.apps.UploaderConfig',
+    'quiz.apps.QuizConfig',
     'rest_framework',
     "debug_toolbar",
     'corsheaders',

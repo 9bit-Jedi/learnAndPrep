@@ -3,16 +3,11 @@ from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404
 from django.core.validators import MinLengthValidator, RegexValidator
 
-from django.contrib.contenttypes.fields import GenericForeignKey
-from django.contrib.contenttypes.models import ContentType
-from django.contrib.contenttypes.fields import GenericRelation
+# from django.contrib.contenttypes.fields import GenericForeignKey
+# from django.contrib.contenttypes.models import ContentType
+# from django.contrib.contenttypes.fields import GenericRelation
 
 # Create your models here.
-
-# SUBJECTS = ["Physics", "Chemistry", "Maths"]
-# ALL_SUBS = sorted([(item, item) for item in SUBJECTS])
-
-
 class Subject(models.Model):
     SUBJECT_CHOICES = [
         ('PH', 'Physics'),
@@ -98,7 +93,7 @@ class Question(models.Model):
         ('MISSL', 'Missl'),
     ]
     
-    id = models.CharField(max_length=9, primary_key=True, validators=[MinLengthValidator(9), RegexValidator(r'^(CH)|(MA)|(PH)\d{7}$', "ID must be of format: Subject Letter + 2 digits")])
+    id = models.CharField(max_length=9, primary_key=True, validators=[MinLengthValidator(7), RegexValidator(r'^(CH)|(MA)|(PH)\d{5}$', "ID must be of format: Subject Letter + 2 digits")])
     chapter_id = models.ForeignKey(to=Chapter, on_delete=models.CASCADE, null=False, related_name='chapter_questions') #
     type = models.CharField(max_length=128, choices=TYPE_CHOICES)
     source = models.CharField(max_length=128, choices=SOURCE_CHOICES)

@@ -1,0 +1,6 @@
+id,type,source,chapter_id,creator,question
+PH01001,SMCQ,MODULE,PH01,admin,"\textbf{1.} If a\textsubscript{1}, a\textsubscript{2}, "
+PH02001,SMCQ,MODULE,PH02,admin,"a\textsubscript{3},...., a\textsubscript{n},..... are in A.P. such that"
+PH03001,SMCQ,ADV,PH03,admin,"a\textsubscript{4}-- a\textsubscript{7}+ a\textsubscript{10}= m, then"
+PH04001,SMCQ,MODULE,PH04,admin,"the sum of first 13terms of this A.P., is : \textbf{{[}JEE-MAINS Online"
+PH04002,MMCQ,MODULE,PH04,admin,"the sum of first 13terms of this A.P., is : \textbf{{[}JEE-MAINS Online"

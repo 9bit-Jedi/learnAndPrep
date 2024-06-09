@@ -15,23 +15,50 @@ from django.core import serializers
 
 # Create your views here.
   
-class GetQuestion(APIView):
+class GetQuestionAll(APIView):
   def get(self, request, format=None):
     queryset = Question.objects.all()
     serializer = QuestionSerializer(queryset, many=True)
     return Response(serializer.data, status=status.HTTP_200_OK)
   
-class GetMmcqAll(APIView):
-  def get(self, request, format=None):
-    queryset = AnswerMmcq.objects.all()
-    serializer = AnswerMmcqSerializer(queryset, many=True)
+class GetQuestionAllSrc(APIView):
+  def get(self, request, src, format=None):
+    queryset = Question.objects.filter(source = src)
+    # queryset = get_object_or_404(Question, source=src)
+    serializer = QuestionSerializer(queryset, many=True)
     return Response(serializer.data, status=status.HTTP_200_OK)
   
-class GetIntegerTypeAll(APIView):
-  def get(self, request, format=None):
-    queryset = AnswerIntegerType.objects.all()
-    serializer = AnswerIntegerTypeSerializer(queryset, many=True)
+class GetQuestion(APIView):
+  def get(self, request, question_id, format=None):
+    # question_id = request.GET.get('question_id')
+    queryset = get_object_or_404(Question, pk=question_id)
+    # queryset = Question.objects.all()
+    serializer = QuestionSerializer(queryset)
     return Response(serializer.data, status=status.HTTP_200_OK)
+
+class ChapterList_Subject(APIView):
+  def get(self, request, subject_id, format=None):
+    # subject_id = request.GET.get('subject_id')
+    # subject_id = get_object_or_404(Subject, subject_name__iexact=subject_name).id
+    chapters = Chapter.objects.filter(subject_id=subject_id)    ## only chapters with taht subject id
+    # chapters = Chapter.objects.all()
+    serializer = ChapterSerializer(chapters, many=True)  # Pass request to serializer
+    return Response(serializer.data)
+
+
+{
+# class GetMmcqAll(APIView):
+#   def get(self, request, format=None):
+#     queryset = AnswerMmcq.objects.all()
+#     serializer = AnswerMmcqSerializer(queryset, many=True)
+#     return Response(serializer.data, status=status.HTTP_200_OK)
+
+# class GetIntegerTypeAll(APIView):
+#   def get(self, request, format=None):
+#     queryset = AnswerIntegerType.objects.all()
+#     serializer = AnswerIntegerTypeSerializer(queryset, many=True)
+#     return Response(serializer.data, status=status.HTTP_200_OK)
+}
 
 def GetSmcq(request, question_id):
   if request.method == 'GET':
@@ -44,6 +71,15 @@ def GetSmcq(request, question_id):
       'correct_option': queryset.correct_option,
     }
     return JsonResponse(data)
+
+class GetAnswer(APIView):
+  def get(self, request, format=None):
+    question_id = request.GET.get('question_id')
+    # subject_id = get_object_or_404(Subject, subject_name__iexact=subject_name).id
+    chapters = Chapter.objects.filter(subject_id=subject_id)    ## only chapters with taht subject id
+    # chapters = Chapter.objects.all()
+    serializer = ChapterSerializer_Nested(chapters, many=True, context={'request': request})  # Pass request to serializer
+    return Response(serializer.data)
 
 def GetMmcq(request, question_id):
   if request.method == 'GET':
@@ -100,19 +136,20 @@ def GetIntegerType(request, question_id):
 #     chapters_queryset = get_object_or_404(Mmcq, pk=ch_id)
 
 
-class TopicList_Subject(APIView):
+class GetQuestionChapter(APIView): ##this
   def get(self, request, format=None):
-    subject_name = request.GET.get('subject_name')
-    subject_id = get_object_or_404(Subject, subject_name__iexact=subject_name).id
+    subject_id = request.GET.get('subject_id')
+    # subject_id = get_object_or_404(Subject, subject_name__iexact=subject_name).id
     chapters = Chapter.objects.filter(subject_id=subject_id)    ## only chapters with taht subject id
     # chapters = Chapter.objects.all()
     serializer = ChapterSerializer_Nested(chapters, many=True, context={'request': request})  # Pass request to serializer
     return Response(serializer.data)
+
       
-class TopicList_Chapter(APIView):
-  def get(self, request, format=None):
-    chapter_name = request.GET.get('chapter_name')
-    chapter_id = get_object_or_404(Chapter, chapter_name__iexact=chapter_name).id
+# class TopicList_Chapter(APIView):
+#   def get(self, request, format=None):
+#     chapter_name = request.GET.get('chapter_name')
+#     chapter_id = get_object_or_404(Chapter, chapter_name__iexact=chapter_name).id
     # print(chapter_id)
     # data={
     #   'subjects' : 'smthn'

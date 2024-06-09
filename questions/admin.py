@@ -14,7 +14,7 @@ class QuestionAdmin(admin.ModelAdmin):
 
 admin.site.register(Subject)
 admin.site.register(Chapter)
-admin.site.register(Topic)
+# admin.site.register(Topic)
 
 admin.site.register(Question)
 # admin.site.register(AnswerBase)
