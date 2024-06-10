@@ -8,8 +8,8 @@ from rest_framework.exceptions import NotFound
 from django.core.exceptions import ObjectDoesNotExist
 
 
-from .serializers import SubjectSerializer, ChapterSerializer, ChapterSerializer_Nested, TopicSerializer, QuestionSerializer, AnswerSmcqSerializer, AnswerMmcqSerializer, AnswerIntegerTypeSerializer
-from .models import Subject, Chapter, Topic, AnswerSmcq, AnswerMmcq, AnswerIntegerType, Question
+from .serializers import SubjectSerializer, ChapterSerializer, QuestionSerializer, AnswerSmcqSerializer, AnswerMmcqSerializer, AnswerIntegerTypeSerializer
+from .models import Subject, Chapter, AnswerSmcq, AnswerMmcq, AnswerIntegerType, Question
 
 from django.core import serializers
 
@@ -23,149 +23,100 @@ class GetQuestionAll(APIView):
   
 class GetQuestionAllSrc(APIView):
   def get(self, request, src, format=None):
-    queryset = Question.objects.filter(source = src)
-    # queryset = get_object_or_404(Question, source=src)
+    queryset = Question.objects.filter(source = src.upper())
+    serializer = QuestionSerializer(queryset, many=True)
+    return Response(serializer.data, status=status.HTTP_200_OK)
+
+class GetQuestionSrcChapter(APIView):
+  def get(self, request, src, chapter_id, format=None):
+    queryset = Question.objects.filter(source = src.upper()).filter(chapter_id=chapter_id.upper())
     serializer = QuestionSerializer(queryset, many=True)
     return Response(serializer.data, status=status.HTTP_200_OK)
   
 class GetQuestion(APIView):
   def get(self, request, question_id, format=None):
     # question_id = request.GET.get('question_id')
-    queryset = get_object_or_404(Question, pk=question_id)
+    queryset = get_object_or_404(Question, pk=question_id.upper())
     # queryset = Question.objects.all()
     serializer = QuestionSerializer(queryset)
     return Response(serializer.data, status=status.HTTP_200_OK)
 
 class ChapterList_Subject(APIView):
   def get(self, request, subject_id, format=None):
-    # subject_id = request.GET.get('subject_id')
-    # subject_id = get_object_or_404(Subject, subject_name__iexact=subject_name).id
-    chapters = Chapter.objects.filter(subject_id=subject_id)    ## only chapters with taht subject id
-    # chapters = Chapter.objects.all()
+    chapters = Chapter.objects.filter(subject_id=subject_id.upper())    ## only chapters with taht subject id
     serializer = ChapterSerializer(chapters, many=True)  # Pass request to serializer
     return Response(serializer.data)
 
-
-{
-# class GetMmcqAll(APIView):
-#   def get(self, request, format=None):
-#     queryset = AnswerMmcq.objects.all()
-#     serializer = AnswerMmcqSerializer(queryset, many=True)
-#     return Response(serializer.data, status=status.HTTP_200_OK)
-
-# class GetIntegerTypeAll(APIView):
-#   def get(self, request, format=None):
-#     queryset = AnswerIntegerType.objects.all()
-#     serializer = AnswerIntegerTypeSerializer(queryset, many=True)
-#     return Response(serializer.data, status=status.HTTP_200_OK)
-}
-
-def GetSmcq(request, question_id):
-  if request.method == 'GET':
-    queryset = get_object_or_404(AnswerSmcq, pk=question_id)
-    data = {
-      'question': queryset.question.url,
-      'creator': queryset.creator.username,
-      'created_at': queryset.created_at,
-      'topic_id': queryset.topic_id.id,
-      'correct_option': queryset.correct_option,
-    }
-    return JsonResponse(data)
+# def GetSmcq(request, question_id):
+#   if request.method == 'GET':
+#     queryset = get_object_or_404(AnswerSmcq, pk=question_id.upper())
+#     data = {
+#       'question': queryset.question.url,
+#       'creator': queryset.creator.username,
+#       'created_at': queryset.created_at,
+#       'topic_id': queryset.topic_id.id,
+#       'correct_option': queryset.correct_option,
+#     }
+#     return JsonResponse(data)
 
 class GetAnswer(APIView):
-  def get(self, request, format=None):
-    question_id = request.GET.get('question_id')
-    # subject_id = get_object_or_404(Subject, subject_name__iexact=subject_name).id
-    chapters = Chapter.objects.filter(subject_id=subject_id)    ## only chapters with taht subject id
-    # chapters = Chapter.objects.all()
-    serializer = ChapterSerializer_Nested(chapters, many=True, context={'request': request})  # Pass request to serializer
-    return Response(serializer.data)
-
-def GetMmcq(request, question_id):
-  if request.method == 'GET':
-    queryset = get_object_or_404(AnswerMmcq, pk=question_id)
-    data = {
-      'question': queryset.question.url,
-      'creator': queryset.creator.username,
-      'created_at': queryset.created_at,
-      'topic_id': queryset.topic_id.id,
-      'is_O1_correct': queryset.is_O1_correct,
-      'is_O2_correct': queryset.is_O2_correct,
-      'is_O3_correct': queryset.is_O3_correct,
-      'is_O4_correct': queryset.is_O4_correct,
-    }
-    return JsonResponse(data)
-  
-def GetIntegerType(request, question_id):
-  if request.method == 'GET':
-    queryset = get_object_or_404(AnswerIntegerType, pk=question_id)
-    # print(queryset)
-    data = {
-      'question': queryset.question.url,
-      'creator': queryset.creator.username,
-      'created_at': queryset.created_at,
-      'topic_id': queryset.topic_id.id,
-      'correct_answer': queryset.correct_answer
-    }
-    return JsonResponse(data)
-  
-# class FetchSubjects(APIView):
-#   def get(self, request, format=None):
-#     subjects = Subject.objects.all()
-#     serializer = SubjectSerializer(subjects, many=True)
-#     return HttpResponse(serializer.data, status=status.HTTP_200_OK)
-
-# class FetchChapters(APIView):
-#   def get(self, request, format=None):
-#     chapters = Chapter.objects.all()
-#     serializer = ChapterSerializer(chapters, many=True)
-#     return HttpResponse(serializer.data, status=status.HTTP_200_OK)
-
-# class ListTopics(APIView):
-#   def get(self, request, format=None):
-#     queryset = Topic.objects.all()
-#     serializer = TopicSerializer(queryset, many=True)
-#     return HttpResponse(serializer.data, status=status.HTTP_200_OK)
-  
-
-######################
-
-# def ListTopics(request, ch_name):
-#   if request.method == 'GET':
-#     ch_id = Chapter.objects.filter(chapter=ch_name)
-#     chapters_queryset = get_object_or_404(Mmcq, pk=ch_id)
-
-
-class GetQuestionChapter(APIView): ##this
-  def get(self, request, format=None):
-    subject_id = request.GET.get('subject_id')
-    # subject_id = get_object_or_404(Subject, subject_name__iexact=subject_name).id
-    chapters = Chapter.objects.filter(subject_id=subject_id)    ## only chapters with taht subject id
-    # chapters = Chapter.objects.all()
-    serializer = ChapterSerializer_Nested(chapters, many=True, context={'request': request})  # Pass request to serializer
-    return Response(serializer.data)
-
-      
-# class TopicList_Chapter(APIView):
-#   def get(self, request, format=None):
-#     chapter_name = request.GET.get('chapter_name')
-#     chapter_id = get_object_or_404(Chapter, chapter_name__iexact=chapter_name).id
-    # print(chapter_id)
-    # data={
-    #   'subjects' : 'smthn'
-    #   'data' : {
-    #     Topic.objects.all()
-    #   }
-    # }
-    ######  test nested json data  #####
+  def get(self, request, question_id, format=None):
     
-    topics = Topic.objects.filter(id=chapter_id)
-    serializer = TopicSerializer(topics, many=True)
-    for topic in topics:
-      print(topic)
-      print(Topic.get_total_question(topic))
+    ## only question with that question id
+    question = get_object_or_404(Question, id=question_id)
+
+    # queryset=None
+    if question.type == 'SMCQ':
+      queryset = AnswerSmcq.objects.get(question_id=question_id.upper())
+      serializer = AnswerSmcqSerializer(queryset)
+    if question.type == 'MMCQ':
+      queryset = AnswerMmcq.objects.get(question_id=question_id.upper())
+      serializer = AnswerMmcqSerializer(queryset)
+    if question.type == 'INT':
+      queryset = AnswerIntegerType.objects.get(question_id=question_id.upper())
+      serializer = AnswerIntegerTypeSerializer(queryset)
+    
     return Response(serializer.data, status=status.HTTP_200_OK)
+
+# def GetMmcq(request, question_id):
+#   if request.method == 'GET':
+#     queryset = get_object_or_404(AnswerMmcq, pk=question_id.upper())
+#     data = {
+#       'question': queryset.question.url,
+#       'creator': queryset.creator.username,
+#       'created_at': queryset.created_at,
+#       'topic_id': queryset.topic_id.id,
+#       'is_O1_correct': queryset.is_O1_correct,
+#       'is_O2_correct': queryset.is_O2_correct,
+#       'is_O3_correct': queryset.is_O3_correct,
+#       'is_O4_correct': queryset.is_O4_correct,
+#     }
+#     return JsonResponse(data)
   
+# def GetIntegerType(request, question_id):
+#   if request.method == 'GET':
+#     queryset = get_object_or_404(AnswerIntegerType, pk=question_id.upper())
+#     # print(queryset)
+#     data = {
+#       'question': queryset.question.url,
+#       'creator': queryset.creator.username,
+#       'created_at': queryset.created_at,
+#       'topic_id': queryset.topic_id.id,
+#       'correct_answer': queryset.correct_answer
+#     }
+#     return JsonResponse(data)
+  
+class Submit(APIView):
+  def get(self, request, question_id, format=None):
+    type = self.request.query_params.get('type')
+    if type == 'SMCQ':
+      queryset = AnswerSmcq.objects.filter(question_id=question_id.upper())
+    if not queryset.exists():
+      return Http404
+    serializer = AnswerSmcqSerializer(queryset)
+    print(serializer)
+    return HttpResponse(serializer.data, status=status.HTTP_200_OK)
+
 {
 # class ListTopics(APIView):
 #   def get(self, request, format=None):
@@ -213,5 +164,5 @@ class GetQuestionChapter(APIView): ##this
 
 class ViewImage(APIView):
   def get(self, request, image_name):
-    full_path = f'questions/images/{image_name}'
+    full_path = f'questions/questions/{image_name}'
     return FileResponse(open(full_path, 'rb'))

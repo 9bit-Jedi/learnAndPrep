@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from questions.models import Question, Subject, Chapter, Topic, AnswerSmcq, AnswerMmcq, AnswerIntegerType
+from questions.models import Question, Subject, Chapter, AnswerSmcq, AnswerMmcq, AnswerIntegerType
   
 class SubjectSerializer(serializers.ModelSerializer):
   class Meta:
@@ -15,16 +15,6 @@ class ChapterSerializer(serializers.ModelSerializer):
   class Meta:
     model = Chapter
     fields = ('id', 'chapter_name', 'subject_id')
-
-class TopicSerializer(serializers.ModelSerializer):
-  chapter_id = serializers.SlugRelatedField(
-    read_only=True,
-    slug_field='id'
-  )
-  class Meta:
-    model = Topic
-    fields = ('id', 'topic_name', 'chapter_id')
-    
 
 class QuestionSerializer(serializers.ModelSerializer):
   class Meta:
@@ -50,9 +40,9 @@ class AnswerIntegerTypeSerializer(QuestionSerializer):
     model=AnswerIntegerType
     fields = ('__all__')
 
-
-class ChapterSerializer_Nested(serializers.ModelSerializer):
-    topics = TopicSerializer(many=True, read_only=True)  # Nested serializer for topics
-    class Meta:
-        model = Chapter
-        fields = ['id', 'chapter_name', 'subject_id', 'topics']
+# nested attempt
+# class ChapterSerializer_Nested(serializers.ModelSerializer):
+#     topics = TopicSerializer(many=True, read_only=True)  # Nested serializer for topics
+#     class Meta:
+#         model = Chapter
+#         fields = ['id', 'chapter_name', 'subject_id', 'topics']

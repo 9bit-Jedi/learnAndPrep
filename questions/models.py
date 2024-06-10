@@ -38,43 +38,6 @@ class Chapter(models.Model):
     def __str__(self):
         return self.chapter_name
     
-class Topic(models.Model):
-    id = models.CharField(
-        max_length=6,
-        primary_key=True,
-        validators=[
-            MinLengthValidator(6),  
-            RegexValidator(
-                r'^(CH|MA|PH)\d{4}$',  
-                "ID must be of format: Subject Letter (CH, MA, or PH) + 4 digits" 
-            )
-        ]
-    )
-    topic_name = models.CharField(max_length=128)
-    chapter_id = models.ForeignKey(to=Chapter, on_delete=models.CASCADE, null=False, related_name='topics')
-    subject_id = models.ForeignKey(to=Subject, on_delete=models.CASCADE, null=True)
-    # total_questions = models.IntegerField(null=True, default=0) #
-    # solved_questions = models.IntegerField(null=True, default=0) #
-    
-    # managers
-    # objects = models.Manager() #default manager
-    # objects_custom = models.Manager() #my new custom manager
-    
-    
-    # def get_total_question(self):
-    #     # count = self.topic_question.all().count()        
-    #     # topic_id = Topic.objects_custom.filter(topic_name=self)
-    #     topic_id = get_object_or_404(Topic, topic_name__iexact=self).id
-    #     count = Question.objects.filter(topic_id=topic_id).count()
-    #     return count
-
-    # def get_solved_question(self):
-    #     count = Question.objects.filter(topic_id=self, solved_status=True).count()
-    #     return count
-    
-    def __str__(self):
-        return self.topic_name
-
 class Question(models.Model):
     
     TYPE_CHOICES = [
@@ -100,34 +63,19 @@ class Question(models.Model):
     question = models.CharField(max_length=10000)
     creator = models.ForeignKey(to=User, on_delete=models.SET_NULL, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
-    # answer = models.OneToOneField(to=AnswerBase, on_delete=models.SET_DEFAULT)
-    # solved_status = models.BooleanField(default=False, null=True)
     
-    # content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
-    # object_id = models.PositiveIntegerField()
-    # answer = GenericForeignKey('content_type', 'object_id')
     
-    # class Meta:
-    #     indexes = [
-    #         models.Index(fields=["content_type", "object_id"]),
-    #     ]
-
-# class AnswerBase(models.Model):
-#     # id = models.CharField(max_length=10, primary_key=True)
-#     # correct_option = models.CharField(max_length=32)
-#     solution = models.ImageField(upload_to='questions/solutions/')
-    
-#     class Meta:
-#         abstract = True
-    
-OPTIONS = ["A", "B", "C", "D"]
-ALL_OP = sorted([(item, item) for item in OPTIONS])
+OPTION_CHOICES = [('A', 'A'),('B', 'B'),('C', 'C'),('D', 'D'),]
 
 class AnswerSmcq(models.Model):
-    id = models.CharField(max_length=10, primary_key=True, editable=False)
-    question_id = models.OneToOneField(to = Question, on_delete=models.CASCADE, related_query_name="answer_smcq")
-    correct_option = models.CharField(max_length=1, choices=ALL_OP)
+    id = models.CharField(max_length=8, primary_key=True)
+    question_id = models.OneToOneField(Question, on_delete=models.CASCADE, related_query_name="answer_smcq")
+    correct_option = models.CharField(max_length=1, choices=OPTION_CHOICES)
     
+    def save(self, *args, **kwargs):
+        self.id = self.question_id.id + 'A'
+        super().save(*args, **kwargs)
+
     def __str__(self):
         return self.question_id.id
 
