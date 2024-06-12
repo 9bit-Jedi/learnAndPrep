@@ -71,7 +71,7 @@ class Question(models.Model):
     type = models.CharField(max_length=128, choices=TYPE_CHOICES)
     source = models.CharField(max_length=128, choices=SOURCE_CHOICES)
     # question = models.CharField(max_length=10000)
-    question = models.ImageField(upload_to='questions/questions/')
+    question = models.ImageField(upload_to='questions/questions/', null=True)
     creator = models.ForeignKey(to=User, on_delete=models.SET_NULL, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     

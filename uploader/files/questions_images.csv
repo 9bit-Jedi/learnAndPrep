@@ -1,0 +1,277 @@
+Question Number,question_id,subject_id,chapter_id,Chapter,type,source,creator,Image Path
+5,CH25001,CH,CH25,Alcohol Ether,SMCQ,MODULE,admin,../Screenshots/Chemistry/Alcohol Ether\question_1.png
+6,CH25002,CH,CH25,Alcohol Ether,SMCQ,MODULE,admin,../Screenshots/Chemistry/Alcohol Ether\question_2.png
+7,CH25003,CH,CH25,Alcohol Ether,SMCQ,MODULE,admin,../Screenshots/Chemistry/Alcohol Ether\question_3.png
+13,CH25004,CH,CH25,Alcohol Ether,SMCQ,MODULE,admin,../Screenshots/Chemistry/Alcohol Ether\question_8.png
+14,CH25005,CH,CH25,Alcohol Ether,SMCQ,MODULE,admin,../Screenshots/Chemistry/Alcohol Ether\question_9.png
+15,CH25006,CH,CH25,Alcohol Ether,SMCQ,MODULE,admin,../Screenshots/Chemistry/Alcohol Ether\question_10.png
+16,CH25007,CH,CH25,Alcohol Ether,SMCQ,MODULE,admin,../Screenshots/Chemistry/Alcohol Ether\question_11.png
+22,CH25008,CH,CH25,Alcohol Ether,SMCQ,MODULE,admin,../Screenshots/Chemistry/Alcohol Ether\question_17.png
+23,CH25009,CH,CH25,Alcohol Ether,SMCQ,MODULE,admin,../Screenshots/Chemistry/Alcohol Ether\question_18.png
+24,CH25010,CH,CH25,Alcohol Ether,SMCQ,MODULE,admin,../Screenshots/Chemistry/Alcohol Ether\question_19.png
+25,CH25011,CH,CH25,Alcohol Ether,SMCQ,MODULE,admin,../Screenshots/Chemistry/Alcohol Ether\question_20.png
+31,CH25012,CH,CH25,Alcohol Ether,SMCQ,MODULE,admin,../Screenshots/Chemistry/Alcohol Ether\question_26.png
+32,CH25013,CH,CH25,Alcohol Ether,SMCQ,MODULE,admin,../Screenshots/Chemistry/Alcohol Ether\question_27.png
+33,CH25014,CH,CH25,Alcohol Ether,SMCQ,MODULE,admin,../Screenshots/Chemistry/Alcohol Ether\question_28.png
+34,CH25015,CH,CH25,Alcohol Ether,SMCQ,MODULE,admin,../Screenshots/Chemistry/Alcohol Ether\question_29.png
+42,CH25016,CH,CH25,Alcohol Ether,SMCQ,MODULE,admin,../Screenshots/Chemistry/Alcohol Ether\question_35.png
+43,CH25017,CH,CH25,Alcohol Ether,SMCQ,MODULE,admin,../Screenshots/Chemistry/Alcohol Ether\question_36.png
+44,CH25018,CH,CH25,Alcohol Ether,SMCQ,MODULE,admin,../Screenshots/Chemistry/Alcohol Ether\question_37.png
+45,CH25019,CH,CH25,Alcohol Ether,SMCQ,MODULE,admin,../Screenshots/Chemistry/Alcohol Ether\question_38.png
+46,CH25020,CH,CH25,Alcohol Ether,SMCQ,MODULE,admin,../Screenshots/Chemistry/Alcohol Ether\question_39.png
+47,CH25021,CH,CH25,Alcohol Ether,SMCQ,MODULE,admin,../Screenshots/Chemistry/Alcohol Ether\question_40.png
+53,CH25022,CH,CH25,Alcohol Ether,SMCQ,MODULE,admin,../Screenshots/Chemistry/Alcohol Ether\question_48.png
+54,CH25023,CH,CH25,Alcohol Ether,SMCQ,MODULE,admin,../Screenshots/Chemistry/Alcohol Ether\question_49.png
+55,CH25024,CH,CH25,Alcohol Ether,SMCQ,MODULE,admin,../Screenshots/Chemistry/Alcohol Ether\question_50.png
+56,CH25025,CH,CH25,Alcohol Ether,SMCQ,MODULE,admin,../Screenshots/Chemistry/Alcohol Ether\question_51.png
+60,CH25026,CH,CH25,Alcohol Ether,SMCQ,MODULE,admin,../Screenshots/Chemistry/Alcohol Ether\question_57.png
+61,CH25027,CH,CH25,Alcohol Ether,SMCQ,MODULE,admin,../Screenshots/Chemistry/Alcohol Ether\question_58.png
+59,CH25028,CH,CH25,Alcohol Ether,SMCQ,MODULE,admin,../Screenshots/Chemistry/Alcohol Ether\question_59.png
+67,CH25029,CH,CH25,Alcohol Ether,SMCQ,MODULE,admin,../Screenshots/Chemistry/Alcohol Ether\question_62.png
+68,CH25030,CH,CH25,Alcohol Ether,SMCQ,MODULE,admin,../Screenshots/Chemistry/Alcohol Ether\question_63.png
+69,CH25031,CH,CH25,Alcohol Ether,SMCQ,MODULE,admin,../Screenshots/Chemistry/Alcohol Ether\question_64.png
+70,CH25032,CH,CH25,Alcohol Ether,SMCQ,MODULE,admin,../Screenshots/Chemistry/Alcohol Ether\question_65.png
+76,CH25033,CH,CH25,Alcohol Ether,SMCQ,MODULE,admin,../Screenshots/Chemistry/Alcohol Ether\question_71.png
+77,CH25034,CH,CH25,Alcohol Ether,SMCQ,MODULE,admin,../Screenshots/Chemistry/Alcohol Ether\question_72.png
+78,CH25035,CH,CH25,Alcohol Ether,SMCQ,MODULE,admin,../Screenshots/Chemistry/Alcohol Ether\question_73.png
+79,CH25036,CH,CH25,Alcohol Ether,SMCQ,MODULE,admin,../Screenshots/Chemistry/Alcohol Ether\question_74.png
+84,CH25037,CH,CH25,Alcohol Ether,SMCQ,MODULE,admin,../Screenshots/Chemistry/Alcohol Ether\question_80.png
+85,CH25038,CH,CH25,Alcohol Ether,SMCQ,MODULE,admin,../Screenshots/Chemistry/Alcohol Ether\question_82.png
+92,CH25039,CH,CH25,Alcohol Ether,SMCQ,MODULE,admin,../Screenshots/Chemistry/Alcohol Ether\question_86.png
+93,CH25040,CH,CH25,Alcohol Ether,SMCQ,MODULE,admin,../Screenshots/Chemistry/Alcohol Ether\question_89.png
+94,CH25041,CH,CH25,Alcohol Ether,SMCQ,MODULE,admin,../Screenshots/Chemistry/Alcohol Ether\question_90.png
+100,CH25042,CH,CH25,Alcohol Ether,SMCQ,MODULE,admin,../Screenshots/Chemistry/Alcohol Ether\question_95.png
+101,CH25043,CH,CH25,Alcohol Ether,SMCQ,MODULE,admin,../Screenshots/Chemistry/Alcohol Ether\question_96.png
+102,CH25044,CH,CH25,Alcohol Ether,SMCQ,MODULE,admin,../Screenshots/Chemistry/Alcohol Ether\question_97.png
+103,CH25045,CH,CH25,Alcohol Ether,SMCQ,MODULE,admin,../Screenshots/Chemistry/Alcohol Ether\question_98.png
+110,CH25046,CH,CH25,Alcohol Ether,SMCQ,MODULE,admin,../Screenshots/Chemistry/Alcohol Ether\question_104.png
+111,CH25047,CH,CH25,Alcohol Ether,SMCQ,MODULE,admin,../Screenshots/Chemistry/Alcohol Ether\question_105.png
+112,CH25048,CH,CH25,Alcohol Ether,SMCQ,MODULE,admin,../Screenshots/Chemistry/Alcohol Ether\question_106.png
+113,CH25049,CH,CH25,Alcohol Ether,SMCQ,MODULE,admin,../Screenshots/Chemistry/Alcohol Ether\question_107.png
+114,CH25050,CH,CH25,Alcohol Ether,SMCQ,MODULE,admin,../Screenshots/Chemistry/Alcohol Ether\question_108.png
+119,CH25051,CH,CH25,Alcohol Ether,SMCQ,MODULE,admin,../Screenshots/Chemistry/Alcohol Ether\question_115.png
+120,CH25052,CH,CH25,Alcohol Ether,SMCQ,MODULE,admin,../Screenshots/Chemistry/Alcohol Ether\question_116.png
+121,CH25053,CH,CH25,Alcohol Ether,SMCQ,MODULE,admin,../Screenshots/Chemistry/Alcohol Ether\question_117.png
+128,CH25054,CH,CH25,Alcohol Ether,SMCQ,MODULE,admin,../Screenshots/Chemistry/Alcohol Ether\question_122.png
+129,CH25055,CH,CH25,Alcohol Ether,SMCQ,MODULE,admin,../Screenshots/Chemistry/Alcohol Ether\question_123.png
+130,CH25056,CH,CH25,Alcohol Ether,SMCQ,MODULE,admin,../Screenshots/Chemistry/Alcohol Ether\question_124.png
+131,CH25057,CH,CH25,Alcohol Ether,SMCQ,MODULE,admin,../Screenshots/Chemistry/Alcohol Ether\question_125.png
+132,CH25058,CH,CH25,Alcohol Ether,SMCQ,MODULE,admin,../Screenshots/Chemistry/Alcohol Ether\question_126.png
+135,CH25059,CH,CH25,Alcohol Ether,SMCQ,MODULE,admin,../Screenshots/Chemistry/Alcohol Ether\question_133.png
+146,CH25060,CH,CH25,Alcohol Ether,SMCQ,MODULE,admin,../Screenshots/Chemistry/Alcohol Ether\question_136.png
+147,CH25061,CH,CH25,Alcohol Ether,SMCQ,MODULE,admin,../Screenshots/Chemistry/Alcohol Ether\question_137.png
+148,CH25062,CH,CH25,Alcohol Ether,SMCQ,MODULE,admin,../Screenshots/Chemistry/Alcohol Ether\question_138.png
+149,CH25063,CH,CH25,Alcohol Ether,SMCQ,MODULE,admin,../Screenshots/Chemistry/Alcohol Ether\question_139.png
+150,CH25064,CH,CH25,Alcohol Ether,SMCQ,MODULE,admin,../Screenshots/Chemistry/Alcohol Ether\question_140.png
+151,CH25065,CH,CH25,Alcohol Ether,SMCQ,MODULE,admin,../Screenshots/Chemistry/Alcohol Ether\question_141.png
+152,CH25066,CH,CH25,Alcohol Ether,SMCQ,MODULE,admin,../Screenshots/Chemistry/Alcohol Ether\question_142.png
+153,CH25067,CH,CH25,Alcohol Ether,SMCQ,MODULE,admin,../Screenshots/Chemistry/Alcohol Ether\question_143.png
+154,CH25068,CH,CH25,Alcohol Ether,SMCQ,MODULE,admin,../Screenshots/Chemistry/Alcohol Ether\question_144.png
+162,CH25069,CH,CH25,Alcohol Ether,INT,MODULE,admin,../Screenshots/Chemistry/Alcohol Ether\question_155.png
+163,CH25070,CH,CH25,Alcohol Ether,INT,MODULE,admin,../Screenshots/Chemistry/Alcohol Ether\question_156.png
+164,CH25071,CH,CH25,Alcohol Ether,INT,MODULE,admin,../Screenshots/Chemistry/Alcohol Ether\question_157.png
+165,CH25072,CH,CH25,Alcohol Ether,INT,MODULE,admin,../Screenshots/Chemistry/Alcohol Ether\question_158.png
+166,CH25073,CH,CH25,Alcohol Ether,INT,MODULE,admin,../Screenshots/Chemistry/Alcohol Ether\question_159.png
+167,CH25074,CH,CH25,Alcohol Ether,INT,MODULE,admin,../Screenshots/Chemistry/Alcohol Ether\question_160.png
+172,CH25075,CH,CH25,Alcohol Ether,INT,MODULE,admin,../Screenshots/Chemistry/Alcohol Ether\question_168.png
+173,CH25076,CH,CH25,Alcohol Ether,INT,MODULE,admin,../Screenshots/Chemistry/Alcohol Ether\question_169.png
+174,CH25077,CH,CH25,Alcohol Ether,INT,MODULE,admin,../Screenshots/Chemistry/Alcohol Ether\question_170.png
+178,CH25078,CH,CH25,Alcohol Ether,INT,MODULE,admin,../Screenshots/Chemistry/Alcohol Ether\question_175.png
+179,CH25079,CH,CH25,Alcohol Ether,INT,MODULE,admin,../Screenshots/Chemistry/Alcohol Ether\question_176.png
+184,CH25080,CH,CH25,Alcohol Ether,INT,MODULE,admin,../Screenshots/Chemistry/Alcohol Ether\question_180.png
+185,CH25081,CH,CH25,Alcohol Ether,INT,MODULE,admin,../Screenshots/Chemistry/Alcohol Ether\question_181.png
+186,CH25082,CH,CH25,Alcohol Ether,INT,MODULE,admin,../Screenshots/Chemistry/Alcohol Ether\question_182.png
+190,CH25083,CH,CH25,Alcohol Ether,INT,MODULE,admin,../Screenshots/Chemistry/Alcohol Ether\question_187.png
+191,CH25084,CH,CH25,Alcohol Ether,INT,MODULE,admin,../Screenshots/Chemistry/Alcohol Ether\question_188.png
+195,CH25085,CH,CH25,Alcohol Ether,INT,MODULE,admin,../Screenshots/Chemistry/Alcohol Ether\question_192.png
+196,CH25086,CH,CH25,Alcohol Ether,INT,MODULE,admin,../Screenshots/Chemistry/Alcohol Ether\question_193.png
+201,CH25087,CH,CH25,Alcohol Ether,INT,MODULE,admin,../Screenshots/Chemistry/Alcohol Ether\question_197.png
+202,CH25088,CH,CH25,Alcohol Ether,INT,MODULE,admin,../Screenshots/Chemistry/Alcohol Ether\question_198.png
+203,CH25089,CH,CH25,Alcohol Ether,INT,MODULE,admin,../Screenshots/Chemistry/Alcohol Ether\question_199.png
+208,CH25090,CH,CH25,Alcohol Ether,INT,MODULE,admin,../Screenshots/Chemistry/Alcohol Ether\question_204.png
+209,CH25091,CH,CH25,Alcohol Ether,INT,MODULE,admin,../Screenshots/Chemistry/Alcohol Ether\question_205.png
+210,CH25092,CH,CH25,Alcohol Ether,INT,MODULE,admin,../Screenshots/Chemistry/Alcohol Ether\question_206.png
+219,CH25093,CH,CH25,Alcohol Ether,INT,MODULE,admin,../Screenshots/Chemistry/Alcohol Ether\question_211.png
+220,CH25094,CH,CH25,Alcohol Ether,INT,MODULE,admin,../Screenshots/Chemistry/Alcohol Ether\question_212.png
+221,CH25095,CH,CH25,Alcohol Ether,INT,MODULE,admin,../Screenshots/Chemistry/Alcohol Ether\question_213.png
+222,CH25096,CH,CH25,Alcohol Ether,INT,MODULE,admin,../Screenshots/Chemistry/Alcohol Ether\question_214.png
+223,CH25097,CH,CH25,Alcohol Ether,INT,MODULE,admin,../Screenshots/Chemistry/Alcohol Ether\question_215.png
+224,CH25098,CH,CH25,Alcohol Ether,INT,MODULE,admin,../Screenshots/Chemistry/Alcohol Ether\question_216.png
+225,CH25099,CH,CH25,Alcohol Ether,INT,MODULE,admin,../Screenshots/Chemistry/Alcohol Ether\question_217.png
+232,CH25100,CH,CH25,Alcohol Ether,INT,MODULE,admin,../Screenshots/Chemistry/Alcohol Ether\question_226.png
+233,CH25101,CH,CH25,Alcohol Ether,INT,MODULE,admin,../Screenshots/Chemistry/Alcohol Ether\question_227.png
+234,CH25102,CH,CH25,Alcohol Ether,INT,MODULE,admin,../Screenshots/Chemistry/Alcohol Ether\question_228.png
+235,CH25103,CH,CH25,Alcohol Ether,INT,MODULE,admin,../Screenshots/Chemistry/Alcohol Ether\question_229.png
+236,CH25104,CH,CH25,Alcohol Ether,MMCQ,MODULE,admin,../Screenshots/Chemistry/Alcohol Ether\question_230.png
+242,CH25105,CH,CH25,Alcohol Ether,MMCQ,MODULE,admin,../Screenshots/Chemistry/Alcohol Ether\question_237.png
+243,CH25106,CH,CH25,Alcohol Ether,MMCQ,MODULE,admin,../Screenshots/Chemistry/Alcohol Ether\question_238.png
+244,CH25107,CH,CH25,Alcohol Ether,MMCQ,MODULE,admin,../Screenshots/Chemistry/Alcohol Ether\question_239.png
+245,CH25108,CH,CH25,Alcohol Ether,MMCQ,MODULE,admin,../Screenshots/Chemistry/Alcohol Ether\question_240.png
+258,CH25109,CH,CH25,Alcohol Ether,MMCQ,MODULE,admin,../Screenshots/Chemistry/Alcohol Ether\question_246.png
+259,CH25110,CH,CH25,Alcohol Ether,MMCQ,MODULE,admin,../Screenshots/Chemistry/Alcohol Ether\question_247.png
+260,CH25111,CH,CH25,Alcohol Ether,MMCQ,MODULE,admin,../Screenshots/Chemistry/Alcohol Ether\question_248.png
+261,CH25112,CH,CH25,Alcohol Ether,MMCQ,MODULE,admin,../Screenshots/Chemistry/Alcohol Ether\question_249.png
+262,CH25113,CH,CH25,Alcohol Ether,MMCQ,MODULE,admin,../Screenshots/Chemistry/Alcohol Ether\question_250.png
+263,CH25114,CH,CH25,Alcohol Ether,MMCQ,MODULE,admin,../Screenshots/Chemistry/Alcohol Ether\question_251.png
+264,CH25115,CH,CH25,Alcohol Ether,MMCQ,MODULE,admin,../Screenshots/Chemistry/Alcohol Ether\question_252.png
+265,CH25116,CH,CH25,Alcohol Ether,MMCQ,MODULE,admin,../Screenshots/Chemistry/Alcohol Ether\question_253.png
+266,CH25117,CH,CH25,Alcohol Ether,MMCQ,MODULE,admin,../Screenshots/Chemistry/Alcohol Ether\question_254.png
+267,CH25118,CH,CH25,Alcohol Ether,MMCQ,MODULE,admin,../Screenshots/Chemistry/Alcohol Ether\question_255.png
+268,CH25119,CH,CH25,Alcohol Ether,MMCQ,MODULE,admin,../Screenshots/Chemistry/Alcohol Ether\question_256.png
+11,CH02001,CH,CH02,Atomic Structure,SMCQ,MODULE,admin,../Screenshots/Chemistry/Atomic Structure\question_1.png
+12,CH02002,CH,CH02,Atomic Structure,SMCQ,MODULE,admin,../Screenshots/Chemistry/Atomic Structure\question_2.png
+13,CH02003,CH,CH02,Atomic Structure,SMCQ,MODULE,admin,../Screenshots/Chemistry/Atomic Structure\question_3.png
+14,CH02004,CH,CH02,Atomic Structure,SMCQ,MODULE,admin,../Screenshots/Chemistry/Atomic Structure\question_4.png
+15,CH02005,CH,CH02,Atomic Structure,SMCQ,MODULE,admin,../Screenshots/Chemistry/Atomic Structure\question_5.png
+16,CH02006,CH,CH02,Atomic Structure,SMCQ,MODULE,admin,../Screenshots/Chemistry/Atomic Structure\question_6.png
+17,CH02007,CH,CH02,Atomic Structure,SMCQ,MODULE,admin,../Screenshots/Chemistry/Atomic Structure\question_7.png
+18,CH02008,CH,CH02,Atomic Structure,SMCQ,MODULE,admin,../Screenshots/Chemistry/Atomic Structure\question_8.png
+19,CH02009,CH,CH02,Atomic Structure,SMCQ,MODULE,admin,../Screenshots/Chemistry/Atomic Structure\question_9.png
+30,CH02010,CH,CH02,Atomic Structure,SMCQ,MODULE,admin,../Screenshots/Chemistry/Atomic Structure\question_22.png
+31,CH02011,CH,CH02,Atomic Structure,SMCQ,MODULE,admin,../Screenshots/Chemistry/Atomic Structure\question_23.png
+32,CH02012,CH,CH02,Atomic Structure,SMCQ,MODULE,admin,../Screenshots/Chemistry/Atomic Structure\question_24.png
+33,CH02013,CH,CH02,Atomic Structure,SMCQ,MODULE,admin,../Screenshots/Chemistry/Atomic Structure\question_25.png
+34,CH02014,CH,CH02,Atomic Structure,SMCQ,MODULE,admin,../Screenshots/Chemistry/Atomic Structure\question_26.png
+35,CH02015,CH,CH02,Atomic Structure,SMCQ,MODULE,admin,../Screenshots/Chemistry/Atomic Structure\question_27.png
+36,CH02016,CH,CH02,Atomic Structure,SMCQ,MODULE,admin,../Screenshots/Chemistry/Atomic Structure\question_28.png
+44,CH02017,CH,CH02,Atomic Structure,SMCQ,MODULE,admin,../Screenshots/Chemistry/Atomic Structure\question_37.png
+45,CH02018,CH,CH02,Atomic Structure,SMCQ,MODULE,admin,../Screenshots/Chemistry/Atomic Structure\question_38.png
+46,CH02019,CH,CH02,Atomic Structure,SMCQ,MODULE,admin,../Screenshots/Chemistry/Atomic Structure\question_39.png
+47,CH02020,CH,CH02,Atomic Structure,SMCQ,MODULE,admin,../Screenshots/Chemistry/Atomic Structure\question_40.png
+48,CH02021,CH,CH02,Atomic Structure,SMCQ,MODULE,admin,../Screenshots/Chemistry/Atomic Structure\question_41.png
+49,CH02022,CH,CH02,Atomic Structure,SMCQ,MODULE,admin,../Screenshots/Chemistry/Atomic Structure\question_42.png
+59,CH02023,CH,CH02,Atomic Structure,SMCQ,MODULE,admin,../Screenshots/Chemistry/Atomic Structure\question_50.png
+60,CH02024,CH,CH02,Atomic Structure,SMCQ,MODULE,admin,../Screenshots/Chemistry/Atomic Structure\question_51.png
+61,CH02025,CH,CH02,Atomic Structure,SMCQ,MODULE,admin,../Screenshots/Chemistry/Atomic Structure\question_52.png
+62,CH02026,CH,CH02,Atomic Structure,SMCQ,MODULE,admin,../Screenshots/Chemistry/Atomic Structure\question_53.png
+63,CH02027,CH,CH02,Atomic Structure,SMCQ,MODULE,admin,../Screenshots/Chemistry/Atomic Structure\question_54.png
+64,CH02028,CH,CH02,Atomic Structure,SMCQ,MODULE,admin,../Screenshots/Chemistry/Atomic Structure\question_55.png
+65,CH02029,CH,CH02,Atomic Structure,SMCQ,MODULE,admin,../Screenshots/Chemistry/Atomic Structure\question_56.png
+66,CH02030,CH,CH02,Atomic Structure,SMCQ,MODULE,admin,../Screenshots/Chemistry/Atomic Structure\question_57.png
+73,CH02031,CH,CH02,Atomic Structure,SMCQ,MODULE,admin,../Screenshots/Chemistry/Atomic Structure\question_67.png
+74,CH02032,CH,CH02,Atomic Structure,INT,MODULE,admin,../Screenshots/Chemistry/Atomic Structure\question_68.png
+75,CH02033,CH,CH02,Atomic Structure,INT,MODULE,admin,../Screenshots/Chemistry/Atomic Structure\question_69.png
+76,CH02034,CH,CH02,Atomic Structure,INT,MODULE,admin,../Screenshots/Chemistry/Atomic Structure\question_70.png
+77,CH02035,CH,CH02,Atomic Structure,INT,MODULE,admin,../Screenshots/Chemistry/Atomic Structure\question_71.png
+86,CH02036,CH,CH02,Atomic Structure,INT,MODULE,admin,../Screenshots/Chemistry/Atomic Structure\question_78.png
+87,CH02037,CH,CH02,Atomic Structure,INT,MODULE,admin,../Screenshots/Chemistry/Atomic Structure\question_79.png
+88,CH02038,CH,CH02,Atomic Structure,INT,MODULE,admin,../Screenshots/Chemistry/Atomic Structure\question_80.png
+89,CH02039,CH,CH02,Atomic Structure,INT,MODULE,admin,../Screenshots/Chemistry/Atomic Structure\question_81.png
+90,CH02040,CH,CH02,Atomic Structure,INT,MODULE,admin,../Screenshots/Chemistry/Atomic Structure\question_82.png
+91,CH02041,CH,CH02,Atomic Structure,INT,MODULE,admin,../Screenshots/Chemistry/Atomic Structure\question_83.png
+92,CH02042,CH,CH02,Atomic Structure,INT,MODULE,admin,../Screenshots/Chemistry/Atomic Structure\question_84.png
+98,CH02043,CH,CH02,Atomic Structure,INT,MODULE,admin,../Screenshots/Chemistry/Atomic Structure\question_93.png
+99,CH02044,CH,CH02,Atomic Structure,INT,MODULE,admin,../Screenshots/Chemistry/Atomic Structure\question_94.png
+100,CH02045,CH,CH02,Atomic Structure,INT,MODULE,admin,../Screenshots/Chemistry/Atomic Structure\question_95.png
+101,CH02046,CH,CH02,Atomic Structure,INT,MODULE,admin,../Screenshots/Chemistry/Atomic Structure\question_96.png
+108,CH02047,CH,CH02,Atomic Structure,INT,MODULE,admin,../Screenshots/Chemistry/Atomic Structure\question_102.png
+109,CH02048,CH,CH02,Atomic Structure,INT,MODULE,admin,../Screenshots/Chemistry/Atomic Structure\question_103.png
+110,CH02049,CH,CH02,Atomic Structure,INT,MODULE,admin,../Screenshots/Chemistry/Atomic Structure\question_104.png
+111,CH02050,CH,CH02,Atomic Structure,INT,MODULE,admin,../Screenshots/Chemistry/Atomic Structure\question_105.png
+112,CH02051,CH,CH02,Atomic Structure,INT,MODULE,admin,../Screenshots/Chemistry/Atomic Structure\question_106.png
+118,CH02052,CH,CH02,Atomic Structure,INT,MODULE,admin,../Screenshots/Chemistry/Atomic Structure\question_113.png
+119,CH02053,CH,CH02,Atomic Structure,INT,MODULE,admin,../Screenshots/Chemistry/Atomic Structure\question_114.png
+120,CH02054,CH,CH02,Atomic Structure,INT,MODULE,admin,../Screenshots/Chemistry/Atomic Structure\question_115.png
+121,CH02055,CH,CH02,Atomic Structure,INT,MODULE,admin,../Screenshots/Chemistry/Atomic Structure\question_116.png
+126,CH02056,CH,CH02,Atomic Structure,INT,MODULE,admin,../Screenshots/Chemistry/Atomic Structure\question_122.png
+127,CH02057,CH,CH02,Atomic Structure,INT,MODULE,admin,../Screenshots/Chemistry/Atomic Structure\question_123.png
+128,CH02058,CH,CH02,Atomic Structure,INT,MODULE,admin,../Screenshots/Chemistry/Atomic Structure\question_124.png
+134,CH02059,CH,CH02,Atomic Structure,INT,MODULE,admin,../Screenshots/Chemistry/Atomic Structure\question_129.png
+135,CH02060,CH,CH02,Atomic Structure,INT,MODULE,admin,../Screenshots/Chemistry/Atomic Structure\question_130.png
+136,CH02061,CH,CH02,Atomic Structure,INT,MODULE,admin,../Screenshots/Chemistry/Atomic Structure\question_131.png
+137,CH02062,CH,CH02,Atomic Structure,INT,MODULE,admin,../Screenshots/Chemistry/Atomic Structure\question_132.png
+142,CH02063,CH,CH02,Atomic Structure,INT,MODULE,admin,../Screenshots/Chemistry/Atomic Structure\question_138.png
+143,CH02064,CH,CH02,Atomic Structure,INT,MODULE,admin,../Screenshots/Chemistry/Atomic Structure\question_139.png
+144,CH02065,CH,CH02,Atomic Structure,INT,MODULE,admin,../Screenshots/Chemistry/Atomic Structure\question_140.png
+148,CH02066,CH,CH02,Atomic Structure,INT,MODULE,admin,../Screenshots/Chemistry/Atomic Structure\question_145.png
+149,CH02067,CH,CH02,Atomic Structure,INT,MODULE,admin,../Screenshots/Chemistry/Atomic Structure\question_146.png
+153,CH02068,CH,CH02,Atomic Structure,INT,MODULE,admin,../Screenshots/Chemistry/Atomic Structure\question_150.png
+154,CH02069,CH,CH02,Atomic Structure,INT,MODULE,admin,../Screenshots/Chemistry/Atomic Structure\question_151.png
+164,CH02070,CH,CH02,Atomic Structure,INT,MODULE,admin,../Screenshots/Chemistry/Atomic Structure\question_155.png
+174,CH02071,CH,CH02,Atomic Structure,INT,MODULE,admin,../Screenshots/Chemistry/Atomic Structure\question_165.png
+175,CH02072,CH,CH02,Atomic Structure,INT,MODULE,admin,../Screenshots/Chemistry/Atomic Structure\question_166.png
+176,CH02073,CH,CH02,Atomic Structure,INT,MODULE,admin,../Screenshots/Chemistry/Atomic Structure\question_167.png
+177,CH02074,CH,CH02,Atomic Structure,INT,MODULE,admin,../Screenshots/Chemistry/Atomic Structure\question_168.png
+178,CH02075,CH,CH02,Atomic Structure,INT,MODULE,admin,../Screenshots/Chemistry/Atomic Structure\question_169.png
+179,CH02076,CH,CH02,Atomic Structure,INT,MODULE,admin,../Screenshots/Chemistry/Atomic Structure\question_170.png
+180,CH02077,CH,CH02,Atomic Structure,INT,MODULE,admin,../Screenshots/Chemistry/Atomic Structure\question_171.png
+181,CH02078,CH,CH02,Atomic Structure,INT,MODULE,admin,../Screenshots/Chemistry/Atomic Structure\question_172.png
+192,CH02079,CH,CH02,Atomic Structure,INT,MODULE,admin,../Screenshots/Chemistry/Atomic Structure\question_182.png
+193,CH02080,CH,CH02,Atomic Structure,INT,MODULE,admin,../Screenshots/Chemistry/Atomic Structure\question_183.png
+194,CH02081,CH,CH02,Atomic Structure,INT,MODULE,admin,../Screenshots/Chemistry/Atomic Structure\question_186.png
+195,CH02082,CH,CH02,Atomic Structure,INT,MODULE,admin,../Screenshots/Chemistry/Atomic Structure\question_187.png
+196,CH02083,CH,CH02,Atomic Structure,INT,MODULE,admin,../Screenshots/Chemistry/Atomic Structure\question_188.png
+197,CH02084,CH,CH02,Atomic Structure,INT,MODULE,admin,../Screenshots/Chemistry/Atomic Structure\question_189.png
+198,CH02085,CH,CH02,Atomic Structure,INT,MODULE,admin,../Screenshots/Chemistry/Atomic Structure\question_190.png
+206,CH02086,CH,CH02,Atomic Structure,INT,MODULE,admin,../Screenshots/Chemistry/Atomic Structure\question_199.png
+207,CH02087,CH,CH02,Atomic Structure,INT,MODULE,admin,../Screenshots/Chemistry/Atomic Structure\question_200.png
+208,CH02088,CH,CH02,Atomic Structure,INT,MODULE,admin,../Screenshots/Chemistry/Atomic Structure\question_201.png
+209,CH02089,CH,CH02,Atomic Structure,INT,MODULE,admin,../Screenshots/Chemistry/Atomic Structure\question_204.png
+215,CH02090,CH,CH02,Atomic Structure,INT,MODULE,admin,../Screenshots/Chemistry/Atomic Structure\question_210.png
+216,CH02091,CH,CH02,Atomic Structure,INT,MODULE,admin,../Screenshots/Chemistry/Atomic Structure\question_211.png
+217,CH02092,CH,CH02,Atomic Structure,INT,MODULE,admin,../Screenshots/Chemistry/Atomic Structure\question_212.png
+218,CH02093,CH,CH02,Atomic Structure,INT,MODULE,admin,../Screenshots/Chemistry/Atomic Structure\question_213.png
+226,CH02094,CH,CH02,Atomic Structure,INT,MODULE,admin,../Screenshots/Chemistry/Atomic Structure\question_219.png
+227,CH02095,CH,CH02,Atomic Structure,INT,MODULE,admin,../Screenshots/Chemistry/Atomic Structure\question_220.png
+228,CH02096,CH,CH02,Atomic Structure,INT,MODULE,admin,../Screenshots/Chemistry/Atomic Structure\question_221.png
+229,CH02097,CH,CH02,Atomic Structure,INT,MODULE,admin,../Screenshots/Chemistry/Atomic Structure\question_222.png
+230,CH02098,CH,CH02,Atomic Structure,INT,MODULE,admin,../Screenshots/Chemistry/Atomic Structure\question_223.png
+231,CH02099,CH,CH02,Atomic Structure,INT,MODULE,admin,../Screenshots/Chemistry/Atomic Structure\question_224.png
+236,CH02100,CH,CH02,Atomic Structure,INT,MODULE,admin,../Screenshots/Chemistry/Atomic Structure\question_232.png
+237,CH02101,CH,CH02,Atomic Structure,INT,MODULE,admin,../Screenshots/Chemistry/Atomic Structure\question_233.png
+238,CH02102,CH,CH02,Atomic Structure,INT,MODULE,admin,../Screenshots/Chemistry/Atomic Structure\question_234.png
+245,CH02103,CH,CH02,Atomic Structure,INT,MODULE,admin,../Screenshots/Chemistry/Atomic Structure\question_239.png
+246,CH02104,CH,CH02,Atomic Structure,INT,MODULE,admin,../Screenshots/Chemistry/Atomic Structure\question_240.png
+247,CH02105,CH,CH02,Atomic Structure,INT,MODULE,admin,../Screenshots/Chemistry/Atomic Structure\question_241.png
+248,CH02106,CH,CH02,Atomic Structure,INT,MODULE,admin,../Screenshots/Chemistry/Atomic Structure\question_242.png
+249,CH02107,CH,CH02,Atomic Structure,INT,MODULE,admin,../Screenshots/Chemistry/Atomic Structure\question_243.png
+257,CH02108,CH,CH02,Atomic Structure,INT,MODULE,admin,../Screenshots/Chemistry/Atomic Structure\question_250.png
+258,CH02109,CH,CH02,Atomic Structure,INT,MODULE,admin,../Screenshots/Chemistry/Atomic Structure\question_251.png
+259,CH02110,CH,CH02,Atomic Structure,INT,MODULE,admin,../Screenshots/Chemistry/Atomic Structure\question_252.png
+260,CH02111,CH,CH02,Atomic Structure,INT,MODULE,admin,../Screenshots/Chemistry/Atomic Structure\question_253.png
+261,CH02112,CH,CH02,Atomic Structure,INT,MODULE,admin,../Screenshots/Chemistry/Atomic Structure\question_254.png
+262,CH02113,CH,CH02,Atomic Structure,INT,MODULE,admin,../Screenshots/Chemistry/Atomic Structure\question_255.png
+267,CH02114,CH,CH02,Atomic Structure,INT,MODULE,admin,../Screenshots/Chemistry/Atomic Structure\question_263.png
+268,CH02115,CH,CH02,Atomic Structure,INT,MODULE,admin,../Screenshots/Chemistry/Atomic Structure\question_264.png
+269,CH02116,CH,CH02,Atomic Structure,INT,MODULE,admin,../Screenshots/Chemistry/Atomic Structure\question_265.png
+275,CH02117,CH,CH02,Atomic Structure,INT,MODULE,admin,../Screenshots/Chemistry/Atomic Structure\question_270.png
+276,CH02118,CH,CH02,Atomic Structure,INT,MODULE,admin,../Screenshots/Chemistry/Atomic Structure\question_271.png
+277,CH02119,CH,CH02,Atomic Structure,MMCQ,MODULE,admin,../Screenshots/Chemistry/Atomic Structure\question_272.png
+278,CH02120,CH,CH02,Atomic Structure,MMCQ,MODULE,admin,../Screenshots/Chemistry/Atomic Structure\question_273.png
+286,CH02121,CH,CH02,Atomic Structure,MMCQ,MODULE,admin,../Screenshots/Chemistry/Atomic Structure\question_279.png
+287,CH02122,CH,CH02,Atomic Structure,MMCQ,MODULE,admin,../Screenshots/Chemistry/Atomic Structure\question_280.png
+288,CH02123,CH,CH02,Atomic Structure,MMCQ,MODULE,admin,../Screenshots/Chemistry/Atomic Structure\question_281.png
+289,CH02124,CH,CH02,Atomic Structure,MMCQ,MODULE,admin,../Screenshots/Chemistry/Atomic Structure\question_282.png
+290,CH02125,CH,CH02,Atomic Structure,MMCQ,MODULE,admin,../Screenshots/Chemistry/Atomic Structure\question_283.png
+291,CH02126,CH,CH02,Atomic Structure,MMCQ,MODULE,admin,../Screenshots/Chemistry/Atomic Structure\question_284.png
+295,CH02127,CH,CH02,Atomic Structure,MMCQ,MODULE,admin,../Screenshots/Chemistry/Atomic Structure\question_292.png
+296,CH02128,CH,CH02,Atomic Structure,MMCQ,MODULE,admin,../Screenshots/Chemistry/Atomic Structure\question_293.png
+297,CH02129,CH,CH02,Atomic Structure,MMCQ,MODULE,admin,../Screenshots/Chemistry/Atomic Structure\question_297.png
+3,CH28001,CH,CH28,Biomolecules,INT,MODULE,admin,../Screenshots/Chemistry/Biomolecules\question_1.png
+11,CH28002,CH,CH28,Biomolecules,INT,MODULE,admin,../Screenshots/Chemistry/Biomolecules\question_4.png
+12,CH28003,CH,CH28,Biomolecules,INT,MODULE,admin,../Screenshots/Chemistry/Biomolecules\question_5.png
+13,CH28004,CH,CH28,Biomolecules,INT,MODULE,admin,../Screenshots/Chemistry/Biomolecules\question_6.png
+14,CH28005,CH,CH28,Biomolecules,INT,MODULE,admin,../Screenshots/Chemistry/Biomolecules\question_7.png
+15,CH28006,CH,CH28,Biomolecules,INT,MODULE,admin,../Screenshots/Chemistry/Biomolecules\question_8.png
+16,CH28007,CH,CH28,Biomolecules,INT,MODULE,admin,../Screenshots/Chemistry/Biomolecules\question_9.png
+24,CH28008,CH,CH28,Biomolecules,INT,MODULE,admin,../Screenshots/Chemistry/Biomolecules\question_17.png
+25,CH28009,CH,CH28,Biomolecules,INT,MODULE,admin,../Screenshots/Chemistry/Biomolecules\question_18.png
+26,CH28010,CH,CH28,Biomolecules,INT,MODULE,admin,../Screenshots/Chemistry/Biomolecules\question_19.png
+27,CH28011,CH,CH28,Biomolecules,INT,MODULE,admin,../Screenshots/Chemistry/Biomolecules\question_20.png
+28,CH28012,CH,CH28,Biomolecules,INT,MODULE,admin,../Screenshots/Chemistry/Biomolecules\question_21.png
+29,CH28013,CH,CH28,Biomolecules,INT,MODULE,admin,../Screenshots/Chemistry/Biomolecules\question_22.png
+34,CH28014,CH,CH28,Biomolecules,INT,MODULE,admin,../Screenshots/Chemistry/Biomolecules\question_30.png
+35,CH28015,CH,CH28,Biomolecules,INT,MODULE,admin,../Screenshots/Chemistry/Biomolecules\question_31.png
+36,CH28016,CH,CH28,Biomolecules,INT,MODULE,admin,../Screenshots/Chemistry/Biomolecules\question_32.png
+44,CH28017,CH,CH28,Biomolecules,INT,MODULE,admin,../Screenshots/Chemistry/Biomolecules\question_37.png
+45,CH28018,CH,CH28,Biomolecules,INT,MODULE,admin,../Screenshots/Chemistry/Biomolecules\question_38.png
+46,CH28019,CH,CH28,Biomolecules,INT,MODULE,admin,../Screenshots/Chemistry/Biomolecules\question_39.png
+47,CH28020,CH,CH28,Biomolecules,INT,MODULE,admin,../Screenshots/Chemistry/Biomolecules\question_40.png
+48,CH28021,CH,CH28,Biomolecules,INT,MODULE,admin,../Screenshots/Chemistry/Biomolecules\question_41.png
+49,CH28022,CH,CH28,Biomolecules,INT,MODULE,admin,../Screenshots/Chemistry/Biomolecules\question_42.png
+55,CH28023,CH,CH28,Biomolecules,INT,MODULE,admin,../Screenshots/Chemistry/Biomolecules\question_50.png
+56,CH28024,CH,CH28,Biomolecules,INT,MODULE,admin,../Screenshots/Chemistry/Biomolecules\question_51.png
+57,CH28025,CH,CH28,Biomolecules,INT,MODULE,admin,../Screenshots/Chemistry/Biomolecules\question_52.png
+58,CH28026,CH,CH28,Biomolecules,INT,MODULE,admin,../Screenshots/Chemistry/Biomolecules\question_53.png
+61,CH28027,CH,CH28,Biomolecules,INT,MODULE,admin,../Screenshots/Chemistry/Biomolecules\question_59.png
+64,CH28028,CH,CH28,Biomolecules,INT,MODULE,admin,../Screenshots/Chemistry/Biomolecules\question_62.png
