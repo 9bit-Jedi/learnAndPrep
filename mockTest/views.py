@@ -10,7 +10,7 @@ from django.core.exceptions import ObjectDoesNotExist
 
 
 # from .serializers import SubjectSerializer, ChapterSerializer, QuestionSerializer, AnswerSmcqSerializer, AnswerMmcqSerializer, AnswerIntegerTypeSerializer
-from .models import Test, LiveTest, TestAttempt, TestQuestion
+from .models import Test, LiveTest, TestAttempt, TestQuestion, TestQuestionAttempt
 from questions.models import Question, AnswerIntegerType, AnswerMmcq, AnswerSmcq
 
 # from django.core import serializers
@@ -19,7 +19,7 @@ from questions.models import Question, AnswerIntegerType, AnswerMmcq, AnswerSmcq
 
 # test list
 
-class testList(APIView):
+class TestList(APIView):
   
   permission_classes = [IsAuthenticated]
   
@@ -34,5 +34,13 @@ class testList(APIView):
 
 # start mock test - post - create attempt object
     # if mock test is LIVE - check start_time
+class StartTest(APIView):
+  def post(self, request, format=None):
+    test_id = self.request.POST.get_query_params("test_id")
+    # user_id = self.request.POST.get_query_params("user_id")
+    user = request.user
+    print(test_id, user)
+
+    return Response(status=status.HTTP_200_OK)
 
 # submit mock test - put - test attempt end time update
