@@ -23,5 +23,6 @@ urlpatterns = [
     path('questions/', include('questions.urls')),
     path('upload/', include('uploader.urls')),
     path('quiz/', include('quiz.urls')),
+    path('mock/', include('mockTest.urls')),
     path("__debug__/", include("debug_toolbar.urls")),
 ]

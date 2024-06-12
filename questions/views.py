@@ -45,7 +45,11 @@ class ChapterList_Subject(APIView):
   def get(self, request, subject_id, format=None):
     chapters = Chapter.objects.filter(subject_id=subject_id.upper())    ## only chapters with taht subject id
     serializer = ChapterSerializer(chapters, many=True)  # Pass request to serializer
-    return Response(serializer.data)
+
+    # icon_url = 
+    # data = serializer.data
+    # data.append({"icon":icon_url})
+    return Response(serializer.data, status=status.HTTP_200_OK)
 
 # def GetSmcq(request, question_id):
 #   if request.method == 'GET':
@@ -161,8 +165,18 @@ class Submit(APIView):
 
 }
 
-
-class ViewImage(APIView):
+class ViewQuestionImage(APIView):
   def get(self, request, image_name):
     full_path = f'questions/questions/{image_name}'
+    return FileResponse(open(full_path, 'rb'))
+  
+class ViewExplanationImage(APIView):
+  def get(self, request, image_name):
+    full_path = f'questions/explanations/{image_name}'
+    return FileResponse(open(full_path, 'rb'))
+  
+class ViewIcon(APIView):
+  def get(self, request, image_name):
+    full_path = f'questions/img/icons/{image_name}'
+    print(full_path)
     return FileResponse(open(full_path, 'rb'))

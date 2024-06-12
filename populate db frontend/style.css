@@ -12,6 +12,7 @@ body {
 .container {
     background-color: #1a1521;
     padding: 20px;
+    margin: 50px;
     border-radius: 16px;
     box-shadow: 0 0 40px rgba(185, 185, 185, 0.16);
     text-align: center;
@@ -23,7 +24,7 @@ body {
     align-items: center;      /* Center items horizontally */
 }
 
-#contentType,
+#contentType, #imgContentType,
 #fileName,
 button {
     width: 90%;       /* Make elements take up full width */
@@ -31,7 +32,7 @@ button {
     /* box-sizing: border-box;  */
 }
 
-#csvFile {
+#csvFile, #imgFile {
     /* margin: 10px 0; */
     padding: 8px 12px; /* Add some padding */
     border: none;    /* Remove default border */
@@ -77,7 +78,7 @@ button {
     color: #555;
 }
 
-#contentType {
+#contentType, #imgContentType {
     padding: 10px 30px 10px 10px; /* Add extra padding on the right for the arrow */
     /* ... (rest of your select styles) */
     -webkit-appearance: none; /* Remove default styles for Webkit */

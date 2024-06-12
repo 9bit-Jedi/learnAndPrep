@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'questions.apps.QuestionsConfig',
     'uploader.apps.UploaderConfig',
     'quiz.apps.QuizConfig',
+    'mockTest.apps.MocktestConfig',
     'rest_framework',
     "debug_toolbar",
     'corsheaders',

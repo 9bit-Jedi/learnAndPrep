@@ -14,6 +14,7 @@ class QuestionAdmin(admin.ModelAdmin):
 
 admin.site.register(Subject)
 admin.site.register(Chapter)
+admin.site.register(Icon)
 
 admin.site.register(Question)
 admin.site.register(AnswerIntegerType)

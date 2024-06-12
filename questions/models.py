@@ -19,11 +19,21 @@ class Subject(models.Model):
     
     def __str__(self):
         return self.subject_name
+
+class Icon(models.Model):
+    id = models.CharField(max_length=4, primary_key=True)
+    icon = models.ImageField(upload_to='questions/img/icons')
+
+    def __str__(self):
+        return self.id
     
 class Chapter(models.Model):
     id = models.CharField(max_length=4, primary_key=True, validators=[MinLengthValidator(4), RegexValidator(r'^(CH)|(MA)|(PH)\d{2}$', "ID must be of format: Subject Letter + 2 digits")])
     chapter_name = models.CharField(max_length=128)
     subject_id = models.ForeignKey(to=Subject, on_delete=models.CASCADE, null=False)
+
+    icon_id = models.ForeignKey(to=Icon, on_delete=models.CASCADE)
+    
     
     # def save(self, *args, **kwargs):
     #     if not self.id:
@@ -60,17 +70,20 @@ class Question(models.Model):
     chapter_id = models.ForeignKey(to=Chapter, on_delete=models.CASCADE, null=False, related_name='chapter_questions') #
     type = models.CharField(max_length=128, choices=TYPE_CHOICES)
     source = models.CharField(max_length=128, choices=SOURCE_CHOICES)
-    question = models.CharField(max_length=10000)
+    # question = models.CharField(max_length=10000)
+    question = models.ImageField(upload_to='questions/questions/')
     creator = models.ForeignKey(to=User, on_delete=models.SET_NULL, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     
     
 OPTION_CHOICES = [('A', 'A'),('B', 'B'),('C', 'C'),('D', 'D'),]
 
-class AnswerSmcq(models.Model):
+class AbstractAnswer(models.Model):
     id = models.CharField(max_length=8, primary_key=True)
     question_id = models.OneToOneField(Question, on_delete=models.CASCADE, related_query_name="answer_smcq")
-    correct_option = models.CharField(max_length=1, choices=OPTION_CHOICES)
+    explanation = models.ImageField(upload_to='questions/explanations/')
+    class Meta:
+        abstract = True
     
     def save(self, *args, **kwargs):
         self.id = self.question_id.id + 'A'
@@ -79,15 +92,15 @@ class AnswerSmcq(models.Model):
     def __str__(self):
         return self.question_id.id
 
-class AnswerMmcq(models.Model):
-    id = models.CharField(max_length=10, primary_key=True)
-    question_id = models.OneToOneField(to = Question, on_delete=models.CASCADE, related_query_name="answer_mmcq")
+class AnswerSmcq(AbstractAnswer):
+    correct_option = models.CharField(max_length=1, choices=OPTION_CHOICES)
+    
+
+class AnswerMmcq(AbstractAnswer):
     is_O1_correct = models.BooleanField(default=False)
     is_O2_correct = models.BooleanField(default=False)
     is_O3_correct = models.BooleanField(default=False)
     is_O4_correct = models.BooleanField(default=False)
     
-class AnswerIntegerType(models.Model):
-    id = models.CharField(max_length=10, primary_key=True)
-    question_id = models.OneToOneField(to = Question, on_delete=models.CASCADE, related_query_name="answer_integer")
+class AnswerIntegerType(AbstractAnswer):
     correct_answer = models.IntegerField()

@@ -1,85 +1,85 @@
-id,chapter_name,subject_id
-PH01,Units and Dimensions,PH
-PH02,Circular Motion,PH
-PH03,Kinematics,PH
-PH04,Laws of Motion,PH
-PH05,"Cnetre of Mass, Momentum & Collision",PH
-PH06,"Work, Energy, and Power",PH
-PH07,Rotational Motion,PH
-PH08,Gravitation,PH
-PH09,Properties of Solids and Liquids,PH
-PH10,KTG and Thermodynamics,PH
-PH11,Oscillations and Waves,PH
-PH12,SHM,PH
-PH13,Electrostatics,PH
-PH14,Current Electricity,PH
-PH15,Magnetic Effects of Current ,PH
-PH16,Capacitance,PH
-PH17,EMI,PH
-PH18,Alternating Current,PH
-PH19,Electromagnetic Waves,PH
-PH20,Optics,PH
-PH21,Modern Physics-1,PH
-PH22,Modern Physics-2,PH
-PH23,Electronic Devices,PH
-PH24,Communication Systems,PH
-PH25,Experimental Skills,PH
-CH01,Some Basic Concepts of Chemistry,CH
-CH02,Atomic Structure,CH
-CH03,Classification of Elements and Periodicity in Properties,CH
-CH04,Chemical Bonding and Molecular Structure,CH
-CH05,States of Matter: Gases and Liquids,CH
-CH06,Thermodynamics,CH
-CH07,Chemical Equilibrium,CH
-CH08,Redox Reactions,CH
-CH09,Hydrogen,CH
-CH10,s-Block Elements,CH
-CH11,p-Block Elements,CH
-CH12,Organic Chemistry - Some Basic Principles and Techniques,CH
-CH13,Hydrocarbons,CH
-CH14,Environmental Chemistry,CH
-CH15,Solid State,CH
-CH16,Solutions,CH
-CH17,Electrochemistry,CH
-CH18,Chemical Kinetics,CH
-CH19,Surface Chemistry,CH
-CH20,General Principles and Processes of Isolation of Elements,CH
-CH21,p- Block Elements,CH
-CH22,d and f Block Elements,CH
-CH23,Coordination Compounds,CH
-CH24,Haloalkanes and Haloarenes,CH
-CH25,"Alcohols, Phenols, and Ethers",CH
-CH26,"Aldehydes, Ketones, and Carboxylic Acids",CH
-CH27,Organic Compounds Containing Nitrogen,CH
-CH28,Biomolecules,CH
-CH29,Polymers,CH
-CH30,Chemistry in Everyday Life,CH
-CH31,Practical Organic Chemistry,CH
-CH32,Metallurgy,CH
-CH33,Salt Analysis,CH
-MA01,"Sets, Relations, and Functions",MA
-MA02,Straight Line,MA
-MA03,Circle,MA
-MA04,Parabola,MA
-MA05,Ellipse and Hyperbola,MA
-MA06,Complex Numbers,MA
-MA07,Quadratic Equation,MA
-MA08,Matrices and Determinants,MA
-MA09,"Permutations, Combinations",MA
-MA10,Mathematical Induction,MA
-MA11,Binomial Theorem ,MA
-MA12,Sequence and Series,MA
-MA13,Limit,MA
-MA14,Methoda of Differentiation,MA
-MA15,Integral Calculus,MA
-MA16,Aera under curves,MA
-MA17,Differential Equations,MA
-MA18,Coordinate Geometry,MA
-MA19,Three-Dimensional Geometry,MA
-MA20,Vector ,MA
-MA21,Probability,MA
-MA22,Statistics,MA
-MA23,Trigonometric Equations,MA
-MA24,Inverse Trigonometry,MA
-MA25,Properties of Triangle,MA
-MA26,Mathematical Reasoning,MA
+id,chapter_name,subject_id,icon_id
+PH01,Units and Dimensions,PH,PH11
+PH02,Circular Motion,PH,PH11
+PH03,Kinematics,PH,PH11
+PH04,Laws of Motion,PH,PH11
+PH05,"Cnetre of Mass, Momentum & Collision",PH,PH11
+PH06,"Work, Energy, and Power",PH,PH11
+PH07,Rotational Motion,PH,PH11
+PH08,Gravitation,PH,PH11
+PH09,Properties of Solids and Liquids,PH,PH11
+PH10,KTG and Thermodynamics,PH,PH11
+PH11,Oscillations and Waves,PH,PH11
+PH12,SHM,PH,PH11
+PH13,Electrostatics,PH,PH12
+PH14,Current Electricity,PH,PH12
+PH15,Magnetic Effects of Current ,PH,PH12
+PH16,Capacitance,PH,PH12
+PH17,EMI,PH,PH12
+PH18,Alternating Current,PH,PH12
+PH19,Electromagnetic Waves,PH,PH12
+PH20,Optics,PH,PH12
+PH21,Modern Physics-1,PH,PH12
+PH22,Modern Physics-2,PH,PH12
+PH23,Electronic Devices,PH,PH12
+PH24,Communication Systems,PH,PH12
+PH25,Experimental Skills,PH,PH12
+CH01,Some Basic Concepts of Chemistry,CH,CHP
+CH02,Atomic Structure,CH,CHP
+CH03,Classification of Elements and Periodicity in Properties,CH,CHI
+CH04,Chemical Bonding and Molecular Structure,CH,CHI
+CH05,States of Matter: Gases and Liquids,CH,CHP
+CH06,Thermodynamics,CH,CHP
+CH07,Chemical Equilibrium,CH,CHP
+CH08,Redox Reactions,CH,CHI
+CH09,Hydrogen,CH,CHI
+CH10,s-Block Elements,CH,CHI
+CH11,p-Block Elements,CH,CHI
+CH12,Organic Chemistry - Some Basic Principles and Techniques,CH,CHO
+CH13,Hydrocarbons,CH,CHO
+CH14,Environmental Chemistry,CH,CHO
+CH15,Solid State,CH,CHP
+CH16,Solutions,CH,CHP
+CH17,Electrochemistry,CH,CHP
+CH18,Chemical Kinetics,CH,CHP
+CH19,Surface Chemistry,CH,CHP
+CH20,General Principles and Processes of Isolation of Elements,CH,CHI
+CH21,p- Block Elements,CH,CHI
+CH22,d and f Block Elements,CH,CHI
+CH23,Coordination Compounds,CH,CHI
+CH24,Haloalkanes and Haloarenes,CH,CHO
+CH25,"Alcohols, Phenols, and Ethers",CH,CHO
+CH26,"Aldehydes, Ketones, and Carboxylic Acids",CH,CHO
+CH27,Organic Compounds Containing Nitrogen,CH,CHO
+CH28,Biomolecules,CH,CHO
+CH29,Polymers,CH,CHO
+CH30,Chemistry in Everyday Life,CH,CHO
+CH31,Practical Organic Chemistry,CH,CHP
+CH32,Metallurgy,CH,CHI
+CH33,Salt Analysis,CH,CHI
+MA01,"Sets, Relations, and Functions",MA,MA11
+MA02,Straight Line,MA,MA11
+MA03,Circle,MA,MA11
+MA04,Parabola,MA,MA11
+MA05,Ellipse and Hyperbola,MA,MA11
+MA06,Complex Numbers,MA,MA11
+MA07,Quadratic Equation,MA,MA11
+MA08,Matrices and Determinants,MA,MA11
+MA09,"Permutations, Combinations",MA,MA11
+MA10,Mathematical Induction,MA,MA11
+MA11,Binomial Theorem ,MA,MA11
+MA12,Sequence and Series,MA,MA11
+MA13,Limit,MA,MA12
+MA14,Methoda of Differentiation,MA,MA12
+MA15,Integral Calculus,MA,MA12
+MA16,Aera under curves,MA,MA12
+MA17,Differential Equations,MA,MA12
+MA18,Coordinate Geometry,MA,MA12
+MA19,Three-Dimensional Geometry,MA,MA12
+MA20,Vector ,MA,MA12
+MA21,Probability,MA,MA12
+MA22,Statistics,MA,MA12
+MA23,Trigonometric Equations,MA,MA12
+MA24,Inverse Trigonometry,MA,MA12
+MA25,Properties of Triangle,MA,MA12
+MA26,Mathematical Reasoning,MA,MA12

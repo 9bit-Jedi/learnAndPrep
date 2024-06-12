@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 
-from questions.models import Chapter, Question
+from questions.models import Chapter, Question, AnswerSmcq, AnswerMmcq, AnswerIntegerType
 
 # Create your models here.
 

@@ -16,15 +16,31 @@
             <select id="contentType" name="contentType">
                 <option value="subject">Subject</option>
                 <option value="chapter">Chapter</option>
-                <!-- <option value="topic">Topic</option> -->
                 <option value="question">Question</option>
             </select>
             
             <button type="submit">Upload CSV</button>
-            <button onclick="logQuestions()">See subject list on console</button>
         </form>
         <div id="status"></div>
     </div>
+
+    <div class="container">
+        <h1>Upload image Files</h1>
+        <form id="imgForm" enctype="multipart/form-data">
+            <input type="file" id="imgFile" accept=".png" multiple  />
+            <p id="fileName"></p>
+            
+            <select id="imgContentType" name="contentType">
+                <option value="icon">Chapter Icons</option>
+                <option value="question">Question</option>
+                <option value="answer">Answer</option>
+            </select>
+            
+            <button type="submit">Bulk Upload Images</button>
+        </form>
+        <div id="status"></div>
+    </div>
+    
     <script src="script.js"></script>
 </body>
 </html>
