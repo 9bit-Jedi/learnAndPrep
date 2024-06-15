@@ -25,8 +25,6 @@ class MyUserManager(BaseUserManager):
             email=self.normalize_email(email),
             name = name,
             mobile_no = self.normalize_mobile_no(mobile_no),
-           
-
         )
 
         user.set_password(password)
@@ -62,12 +60,8 @@ class User(AbstractBaseUser):
         blank = False,
     )
 
-
-    # fields for selecting classes
-    is_class_11th = models.BooleanField(default=False)
-    is_class_12th = models.BooleanField(default=False)
-    is_dropper = models.BooleanField(default=False)
-
+    CLASS_CHOICES = [('11th', '11th'), ('12th', '12th'),('dropper', 'dropper')]
+    student_class = models.CharField(max_length=16, choices=CLASS_CHOICES)
 
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
@@ -100,4 +94,10 @@ class User(AbstractBaseUser):
         "Is the user a member of staff?"
         # Simplest possible answer: All admins are staff
         return self.is_admin
+    
+    # gender (while register)
 
+    # is_dropper
+    # state
+    # medium 
+    # 

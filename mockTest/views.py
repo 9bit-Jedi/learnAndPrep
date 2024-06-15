@@ -12,6 +12,7 @@ from django.core.exceptions import ObjectDoesNotExist
 # from .serializers import SubjectSerializer, ChapterSerializer, QuestionSerializer, AnswerSmcqSerializer, AnswerMmcqSerializer, AnswerIntegerTypeSerializer
 from .models import Test, LiveTest, TestAttempt, TestQuestion, TestQuestionAttempt
 from questions.models import Question, AnswerIntegerType, AnswerMmcq, AnswerSmcq
+from .serializers import TestSerializer
 
 # from django.core import serializers
 
@@ -21,12 +22,14 @@ from questions.models import Question, AnswerIntegerType, AnswerMmcq, AnswerSmcq
 
 class TestList(APIView):
   
-  permission_classes = [IsAuthenticated]
+  # permission_classes = [IsAuthenticated]
   
   def get(self, request, format=None):
     user = request.user
-    queryset = Test.objects.filter(user_id = user.id)
-    return HttpResponse({'message' : f'hello {user.name} !'})
+    queryset = Test.objects.all()
+    # queryset = Test.objects.filter(user_id = user.id)
+    serializer = TestSerializer(queryset)
+    return HttpResponse(serializer.data, status=status.HTTP_200_OK)
 
 
 # admin side - post - create new mock test by ui
