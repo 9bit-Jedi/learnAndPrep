@@ -1,0 +1,25 @@
+Chapter,image_path,qsn,ans,correct_answer,type,source,chapter_id,question_id,creator
+Application of Derivative (AOD),questions/MA/Application of Derivative (AOD)\question_138_021.png,21,21,0.5,INT,ADV,MA19,MA19098,utsah
+Application of Derivative (AOD),questions/MA/Application of Derivative (AOD)\question_140_022.png,22,22,5,INT,ADV,MA19,MA19099,utsah
+Application of Derivative (AOD),questions/MA/Application of Derivative (AOD)\question_143_001.png,1,1,"B, D",MMCQ,MODULE,MA19,MA19100,utsah
+Application of Derivative (AOD),questions/MA/Application of Derivative (AOD)\question_144_002.png,2,2,"A, B, D",MMCQ,MODULE,MA19,MA19101,utsah
+Application of Derivative (AOD),questions/MA/Application of Derivative (AOD)\question_145_003.png,3,3,"B, D",MMCQ,MODULE,MA19,MA19102,utsah
+Application of Derivative (AOD),questions/MA/Application of Derivative (AOD)\question_147_004.png,4,4,"A,B,C,D",MMCQ,MODULE,MA19,MA19103,utsah
+Application of Derivative (AOD),questions/MA/Application of Derivative (AOD)\question_148_005.png,5,5,"A, C",MMCQ,MODULE,MA19,MA19104,utsah
+Application of Derivative (AOD),questions/MA/Application of Derivative (AOD)\question_153_007.png,7,7,"A, C",MMCQ,MODULE,MA19,MA19105,utsah
+Application of Derivative (AOD),questions/MA/Application of Derivative (AOD)\question_154_008.png,8,8,"B, C",MMCQ,MODULE,MA19,MA19106,utsah
+Application of Derivative (AOD),questions/MA/Application of Derivative (AOD)\question_155_009.png,9,9,"A, B, C, D",MMCQ,MODULE,MA19,MA19107,utsah
+Application of Derivative (AOD),questions/MA/Application of Derivative (AOD)\question_156_010.png,10,10,"B, C, D",MMCQ,MODULE,MA19,MA19108,utsah
+Application of Derivative (AOD),questions/MA/Application of Derivative (AOD)\question_157_001.png,1,1,Pmax= a 1 cos ec 2 ? ? ? ? ?,SUBJ,MODULE,MA19,MA19109,utsah
+Application of Derivative (AOD),questions/MA/Application of Derivative (AOD)\question_164_005.png,5,5,"(0, 0)",SUBJ,MODULE,MA19,MA19110,utsah
+Application of Derivative (AOD),questions/MA/Application of Derivative (AOD)\question_165_006.png,6,6,,SUBJ,MODULE,MA19,MA19111,utsah
+Application of Derivative (AOD),questions/MA/Application of Derivative (AOD)\question_166_007.png,7,7,,SUBJ,MODULE,MA19,MA19112,utsah
+Application of Derivative (AOD),questions/MA/Application of Derivative (AOD)\question_167_008.png,8,8,,SUBJ,MODULE,MA19,MA19113,utsah
+Application of Derivative (AOD),questions/MA/Application of Derivative (AOD)\question_168_009.png,9,9,,SUBJ,MODULE,MA19,MA19114,utsah
+Application of Derivative (AOD),questions/MA/Application of Derivative (AOD)\question_169_010.png,10,10,(\pi) / 4,SUBJ,MODULE,MA19,MA19115,utsah
+Application of Derivative (AOD),questions/MA/Application of Derivative (AOD)\question_170_011.png,11,11,320,SUBJ,MODULE,MA19,MA19116,utsah
+Application of Derivative (AOD),questions/MA/Application of Derivative (AOD)\question_175_002.png,13,13,,SUBJ,MODULE,MA19,MA19117,utsah
+Application of Derivative (AOD),questions/MA/Application of Derivative (AOD)\question_177_014.png,14,14,( \frac{4}{3\sqrt{3}} ),SUBJ,MODULE,MA19,MA19118,utsah
+Binomial Theorem,questions/MA/Binomial Theorem\question_001_001.png,1,1,C,SMCQ,MODULE,MA12,MA12001,utsah
+Binomial Theorem,questions/MA/Binomial Theorem\question_002_002.png,2,2,B,SMCQ,MODULE,MA12,MA12002,utsah
+Binomial Theorem,questions/MA/Binomial Theorem\question_003_003.png,3,3,A,SMCQ,MODULE,MA12,MA12003,utsah

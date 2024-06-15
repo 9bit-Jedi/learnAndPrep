@@ -79,6 +79,9 @@ class GetAnswer(APIView):
     if question.type == 'INT':
       queryset = AnswerIntegerType.objects.get(question_id=question_id.upper())
       serializer = AnswerIntegerTypeSerializer(queryset)
+    if question.type == 'SUBJ':
+      queryset = AnswerIntegerType.objects.get(question_id=question_id.upper())
+      serializer = AnswerIntegerTypeSerializer(queryset)
     
     return Response(serializer.data, status=status.HTTP_200_OK)
 
@@ -167,16 +170,16 @@ class Submit(APIView):
 
 class ViewQuestionImage(APIView):
   def get(self, request, image_name):
-    full_path = f'questions/questions/{image_name}'
+    full_path = f'media/questions/{image_name}'
     return FileResponse(open(full_path, 'rb'))
   
 class ViewExplanationImage(APIView):
   def get(self, request, image_name):
-    full_path = f'questions/explanations/{image_name}'
+    full_path = f'media/explanations/{image_name}'
     return FileResponse(open(full_path, 'rb'))
   
 class ViewIcon(APIView):
   def get(self, request, image_name):
-    full_path = f'questions/img/icons/{image_name}'
+    full_path = f'media/icons/{image_name}'
     print(full_path)
     return FileResponse(open(full_path, 'rb'))

@@ -9,8 +9,12 @@ https://docs.djangoproject.com/en/5.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
-
+import os
 from pathlib import Path
+from decouple import config
+from datetime import timedelta
+
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -25,7 +29,7 @@ SECRET_KEY = 'django-insecure-b*p$)e#h++vii7j^zm3gw-^4%7z__7sv1b64%eyf8rg+7krgm_
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['192.168.104.59', 'localhost', '127.0.0.1'] 
 
 
 # Application definition
@@ -45,6 +49,10 @@ INSTALLED_APPS = [
     'rest_framework',
     "debug_toolbar",
     'corsheaders',
+    'rest_framework_simplejwt',
+    
+    'accounts',
+
 ]
 
 MIDDLEWARE = [
@@ -143,11 +151,43 @@ REST_FRAMEWORK = {
     'PAGE_SIZE': 10, 
     'DEFAULT_PARSER_CLASSES': [
         'rest_framework.parsers.JSONParser',
-    ]
+    ],
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    )
 }
+
+AUTH_USER_MODEL = 'accounts.User'
+
+PASSWORD_RESET_TIMEOUT = 900
+
+# EMAIL CONFIGURATTION
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.office365.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = config('EMAIL_USER')
+EMAIL_HOST_PASSWORD = config('EMAIL_PASSWORD')
+EMAIL_USE_TLS = True
+
+DEFAULT_FROM_EMAIL = config('EMAIL_USER')
+
+# TWILLO CONFIGURATION
+# TWILIO_ACCOUNT_SID = config('TWILIO_ACCOUNT_SID')
+# TWILIO_AUTH_TOKEN = config('TWILIO_AUTH_TOKEN')
+# TWILIO_PHONE_NUMBER = config('TWILIO_PHONE_NUMBER')
+
+SIMPLE_JWT = {
+    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=40),
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
+    }
+
 
 CORS_ALLOWED_ORIGINS = [
     'http://127.0.0.1:8000',
     'http://localhost:8000',
 ]
 CORS_ALLOW_ALL_ORIGINS = True
+
+# Managing Media
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'

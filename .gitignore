@@ -1,6 +1,8 @@
 __pycache__
-db.sqlite3
-uploader/files
-uploader/img
-questions/questions
-questions/img
+# db.sqlite3
+# uploader/files
+# uploader/img
+# questions/questions
+# questions/img
+.env
+*.ps1

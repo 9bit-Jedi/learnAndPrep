@@ -1,5 +1,7 @@
 from django.db import models
-from django.contrib.auth.models import User
+from django.conf import settings
+User = settings.AUTH_USER_MODEL
+
 from django.shortcuts import get_object_or_404
 from django.core.validators import MinLengthValidator, RegexValidator
 
@@ -22,7 +24,7 @@ class Subject(models.Model):
 
 class Icon(models.Model):
     id = models.CharField(max_length=4, primary_key=True)
-    icon = models.ImageField(upload_to='questions/img/icons')
+    icon = models.ImageField(upload_to='icons/')
 
     def __str__(self):
         return self.id
@@ -46,7 +48,7 @@ class Chapter(models.Model):
     #     super().save(*args, **kwargs)
     
     def __str__(self):
-        return self.chapter_name
+        return f"{self.id} - {self.chapter_name}"
     
 class Question(models.Model):
     
@@ -54,8 +56,8 @@ class Question(models.Model):
         ('SMCQ', 'Single Option Correct'),
         ('MMCQ', 'Multiple Option Correct'),
         ('INT', 'Integer Answer Type'),
+        ('SUBJ', 'Subjective'),
         ('MATCH', 'Match the Matrix'),
-        ('COMPR', 'Comprehension'),
     ]
     
     SOURCE_CHOICES = [
@@ -71,7 +73,7 @@ class Question(models.Model):
     type = models.CharField(max_length=128, choices=TYPE_CHOICES)
     source = models.CharField(max_length=128, choices=SOURCE_CHOICES)
     # question = models.CharField(max_length=10000)
-    question = models.ImageField(upload_to='questions/questions/')
+    question = models.ImageField(upload_to='')
     creator = models.ForeignKey(to=User, on_delete=models.SET_NULL, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     
@@ -81,7 +83,7 @@ OPTION_CHOICES = [('A', 'A'),('B', 'B'),('C', 'C'),('D', 'D'),]
 class AbstractAnswer(models.Model):
     id = models.CharField(max_length=8, primary_key=True)
     question_id = models.OneToOneField(Question, on_delete=models.CASCADE, related_query_name="answer_smcq")
-    explanation = models.ImageField(upload_to='questions/explanations/')
+    explanation = models.ImageField(upload_to='explanations/', null=True)
     class Meta:
         abstract = True
     
@@ -103,4 +105,7 @@ class AnswerMmcq(AbstractAnswer):
     is_O4_correct = models.BooleanField(default=False)
     
 class AnswerIntegerType(AbstractAnswer):
-    correct_answer = models.IntegerField()
+    correct_answer = models.FloatField()
+    
+class AnswerSubjective(AbstractAnswer):
+    correct_answer = models.CharField(max_length=512, null=True)

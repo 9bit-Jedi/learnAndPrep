@@ -1,18 +1,20 @@
 import re
 from django import views
 from django.http import HttpResponse
-from django.db import transaction
+from django.db import IntegrityError, transaction
 from rest_framework import status
 from rest_framework.parsers import MultiPartParser, FormParser
 from rest_framework.views import APIView
+# from rest_framework import viewsets
+from django.core.files.images import ImageFile
 
 import pandas as pd
 
-from questions.models import Subject, Chapter, Question, Icon
+from questions.models import Subject, Chapter, Question, Icon, AnswerIntegerType, AnswerMmcq, AnswerSmcq, AnswerSubjective
 from questions.serializers import SubjectSerializer, ChapterSerializer
 from .models import File, Img
 
-from django.contrib.auth.models import User
+from accounts.models import User
 
 # Create your views here.
 
@@ -61,14 +63,7 @@ class ImageUploadView(APIView):
       "uploaded_images": uploaded_images  
     },status=status.HTTP_201_CREATED)
 
-# def ImportIcon(file_path):
-  
-#     Icon.objects.create(
-#       id= row['id'],
-#     )
-
-
-class FileUploadView(APIView):
+class CsvUploadView(APIView):
   parser_classes = [MultiPartParser, FormParser]
 
   def post(self, request, format=None):    
@@ -79,20 +74,29 @@ class FileUploadView(APIView):
     print(request.data['contentType'])
     
     if(request.data['contentType']=='subject'):
-      ImportSubject(obj.file.path)
+      return ImportSubject(obj.file.path)
     elif(request.data['contentType']=='chapter'):
-      ImportChapter(obj.file.path)
+      return ImportChapter(obj.file.path)
     elif(request.data['contentType']=='question'):
-      ImportQuestion(obj.file.path)
-      print('done importing questions !')
-    # passing file object to ImportSubject function
-    
-    return HttpResponse(status=status.HTTP_201_CREATED)
+      return ImportQuestion(obj.file.path)
+    elif(request.data['contentType']=='answer'):
+      return ImportAnswer(obj.file.path)
+    # passing file object to Import function
+
 
 def ImportSubject(file_path):
-  df = pd.read_csv(file_path, delimiter=',')
-  
+  # read csv
+  try:
+    df = pd.read_csv(file_path, delimiter=',')
+  except FileNotFoundError:
+    return HttpResponse({'error': "File not found."}, status=status.HTTP_400_BAD_REQUEST)
+  except pd.errors.EmptyDataError:  
+    return HttpResponse({'error': "File is empty."}, status=status.HTTP_400_BAD_REQUEST)
+  except pd.errors.ParserError:
+    return HttpResponse({'error': "Error parsing the CSV file."}, status=status.HTTP_400_BAD_REQUEST)
+
   model_instances = []
+  invalid_rows = []
   for index, row in df.iterrows():
     subject_data = {
       'id': row['id'],
@@ -103,11 +107,16 @@ def ImportSubject(file_path):
     if serializer.is_valid():
       model_instances.append(Subject(**serializer.validated_data))
     else:
-      print(serializer.errors)  # Handle any validation errors here
+      invalid_rows.append({'row':index, 'error':serializer.errors})  # Handle any validation errors here
   
   # bulk create all instances
-  with transaction.atomic():
-    Subject.objects.bulk_create(model_instances)
+  try:
+    with transaction.atomic():
+      Subject.objects.bulk_create(model_instances)
+  except IntegrityError as e:
+    return HttpResponse({'error':f"Integrity Error : {e}"}, status=status.HTTP_400_BAD_REQUEST)
+  
+  return HttpResponse({'messsage':"success"}, status=status.HTTP_201_CREATED)
 
 def ImportChapter(file_path):
   df = pd.read_csv(file_path, delimiter=',')  # csv to dataframe
@@ -136,6 +145,7 @@ def ImportChapter(file_path):
       print('listed icon_id does not exist, try uploading icons first')
       return False, f"listed icon_id does not exist, try uploading icons first"
     
+    # print('hello, I am single creating a chapter')
     Chapter.objects.create(
       id= row['id'],
       chapter_name= row['chapter_name'],
@@ -161,29 +171,140 @@ def ImportChapter(file_path):
     
 def ImportQuestion(file_path):
   df = pd.read_csv(file_path, delimiter=',')  # csv to dataframe
+  creator = User.objects.get(name='utsah')
   # print("df created !")
-  for index, row in df.iterrows():
-    
-    # getting queryset
-    chapter_id = row['chapter_id']
-    try:
-      queryset = Chapter.objects.get( id = chapter_id )
-    except Chapter.DoesNotExist:
-      return False, f"Listed Chapter not found."
   
-    creator_id = row['creator']
+  invalid_rows = []
+  
+  for index, row in df.iterrows():
+    question_id = row['question_id']
+    # subject_id = Subject.objects.get(id=question_id[0:2])
     try:
-      creator_queryset = User.objects.get( username = creator_id )
-    except User.DoesNotExist:
-      return False, f"Listed Creator not found."
+      chapter_id = Chapter.objects.get(id=question_id[0:4])
+    except Chapter.DoesNotExist as e:
+      invalid_rows.append({'row':index, 'error': f"Chapter id not found : {e}"})
+      
+    print(row['question_id'])
+    if Question.objects.filter(id=row['question_id']).count():
+      continue;
+    
+    try:
+      image = ImageFile(open(row['image_path'], 'rb'))
+    except FileNotFoundError:
+      invalid_rows.append({'row':index, 'error': f"image file not found : {e}"})
+      # return HttpResponse({'error': "question image file not found."}, status=status.HTTP_404_NOT_FOUND)
+  
+    try:
+      Question.objects.create(
+        id= row['question_id'],
+        chapter_id= chapter_id,
+        type= row['type'],
+        source= row['source'],
+        question= image,
+        creator= creator
+      )
+      print(f"Created question id : {row['question_id']}") 
+    except Exception as e:
+      print(f"error : {str(e)}")
+      invalid_rows.append({'row':index, 'error': f"image file not found : {e}"})
+      # return HttpResponse({'error':f"{e}", "invalid_rows" : invalid_rows}, status=status.HTTP_400_BAD_REQUEST)
+      
+  return HttpResponse({"message":"populated all questions into database successfully", "invalid_rows" : invalid_rows}, status=status.HTTP_201_CREATED)
 
-    # print(row['id'])
-    # id,type,source,chapter_id,creator,question
-    Question.objects.create(
-      id= row['id'],
-      type= row['type'],
-      source= row['source'],
-      chapter_id= queryset,
-      creator= creator_queryset,
-      question= row['question']
-    )
+def ImportAnswer(file_path):
+  df = pd.read_csv(file_path, delimiter=',')  # csv to dataframe
+  invalid_rows = []
+  
+  for index, row in df.iterrows():
+    question_id = row['question_id']
+    # subject_id = Subject.objects.get(id=question_id[0:2])
+    try:
+      question = Question.objects.get(id=question_id)
+    except Question.DoesNotExist as e:
+      invalid_rows.append({'row':index, 'error': f"Chapter id not found : {e}"})
+    
+    # try:
+    #   image = ImageFile(open(row['image_path'], 'rb'))
+    # except FileNotFoundError:
+    #   return HttpResponse({'error': "question image file not found."}, status=status.HTTP_404_NOT_FOUND)
+    type = row['type']
+    try:
+      if type=='SMCQ':
+        # if answer object already exists
+        print(row['question_id'])
+        print(type)
+        if AnswerSmcq.objects.filter(question_id=row['question_id']).count():
+          continue;
+        # if it does not exists create it
+        AnswerSmcq.objects.create(
+          id= f"row['question_id']A",
+          question_id= question,
+          correct_option = row['correct_answer']
+        )
+        
+      if type=='MMCQ':
+        # if answer object already exists
+        print(row['question_id'])
+        print(type)
+        if AnswerMmcq.objects.filter(question_id=row['question_id']).count():
+          continue;
+        # if it does not exists create it
+        # write logic for 4 options
+        if "A" in row['correct_answer']:
+          is_O1_correct = True
+        else:
+          is_O1_correct = False
+        if "B" in row['correct_answer']:
+          is_O2_correct = True
+        else:
+          is_O2_correct = False
+        if "C" in row['correct_answer']:
+          is_O3_correct = True
+        else:
+          is_O3_correct = False
+        if "D" in row['correct_answer']:
+          is_O4_correct = True
+        else:
+          is_O4_correct = False
+        
+        AnswerMmcq.objects.create(
+          id= f"row['question_id']A",
+          question_id= question,
+          is_O1_correct = is_O1_correct,
+          is_O2_correct = is_O2_correct,
+          is_O3_correct = is_O3_correct,
+          is_O4_correct = is_O4_correct
+        )
+        
+      if type=='INT':
+        # if answer object already exists
+        print(row['question_id'])
+        print(type)
+        if AnswerIntegerType.objects.filter(question_id=row['question_id']).count():
+          continue;
+        # if it does not exists create it
+        AnswerIntegerType.objects.create(
+          id= f"row['question_id']A",
+          question_id= question,
+          correct_answer = row['correct_answer']
+        )
+        
+      if type=='SUBJ':
+        # if answer object already exists
+        print(row['question_id'])
+        print(type)
+        if AnswerSubjective.objects.filter(question_id=row['question_id']).count():
+          continue;
+        # if it does not exists create it
+        AnswerSubjective.objects.create(
+          id= f"row['question_id']A",
+          question_id= question,
+          correct_answer = row['correct_answer']
+        )
+      print(f"answer id : {row['question_id']}A") 
+      print(type)
+    except Exception as e:
+      print(f"error : {str(e)}")
+      return HttpResponse({'error':f"{e}"}, status=status.HTTP_400_BAD_REQUEST)
+      
+  return HttpResponse({"message":"populated all questions into database successfully"}, status=status.HTTP_201_CREATED)

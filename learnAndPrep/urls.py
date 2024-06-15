@@ -16,13 +16,23 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.conf import settings
+from django.conf.urls.static import static
+
+
+from rest_framework_simplejwt.views import (
+    TokenObtainPairView,
+    TokenRefreshView,
+)
 
 urlpatterns = [
+    
     path('admin/', admin.site.urls),
+    path('api/user/' , include('accounts.urls')),
     # path('auth/', include('auth_service.urls')),
     path('questions/', include('questions.urls')),
     path('upload/', include('uploader.urls')),
     path('quiz/', include('quiz.urls')),
     path('mock/', include('mockTest.urls')),
     path("__debug__/", include("debug_toolbar.urls")),
-]
+] + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

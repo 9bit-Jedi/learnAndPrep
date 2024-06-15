@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import File
+from .models import File, Files
   
 class FileSerializer(serializers.ModelSerializer):
   class Meta :
@@ -15,3 +15,8 @@ class FileSerializer(serializers.ModelSerializer):
   #   }
   #   representation['file'] = file
   #   return representation
+  
+  # class Filesserializer(serializers.ModelSerializer):
+  #   class Meta:
+  #       model = Files
+  #       fields = ['id' , 'pdf' , 'title']

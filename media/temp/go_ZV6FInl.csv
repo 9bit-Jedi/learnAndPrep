@@ -1,0 +1,421 @@
+Chapter,image_path,qsn,ans,correct_answer,type,source,chapter_id,question_id,creator
+Application of Derivative (AOD),questions/MA/Application of Derivative (AOD)\question_001_001.png,1,1,"A, C",MMCQ,MODULE,MA19,MA19001,utsah
+Application of Derivative (AOD),questions/MA/Application of Derivative (AOD)\question_002_002.png,2,2,C,SMCQ,MODULE,MA19,MA19002,utsah
+Application of Derivative (AOD),questions/MA/Application of Derivative (AOD)\question_003_003.png,3,3,B,SMCQ,MODULE,MA19,MA19003,utsah
+Application of Derivative (AOD),questions/MA/Application of Derivative (AOD)\question_006_000.png,0,4,D,SMCQ,MODULE,MA19,MA19004,utsah
+Application of Derivative (AOD),questions/MA/Application of Derivative (AOD)\question_007_005.png,5,5,C,SMCQ,MODULE,MA19,MA19005,utsah
+Application of Derivative (AOD),questions/MA/Application of Derivative (AOD)\question_008_006.png,6,6,B,SMCQ,MODULE,MA19,MA19006,utsah
+Application of Derivative (AOD),questions/MA/Application of Derivative (AOD)\question_009_007.png,7,7,C,SMCQ,MODULE,MA19,MA19007,utsah
+Application of Derivative (AOD),questions/MA/Application of Derivative (AOD)\question_010_008.png,8,8,C,SMCQ,MODULE,MA19,MA19008,utsah
+Application of Derivative (AOD),questions/MA/Application of Derivative (AOD)\question_011_009.png,9,9,C,SMCQ,MODULE,MA19,MA19009,utsah
+Application of Derivative (AOD),questions/MA/Application of Derivative (AOD)\question_012_010.png,10,10,B,SMCQ,MODULE,MA19,MA19010,utsah
+Application of Derivative (AOD),questions/MA/Application of Derivative (AOD)\question_013_011.png,11,11,C,SMCQ,MODULE,MA19,MA19011,utsah
+Application of Derivative (AOD),questions/MA/Application of Derivative (AOD)\question_014_012.png,12,12,C,SMCQ,MODULE,MA19,MA19012,utsah
+Application of Derivative (AOD),questions/MA/Application of Derivative (AOD)\question_015_013.png,13,13,C,SMCQ,MODULE,MA19,MA19013,utsah
+Application of Derivative (AOD),questions/MA/Application of Derivative (AOD)\question_016_014.png,14,14,B,SMCQ,MODULE,MA19,MA19014,utsah
+Application of Derivative (AOD),questions/MA/Application of Derivative (AOD)\question_017_015.png,15,15,A,SMCQ,MODULE,MA19,MA19015,utsah
+Application of Derivative (AOD),questions/MA/Application of Derivative (AOD)\question_018_016.png,16,16,C,SMCQ,MODULE,MA19,MA19016,utsah
+Application of Derivative (AOD),questions/MA/Application of Derivative (AOD)\question_019_017.png,17,17,A,SMCQ,MODULE,MA19,MA19017,utsah
+Application of Derivative (AOD),questions/MA/Application of Derivative (AOD)\question_020_018.png,18,18,A,SMCQ,MODULE,MA19,MA19018,utsah
+Application of Derivative (AOD),questions/MA/Application of Derivative (AOD)\question_021_019.png,19,19,D,SMCQ,MODULE,MA19,MA19019,utsah
+Application of Derivative (AOD),questions/MA/Application of Derivative (AOD)\question_022_020.png,20,20,C,SMCQ,MODULE,MA19,MA19020,utsah
+Application of Derivative (AOD),questions/MA/Application of Derivative (AOD)\question_023_021.png,21,21,B,SMCQ,MODULE,MA19,MA19021,utsah
+Application of Derivative (AOD),questions/MA/Application of Derivative (AOD)\question_024_022.png,22,22,B,SMCQ,MODULE,MA19,MA19022,utsah
+Application of Derivative (AOD),questions/MA/Application of Derivative (AOD)\question_025_023.png,23,23,D,SMCQ,MODULE,MA19,MA19023,utsah
+Application of Derivative (AOD),questions/MA/Application of Derivative (AOD)\question_026_024.png,24,24,A,SMCQ,MODULE,MA19,MA19024,utsah
+Application of Derivative (AOD),questions/MA/Application of Derivative (AOD)\question_027_025.png,25,25,B,SMCQ,MODULE,MA19,MA19025,utsah
+Application of Derivative (AOD),questions/MA/Application of Derivative (AOD)\question_028_026.png,26,26,A,SMCQ,MODULE,MA19,MA19026,utsah
+Application of Derivative (AOD),questions/MA/Application of Derivative (AOD)\question_029_001.png,1,1,"(a) Max at (x=2\pi.) Max value = 2?, Min. at (x=0.) Min value = 0  (b) Max at (x=\pi/6&amp;) also at (x=5~\pi/6) and Max value (=3/2) , Min at (x=\pi/2) , Min value = -3",SUBJ,MODULE,MA19,MA19027,utsah
+Application of Derivative (AOD),questions/MA/Application of Derivative (AOD)\question_030_002.png,2,2,(a=\frac{1}{4}; b=-\frac{5}{4}; f(x)=\frac{1}{4}(x^{2}-5x+8)),SUBJ,MODULE,MA19,MA19028,utsah
+Application of Derivative (AOD),questions/MA/Application of Derivative (AOD)\question_032_004.png,3,3,6,SUBJ,MODULE,MA19,MA19029,utsah
+Application of Derivative (AOD),questions/MA/Application of Derivative (AOD)\question_033_004.png,4,4,(75\sqrt{3}) sq. units,SUBJ,MODULE,MA19,MA19030,utsah
+Application of Derivative (AOD),questions/MA/Application of Derivative (AOD)\question_034_005.png,5,5,"(r=\sqrt{\frac{2A}{\pi+4}}, s=\sqrt{\frac{2A}{\pi+4}})",SUBJ,MODULE,MA19,MA19031,utsah
+Application of Derivative (AOD),questions/MA/Application of Derivative (AOD)\question_035_006.png,6,6,(3x+4y-9=0; 3x-4y+9=0),SUBJ,MODULE,MA19,MA19032,utsah
+Application of Derivative (AOD),questions/MA/Application of Derivative (AOD)\question_036_007.png,7,7,(\frac{1}{\pi}) cu m,SUBJ,MODULE,MA19,MA19033,utsah
+Application of Derivative (AOD),questions/MA/Application of Derivative (AOD)\question_037_008.png,8,8,"110', 70'",SUBJ,MODULE,MA19,MA19034,utsah
+Application of Derivative (AOD),questions/MA/Application of Derivative (AOD)\question_039_009.png,9,9,"side 10', height 10'",SUBJ,MODULE,MA19,MA19035,utsah
+Application of Derivative (AOD),questions/MA/Application of Derivative (AOD)\question_040_010.png,10,10,32 sq. units,SUBJ,MODULE,MA19,MA19036,utsah
+Application of Derivative (AOD),questions/MA/Application of Derivative (AOD)\question_042_011.png,11,11,"(a=1, b=0)",SUBJ,MODULE,MA19,MA19037,utsah
+Application of Derivative (AOD),questions/MA/Application of Derivative (AOD)\question_043_012.png,12,12,6' x 18',SUBJ,MODULE,MA19,MA19038,utsah
+Application of Derivative (AOD),questions/MA/Application of Derivative (AOD)\question_049_001.png,1,1,4,SMCQ,MAIN,MA19,MA19039,utsah
+Application of Derivative (AOD),questions/MA/Application of Derivative (AOD)\question_050_002.png,2,2,3,SMCQ,MAIN,MA19,MA19040,utsah
+Application of Derivative (AOD),questions/MA/Application of Derivative (AOD)\question_051_003.png,3,3,3,SMCQ,MAIN,MA19,MA19041,utsah
+Application of Derivative (AOD),questions/MA/Application of Derivative (AOD)\question_052_004.png,4,4,4,SMCQ,MAIN,MA19,MA19042,utsah
+Application of Derivative (AOD),questions/MA/Application of Derivative (AOD)\question_053_005.png,5,5,2,SMCQ,MAIN,MA19,MA19043,utsah
+Application of Derivative (AOD),questions/MA/Application of Derivative (AOD)\question_054_006.png,6,6,4,SMCQ,MAIN,MA19,MA19044,utsah
+Application of Derivative (AOD),questions/MA/Application of Derivative (AOD)\question_056_000.png,0,7,1,SMCQ,MAIN,MA19,MA19045,utsah
+Application of Derivative (AOD),questions/MA/Application of Derivative (AOD)\question_058_000.png,0,8,4,SMCQ,MAIN,MA19,MA19046,utsah
+Application of Derivative (AOD),questions/MA/Application of Derivative (AOD)\question_059_009.png,9,9,3,SMCQ,MAIN,MA19,MA19047,utsah
+Application of Derivative (AOD),questions/MA/Application of Derivative (AOD)\question_060_010.png,10,10,4,SMCQ,MAIN,MA19,MA19048,utsah
+Application of Derivative (AOD),questions/MA/Application of Derivative (AOD)\question_065_012.png,12,12,1,SMCQ,MAIN,MA19,MA19049,utsah
+Application of Derivative (AOD),questions/MA/Application of Derivative (AOD)\question_066_013.png,13,13,3,SMCQ,MAIN,MA19,MA19050,utsah
+Application of Derivative (AOD),questions/MA/Application of Derivative (AOD)\question_071_014.png,14,14,4,SMCQ,MAIN,MA19,MA19051,utsah
+Application of Derivative (AOD),questions/MA/Application of Derivative (AOD)\question_074_015.png,15,15,3,SMCQ,MAIN,MA19,MA19052,utsah
+Application of Derivative (AOD),questions/MA/Application of Derivative (AOD)\question_076_002.png,2,16,1,SMCQ,MAIN,MA19,MA19053,utsah
+Application of Derivative (AOD),questions/MA/Application of Derivative (AOD)\question_077_017.png,17,17,4,SMCQ,MAIN,MA19,MA19054,utsah
+Application of Derivative (AOD),questions/MA/Application of Derivative (AOD)\question_078_018.png,18,18,4,SMCQ,MAIN,MA19,MA19055,utsah
+Application of Derivative (AOD),questions/MA/Application of Derivative (AOD)\question_081_020.png,20,20,3,SMCQ,MAIN,MA19,MA19056,utsah
+Application of Derivative (AOD),questions/MA/Application of Derivative (AOD)\question_082_021.png,21,21,4,SMCQ,MAIN,MA19,MA19057,utsah
+Application of Derivative (AOD),questions/MA/Application of Derivative (AOD)\question_083_022.png,22,22,3,SMCQ,MAIN,MA19,MA19058,utsah
+Application of Derivative (AOD),questions/MA/Application of Derivative (AOD)\question_084_023.png,23,23,4,SMCQ,MAIN,MA19,MA19059,utsah
+Application of Derivative (AOD),questions/MA/Application of Derivative (AOD)\question_085_024.png,24,24,3,SMCQ,MAIN,MA19,MA19060,utsah
+Application of Derivative (AOD),questions/MA/Application of Derivative (AOD)\question_086_025.png,25,25,2,SMCQ,MAIN,MA19,MA19061,utsah
+Application of Derivative (AOD),questions/MA/Application of Derivative (AOD)\question_087_026.png,26,26,1,SMCQ,MAIN,MA19,MA19062,utsah
+Application of Derivative (AOD),questions/MA/Application of Derivative (AOD)\question_088_027.png,27,27,4,SMCQ,MAIN,MA19,MA19063,utsah
+Application of Derivative (AOD),questions/MA/Application of Derivative (AOD)\question_089_028.png,28,28,2,SMCQ,MAIN,MA19,MA19064,utsah
+Application of Derivative (AOD),questions/MA/Application of Derivative (AOD)\question_090_029.png,29,29,2,SMCQ,MAIN,MA19,MA19065,utsah
+Application of Derivative (AOD),questions/MA/Application of Derivative (AOD)\question_091_030.png,30,30,3,SMCQ,MAIN,MA19,MA19066,utsah
+Application of Derivative (AOD),questions/MA/Application of Derivative (AOD)\question_094_032.png,32,32,4,SMCQ,MAIN,MA19,MA19067,utsah
+Application of Derivative (AOD),questions/MA/Application of Derivative (AOD)\question_096_001.png,1,33,4,SMCQ,MAIN,MA19,MA19068,utsah
+Application of Derivative (AOD),questions/MA/Application of Derivative (AOD)\question_097_034.png,34,34,4,SMCQ,MAIN,MA19,MA19069,utsah
+Application of Derivative (AOD),questions/MA/Application of Derivative (AOD)\question_098_035.png,35,35,2,SMCQ,MAIN,MA19,MA19070,utsah
+Application of Derivative (AOD),questions/MA/Application of Derivative (AOD)\question_099_036.png,36,36,3,SMCQ,MAIN,MA19,MA19071,utsah
+Application of Derivative (AOD),questions/MA/Application of Derivative (AOD)\question_100_037.png,37,37,4,SMCQ,MAIN,MA19,MA19072,utsah
+Application of Derivative (AOD),questions/MA/Application of Derivative (AOD)\question_101_038.png,38,38,3,SMCQ,MAIN,MA19,MA19073,utsah
+Application of Derivative (AOD),questions/MA/Application of Derivative (AOD)\question_102_039.png,39,39,904,INT,MAIN,MA19,MA19074,utsah
+Application of Derivative (AOD),questions/MA/Application of Derivative (AOD)\question_105_041.png,41,41,22,INT,MAIN,MA19,MA19075,utsah
+Application of Derivative (AOD),questions/MA/Application of Derivative (AOD)\question_107_042.png,42,42,1,INT,MAIN,MA19,MA19076,utsah
+Application of Derivative (AOD),questions/MA/Application of Derivative (AOD)\question_110_044.png,44,44,48,INT,MAIN,MA19,MA19077,utsah
+Application of Derivative (AOD),questions/MA/Application of Derivative (AOD)\question_111_045.png,45,45,5,INT,MAIN,MA19,MA19078,utsah
+Application of Derivative (AOD),questions/MA/Application of Derivative (AOD)\question_112_046.png,46,46,4,SMCQ,MAIN,MA19,MA19079,utsah
+Application of Derivative (AOD),questions/MA/Application of Derivative (AOD)\question_113_001.png,1,1,A,SMCQ,ADV,MA19,MA19080,utsah
+Application of Derivative (AOD),questions/MA/Application of Derivative (AOD)\question_114_002.png,2,2,D,SMCQ,ADV,MA19,MA19081,utsah
+Application of Derivative (AOD),questions/MA/Application of Derivative (AOD)\question_116_003.png,3,3,A,SMCQ,ADV,MA19,MA19082,utsah
+Application of Derivative (AOD),questions/MA/Application of Derivative (AOD)\question_117_004.png,4,4,D,SMCQ,ADV,MA19,MA19083,utsah
+Application of Derivative (AOD),questions/MA/Application of Derivative (AOD)\question_118_005.png,5,5,C,SMCQ,ADV,MA19,MA19084,utsah
+Application of Derivative (AOD),questions/MA/Application of Derivative (AOD)\question_119_006.png,6,6,D,SMCQ,ADV,MA19,MA19085,utsah
+Application of Derivative (AOD),questions/MA/Application of Derivative (AOD)\question_121_008.png,8,8,10,INT,ADV,MA19,MA19086,utsah
+Application of Derivative (AOD),questions/MA/Application of Derivative (AOD)\question_122_009.png,9,9,( 4\sqrt{65} ),SUBJ,ADV,MA19,MA19087,utsah
+Application of Derivative (AOD),questions/MA/Application of Derivative (AOD)\question_127_002.png,12,12,0,INT,ADV,MA19,MA19088,utsah
+Application of Derivative (AOD),questions/MA/Application of Derivative (AOD)\question_128_002.png,12,12,7,INT,ADV,MA19,MA19089,utsah
+Application of Derivative (AOD),questions/MA/Application of Derivative (AOD)\question_129_013.png,13,13,1,INT,ADV,MA19,MA19090,utsah
+Application of Derivative (AOD),questions/MA/Application of Derivative (AOD)\question_130_014.png,14,14,5,INT,ADV,MA19,MA19091,utsah
+Application of Derivative (AOD),questions/MA/Application of Derivative (AOD)\question_131_015.png,15,15,9,INT,ADV,MA19,MA19092,utsah
+Application of Derivative (AOD),questions/MA/Application of Derivative (AOD)\question_133_016.png,16,16,"A, C",MMCQ,ADV,MA19,MA19093,utsah
+Application of Derivative (AOD),questions/MA/Application of Derivative (AOD)\question_134_017.png,17,17,"A, B",MMCQ,ADV,MA19,MA19094,utsah
+Application of Derivative (AOD),questions/MA/Application of Derivative (AOD)\question_135_018.png,18,18,4,INT,ADV,MA19,MA19095,utsah
+Application of Derivative (AOD),questions/MA/Application of Derivative (AOD)\question_136_019.png,19,19,"B, C",MMCQ,ADV,MA19,MA19096,utsah
+Application of Derivative (AOD),questions/MA/Application of Derivative (AOD)\question_137_020.png,20,20,C,MMCQ,ADV,MA19,MA19097,utsah
+Application of Derivative (AOD),questions/MA/Application of Derivative (AOD)\question_138_021.png,21,21,0.5,INT,ADV,MA19,MA19098,utsah
+Application of Derivative (AOD),questions/MA/Application of Derivative (AOD)\question_140_022.png,22,22,5,INT,ADV,MA19,MA19099,utsah
+Application of Derivative (AOD),questions/MA/Application of Derivative (AOD)\question_143_001.png,1,1,"B, D",MMCQ,MODULE,MA19,MA19100,utsah
+Application of Derivative (AOD),questions/MA/Application of Derivative (AOD)\question_144_002.png,2,2,"A, B, D",MMCQ,MODULE,MA19,MA19101,utsah
+Application of Derivative (AOD),questions/MA/Application of Derivative (AOD)\question_145_003.png,3,3,"B, D",MMCQ,MODULE,MA19,MA19102,utsah
+Application of Derivative (AOD),questions/MA/Application of Derivative (AOD)\question_147_004.png,4,4,"A,B,C,D",MMCQ,MODULE,MA19,MA19103,utsah
+Application of Derivative (AOD),questions/MA/Application of Derivative (AOD)\question_148_005.png,5,5,"A, C",MMCQ,MODULE,MA19,MA19104,utsah
+Application of Derivative (AOD),questions/MA/Application of Derivative (AOD)\question_153_007.png,7,7,"A, C",MMCQ,MODULE,MA19,MA19105,utsah
+Application of Derivative (AOD),questions/MA/Application of Derivative (AOD)\question_154_008.png,8,8,"B, C",MMCQ,MODULE,MA19,MA19106,utsah
+Application of Derivative (AOD),questions/MA/Application of Derivative (AOD)\question_155_009.png,9,9,"A, B, C, D",MMCQ,MODULE,MA19,MA19107,utsah
+Application of Derivative (AOD),questions/MA/Application of Derivative (AOD)\question_156_010.png,10,10,"B, C, D",MMCQ,MODULE,MA19,MA19108,utsah
+Application of Derivative (AOD),questions/MA/Application of Derivative (AOD)\question_157_001.png,1,1,Pmax= a 1 cos ec 2 ? ? ? ? ?,SUBJ,MODULE,MA19,MA19109,utsah
+Application of Derivative (AOD),questions/MA/Application of Derivative (AOD)\question_164_005.png,5,5,"(0, 0)",SUBJ,MODULE,MA19,MA19110,utsah
+Application of Derivative (AOD),questions/MA/Application of Derivative (AOD)\question_165_006.png,6,6,,SUBJ,MODULE,MA19,MA19111,utsah
+Application of Derivative (AOD),questions/MA/Application of Derivative (AOD)\question_166_007.png,7,7,,SUBJ,MODULE,MA19,MA19112,utsah
+Application of Derivative (AOD),questions/MA/Application of Derivative (AOD)\question_167_008.png,8,8,,SUBJ,MODULE,MA19,MA19113,utsah
+Application of Derivative (AOD),questions/MA/Application of Derivative (AOD)\question_168_009.png,9,9,,SUBJ,MODULE,MA19,MA19114,utsah
+Application of Derivative (AOD),questions/MA/Application of Derivative (AOD)\question_169_010.png,10,10,(\pi) / 4,SUBJ,MODULE,MA19,MA19115,utsah
+Application of Derivative (AOD),questions/MA/Application of Derivative (AOD)\question_170_011.png,11,11,320,SUBJ,MODULE,MA19,MA19116,utsah
+Application of Derivative (AOD),questions/MA/Application of Derivative (AOD)\question_175_002.png,13,13,,SUBJ,MODULE,MA19,MA19117,utsah
+Application of Derivative (AOD),questions/MA/Application of Derivative (AOD)\question_177_014.png,14,14,( \frac{4}{3\sqrt{3}} ),SUBJ,MODULE,MA19,MA19118,utsah
+Binomial Theorem,questions/MA/Binomial Theorem\question_001_001.png,1,1,C,SMCQ,MODULE,MA12,MA12001,utsah
+Binomial Theorem,questions/MA/Binomial Theorem\question_002_002.png,2,2,B,SMCQ,MODULE,MA12,MA12002,utsah
+Binomial Theorem,questions/MA/Binomial Theorem\question_003_003.png,3,3,A,SMCQ,MODULE,MA12,MA12003,utsah
+Binomial Theorem,questions/MA/Binomial Theorem\question_005_002.png,2,4,C,SMCQ,MODULE,MA12,MA12004,utsah
+Binomial Theorem,questions/MA/Binomial Theorem\question_006_005.png,5,5,B,SMCQ,MODULE,MA12,MA12005,utsah
+Binomial Theorem,questions/MA/Binomial Theorem\question_007_006.png,6,6,A,SMCQ,MODULE,MA12,MA12006,utsah
+Binomial Theorem,questions/MA/Binomial Theorem\question_008_007.png,7,7,C,SMCQ,MODULE,MA12,MA12007,utsah
+Binomial Theorem,questions/MA/Binomial Theorem\question_009_008.png,8,8,A,SMCQ,MODULE,MA12,MA12008,utsah
+Binomial Theorem,questions/MA/Binomial Theorem\question_010_009.png,9,9,B,SMCQ,MODULE,MA12,MA12009,utsah
+Binomial Theorem,questions/MA/Binomial Theorem\question_013_010.png,10,10,B,SMCQ,MODULE,MA12,MA12010,utsah
+Binomial Theorem,questions/MA/Binomial Theorem\question_014_011.png,11,11,B,SMCQ,MODULE,MA12,MA12011,utsah
+Binomial Theorem,questions/MA/Binomial Theorem\question_015_012.png,12,12,D,SMCQ,MODULE,MA12,MA12012,utsah
+Binomial Theorem,questions/MA/Binomial Theorem\question_016_013.png,13,13,B,SMCQ,MODULE,MA12,MA12013,utsah
+Binomial Theorem,questions/MA/Binomial Theorem\question_017_014.png,14,14,A,SMCQ,MODULE,MA12,MA12014,utsah
+Binomial Theorem,questions/MA/Binomial Theorem\question_018_015.png,15,15,B,SMCQ,MODULE,MA12,MA12015,utsah
+Binomial Theorem,questions/MA/Binomial Theorem\question_019_001.png,1,1,(a) r = 6 (b) r = 5 or 9,SUBJ,MODULE,MA12,MA12016,utsah
+Binomial Theorem,questions/MA/Binomial Theorem\question_021_002.png,2,2,(i) 05-12-2024 (ii)  (T_6) = 7,SUBJ,MODULE,MA12,MA12017,utsah
+Binomial Theorem,questions/MA/Binomial Theorem\question_022_003.png,3,3,,SUBJ,MODULE,MA12,MA12018,utsah
+Binomial Theorem,questions/MA/Binomial Theorem\question_024_004.png,4,4,(\frac{(2^{mn}-1)}{(2^{n}-1)(2^{mn})}),SUBJ,MODULE,MA12,MA12019,utsah
+Binomial Theorem,questions/MA/Binomial Theorem\question_025_005.png,5,5,(i) (T_7=\frac{7.3^{13}}{2}) (ii) (455\times3^{12}),SUBJ,MODULE,MA12,MA12020,utsah
+Binomial Theorem,questions/MA/Binomial Theorem\question_026_006.png,6,6,(\frac{17}{54}),SUBJ,MODULE,MA12,MA12021,utsah
+Binomial Theorem,questions/MA/Binomial Theorem\question_027_007.png,7,7,n=2 or 3 or 4,SUBJ,MODULE,MA12,MA12022,utsah
+Binomial Theorem,questions/MA/Binomial Theorem\question_028_008.png,8,8,816,SUBJ,MODULE,MA12,MA12023,utsah
+Binomial Theorem,questions/MA/Binomial Theorem\question_036_011.png,11,11,(a) 990 (b) 3600,SUBJ,MODULE,MA12,MA12024,utsah
+Binomial Theorem,questions/MA/Binomial Theorem\question_037_012.png,12,12,({}^{n}C_{r}(3^{n-r}-2^{n-r})),SUBJ,MODULE,MA12,MA12025,utsah
+Binomial Theorem,questions/MA/Binomial Theorem\question_038_013.png,13,13,,SUBJ,MODULE,MA12,MA12026,utsah
+Binomial Theorem,questions/MA/Binomial Theorem\question_039_014.png,14,14,(i) 3� (ii) 1 (iii) an,SUBJ,MODULE,MA12,MA12027,utsah
+Binomial Theorem,questions/MA/Binomial Theorem\question_040_015.png,15,15,,SUBJ,MODULE,MA12,MA12028,utsah
+Binomial Theorem,questions/MA/Binomial Theorem\question_043_016.png,16,16,,SUBJ,MODULE,MA12,MA12029,utsah
+Binomial Theorem,questions/MA/Binomial Theorem\question_044_017.png,17,17,,SUBJ,MODULE,MA12,MA12030,utsah
+Binomial Theorem,questions/MA/Binomial Theorem\question_045_001.png,1,1,2,SMCQ,MAIN,MA12,MA12031,utsah
+Binomial Theorem,questions/MA/Binomial Theorem\question_046_002.png,2,2,1,SMCQ,MAIN,MA12,MA12032,utsah
+Binomial Theorem,questions/MA/Binomial Theorem\question_047_003.png,3,3,3,SMCQ,MAIN,MA12,MA12033,utsah
+Binomial Theorem,questions/MA/Binomial Theorem\question_048_004.png,4,4,2,SMCQ,MAIN,MA12,MA12034,utsah
+Binomial Theorem,questions/MA/Binomial Theorem\question_049_005.png,5,5,4,SMCQ,MAIN,MA12,MA12035,utsah
+Binomial Theorem,questions/MA/Binomial Theorem\question_055_007.png,7,7,1,SMCQ,MAIN,MA12,MA12036,utsah
+Binomial Theorem,questions/MA/Binomial Theorem\question_056_008.png,8,8,2,SMCQ,MAIN,MA12,MA12037,utsah
+Binomial Theorem,questions/MA/Binomial Theorem\question_057_009.png,9,9,3,SMCQ,MAIN,MA12,MA12038,utsah
+Binomial Theorem,questions/MA/Binomial Theorem\question_058_010.png,10,10,4,SMCQ,MAIN,MA12,MA12039,utsah
+Binomial Theorem,questions/MA/Binomial Theorem\question_059_011.png,11,11,3,SMCQ,MAIN,MA12,MA12040,utsah
+Binomial Theorem,questions/MA/Binomial Theorem\question_060_012.png,12,12. (Bonus),1,SMCQ,MAIN,MA12,MA12041,utsah
+Binomial Theorem,questions/MA/Binomial Theorem\question_061_013.png,13,13,1,SMCQ,MAIN,MA12,MA12042,utsah
+Binomial Theorem,questions/MA/Binomial Theorem\question_062_014.png,14,14,1,SMCQ,MAIN,MA12,MA12043,utsah
+Binomial Theorem,questions/MA/Binomial Theorem\question_063_015.png,15,15,4,SMCQ,MAIN,MA12,MA12044,utsah
+Binomial Theorem,questions/MA/Binomial Theorem\question_064_016.png,16,16,3,SMCQ,MAIN,MA12,MA12045,utsah
+Binomial Theorem,questions/MA/Binomial Theorem\question_065_017.png,17,17,4,SMCQ,MAIN,MA12,MA12046,utsah
+Binomial Theorem,questions/MA/Binomial Theorem\question_066_018.png,18,18,2,SMCQ,MAIN,MA12,MA12047,utsah
+Binomial Theorem,questions/MA/Binomial Theorem\question_067_019.png,19,19,4,SMCQ,MAIN,MA12,MA12048,utsah
+Binomial Theorem,questions/MA/Binomial Theorem\question_068_020.png,20,20,1,SMCQ,MAIN,MA12,MA12049,utsah
+Binomial Theorem,questions/MA/Binomial Theorem\question_069_021.png,21,21,3,SMCQ,MAIN,MA12,MA12050,utsah
+Binomial Theorem,questions/MA/Binomial Theorem\question_070_022.png,22,22,2,SMCQ,MAIN,MA12,MA12051,utsah
+Binomial Theorem,questions/MA/Binomial Theorem\question_076_024.png,24,24,4,SMCQ,MAIN,MA12,MA12052,utsah
+Binomial Theorem,questions/MA/Binomial Theorem\question_080_025.png,25,25,1,SMCQ,MAIN,MA12,MA12053,utsah
+Binomial Theorem,questions/MA/Binomial Theorem\question_081_026.png,26,26,4,SMCQ,MAIN,MA12,MA12054,utsah
+Binomial Theorem,questions/MA/Binomial Theorem\question_082_027.png,27,27,2,SMCQ,MAIN,MA12,MA12055,utsah
+Binomial Theorem,questions/MA/Binomial Theorem\question_083_028.png,28,28,Bonus,SMCQ,MAIN,MA12,MA12056,utsah
+Binomial Theorem,questions/MA/Binomial Theorem\question_085_029.png,29,29,1,SMCQ,MAIN,MA12,MA12057,utsah
+Binomial Theorem,questions/MA/Binomial Theorem\question_086_030.png,30,30,1,SMCQ,MAIN,MA12,MA12058,utsah
+Binomial Theorem,questions/MA/Binomial Theorem\question_087_031.png,31,31,1,SMCQ,MAIN,MA12,MA12059,utsah
+Binomial Theorem,questions/MA/Binomial Theorem\question_088_032.png,32,32,1,SMCQ,MAIN,MA12,MA12060,utsah
+Binomial Theorem,questions/MA/Binomial Theorem\question_089_033.png,33,33,4,SMCQ,MAIN,MA12,MA12061,utsah
+Binomial Theorem,questions/MA/Binomial Theorem\question_090_034.png,34,34,3,SMCQ,MAIN,MA12,MA12062,utsah
+Binomial Theorem,questions/MA/Binomial Theorem\question_091_035.png,35,35,3,SMCQ,MAIN,MA12,MA12063,utsah
+Binomial Theorem,questions/MA/Binomial Theorem\question_092_036.png,36,36,30,INT,MAIN,MA12,MA12064,utsah
+Binomial Theorem,questions/MA/Binomial Theorem\question_093_037.png,37,37,2,SMCQ,MAIN,MA12,MA12065,utsah
+Binomial Theorem,questions/MA/Binomial Theorem\question_094_038.png,38,38,2,SMCQ,MAIN,MA12,MA12066,utsah
+Binomial Theorem,questions/MA/Binomial Theorem\question_095_039.png,39,39,4,SMCQ,MAIN,MA12,MA12067,utsah
+Binomial Theorem,questions/MA/Binomial Theorem\question_096_040.png,40,40,1,SMCQ,MAIN,MA12,MA12068,utsah
+Binomial Theorem,questions/MA/Binomial Theorem\question_097_041.png,41,41,615,INT,MAIN,MA12,MA12069,utsah
+Binomial Theorem,questions/MA/Binomial Theorem\question_098_042.png,42,42,3,SMCQ,MAIN,MA12,MA12070,utsah
+Binomial Theorem,questions/MA/Binomial Theorem\question_099_043.png,43,43,51,INT,MAIN,MA12,MA12071,utsah
+Binomial Theorem,questions/MA/Binomial Theorem\question_101_004.png,44,44,2,SMCQ,MAIN,MA12,MA12072,utsah
+Binomial Theorem,questions/MA/Binomial Theorem\question_102_045.png,45,45,3,SMCQ,MAIN,MA12,MA12073,utsah
+Binomial Theorem,questions/MA/Binomial Theorem\question_103_046.png,46,46,4,SMCQ,MAIN,MA12,MA12074,utsah
+Binomial Theorem,questions/MA/Binomial Theorem\question_104_047.png,47,47,1,SMCQ,MAIN,MA12,MA12075,utsah
+Binomial Theorem,questions/MA/Binomial Theorem\question_105_048.png,48,48,3,SMCQ,MAIN,MA12,MA12076,utsah
+Binomial Theorem,questions/MA/Binomial Theorem\question_106_049.png,49,49,8,INT,MAIN,MA12,MA12077,utsah
+Binomial Theorem,questions/MA/Binomial Theorem\question_107_050.png,50,50,3,SMCQ,MAIN,MA12,MA12078,utsah
+Binomial Theorem,questions/MA/Binomial Theorem\question_108_051.png,51,51,13,INT,MAIN,MA12,MA12079,utsah
+Binomial Theorem,questions/MA/Binomial Theorem\question_109_052.png,52,52,120,INT,MAIN,MA12,MA12080,utsah
+Binomial Theorem,questions/MA/Binomial Theorem\question_110_053.png,53,53,1,SMCQ,MAIN,MA12,MA12081,utsah
+Binomial Theorem,questions/MA/Binomial Theorem\question_111_054.png,54,54,3,SMCQ,MAIN,MA12,MA12082,utsah
+Binomial Theorem,questions/MA/Binomial Theorem\question_112_055.png,55,55,2,SMCQ,MAIN,MA12,MA12083,utsah
+Binomial Theorem,questions/MA/Binomial Theorem\question_113_056.png,56,56,3,SMCQ,MAIN,MA12,MA12084,utsah
+Binomial Theorem,questions/MA/Binomial Theorem\question_114_057.png,57,57,2,SMCQ,MAIN,MA12,MA12085,utsah
+Binomial Theorem,questions/MA/Binomial Theorem\question_115_058.png,58,58,3,SMCQ,MAIN,MA12,MA12086,utsah
+Binomial Theorem,questions/MA/Binomial Theorem\question_116_059.png,59,59,4,SMCQ,MAIN,MA12,MA12087,utsah
+Binomial Theorem,questions/MA/Binomial Theorem\question_117_060.png,60,60,45,INT,MAIN,MA12,MA12088,utsah
+Binomial Theorem,questions/MA/Binomial Theorem\question_118_061.png,61,61,210,INT,MAIN,MA12,MA12089,utsah
+Binomial Theorem,questions/MA/Binomial Theorem\question_120_001.png,62,62,7,INT,MAIN,MA12,MA12090,utsah
+Binomial Theorem,questions/MA/Binomial Theorem\question_121_063.png,63,63,924,INT,MAIN,MA12,MA12091,utsah
+Binomial Theorem,questions/MA/Binomial Theorem\question_122_064.png,64,64,3,SMCQ,MAIN,MA12,MA12092,utsah
+Binomial Theorem,questions/MA/Binomial Theorem\question_123_065.png,65,65,1,SMCQ,MAIN,MA12,MA12093,utsah
+Binomial Theorem,questions/MA/Binomial Theorem\question_124_066.png,66,66,2,SMCQ,MAIN,MA12,MA12094,utsah
+Binomial Theorem,questions/MA/Binomial Theorem\question_126_067.png,67,67,2,SMCQ,MAIN,MA12,MA12095,utsah
+Binomial Theorem,questions/MA/Binomial Theorem\question_127_068.png,68,68,4,SMCQ,MAIN,MA12,MA12096,utsah
+Binomial Theorem,questions/MA/Binomial Theorem\question_128_069.png,69,69,5005,INT,MAIN,MA12,MA12097,utsah
+Binomial Theorem,questions/MA/Binomial Theorem\question_129_001.png,1,1,C,SMCQ,ADV,MA12,MA12098,utsah
+Binomial Theorem,questions/MA/Binomial Theorem\question_130_002.png,2,2,A,SMCQ,ADV,MA12,MA12099,utsah
+Binomial Theorem,questions/MA/Binomial Theorem\question_131_003.png,3,4,D,SMCQ,ADV,MA12,MA12100,utsah
+Binomial Theorem,questions/MA/Binomial Theorem\question_132_004.png,4,5,A,SMCQ,ADV,MA12,MA12101,utsah
+Binomial Theorem,questions/MA/Binomial Theorem\question_133_005.png,5,7,6,INT,ADV,MA12,MA12102,utsah
+Binomial Theorem,questions/MA/Binomial Theorem\question_138_008.png,8,8,C,SMCQ,ADV,MA12,MA12103,utsah
+Binomial Theorem,questions/MA/Binomial Theorem\question_139_009.png,9,9,8,INT,ADV,MA12,MA12104,utsah
+Binomial Theorem,questions/MA/Binomial Theorem\question_140_010.png,10,10,5,INT,ADV,MA12,MA12105,utsah
+Binomial Theorem,questions/MA/Binomial Theorem\question_141_011.png,11,11,646,INT,ADV,MA12,MA12106,utsah
+Binomial Theorem,questions/MA/Binomial Theorem\question_142_012.png,12,12,6.2,INT,ADV,MA12,MA12107,utsah
+Binomial Theorem,questions/MA/Binomial Theorem\question_144_014.png,14,14,3,INT,ADV,MA12,MA12108,utsah
+Binomial Theorem,questions/MA/Binomial Theorem\question_145_001.png,1,1,B,SMCQ,MODULE,MA12,MA12109,utsah
+Binomial Theorem,questions/MA/Binomial Theorem\question_146_002.png,2,2,B,SMCQ,MODULE,MA12,MA12110,utsah
+Binomial Theorem,questions/MA/Binomial Theorem\question_147_003.png,3,3,B,SMCQ,MODULE,MA12,MA12111,utsah
+Binomial Theorem,questions/MA/Binomial Theorem\question_148_004.png,4,4,D,SMCQ,MODULE,MA12,MA12112,utsah
+Binomial Theorem,questions/MA/Binomial Theorem\question_155_006.png,6,6,ACD,MMCQ,MODULE,MA12,MA12113,utsah
+Binomial Theorem,questions/MA/Binomial Theorem\question_156_007.png,7,7,AB,MMCQ,MODULE,MA12,MA12114,utsah
+Binomial Theorem,questions/MA/Binomial Theorem\question_158_003.png,8,8,BCD,MMCQ,MODULE,MA12,MA12115,utsah
+Binomial Theorem,questions/MA/Binomial Theorem\question_159_009.png,9,9,AB,MMCQ,MODULE,MA12,MA12116,utsah
+Binomial Theorem,questions/MA/Binomial Theorem\question_160_010.png,10,10,AC,MMCQ,MODULE,MA12,MA12117,utsah
+Binomial Theorem,questions/MA/Binomial Theorem\question_161_011.png,11,11,ACD,MMCQ,MODULE,MA12,MA12118,utsah
+Binomial Theorem,questions/MA/Binomial Theorem\question_162_012.png,12,12,BCD,MMCQ,MODULE,MA12,MA12119,utsah
+Binomial Theorem,questions/MA/Binomial Theorem\question_163_013.png,13,13,AD,MMCQ,MODULE,MA12,MA12120,utsah
+Binomial Theorem,questions/MA/Binomial Theorem\question_164_014.png,14,14,BD,MMCQ,MODULE,MA12,MA12121,utsah
+Binomial Theorem,questions/MA/Binomial Theorem\question_165_015.png,15,15,AC,MMCQ,MODULE,MA12,MA12122,utsah
+Binomial Theorem,questions/MA/Binomial Theorem\question_166_001.png,1,1,,SUBJ,MODULE,MA12,MA12123,utsah
+Binomial Theorem,questions/MA/Binomial Theorem\question_168_002.png,2,2,722,SUBJ,MODULE,MA12,MA12124,utsah
+Binomial Theorem,questions/MA/Binomial Theorem\question_169_003.png,3,3,( \frac{8}{21} ) <x <20,SUBJ,MODULE,MA12,MA12125,utsah
+Binomial Theorem,questions/MA/Binomial Theorem\question_170_004.png,4,4,,SUBJ,MODULE,MA12,MA12126,utsah
+Binomial Theorem,questions/MA/Binomial Theorem\question_172_001.png,5,5,( 2^{10} ),SUBJ,MODULE,MA12,MA12127,utsah
+Binomial Theorem,questions/MA/Binomial Theorem\question_173_006.png,6,6,0,INT,MODULE,MA12,MA12128,utsah
+Binomial Theorem,questions/MA/Binomial Theorem\question_176_008.png,8,8,n=12,SUBJ,MODULE,MA12,MA12129,utsah
+Binomial Theorem,questions/MA/Binomial Theorem\question_177_009.png,9,9,-22100,SUBJ,MODULE,MA12,MA12130,utsah
+Binomial Theorem,questions/MA/Binomial Theorem\question_178_010.png,10,10,30 15,SUBJ,MODULE,MA12,MA12131,utsah
+Circle,questions/MA/Circle\question_064_001.png,1,1,D,SMCQ,MODULE,MA03,MA03001,utsah
+Circle,questions/MA/Circle\question_065_002.png,2,2,B,SMCQ,MODULE,MA03,MA03002,utsah
+Circle,questions/MA/Circle\question_068_004.png,4,4,A,SMCQ,MODULE,MA03,MA03003,utsah
+Circle,questions/MA/Circle\question_069_005.png,5,5,A,SMCQ,MODULE,MA03,MA03004,utsah
+Circle,questions/MA/Circle\question_070_006.png,6,6,D,SMCQ,MODULE,MA03,MA03005,utsah
+Circle,questions/MA/Circle\question_071_007.png,7,7,A,SMCQ,MODULE,MA03,MA03006,utsah
+Circle,questions/MA/Circle\question_072_008.png,8,8,B,SMCQ,MODULE,MA03,MA03007,utsah
+Circle,questions/MA/Circle\question_073_009.png,9,9,B,SMCQ,MODULE,MA03,MA03008,utsah
+Circle,questions/MA/Circle\question_074_010.png,10,10,B,SMCQ,MODULE,MA03,MA03009,utsah
+Circle,questions/MA/Circle\question_075_011.png,11,11,D,SMCQ,MODULE,MA03,MA03010,utsah
+Circle,questions/MA/Circle\question_076_012.png,12,12,A,SMCQ,MODULE,MA03,MA03011,utsah
+Circle,questions/MA/Circle\question_077_013.png,13,13,C,SMCQ,MODULE,MA03,MA03012,utsah
+Circle,questions/MA/Circle\question_078_014.png,14,14,B,SMCQ,MODULE,MA03,MA03013,utsah
+Circle,questions/MA/Circle\question_079_015.png,15,15,B,SMCQ,MODULE,MA03,MA03014,utsah
+Circle,questions/MA/Circle\question_080_016.png,16,16,B,SMCQ,MODULE,MA03,MA03015,utsah
+Circle,questions/MA/Circle\question_081_017.png,17,17,C,SMCQ,MODULE,MA03,MA03016,utsah
+Circle,questions/MA/Circle\question_083_000.png,18,18,A,SMCQ,MODULE,MA03,MA03017,utsah
+Circle,questions/MA/Circle\question_084_019.png,19,19,C,SMCQ,MODULE,MA03,MA03018,utsah
+Circle,questions/MA/Circle\question_085_020.png,20,20,C,SMCQ,MODULE,MA03,MA03019,utsah
+Circle,questions/MA/Circle\question_088_022.png,22,22,A,SMCQ,MODULE,MA03,MA03020,utsah
+Circle,questions/MA/Circle\question_089_023.png,23,23,A,SMCQ,MODULE,MA03,MA03021,utsah
+Circle,questions/MA/Circle\question_090_024.png,24,24,C,SMCQ,MODULE,MA03,MA03022,utsah
+Circle,questions/MA/Circle\question_091_025.png,25,25,C,SMCQ,MODULE,MA03,MA03023,utsah
+Circle,questions/MA/Circle\question_092_026.png,26,26,C,SMCQ,MODULE,MA03,MA03024,utsah
+Circle,questions/MA/Circle\question_095_028.png,28,28,D,SMCQ,MODULE,MA03,MA03025,utsah
+Circle,questions/MA/Circle\question_097_000.png,0,29,B,SMCQ,MODULE,MA03,MA03026,utsah
+Circle,questions/MA/Circle\question_098_030.png,30,30,C,SMCQ,MODULE,MA03,MA03027,utsah
+Circle,questions/MA/Circle\question_099_031.png,31,31,B,SMCQ,MODULE,MA03,MA03028,utsah
+Circle,questions/MA/Circle\question_100_032.png,32,32,A,SMCQ,MODULE,MA03,MA03029,utsah
+Circle,questions/MA/Circle\question_101_033.png,33,33,B,SMCQ,MODULE,MA03,MA03030,utsah
+Circle,questions/MA/Circle\question_102_034.png,34,34,A,SMCQ,MODULE,MA03,MA03031,utsah
+Circle,questions/MA/Circle\question_103_035.png,35,35,B,SMCQ,MODULE,MA03,MA03032,utsah
+Circle,questions/MA/Circle\question_104_036.png,36,36,A,SMCQ,MODULE,MA03,MA03033,utsah
+Circle,questions/MA/Circle\question_105_037.png,37,37,A,SMCQ,MODULE,MA03,MA03034,utsah
+Circle,questions/MA/Circle\question_107_002.png,2,2,"(a) (2, 4); ?61 (b) ((\frac{c}{\sqrt{1+m^{2}}},\frac{mc}{\sqrt{1+m^{2}}}))",SUBJ,MODULE,MA03,MA03035,utsah
+Circle,questions/MA/Circle\question_108_003.png,3,3,(a) x^2 + y^2 -ax - by = 0 (b) x^2 + y^2 - 22x - 4y + 25 = 0 (c) x^2 + y^2 - 5x - y + 4 = 0,SUBJ,MODULE,MA03,MA03036,utsah
+Circle,questions/MA/Circle\question_109_004.png,4,4,x^2 + y^2 - hx - ky = 0,SUBJ,MODULE,MA03,MA03037,utsah
+Circle,questions/MA/Circle\question_110_005.png,5,5,(a) x^2 + y^2 - 6x � 6?2y + 9 = 0 (bx^2 + y^2 + 4x - 10y + 4 = 0; x^2 + y^2 - 4x - 2y + 4 = 0),SUBJ,MODULE,MA03,MA03038,utsah
+Circle,questions/MA/Circle\question_111_006.png,6,6 (a),2,INT,MODULE,MA03,MA03039,utsah
+Circle,questions/MA/Circle\question_112_000.png,6,6 (b),"(9, 3)",SUBJ,MODULE,MA03,MA03040,utsah
+Circle,questions/MA/Circle\question_113_007.png,7,7,"(\lambda\in(-1,4))",SUBJ,MODULE,MA03,MA03041,utsah
+Circle,questions/MA/Circle\question_114_008.png,8,8,,SUBJ,MODULE,MA03,MA03042,utsah
+Circle,questions/MA/Circle\question_119_011.png,11,11,73,INT,MODULE,MA03,MA03043,utsah
+Circle,questions/MA/Circle\question_120_012.png,12,12,"(-25, 50)",SUBJ,MODULE,MA03,MA03044,utsah
+Circle,questions/MA/Circle\question_126_015.png,15,15,"zero, zero",SUBJ,MODULE,MA03,MA03045,utsah
+Circle,questions/MA/Circle\question_134_019.png,19,19,"[(5, 1) & (-1, 5)]",SUBJ,MODULE,MA03,MA03046,utsah
+Circle,questions/MA/Circle\question_135_020.png,20,20,4x - 3y - 25 = 0 OR 3x + 4y - 25 = 0,SUBJ,MODULE,MA03,MA03047,utsah
+Circle,questions/MA/Circle\question_137_021.png,21,21,4,INT,MODULE,MA03,MA03048,utsah
+Circle,questions/MA/Circle\question_140_024.png,24,24,2x - 2y - 3 = 0,SUBJ,MODULE,MA03,MA03049,utsah
+Circle,questions/MA/Circle\question_141_025.png,25,25,a^2 (x^2 + y^2) = 4x^2 y^2,SUBJ,MODULE,MA03,MA03050,utsah
+Circle,questions/MA/Circle\question_143_000.png,26,26,x^2 + y^2 + gx + fy = 0,SUBJ,MODULE,MA03,MA03051,utsah
+Circle,questions/MA/Circle\question_144_027.png,27,27,6,INT,MODULE,MA03,MA03052,utsah
+Circle,questions/MA/Circle\question_145_028.png,28,28,(r=\sqrt{a^{2}+b^{2}}),SUBJ,MODULE,MA03,MA03053,utsah
+Circle,questions/MA/Circle\question_146_029.png,29,29,7,INT,MODULE,MA03,MA03054,utsah
+Circle,questions/MA/Circle\question_147_030.png,30,30,9,INT,MODULE,MA03,MA03055,utsah
+Circle,questions/MA/Circle\question_149_031.png,31,31,"(1, 2)",SUBJ,MODULE,MA03,MA03056,utsah
+Circle,questions/MA/Circle\question_151_032.png,32,32,"(a) (x^{2}+y^{2}+4x-7y+5=0), (b) (2(x^{2}+y^{2})-x+y-31=0)",SUBJ,MODULE,MA03,MA03057,utsah
+Circle,questions/MA/Circle\question_153_033.png,33,33,"-4, 4; (-1/2, 1/2)",SUBJ,MODULE,MA03,MA03058,utsah
+Circle,questions/MA/Circle\question_154_034.png,34,34,(x^{2}+y^{2}-4x-2y+3=0),SUBJ,MODULE,MA03,MA03059,utsah
+Circle,questions/MA/Circle\question_155_035.png,35,35,(x^{2}+y^{2}-16x-18y-4=0),SUBJ,MODULE,MA03,MA03060,utsah
+Circle,questions/MA/Circle\question_157_036.png,36,36,(x^{2}+y^{2}+16x+14y-12=0),SUBJ,MODULE,MA03,MA03061,utsah
+Circle,questions/MA/Circle\question_158_037.png,37,37,,SUBJ,MODULE,MA03,MA03062,utsah
+Circle,questions/MA/Circle\question_162_039.png,39,39,(x^{2}+y^{2}-6x+4y=0) OR (x^{2}+y^{2}+2x-8y+4=0),SUBJ,MODULE,MA03,MA03063,utsah
+Circle,questions/MA/Circle\question_163_040.png,40,40,[x^{2}+y^{2}+x-6y+3=0],SUBJ,MODULE,MA03,MA03064,utsah
+Circle,questions/MA/Circle\question_164_041.png,41,41,(5x^{2}+5y^{2}-8x-14y-32=0),SUBJ,MODULE,MA03,MA03065,utsah
+Circle,questions/MA/Circle\question_165_042.png,42,42,63,INT,MODULE,MA03,MA03066,utsah
+Circle,questions/MA/Circle\question_168_004.png,4,43,36,INT,MODULE,MA03,MA03067,utsah
+Circle,questions/MA/Circle\question_169_001.png,1,1,3,SMCQ,MAIN,MA03,MA03068,utsah
+Circle,questions/MA/Circle\question_170_002.png,2,2,3,SMCQ,MAIN,MA03,MA03069,utsah
+Circle,questions/MA/Circle\question_171_003.png,3,3,2,SMCQ,MAIN,MA03,MA03070,utsah
+Circle,questions/MA/Circle\question_172_005.png,5,5,4,SMCQ,MAIN,MA03,MA03071,utsah
+Circle,questions/MA/Circle\question_173_006.png,6,6,4,SMCQ,MAIN,MA03,MA03072,utsah
+Circle,questions/MA/Circle\question_174_007.png,7,7,3,SMCQ,MAIN,MA03,MA03073,utsah
+Circle,questions/MA/Circle\question_175_008.png,8,8,2,SMCQ,MAIN,MA03,MA03074,utsah
+Circle,questions/MA/Circle\question_176_009.png,9,9,4,SMCQ,MAIN,MA03,MA03075,utsah
+Circle,questions/MA/Circle\question_177_010.png,10,10,3,SMCQ,MAIN,MA03,MA03076,utsah
+Circle,questions/MA/Circle\question_178_011.png,11,11,2,SMCQ,MAIN,MA03,MA03077,utsah
+Circle,questions/MA/Circle\question_179_012.png,12,12,3,SMCQ,MAIN,MA03,MA03078,utsah
+Circle,questions/MA/Circle\question_180_013.png,13,13,4,SMCQ,MAIN,MA03,MA03079,utsah
+Circle,questions/MA/Circle\question_181_014.png,14,14,1,SMCQ,MAIN,MA03,MA03080,utsah
+Circle,questions/MA/Circle\question_186_001.png,16,16,4,SMCQ,MAIN,MA03,MA03081,utsah
+Circle,questions/MA/Circle\question_187_017.png,17,17,1,SMCQ,MAIN,MA03,MA03082,utsah
+Circle,questions/MA/Circle\question_188_018.png,18,18,3,SMCQ,MAIN,MA03,MA03083,utsah
+Circle,questions/MA/Circle\question_189_019.png,19,19,1,SMCQ,MAIN,MA03,MA03084,utsah
+Circle,questions/MA/Circle\question_190_020.png,20,20,1,SMCQ,MAIN,MA03,MA03085,utsah
+Circle,questions/MA/Circle\question_191_021.png,21,21,4,SMCQ,MAIN,MA03,MA03086,utsah
+Circle,questions/MA/Circle\question_192_022.png,22,22,4,SMCQ,MAIN,MA03,MA03087,utsah
+Circle,questions/MA/Circle\question_193_023.png,23,23,1,SMCQ,MAIN,MA03,MA03088,utsah
+Circle,questions/MA/Circle\question_194_024.png,24,24,4,SMCQ,MAIN,MA03,MA03089,utsah
+Circle,questions/MA/Circle\question_195_025.png,25,25,1,SMCQ,MAIN,MA03,MA03090,utsah
+Circle,questions/MA/Circle\question_196_026.png,26,26,1,SMCQ,MAIN,MA03,MA03091,utsah
+Circle,questions/MA/Circle\question_197_027.png,27,27,3,SMCQ,MAIN,MA03,MA03092,utsah
+Circle,questions/MA/Circle\question_198_028.png,28,28,1,SMCQ,MAIN,MA03,MA03093,utsah
+Circle,questions/MA/Circle\question_199_029.png,29,29,4,SMCQ,MAIN,MA03,MA03094,utsah
+Circle,questions/MA/Circle\question_200_030.png,30,30,3,SMCQ,MAIN,MA03,MA03095,utsah
+Circle,questions/MA/Circle\question_201_031.png,31,31,1,SMCQ,MAIN,MA03,MA03096,utsah
+Circle,questions/MA/Circle\question_202_032.png,32,32,1,SMCQ,MAIN,MA03,MA03097,utsah
+Circle,questions/MA/Circle\question_203_033.png,33,33,2,SMCQ,MAIN,MA03,MA03098,utsah
+Circle,questions/MA/Circle\question_204_034.png,34,34,2,SMCQ,MAIN,MA03,MA03099,utsah
+Circle,questions/MA/Circle\question_205_035.png,35,35,2,SMCQ,MAIN,MA03,MA03100,utsah
+Circle,questions/MA/Circle\question_206_036.png,36,36,3,SMCQ,MAIN,MA03,MA03101,utsah
+Circle,questions/MA/Circle\question_207_037.png,37,37,2,SMCQ,MAIN,MA03,MA03102,utsah
+Circle,questions/MA/Circle\question_208_038.png,38,38,4,SMCQ,MAIN,MA03,MA03103,utsah
+Circle,questions/MA/Circle\question_209_039.png,39,39,4,SMCQ,MAIN,MA03,MA03104,utsah
+Circle,questions/MA/Circle\question_210_040.png,40,40,3,SMCQ,MAIN,MA03,MA03105,utsah
+Circle,questions/MA/Circle\question_211_041.png,41,41,3,SMCQ,MAIN,MA03,MA03106,utsah
+Circle,questions/MA/Circle\question_212_042.png,42,42,2,SMCQ,MAIN,MA03,MA03107,utsah
+Circle,questions/MA/Circle\question_213_043.png,43,43,36,INT,MAIN,MA03,MA03108,utsah
+Circle,questions/MA/Circle\question_214_044.png,44,44,2,SMCQ,MAIN,MA03,MA03109,utsah
+Circle,questions/MA/Circle\question_215_045.png,45,45,3,SMCQ,MAIN,MA03,MA03110,utsah
+Circle,questions/MA/Circle\question_217_009.png,9,46,7,SMCQ,MAIN,MA03,MA03111,utsah
+Circle,questions/MA/Circle\question_218_047.png,47,47,3,SMCQ,MAIN,MA03,MA03112,utsah
+Circle,questions/MA/Circle\question_219_048.png,48,48,9,SMCQ,MAIN,MA03,MA03113,utsah
+Circle,questions/MA/Circle\question_220_049.png,49,49,3,SMCQ,MAIN,MA03,MA03114,utsah
+Circle,questions/MA/Circle\question_221_050.png,50,50,2,SMCQ,MAIN,MA03,MA03115,utsah
+Circle,questions/MA/Circle\question_222_051.png,51,51,1,SMCQ,MAIN,MA03,MA03116,utsah
+Circle,questions/MA/Circle\question_223_052.png,52,52,3,SMCQ,MAIN,MA03,MA03117,utsah
+Circle,questions/MA/Circle\question_224_053.png,53,53,3,SMCQ,MAIN,MA03,MA03118,utsah
+Circle,questions/MA/Circle\question_225_054.png,54,54,3,SMCQ,MAIN,MA03,MA03119,utsah
+Circle,questions/MA/Circle\question_226_055.png,55,55,1,SMCQ,MAIN,MA03,MA03120,utsah
+Circle,questions/MA/Circle\question_227_056.png,56,56,1,SMCQ,MAIN,MA03,MA03121,utsah
+Circle,questions/MA/Circle\question_228_057.png,57,57,165,INT,MAIN,MA03,MA03122,utsah
+Circle,questions/MA/Circle\question_229_058.png,58,58,2,SMCQ,MAIN,MA03,MA03123,utsah
+Circle,questions/MA/Circle\question_230_059.png,59,59,2,SMCQ,MAIN,MA03,MA03124,utsah
+Circle,questions/MA/Circle\question_231_060.png,60,60,3,SMCQ,MAIN,MA03,MA03125,utsah
+Circle,questions/MA/Circle\question_232_061.png,61,61,816,INT,MAIN,MA03,MA03126,utsah
+Circle,questions/MA/Circle\question_233_062.png,62,62,3,SMCQ,MAIN,MA03,MA03127,utsah
+Circle,questions/MA/Circle\question_234_063.png,63,63,121,INT,MAIN,MA03,MA03128,utsah
+Circle,questions/MA/Circle\question_235_001.png,1,1,B,SMCQ,ADV,MA03,MA03129,utsah
+Circle,questions/MA/Circle\question_237_169.png,2,2,A,SMCQ,ADV,MA03,MA03130,utsah
+Circle,questions/MA/Circle\question_244_005.png,5,5 (i),D,SMCQ,ADV,MA03,MA03131,utsah
+Circle,questions/MA/Circle\question_245_005.png,5,5 (ii),A,SMCQ,ADV,MA03,MA03132,utsah
+Circle,questions/MA/Circle\question_246_005.png,5,5 (iii),D,SMCQ,ADV,MA03,MA03133,utsah
+Circle,questions/MA/Circle\question_246_006.png,6,6,B,SMCQ,ADV,MA03,MA03134,utsah
+Circle,questions/MA/Circle\question_247_007.png,7,7,8,INT,ADV,MA03,MA03135,utsah
+Circle,questions/MA/Circle\question_248_008.png,8,8,3,INT,ADV,MA03,MA03136,utsah
+Circle,questions/MA/Circle\question_249_009.png,9,9,D,SMCQ,ADV,MA03,MA03137,utsah
+Circle,questions/MA/Circle\question_250_010.png,10,10,2,INT,ADV,MA03,MA03138,utsah
+Circle,questions/MA/Circle\question_251_011.png,11,11,A,SMCQ,ADV,MA03,MA03139,utsah
+Circle,questions/MA/Circle\question_253_012.png,12,12,D,SMCQ,ADV,MA03,MA03140,utsah
+Circle,questions/MA/Circle\question_254_013.png,13,13,A,SMCQ,ADV,MA03,MA03141,utsah
+Circle,questions/MA/Circle\question_255_014.png,14,14,"A, C",MMCQ,ADV,MA03,MA03142,utsah
+Circle,questions/MA/Circle\question_258_016.png,16,16,"A, C",MMCQ,ADV,MA03,MA03143,utsah
+Circle,questions/MA/Circle\question_259_017.png,17,17,2,SMCQ,ADV,MA03,MA03144,utsah
+Circle,questions/MA/Circle\question_264_019.png,19,19,D,SMCQ,ADV,MA03,MA03145,utsah
+Circle,questions/MA/Circle\question_268_021.png,21,21,4,INT,ADV,MA03,MA03146,utsah
+Circle,questions/MA/Circle\question_270_000.png,22,22,10,INT,ADV,MA03,MA03147,utsah
+Circle,questions/MA/Circle\question_274_000.png,26,26,2,INT,ADV,MA03,MA03148,utsah
+Circle,questions/MA/Circle\question_277_000.png,27,27,"3, 4",MMCQ,ADV,MA03,MA03149,utsah
+Circle,questions/MA/Circle\question_278_028.png,28,28,0.84,INT,ADV,MA03,MA03150,utsah
+Circle,questions/MA/Circle\question_281_001.png,1,1,D,SMCQ,MODULE,MA03,MA03151,utsah
+Circle,questions/MA/Circle\question_282_002.png,2,2,C,SMCQ,MODULE,MA03,MA03152,utsah
+Circle,questions/MA/Circle\question_283_003.png,3,3,A,SMCQ,MODULE,MA03,MA03153,utsah
+Circle,questions/MA/Circle\question_288_007.png,7,7,B,SMCQ,MODULE,MA03,MA03154,utsah
+Circle,questions/MA/Circle\question_289_008.png,8,8,ABCD,MMCQ,MODULE,MA03,MA03155,utsah
+Circle,questions/MA/Circle\question_290_009.png,9,9,AB,MMCQ,MODULE,MA03,MA03156,utsah
+Circle,questions/MA/Circle\question_291_010.png,10,10,ABCD,MMCQ,MODULE,MA03,MA03157,utsah
+Circle,questions/MA/Circle\question_292_011.png,11,11,AC,MMCQ,MODULE,MA03,MA03158,utsah
+Circle,questions/MA/Circle\question_293_012.png,12,12,AC,MMCQ,MODULE,MA03,MA03159,utsah
+Circle,questions/MA/Circle\question_300_014.png,14,14,ACD,MMCQ,MODULE,MA03,MA03160,utsah
+Circle,questions/MA/Circle\question_304_016.png,16,16,BC,MMCQ,MODULE,MA03,MA03161,utsah
+Circle,questions/MA/Circle\question_305_001.png,1,1,25,INT,MODULE,MA03,MA03162,utsah
+Circle,questions/MA/Circle\question_307_001.png,2,2,2,INT,MODULE,MA03,MA03163,utsah
+Circle,questions/MA/Circle\question_308_003.png,3,3,( \frac{23}{3} ),SUBJ,MODULE,MA03,MA03164,utsah
+Circle,questions/MA/Circle\question_309_004.png,4,4,(a) k = 1 (b) 8,SUBJ,MODULE,MA03,MA03165,utsah
+Circle,questions/MA/Circle\question_310_005.png,5,5,x^2 + y^2 -2x - 2y + 1 = 0 OR x^2 + y^2 - 42x + 38y - 39 = 0,SUBJ,MODULE,MA03,MA03166,utsah
+Circle,questions/MA/Circle\question_311_006.png,6,6,54,INT,MODULE,MA03,MA03167,utsah
+Circle,questions/MA/Circle\question_316_009.png,9,9,x + y = 2,SUBJ,MODULE,MA03,MA03168,utsah
+Circle,questions/MA/Circle\question_317_010.png,10,10,10,INT,MODULE,MA03,MA03169,utsah
+Circle,questions/MA/Circle\question_318_011.png,11,11,( \sqrt{3} ),SUBJ,MODULE,MA03,MA03170,utsah
+Circle,questions/MA/Circle\question_319_012.png,12,12,(A) S; (B) R; (C) Q; (D) P,SUBJ,MODULE,MA03,MA03171,utsah
