@@ -6,3 +6,5 @@ __pycache__
 # questions/img
 .env
 *.ps1
+.ml-assist
+model.safetensors

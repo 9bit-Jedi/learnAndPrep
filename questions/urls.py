@@ -12,8 +12,8 @@ urlpatterns = [
     path("submit/<question_id>", Submit.as_view(), name="submit solution with query param as question 'type' "),
     
     path("media/questions/<image_name>", ViewQuestionImage.as_view(), name="render any image from qestions"),
-    path("/media/explanations/<image_name>", ViewExplanationImage.as_view(), name="render any image from qestions"),
-    path("/media/img/icons/<image_name>", ViewIcon.as_view(), name="render any image from qestions"),
+    path("media/explanations/<image_name>", ViewExplanationImage.as_view(), name="render any image from qestions"),
+    path("media/img/icons/<image_name>", ViewIcon.as_view(), name="render any image from qestions"),
     
     # path("solution/<question_id>", GetSolution.as_view(), name="get question by id"),
 
