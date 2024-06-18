@@ -34,6 +34,6 @@ urlpatterns = [
     path('upload/', include('uploader.urls')),
     path('answer/', include('quiz.urls')),
     path('mock/', include('mockTest.urls')),
-    path('dpp/', include('mlAssist.urls')),
+    # path('dpp/', include('mlAssist.urls')),
     path("__debug__/", include("debug_toolbar.urls")),
 ] + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
