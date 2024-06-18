@@ -63,27 +63,7 @@ class ChapterList_Subject(APIView):
 #     }
 #     return JsonResponse(data)
 
-class GetAnswer(APIView):
-  def get(self, request, question_id, format=None):
-    
-    ## only question with that question id
-    question = get_object_or_404(Question, id=question_id)
 
-    # queryset=None
-    if question.type == 'SMCQ':
-      queryset = AnswerSmcq.objects.get(question_id=question_id.upper())
-      serializer = AnswerSmcqSerializer(queryset)
-    if question.type == 'MMCQ':
-      queryset = AnswerMmcq.objects.get(question_id=question_id.upper())
-      serializer = AnswerMmcqSerializer(queryset)
-    if question.type == 'INT':
-      queryset = AnswerIntegerType.objects.get(question_id=question_id.upper())
-      serializer = AnswerIntegerTypeSerializer(queryset)
-    if question.type == 'SUBJ':
-      queryset = AnswerIntegerType.objects.get(question_id=question_id.upper())
-      serializer = AnswerIntegerTypeSerializer(queryset)
-    
-    return Response(serializer.data, status=status.HTTP_200_OK)
 
 # def GetMmcq(request, question_id):
 #   if request.method == 'GET':
@@ -113,16 +93,6 @@ class GetAnswer(APIView):
 #     }
 #     return JsonResponse(data)
   
-class Submit(APIView):
-  def get(self, request, question_id, format=None):
-    type = self.request.query_params.get('type')
-    if type == 'SMCQ':
-      queryset = AnswerSmcq.objects.filter(question_id=question_id.upper())
-    if not queryset.exists():
-      return Http404
-    serializer = AnswerSmcqSerializer(queryset)
-    print(serializer)
-    return HttpResponse(serializer.data, status=status.HTTP_200_OK)
 
 {
 # class ListTopics(APIView):

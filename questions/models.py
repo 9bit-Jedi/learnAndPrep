@@ -82,7 +82,7 @@ OPTION_CHOICES = [('A', 'A'),('B', 'B'),('C', 'C'),('D', 'D'),]
 
 class AbstractAnswer(models.Model):
     id = models.CharField(max_length=8, primary_key=True)
-    question_id = models.OneToOneField(Question, on_delete=models.CASCADE, related_query_name="answer_smcq")
+    question_id = models.OneToOneField(Question, on_delete=models.CASCADE, related_query_name="question_answer")
     explanation = models.ImageField(upload_to='explanations/', null=True)
     class Meta:
         abstract = True
