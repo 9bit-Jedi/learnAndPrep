@@ -20,7 +20,8 @@ from .serializers import QuizSerializer, QuizQuestionAttemptIntSerializer, QuizQ
 # Create your views here.
 class GetQuiz(APIView):
   def get(self, request, format=None):
-    queryset = Quiz.objects.all()
+    user = request.user
+    queryset = Quiz.objects.filter(user_id=user)
     serializer = QuizSerializer(queryset, many=True)
     return Response(serializer.data, status=status.HTTP_200_OK)
   
@@ -108,7 +109,10 @@ class GetAnswer(APIView):
           try:
             quiz_question_attempt = QuizQuestionAttemptSmcq.objects.create(id="1", quiz_question_id = quiz_question, is_correct=is_correct, marked_option=body['marked_option'], answer_id=answer)
           except IntegrityError as e:
-            return HttpResponse({f"Question is already attempted : {e}"}, status=status.HTTP_200_OK)
+            return Response({
+                "message" : "Question is already attempted",
+                "error" : f"{e}"
+              }, status=status.HTTP_400_BAD_REQUEST)
           #   quiz_question_attempt = QuizQuestionAttemptSmcq.objects.get(quiz_question_id=quiz_question)
           serializer = QuizQuestionAttemptSmcqSerializer(quiz_question_attempt)
           # print(serializer)

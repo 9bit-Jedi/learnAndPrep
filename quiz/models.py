@@ -28,11 +28,11 @@ class Quiz(models.Model):
     self.module_total_questions=Question.objects.filter(chapter_id=self.chapter_id, source='MODULE').count()
     self.main_total_questions=Question.objects.filter(chapter_id=self.chapter_id, source='MAIN').count()
     self.adv_total_questions=Question.objects.filter(chapter_id=self.chapter_id, source='ADV').count()
-    self.id = f"{self.chapter_id.id}Q"
+    self.id = f"{self.chapter_id.id}Q{self.user_id.id}"
     super().save(*args, **kwargs)
   
   def __str__(self):
-      return f"Quiz - {self.chapter_id}"
+      return f"{self.user_id.id} - {self.chapter_id}"
 
 class QuizQuestion(models.Model):
   quiz_id = models.ForeignKey(Quiz, on_delete=models.CASCADE)
@@ -40,7 +40,7 @@ class QuizQuestion(models.Model):
   solved_status = models.BooleanField(default=False)
   
   def __str__(self):
-      return f"Quiz ID : {self.quiz_id} | Question ID : {self.question_id}"
+      return f"Quiz {self.quiz_id} | Question {self.question_id.id}"
     
 # attempt models
 
@@ -50,7 +50,7 @@ class QuizQuestionAttemptAbstract(models.Model):
   is_correct = models.BooleanField(null=False)
   
   def save(self, *args, **kwargs):
-    self.id = f"{self.quiz_question_id.question_id.id}AT"
+    self.id = f"{self.quiz_question_id.question_id.id}AT{self.quiz_question_id.quiz_id.id}"
     super().save(*args, **kwargs)
   
   class Meta:
