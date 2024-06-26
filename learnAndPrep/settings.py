@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'uploader.apps.UploaderConfig',
     'quiz.apps.QuizConfig',
     'mockTest.apps.MocktestConfig',
+    'notes.apps.NotesConfig',
     # 'mentorship.apps.MentorshipConfig',
     'rest_framework',
     "debug_toolbar",
