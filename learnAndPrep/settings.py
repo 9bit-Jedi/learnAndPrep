@@ -46,12 +46,14 @@ INSTALLED_APPS = [
     'uploader.apps.UploaderConfig',
     'quiz.apps.QuizConfig',
     'mockTest.apps.MocktestConfig',
+    # 'mentorship.apps.MentorshipConfig',
     'rest_framework',
     "debug_toolbar",
     'corsheaders',
     'rest_framework_simplejwt',
     
     'accounts',
+    'mentorship',
 
 ]
 
@@ -191,3 +193,5 @@ CORS_ALLOW_ALL_ORIGINS = True
 # Managing Media
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
+
+TIME_ZONE = 'Asia/Kolkata'

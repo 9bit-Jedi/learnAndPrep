@@ -16,6 +16,8 @@ from .models import File, Img
 
 from accounts.models import User
 
+from mentorship.views import ImportMentor
+
 # Create your views here.
 
 class ImageUploadView(APIView):
@@ -81,6 +83,8 @@ class CsvUploadView(APIView):
       return ImportQuestion(obj.file.path)
     elif(request.data['contentType']=='answer'):
       return ImportAnswer(obj.file.path)
+    elif(request.data['contentType']=='mentor'):
+      return ImportMentor(obj.file.path)
     # passing file object to Import function
 
 

@@ -97,7 +97,6 @@ class User(AbstractBaseUser):
     
     # gender (while register)
 
-    # is_dropper
     # state
     # medium 
     # 
