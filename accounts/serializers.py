@@ -118,17 +118,4 @@ class UserPasswordResetSerializer(serializers.Serializer):
 class StudentClassSelectionSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['is_class_11th', 'is_class_12th', 'is_dropper']
-
-    def validate(self, data):
-        is_class_11th = data.get('is_class_11th', False)
-        is_class_12th = data.get('is_class_12th', False)
-        is_dropper = data.get('is_dropper', False)
-
-        selected_classes = [is_class_11th, is_class_12th, is_dropper]
-        if sum(selected_classes) != 1:
-            raise serializers.ValidationError("Only one class can be selected at a time.")
-        return data
-        
-
-     
+        fields = ['student_class']

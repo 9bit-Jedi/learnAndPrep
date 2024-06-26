@@ -6,6 +6,7 @@ from accounts.models import User
 
 # mentor model - from scratch 
 
+max_bandwidth = 5
 class Mentor(models.Model):
   
   MEDIUM_CHOICES = [('English', 'English'), ('Hindi', 'Hindi')]
@@ -16,7 +17,7 @@ class Mentor(models.Model):
   # id = models.CharField(primary_key=True, max_length=200)
   Name = models.CharField(max_length=50)
   email = models.EmailField(max_length=254)
-  # mobile_no = models.models.PhoneNumberField(null=True, blank=True)
+  # mobile_no = models.PhoneNumberField(null=True, blank=True)
   
   mentor_gender = models.CharField(max_length=12, choices=GENDER_CHOICES)
   profile_photo = models.ImageField(upload_to='mentor_pfp/', null=True, blank=True)
@@ -33,13 +34,19 @@ class Mentor(models.Model):
   physics_rank = models.IntegerField()
   chemistry_rank = models.IntegerField()
   maths_rank = models.IntegerField()
+  
+  bandwidth = models.IntegerField(default=0)
+  is_available = models.BooleanField(default=True)
 
   def __str__(self):
     return f"{self.id} - {self.Name} - {self.IIT}" 
   
-  # def save(self, *args, **kwargs):
-  #   self.id = hashlib.sha256(f"{self.Name}{self.IIT}".encode('utf-8')).hexdigest() 
-  #   super().save(*args, **kwargs)
+  def save(self, *args, **kwargs):
+    self.bandwidth=self.relationships.count()
+    # check if bandwidth <= 5
+    if self.bandwidth >= max_bandwidth:
+      self.is_available = False
+    super().save(*args, **kwargs)
   
   
 class Mentee(models.Model):
@@ -50,7 +57,7 @@ class Mentee(models.Model):
   CHANGE_OPTIONS = [('YES', 'YES'), ('NO', 'NO')]
   
   
-  user = models.OneToOneField(to=User,on_delete=models.CASCADE)
+  user = models.OneToOneField(to=User,related_name="mentee",on_delete=models.CASCADE)
   
   student_gender = models.CharField(max_length=12, choices=GENDER_CHOICES)
   # profile_photo = models.ImageField(upload_to='mentor_pfp/', null=True, blank=True)
@@ -71,5 +78,25 @@ class Mentee(models.Model):
   
   def save(self, *args, **kwargs):
     # check dropper status using User model
-    self.dropper_status = 'Dropper' if self.user.student_class == "11th" or "12th" else "Non-dropper"
+    if self.user.student_class in ("11th", "12th"):
+      self.dropper_status='Non-dropper'
+    else:
+      self.dropper_status='Dopper'
     super().save(*args, **kwargs)
+    
+class MentorMenteeRelationship(models.Model):
+  mentee = models.OneToOneField(to=Mentee, related_name="relationships", on_delete=models.CASCADE)
+  
+  alloted_mentor = models.ForeignKey(to=Mentor, related_name="relationships", on_delete=models.CASCADE)
+  alloted_mentor_compatibility = models.FloatField()
+   
+  extra_mentor_1 = models.ForeignKey(to=Mentor, related_name="relationships_1", on_delete=models.CASCADE)
+  extra_mentor_1_compatibility = models.FloatField()
+  extra_mentor_2 = models.ForeignKey(to=Mentor, related_name="relationships_2", on_delete=models.CASCADE)
+  extra_mentor_2_compatibility = models.FloatField()
+  extra_mentor_3 = models.ForeignKey(to=Mentor, related_name="relationships_3", on_delete=models.CASCADE)
+  extra_mentor_3_compatibility = models.FloatField()
+  
+  def __str__(self):
+      return f"{self.alloted_mentor.Name} - {self.mentee.user.name}"
+  

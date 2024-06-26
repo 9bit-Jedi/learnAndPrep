@@ -1,19 +1,20 @@
 from django.shortcuts import render
-from rest_framework.response import Response
-from rest_framework import status
-from rest_framework.views import APIView
-from accounts.serializers import StudentClassSelectionSerializer, UserRegestrationSerializer,UserLoginSerializer,UserProfileSerializer,UserChangePasswordSerializer,SendPasswordResetEmailSerializer , UserPasswordResetSerializer 
 from django.contrib.auth import authenticate ,login
 from django.utils.http import urlsafe_base64_decode
 from django.contrib.auth.tokens import PasswordResetTokenGenerator
-from accounts.renderers import UserRenderer
-from rest_framework_simplejwt.tokens import RefreshToken
-from rest_framework.permissions import IsAuthenticated
-from accounts.models import User
 from django.core.mail import send_mail
 from django.http import HttpResponse
 from accounts.utils import Util
 from django.contrib.auth import get_user_model
+from rest_framework.response import Response
+from rest_framework import status
+from rest_framework.views import APIView
+from rest_framework_simplejwt.tokens import RefreshToken
+from rest_framework.permissions import IsAuthenticated
+
+from .models import User
+from .renderers import UserRenderer
+from .serializers import StudentClassSelectionSerializer, UserRegestrationSerializer,UserLoginSerializer,UserProfileSerializer,UserChangePasswordSerializer,SendPasswordResetEmailSerializer , UserPasswordResetSerializer
 
 User = get_user_model()
 # Create your views here.

@@ -2,6 +2,8 @@ from django.shortcuts import render
 import pandas as pd
 
 from django.http import HttpResponse
+from django.db import IntegrityError 
+from django.shortcuts import get_object_or_404
 from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -10,8 +12,8 @@ from rest_framework.parsers import FormParser, MultiPartParser
 
 from accounts.models import User
 
-from .models import Mentor, Mentee
-from .serializers import MentorSerializer, MenteeSerializer
+from .models import Mentor, Mentee, MentorMenteeRelationship
+from .serializers import MentorSerializer, MenteeSerializer, MentorMenteeRelationshipSerializer, AllotedMentorRelationshipSerializer
 from .script_inference import main
 from .script_train import train
 
@@ -30,6 +32,7 @@ def ImportMentor(file_path):
         Name= row['Name'],
         email= row['Email Address'],
         # mobile_no= row['mobile_no'],
+        about= row['about'],
 
         mentor_gender= row['mentor_gender'],
 
@@ -78,21 +81,73 @@ def SaveMenteeDetails(student_data, user):
     print("new mentee object created !")
   return mentee
 
+def SaveRelationshipDetails(mentors, mentee):
+  extra_mentors = mentors[1]
 
-class predictCompatibility(APIView):
+  # print ((alloted_mentor))
+  alloted_mentor = mentors[0]
+  extra_mentor1 = extra_mentors.iloc[0] 
+  extra_mentor2 = extra_mentors.iloc[1] 
+  extra_mentor3 = extra_mentors.iloc[2] 
+  
+  try:
+    relationship = MentorMenteeRelationship.objects.create(
+      mentee = mentee,
+      
+      alloted_mentor = Mentor.objects.get(id=alloted_mentor['mentor_id']),
+      alloted_mentor_compatibility = alloted_mentor['compatibility_score'],
+      
+      extra_mentor_1 = Mentor.objects.get(id=extra_mentor1['mentor_id']), 
+      extra_mentor_1_compatibility = extra_mentor1['compatibility_score'],
+      extra_mentor_2 = Mentor.objects.get(id=extra_mentor2['mentor_id']),
+      extra_mentor_2_compatibility = extra_mentor2['compatibility_score'],
+      extra_mentor_3 = Mentor.objects.get(id=extra_mentor3['mentor_id']),
+      extra_mentor_3_compatibility= extra_mentor3['compatibility_score']
+    )
+    print(relationship)
+    return relationship
+  except (Mentor.DoesNotExist, IndexError, KeyError, IntegrityError) as e:
+    # Handle different types of errors explicitly
+    if isinstance(e, Mentor.DoesNotExist):
+        error_message = "One or more mentors do not exist."
+    elif isinstance(e, IndexError):
+        error_message = "Invalid mentor data format."
+    elif isinstance(e, KeyError):
+        error_message = "Missing mentor ID or compatibility score."
+    elif isinstance(e, IntegrityError):
+        error_message = "You have already taken the Compatibility Test."
+    return (f"{e}", error_message)
+   
+class getMentorView(APIView):
   parser_classes = [FormParser, MultiPartParser]
+  
+  def get(self, request, format=None):
+    
+    # STUDENT DATA
+    user = request.user
+    try:
+      mentee = user.mentee
+    except Mentee.DoesNotExist as e:
+      return Response({"error": "No mentor has been alloted to you.", "error_message":str(e)}, status=status.HTTP_404_NOT_FOUND)
+    
+    relationship = get_object_or_404(MentorMenteeRelationship, mentee=mentee)
+    # relationship = MentorMenteeRelationship.objects.get(mentee=mentee)
+    serializer = AllotedMentorRelationshipSerializer(relationship)
+    return Response({"message":"Alloted Mentor Details fetched successfully","data":serializer.data}, status=status.HTTP_200_OK)
+
+  
   def post(self, request, format=None):
     
     # MENTOR DATA
     
-    queryset = Mentor.objects.all()
+    queryset = Mentor.objects.filter(is_available=True)
     serializer = MentorSerializer(queryset, many=True)
     mentor_data = pd.DataFrame(serializer.data)
     
     # STUDENT DATA
         
     user = request.user
-    mentee = SaveMenteeDetails(request.data, user)     # querydict
+    mentee = SaveMenteeDetails(request.data, user)     # returned querydict
     
     mentee_data = {
       'student_id': mentee.id,
@@ -106,10 +161,45 @@ class predictCompatibility(APIView):
       'student_state': mentee.state,
       'student_gender': mentee.student_gender
     }
-    print(pd.DataFrame([mentee_data])) 
-    alloted_mentor = main(mentee_data, mentor_data)
     
-    print(f"\n")
+    # print(pd.DataFrame([mentee_data])) 
+    
+    mentor = main(mentee_data, mentor_data)     # returned tuple of (dict, df)
+    # will save mentor for the sake of bandwidth
+    alloted_mentor = Mentor.objects.get(id = mentor[0]['mentor_id'])
+    print(alloted_mentor)
+    # print(mentor[0])
+    # print(mentor[1])
+    
+    try:
+      relationship = SaveRelationshipDetails(mentor, mentee)
+            
+      # if bt with saving MentorMenteeRelationship Model - it already exists (Integrity error) or anything else
+      if str(type(relationship)) == r"<class 'tuple'>":
+        # repeating my GET request code in this case
+        user = request.user
+        try:
+          mentee = user.mentee
+        except Mentee.DoesNotExist as e:
+          return Response({"error": "No mentor has been alloted to you.", "error_message":str(e)}, status=status.HTTP_404_NOT_FOUND)
+        
+        relationship = get_object_or_404(MentorMenteeRelationship, mentee=mentee)
+        # relationship = MentorMenteeRelationship.objects.get(mentee=mentee)
+        serializer = AllotedMentorRelationshipSerializer(relationship)
+        
+        alloted_mentor.save()
+        print(alloted_mentor)
+        return Response({"message": "Mentor has already been alloted", "data":serializer.data}, status=status.HTTP_200_OK)
+        # return Response({"error": relationship[1], "error_message":str(relationship[0])}, status=status.HTTP_400_BAD_REQUEST)
+      
+      serializer = MentorMenteeRelationshipSerializer(relationship)
+      
+      alloted_mentor.save()
+      print(alloted_mentor)
+      return Response({"message": "Mentor has been alloted successfully !", "data":serializer.data}, status=status.HTTP_200_OK) 
+    except IntegrityError as e:
+      return Response({"error": "You have already taken the Compatibility Test", "error_message": str(e)}, status=status.HTTP_400_BAD_REQUEST)
+
     # testing \
     
     mentee_data2 = {
@@ -127,4 +217,3 @@ class predictCompatibility(APIView):
     print(pd.DataFrame([mentee_data2])) 
     print(main(mentee_data2, mentor_data))
     
-    return Response(alloted_mentor, status=status.HTTP_200_OK)

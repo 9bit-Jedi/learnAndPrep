@@ -132,7 +132,7 @@ def main(new_student, mentors):
     my_mentor = get_my_mentor[['mentor_id','mentor_name','mentor_iit', 'compatibility_score','mentor_gender']]
     my_student = get_my_mentor[['student_gender']]
     
-    print(get_my_mentor)
+    # print(get_my_mentor)
     
     def allocate_mentor(my_mentor, my_student):
         # Filter mentors based on student's gender
@@ -162,4 +162,4 @@ def main(new_student, mentors):
     
     predictions.to_csv(os.path.join(settings.BASE_DIR, 'mentorship/csv/results.csv'))
     alloted_mentor = pd.DataFrame(alloted_mentor)
-    return allocated_mentor
+    return [allocated_mentor, get_my_mentor]

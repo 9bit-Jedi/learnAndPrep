@@ -8,7 +8,7 @@ urlpatterns = [
     path('changepassword/', UserChangePasswordView.as_view(), name='changepassword'),
     path('send-reset-password-email/', SendPasswordResetEmailView.as_view(), name='send-reset-password-email'),
     path('reset-password/<uid>/<token>/', UserPasswordResetView.as_view(), name='reset-password'),
-    path('select-class/', StudentClassSelectionView.as_view(), name='reset-password'),
+    path('select-class/', StudentClassSelectionView.as_view(), name='select class'),
     path('unregister/', UserUnregisterView.as_view(), name='user-unregister'),
     path('verify-otp/', VerifyOTPView.as_view(), name='verify-otp'),
 ]
