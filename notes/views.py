@@ -12,9 +12,9 @@ from .serializers import NotesSerializer
 # Create your views here.
 
 class ListNotes(APIView):
-  def get(self, request, chapter_id, format=None):
+  def get(self, request, subject_id, format=None):
     
-    notes = Notes.objects.filter(chapter__id=chapter_id)
+    notes = Notes.objects.filter(chapter__id=subject_id)
     serializer = NotesSerializer(notes, many=True)
     return Response(serializer.data)
 

@@ -8,6 +8,7 @@ pdf_ext_validator = FileExtensionValidator(['pdf'])
 
 class Notes(models.Model):
   id = models.CharField(max_length=10, primary_key=True)  
+  title = models.CharField(max_length=128, null=True)
   chapter = models.ForeignKey(Chapter, on_delete=models.CASCADE)
   file = models.FileField(upload_to='notes/', validators=[pdf_ext_validator])
   

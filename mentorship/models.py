@@ -81,7 +81,7 @@ class Mentee(models.Model):
     if self.user.student_class in ("11th", "12th"):
       self.dropper_status='Non-dropper'
     else:
-      self.dropper_status='Dopper'
+      self.dropper_status='Dropper'
     super().save(*args, **kwargs)
     
 class MentorMenteeRelationship(models.Model):
