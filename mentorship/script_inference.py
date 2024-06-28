@@ -122,7 +122,7 @@ def main(new_student, mentors):
     mentors = mentors.rename(columns = {'id':'mentor_id','Name':'mentor_name','dropper_status':'mentor_dropper','maths_rank':'mentor_maths_rank','physics_rank':'mentor_physics_rank','chemistry_rank':'mentor_chemistry_rank','medium':'mentor_medium','did_you_change':'mentor_medium_change', 'state':'mentor_state','IIT':'mentor_iit'})
     
     predictions = inference(new_student, mentors).sort_values(by='compatibility_score', ascending=False)
-    predictions.to_csv('results.csv') 
+    # predictions.to_csv('results.csv') 
     
     
     #### 

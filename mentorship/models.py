@@ -14,7 +14,7 @@ class Mentor(models.Model):
   DROPPER_CHOICES = [('Dropper', 'Dropper'), ('Non-dropper', 'Non-dropper')]
   CHANGE_OPTIONS = [('Yes', 'Yes'), ('No', 'No')]
   
-  # id = models.CharField(primary_key=True, max_length=200)
+  id = models.CharField(primary_key=True, max_length=200)
   Name = models.CharField(max_length=50)
   email = models.EmailField(max_length=254)
   # mobile_no = models.PhoneNumberField(null=True, blank=True)

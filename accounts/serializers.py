@@ -37,7 +37,7 @@ class UserLoginSerializer(serializers.ModelSerializer):
 class UserProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['id' , 'email' , 'name' , 'mobile_no']
+        fields = ['id' , 'email' , 'name' , 'mobile_no']        # student_class. {subject_rank} - design changes
 
 
 class UserChangePasswordSerializer(serializers.Serializer):
