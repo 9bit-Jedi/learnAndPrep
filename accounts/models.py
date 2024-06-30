@@ -1,6 +1,8 @@
 from django.db import models
-from django.contrib.auth.models import BaseUserManager, AbstractBaseUser
+from django.contrib.auth.models import BaseUserManager, AbstractBaseUser, PermissionsMixin
 import phonenumbers
+from datetime import datetime, timedelta
+from django.utils import timezone
 
 # Create your models here.
 # custom user manager
@@ -48,7 +50,7 @@ class MyUserManager(BaseUserManager):
         return user
 
 # custom user model
-class User(AbstractBaseUser):
+class User(AbstractBaseUser, PermissionsMixin ):
     
 
     name = models.CharField(max_length=30 ,blank = False)
@@ -63,24 +65,33 @@ class User(AbstractBaseUser):
     CLASS_CHOICES = [('11th', '11th'), ('12th', '12th'),('dropper', 'dropper')]
     student_class = models.CharField(max_length=16, choices=CLASS_CHOICES)
 
-    is_active = models.BooleanField(default=True)
-    is_admin = models.BooleanField(default=False)
 
     create_at = models.DateTimeField(auto_now_add = True)
     updated_at = models.DateTimeField(auto_now = True)
-
+    
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = ["name", "mobile_no"]
+
+    is_active = models.BooleanField(default=True)
+    is_admin = models.BooleanField(default=False)
+    is_superuser = models.BooleanField(default=False)
+    
+    is_payment_done = models.BooleanField(default=False)
+    is_mentor_alloted = models.BooleanField(default=False)
 
     # CREATING OBJECT OF USER MANAGER 
     objects = MyUserManager()
 
-    def __str__(self):
-        return self.email
-
     def has_perm(self, perm, obj=None):
         "Does the user have a specific permission?"
-        # Simplest possible answer: Yes, always
+        # If upseruser or admin, every permission allowed
+        if self.is_superuser or self.is_admin:
+            return True 
+        # Check the specific permissions
+        elif perm == 'accounts.is_payment_done':
+            return self.is_payment_done
+        elif perm == 'accounts.is_mentor_alloted':
+            return self.is_mentor_alloted
         return self.is_admin
 
     
@@ -88,15 +99,37 @@ class User(AbstractBaseUser):
         "Does the user have permissions to view the app `app_label`?"
         # Simplest possible answer: Yes, always
         return True
-
+    
     @property
     def is_staff(self):
         "Is the user a member of staff?"
         # Simplest possible answer: All admins are staff
         return self.is_admin
     
-    # gender (while register)
+    class Meta :
+        permissions= (
+            ("is_admin", "Can check if user is admin"),
+            ("is_payment_done", "Can check if payment is done"),
+            ("is_mentor_alloted", "Can check if mentor is allotted"),
+        )
 
-    # state
-    # medium 
-    # 
+    def __str__(self):
+        return self.email
+
+
+
+class UserOTP(models.Model):
+    
+    
+    temp_user_data = models.TextField(null=True, blank=True)
+    email = models.CharField(max_length=128)
+    otp = models.CharField(max_length=6, null=True, blank=True)
+    otp_created_at = models.DateTimeField(null=True, blank=True)
+
+    def is_otp_expired(self):  # Make it an instance method
+        expiry_duration=timedelta(minutes=30)
+        now = timezone.now()         
+        # print("Now (UTC):", now)                # Debugging statement
+        # print("OTP Created At (UTC):", self.otp_created_at)     # Debugging statement
+        # print("Expiry Duration:", expiry_duration)  # Debugging statement
+        return (now - self.otp_created_at) > expiry_duration 

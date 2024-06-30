@@ -11,6 +11,7 @@ from rest_framework.response import Response
 from rest_framework.parsers import FormParser, MultiPartParser
 
 from accounts.models import User
+from accounts.permissions import IsPaymentDone, IsMentorAlloted
 
 from .models import Mentor, Mentee, MentorMenteeRelationship
 from .serializers import MentorSerializer, MenteeSerializer, MentorMenteeRelationshipSerializer, AllotedMentorRelationshipSerializer
@@ -25,14 +26,16 @@ def ImportMentor(file_path):
   print(df)
   for index, row in df.iterrows():
         
-    print('hello, I am single creating a mentor')
+    print(f"hello, I am single creating a mentor : {row['Name']}")
     
     try:
       Mentor.objects.get_or_create(
+        id= row['id'],
         Name= row['Name'],
         email= row['Email Address'],
-        # mobile_no= row['mobile_no'],
+        mobile_no= row['mobile_no'],
         about= row['about'],
+        branch= row['branch'],
 
         mentor_gender= row['mentor_gender'],
 
@@ -66,7 +69,7 @@ def SaveMenteeDetails(student_data, user):
     mentee.chemistry_rank = student_data.get('chemistry_rank')
     mentee.maths_rank = student_data.get('maths_rank')
     mentee.save()
-    print("updated")
+    print("mentee details updated (if changed)")
   except Mentee.DoesNotExist:
     mentee = Mentee.objects.create(
       user= user,
@@ -104,7 +107,7 @@ def SaveRelationshipDetails(mentors, mentee):
       extra_mentor_3 = Mentor.objects.get(id=extra_mentor3['mentor_id']),
       extra_mentor_3_compatibility= extra_mentor3['compatibility_score']
     )
-    print(relationship)
+    print("saved new allotment : ", relationship)
     return relationship
   except (Mentor.DoesNotExist, IndexError, KeyError, IntegrityError) as e:
     # Handle different types of errors explicitly
@@ -118,8 +121,12 @@ def SaveRelationshipDetails(mentors, mentee):
         error_message = "You have already taken the Compatibility Test."
     return (f"{e}", error_message)
    
+   
+# GET MENTOR VIEW #
+
 class getMentorView(APIView):
   parser_classes = [FormParser, MultiPartParser]
+  permission_classes = [IsPaymentDone, IsMentorAlloted]
   
   def get(self, request, format=None):
     
@@ -128,7 +135,7 @@ class getMentorView(APIView):
     try:
       mentee = user.mentee
     except Mentee.DoesNotExist as e:
-      return Response({"error": "No mentor has been alloted to you.", "error_message":str(e)}, status=status.HTTP_404_NOT_FOUND)
+      return Response({"error": "No mentor has been alloted to you.", "error_message": f"Mentor {str(e)}"}, status=status.HTTP_404_NOT_FOUND)
     
     relationship = get_object_or_404(MentorMenteeRelationship, mentee=mentee)
     # relationship = MentorMenteeRelationship.objects.get(mentee=mentee)
@@ -167,7 +174,7 @@ class getMentorView(APIView):
     mentor = main(mentee_data, mentor_data)     # returned tuple of (dict, df)
     # will save mentor for the sake of bandwidth
     alloted_mentor = Mentor.objects.get(id = mentor[0]['mentor_id'])
-    print(alloted_mentor)
+    print(alloted_mentor, " - alloted mentor by mentor_id from model")
     # print(mentor[0])
     # print(mentor[1])
     
@@ -176,27 +183,25 @@ class getMentorView(APIView):
             
       # if bt with saving MentorMenteeRelationship Model - it already exists (Integrity error) or anything else
       if str(type(relationship)) == r"<class 'tuple'>":
-        # repeating my GET request code in this case
-        user = request.user
-        try:
-          mentee = user.mentee
-        except Mentee.DoesNotExist as e:
-          return Response({"error": "No mentor has been alloted to you.", "error_message":str(e)}, status=status.HTTP_404_NOT_FOUND)
-        
+        # replicating  my GET request code in this case
+        # user = request.user
+        mentee = request.user.mentee
+
         relationship = get_object_or_404(MentorMenteeRelationship, mentee=mentee)
         # relationship = MentorMenteeRelationship.objects.get(mentee=mentee)
-        serializer = AllotedMentorRelationshipSerializer(relationship)
+        serializer = MentorMenteeRelationshipSerializer(relationship)
         
-        alloted_mentor.save()
-        print(alloted_mentor)
+        # alloted_mentor.save()
+        print(relationship.alloted_mentor,  " - relationship alloted_mentor (already alloted mentor)")
         return Response({"message": "Mentor has already been alloted", "data":serializer.data}, status=status.HTTP_200_OK)
-        # return Response({"error": relationship[1], "error_message":str(relationship[0])}, status=status.HTTP_400_BAD_REQUEST)
       
+      # code if new mentor alloted
+
       serializer = MentorMenteeRelationshipSerializer(relationship)
-      
       alloted_mentor.save()
-      print(alloted_mentor)
+      print(alloted_mentor, " - New mentor alloted successfully")
       return Response({"message": "Mentor has been alloted successfully !", "data":serializer.data}, status=status.HTTP_200_OK) 
+    
     except IntegrityError as e:
       return Response({"error": "You have already taken the Compatibility Test", "error_message": str(e)}, status=status.HTTP_400_BAD_REQUEST)
 

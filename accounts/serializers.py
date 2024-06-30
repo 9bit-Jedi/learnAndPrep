@@ -3,6 +3,7 @@ from accounts.models import User
 from django.utils.encoding import force_bytes , smart_str , DjangoUnicodeDecodeError
 from django.utils.http import urlsafe_base64_decode , urlsafe_base64_encode
 from django.core.mail import send_mail
+from django.core.validators import RegexValidator
 from django.contrib.auth.tokens import default_token_generator, PasswordResetTokenGenerator
 from accounts.utils  import Util
 
@@ -15,6 +16,15 @@ class UserRegestrationSerializer(serializers.ModelSerializer):
         extra_kwargs={
             'password': {'write_only' :True}
         }
+        
+    mobile_no = serializers.CharField(
+        validators=[
+            RegexValidator(
+                regex=r'^\d{10}$',   
+                message="Invalid mobile number format."
+            ),
+        ]
+    )
 # validating password and con password while registration
     def validate(self, data):
         if data['password'] != data['password2']:
@@ -119,3 +129,31 @@ class StudentClassSelectionSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ['student_class']
+
+
+
+# 
+
+class WebsiteUserRegestrationSerializer(serializers.ModelSerializer):
+    password2 = serializers.CharField(style={'input_type' : 'password'},write_only=True)
+    class Meta:
+        model = User 
+        fields = [ "name" , "mobile_no" ,"email","password" ,"password2"]
+        extra_kwargs={
+            'password': {'write_only' :True}
+        }
+# validating password and con password while registration
+    def validate(self, data):
+        if data['password'] != data['password2']:
+            raise serializers.ValidationError("Passwords do not match.")
+        return data
+    
+    def create(self, validated_data):
+        validated_data.pop('password2')
+        user = User.objects.create_user(**validated_data)
+        return user
+    
+
+class OTPVerificationSerializer(serializers.Serializer):
+   otp = serializers.CharField(max_length=6)
+#    email = serializers.EmailField()

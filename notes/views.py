@@ -7,6 +7,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from rest_framework.permissions import IsAuthenticated, IsAdminUser
 
 from .models import Notes
 from .serializers import NotesSerializer
@@ -14,9 +15,11 @@ from .serializers import NotesSerializer
 # Create your views here.
 
 class ListNotes(APIView):
+  
   def get(self, request, subject_id, format=None):
     
     # notes = get_object_or_404(Notes, chapter__subject_id__id=subject_id)
+    subject_id = subject_id.upper()
     try:
       notes = Notes.objects.filter(chapter__subject_id__id=subject_id)
     except ObjectDoesNotExist as e:

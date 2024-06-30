@@ -1,4 +1,5 @@
 import re
+import pandas as pd
 from django import views
 from django.http import HttpResponse
 from django.db import IntegrityError, transaction
@@ -8,20 +9,21 @@ from rest_framework.views import APIView
 # from rest_framework import viewsets
 from django.core.files.images import ImageFile
 
-import pandas as pd
+from accounts.models import User
+from accounts.permissions import IsPaymentDone, IsMentorAlloted
+from rest_framework.permissions import AllowAny
 
 from questions.models import Subject, Chapter, Question, Icon, AnswerIntegerType, AnswerMmcq, AnswerSmcq, AnswerSubjective
 from questions.serializers import SubjectSerializer, ChapterSerializer
-from .models import File, Img
-
-from accounts.models import User
-
 from mentorship.views import ImportMentor
+
+from .models import File, Img
 
 # Create your views here.
 
 class ImageUploadView(APIView):
   parser_classes = [MultiPartParser, FormParser]
+  permission_classes = [AllowAny]
     
   def post(self, request, format=None):    
     files = request.FILES.getlist('img')
@@ -67,6 +69,7 @@ class ImageUploadView(APIView):
 
 class CsvUploadView(APIView):
   parser_classes = [MultiPartParser, FormParser]
+  permission_classes = [AllowAny]
 
   def post(self, request, format=None):    
     file = request.data['csv']

@@ -1,42 +1,42 @@
 ,mentor_id,mentor_name,mentor_iit,mentor_state,mentor_dropper,mentor_physics_rank,mentor_chemistry_rank,mentor_maths_rank,mentor_medium,mentor_medium_change,mentor_gender,student_id,student_name,student_dropper,student_maths_rank,student_physics_rank,student_chemistry_rank,student_medium,student_medium_change,student_state,student_gender,strongest_subject_match,weak_subject_match,medium_match,dropper_match,state_match,medium_change_match,compatibility_score
-3,4,ashish ,6,rajasthan,dropper,5,4,5,english,yes,1,5,utsah2,non-dropper,4,3,2,english,yes,new delhi,0,0,0,1,0,0,1,0.39999999999999936
-16,17,kishan singh,6,uttar pradesh,dropper,4,3,4,english,yes,1,5,utsah2,non-dropper,4,3,2,english,yes,new delhi,0,0,0,1,0,0,1,0.39999999999999925
-20,21,lokesh saran,4,rajasthan,dropper,4,2,3,english,yes,1,5,utsah2,non-dropper,4,3,2,english,yes,new delhi,0,0,0,1,0,0,1,0.39999999999999925
-12,13,harshit jain,1,haryana,dropper,5,5,3,english,yes,1,5,utsah2,non-dropper,4,3,2,english,yes,new delhi,0,0,0,1,0,0,1,0.39999999999999925
-8,9,bhoomik modi ,4,orissa,non-dropper,5,2,4,english,no,1,5,utsah2,non-dropper,4,3,2,english,yes,new delhi,0,0,0,1,1,0,0,0.3000000000000005
-10,11,debaleena ganguly ,4,west bengal,non-dropper,5,3,4,english,no,0,5,utsah2,non-dropper,4,3,2,english,yes,new delhi,0,0,0,1,1,0,0,0.3000000000000005
-2,3,aditya agrawal ,0,uttar pradesh,non-dropper,5,4,3,english,no,1,5,utsah2,non-dropper,4,3,2,english,yes,new delhi,0,0,0,1,1,0,0,0.3000000000000005
-7,8,bhavya dixit,6,rajasthan,non-dropper,3,4,2,english,no,0,5,utsah2,non-dropper,4,3,2,english,yes,new delhi,0,0,0,1,1,0,0,0.3000000000000005
-5,6,ayush kumar,1,haryana,non-dropper,4,4,4,english,no,1,5,utsah2,non-dropper,4,3,2,english,yes,new delhi,0,0,0,1,1,0,0,0.3000000000000005
-37,38,utsavi agrawal,1,madhya pradesh,non-dropper,3,5,4,english,no,0,5,utsah2,non-dropper,4,3,2,english,yes,new delhi,0,0,0,1,1,0,0,0.3000000000000005
-38,39,vrutika rao,3,gujarat,non-dropper,3,5,3,english,no,0,5,utsah2,non-dropper,4,3,2,english,yes,new delhi,0,0,0,1,1,0,0,0.3000000000000005
-39,40,dhairya singhal,6,delhi,non-dropper,3,4,5,english,no,1,5,utsah2,non-dropper,4,3,2,english,yes,new delhi,0,0,0,1,1,0,0,0.3000000000000005
-33,34,supriya bansal ,1,madhya pradesh,non-dropper,4,5,2,english,no,0,5,utsah2,non-dropper,4,3,2,english,yes,new delhi,0,0,0,1,1,0,0,0.3000000000000005
-11,12,divyansh verma ,6,madhya pradesh,non-dropper,4,3,3,english,no,1,5,utsah2,non-dropper,4,3,2,english,yes,new delhi,0,0,0,1,1,0,0,0.3000000000000005
-14,15,himanshu ,1,haryana,non-dropper,5,4,3,english,no,1,5,utsah2,non-dropper,4,3,2,english,yes,new delhi,0,0,0,1,1,0,0,0.3000000000000005
-15,16,jagriti singh ,1,rajasthan,non-dropper,4,5,2,english,no,0,5,utsah2,non-dropper,4,3,2,english,yes,new delhi,0,0,0,1,1,0,0,0.3000000000000005
-9,10,chhavikash raj ,6,bihar,non-dropper,4,5,4,english,no,1,5,utsah2,non-dropper,4,3,2,english,yes,new delhi,0,0,0,1,1,0,0,0.3000000000000005
-24,25,mohit sharma,6,rajasthan,non-dropper,5,3,4,english,no,1,5,utsah2,non-dropper,4,3,2,english,yes,new delhi,0,0,0,1,1,0,0,0.3000000000000005
-19,20,kuthuru rushika reddy ,4,telangana,non-dropper,3,4,4,english,no,0,5,utsah2,non-dropper,4,3,2,english,yes,new delhi,0,0,0,1,1,0,0,0.3000000000000005
-21,22,manish kumar samudrala ,2,telangana,non-dropper,4,3,4,english,no,1,5,utsah2,non-dropper,4,3,2,english,yes,new delhi,0,0,0,1,1,0,0,0.3000000000000005
-36,37,tvisha,4,gujarat,non-dropper,2,5,5,english,no,0,5,utsah2,non-dropper,4,3,2,english,yes,new delhi,0,0,0,1,1,0,0,0.3000000000000005
-29,30,shivani singh ,6,uttar pradesh,non-dropper,3,3,4,english,no,0,5,utsah2,non-dropper,4,3,2,english,yes,new delhi,0,0,0,1,1,0,0,0.3000000000000005
-32,33,sonali kumari,3,jharkhand,non-dropper,5,2,3,english,no,0,5,utsah2,non-dropper,4,3,2,english,yes,new delhi,0,0,0,1,1,0,0,0.3000000000000005
-27,28,nithish ravikkumar ,6,uttar pradesh,non-dropper,5,3,3,english,no,1,5,utsah2,non-dropper,4,3,2,english,yes,new delhi,0,0,0,1,1,0,0,0.3000000000000005
-28,29,sarthak mathpati,1,maharashtra,non-dropper,4,1,3,english,no,1,5,utsah2,non-dropper,4,3,2,english,yes,new delhi,0,0,0,1,1,0,0,0.3000000000000005
-34,35,swayam chavan,4,maharashtra,non-dropper,4,3,4,english,no,1,5,utsah2,non-dropper,4,3,2,english,yes,new delhi,0,0,0,1,1,0,0,0.3000000000000005
-35,36,tejas sushil rajput ,4,maharashtra,non-dropper,4,4,3,english,no,1,5,utsah2,non-dropper,4,3,2,english,yes,new delhi,0,0,0,1,1,0,0,0.3000000000000005
-1,2,aayushi choudhary,6,rajasthan,dropper,2,5,4,english,no,0,5,utsah2,non-dropper,4,3,2,english,yes,new delhi,0,0,0,1,0,0,0,0.20000000000000046
-0,1,aakash rudra,5,bihar,dropper,4,3,2,english,no,1,5,utsah2,non-dropper,4,3,2,english,yes,new delhi,0,0,0,1,0,0,0,0.20000000000000046
-6,7,ayush kumar,2,bihar,dropper,5,5,3,english,no,1,5,utsah2,non-dropper,4,3,2,english,yes,new delhi,0,0,0,1,0,0,0,0.20000000000000046
-4,5,ashish reddy,4,telangana,dropper,4,5,4,english,no,1,5,utsah2,non-dropper,4,3,2,english,yes,new delhi,0,0,0,1,0,0,0,0.20000000000000046
-13,14,harshit raj ,6,bihar,dropper,3,3,4,english,no,1,5,utsah2,non-dropper,4,3,2,english,yes,new delhi,0,0,0,1,0,0,0,0.20000000000000046
-17,18,kishlay bharti ,5,bihar,dropper,4,3,2,english,no,1,5,utsah2,non-dropper,4,3,2,english,yes,new delhi,0,0,0,1,0,0,0,0.20000000000000046
-23,24,mohit meena ,1,rajasthan,dropper,3,5,4,english,no,1,5,utsah2,non-dropper,4,3,2,english,yes,new delhi,0,0,0,1,0,0,0,0.20000000000000046
-22,23,mohd afshan azam,6,delhi,dropper,2,1,3,english,no,1,5,utsah2,non-dropper,4,3,2,english,yes,new delhi,0,0,0,1,0,0,0,0.20000000000000046
-18,19,kshitij kamble,4,maharashtra,dropper,4,3,4,english,no,1,5,utsah2,non-dropper,4,3,2,english,yes,new delhi,0,0,0,1,0,0,0,0.20000000000000046
-25,26,nikhil upadhyay,0,uttar pradesh,dropper,4,4,3,english,no,1,5,utsah2,non-dropper,4,3,2,english,yes,new delhi,0,0,0,1,0,0,0,0.20000000000000046
-31,32,somavarapu dinesh reddy ,4,andhra pradesh,dropper,3,4,3,english,no,1,5,utsah2,non-dropper,4,3,2,english,yes,new delhi,0,0,0,1,0,0,0,0.20000000000000046
-30,31,sneha das,6,west bengal,dropper,4,5,1,english,no,0,5,utsah2,non-dropper,4,3,2,english,yes,new delhi,0,0,0,1,0,0,0,0.20000000000000046
-26,27,nischay mittal,3,punjab,dropper,5,4,2,english,no,1,5,utsah2,non-dropper,4,3,2,english,yes,new delhi,0,0,0,1,0,0,0,0.20000000000000046
-40,41,akash ,5,west bengal,dropper,5,2,5,english,no,1,5,utsah2,non-dropper,4,3,2,english,yes,new delhi,0,0,0,1,0,0,0,0.20000000000000046
+14,1013,harshit jain,1,haryana,dropper,5,5,3,english,yes,0,5,utsah2,non-dropper,4,3,2,english,yes,new delhi,0,0,0,1,0,0,1,0.3999999999999993
+18,1017,kishan singh,6,uttar pradesh,dropper,4,3,4,english,yes,0,5,utsah2,non-dropper,4,3,2,english,yes,new delhi,0,0,0,1,0,0,1,0.39999999999999925
+21,1021,lokesh saran,4,rajasthan,dropper,4,2,3,english,yes,1,5,utsah2,non-dropper,4,3,2,english,yes,new delhi,0,0,0,1,0,0,1,0.39999999999999925
+3,1004,ashish ,6,rajasthan,dropper,5,4,5,english,yes,1,5,utsah2,non-dropper,4,3,2,english,yes,new delhi,0,0,0,1,0,0,1,0.39999999999999925
+8,1009,bhoomik modi ,4,orissa,non-dropper,5,2,4,english,no,1,5,utsah2,non-dropper,4,3,2,english,yes,new delhi,0,0,0,1,1,0,0,0.3000000000000005
+9,1010,chhavikash raj ,6,bihar,non-dropper,4,5,4,english,no,0,5,utsah2,non-dropper,4,3,2,english,yes,new delhi,0,0,0,1,1,0,0,0.3000000000000005
+1,1003,aditya agrawal ,0,uttar pradesh,non-dropper,5,4,3,english,no,1,5,utsah2,non-dropper,4,3,2,english,yes,new delhi,0,0,0,1,1,0,0,0.3000000000000005
+7,1008,bhavya dixit,6,rajasthan,non-dropper,3,4,2,english,no,1,5,utsah2,non-dropper,4,3,2,english,yes,new delhi,0,0,0,1,1,0,0,0.3000000000000005
+5,1006,ayush kumar,1,haryana,non-dropper,4,4,4,english,no,1,5,utsah2,non-dropper,4,3,2,english,yes,new delhi,0,0,0,1,1,0,0,0.3000000000000005
+37,1037,tvisha,4,gujarat,non-dropper,2,5,5,english,no,0,5,utsah2,non-dropper,4,3,2,english,yes,new delhi,0,0,0,1,1,0,0,0.3000000000000005
+38,1038,utsavi agrawal,1,madhya pradesh,non-dropper,3,5,4,english,no,1,5,utsah2,non-dropper,4,3,2,english,yes,new delhi,0,0,0,1,1,0,0,0.3000000000000005
+39,1039,vrutika rao,3,gujarat,non-dropper,3,5,3,english,no,1,5,utsah2,non-dropper,4,3,2,english,yes,new delhi,0,0,0,1,1,0,0,0.3000000000000005
+36,1036,tejas sushil rajput ,4,maharashtra,non-dropper,4,4,3,english,no,0,5,utsah2,non-dropper,4,3,2,english,yes,new delhi,0,0,0,1,1,0,0,0.3000000000000005
+16,1015,himanshu ,1,haryana,non-dropper,5,4,3,english,no,1,5,utsah2,non-dropper,4,3,2,english,yes,new delhi,0,0,0,1,1,0,0,0.3000000000000005
+13,1012,divyansh verma ,6,madhya pradesh,non-dropper,4,3,3,english,no,1,5,utsah2,non-dropper,4,3,2,english,yes,new delhi,0,0,0,1,1,0,0,0.3000000000000005
+11,1040,dhairya singhal,6,delhi,non-dropper,3,4,5,english,no,1,5,utsah2,non-dropper,4,3,2,english,yes,new delhi,0,0,0,1,1,0,0,0.3000000000000005
+10,1011,debaleena ganguly ,4,west bengal,non-dropper,5,3,4,english,no,1,5,utsah2,non-dropper,4,3,2,english,yes,new delhi,0,0,0,1,1,0,0,0.3000000000000005
+22,1022,manish kumar samudrala ,2,telangana,non-dropper,4,3,4,english,no,1,5,utsah2,non-dropper,4,3,2,english,yes,new delhi,0,0,0,1,1,0,0,0.3000000000000005
+17,1016,jagriti singh ,1,rajasthan,non-dropper,4,5,2,english,no,1,5,utsah2,non-dropper,4,3,2,english,yes,new delhi,0,0,0,1,1,0,0,0.3000000000000005
+35,1035,swayam kiran chavan,4,maharashtra,non-dropper,4,3,4,english,no,0,5,utsah2,non-dropper,4,3,2,english,yes,new delhi,0,0,0,1,1,0,0,0.3000000000000005
+31,1030,shivani singh ,6,uttar pradesh,non-dropper,3,3,4,english,no,0,5,utsah2,non-dropper,4,3,2,english,yes,new delhi,0,0,0,1,1,0,0,0.3000000000000005
+29,1020,rushika reddy,4,telangana,non-dropper,3,4,4,english,no,0,5,utsah2,non-dropper,4,3,2,english,yes,new delhi,0,0,0,1,1,0,0,0.3000000000000005
+30,1029,sarthak mathpati,1,maharashtra,non-dropper,4,1,3,english,no,1,5,utsah2,non-dropper,4,3,2,english,yes,new delhi,0,0,0,1,1,0,0,0.3000000000000005
+28,1028,nithish ravikkumar ,6,uttar pradesh,non-dropper,5,3,3,english,no,0,5,utsah2,non-dropper,4,3,2,english,yes,new delhi,0,0,0,1,1,0,0,0.3000000000000005
+25,1025,mohit sharma,6,rajasthan,non-dropper,5,3,4,english,no,1,5,utsah2,non-dropper,4,3,2,english,yes,new delhi,0,0,0,1,1,0,0,0.3000000000000005
+34,1034,supriya bansal ,1,madhya pradesh,non-dropper,4,5,2,english,no,1,5,utsah2,non-dropper,4,3,2,english,yes,new delhi,0,0,0,1,1,0,0,0.3000000000000005
+33,1033,sonali kumari,3,jharkhand,non-dropper,5,2,3,english,no,1,5,utsah2,non-dropper,4,3,2,english,yes,new delhi,0,0,0,1,1,0,0,0.3000000000000005
+2,1041,akash ,5,west bengal,dropper,5,2,5,english,no,1,5,utsah2,non-dropper,4,3,2,english,yes,new delhi,0,0,0,1,0,0,0,0.20000000000000046
+0,1002,aayushi choudhary,6,rajasthan,dropper,2,5,4,english,no,0,5,utsah2,non-dropper,4,3,2,english,yes,new delhi,0,0,0,1,0,0,0,0.20000000000000046
+6,1007,ayush kumar,2,bihar,dropper,5,5,3,english,no,0,5,utsah2,non-dropper,4,3,2,english,yes,new delhi,0,0,0,1,0,0,0,0.20000000000000046
+4,1005,ashish reddy,4,telangana,dropper,4,5,4,english,no,1,5,utsah2,non-dropper,4,3,2,english,yes,new delhi,0,0,0,1,0,0,0,0.20000000000000046
+12,1032,dinesh reddy somavarapu,4,andhra pradesh,dropper,3,4,3,english,no,1,5,utsah2,non-dropper,4,3,2,english,yes,new delhi,0,0,0,1,0,0,0,0.20000000000000046
+15,1014,harshit raj ,6,bihar,dropper,3,3,4,english,no,1,5,utsah2,non-dropper,4,3,2,english,yes,new delhi,0,0,0,1,0,0,0,0.20000000000000046
+24,1024,mohit meena ,1,rajasthan,dropper,3,5,4,english,no,1,5,utsah2,non-dropper,4,3,2,english,yes,new delhi,0,0,0,1,0,0,0,0.20000000000000046
+23,1023,mohd afshan azam,6,delhi,dropper,2,1,3,english,no,1,5,utsah2,non-dropper,4,3,2,english,yes,new delhi,0,0,0,1,0,0,0,0.20000000000000046
+19,1018,kishlay bharti ,5,bihar,dropper,4,3,2,english,no,1,5,utsah2,non-dropper,4,3,2,english,yes,new delhi,0,0,0,1,0,0,0,0.20000000000000046
+20,1019,kshitij anilkumar kamble,4,maharashtra,dropper,4,3,4,english,no,1,5,utsah2,non-dropper,4,3,2,english,yes,new delhi,0,0,0,1,0,0,0,0.20000000000000046
+32,1031,sneha das,6,west bengal,dropper,4,5,1,english,no,0,5,utsah2,non-dropper,4,3,2,english,yes,new delhi,0,0,0,1,0,0,0,0.20000000000000046
+27,1027,nischay mittal,3,punjab,dropper,5,4,2,english,no,1,5,utsah2,non-dropper,4,3,2,english,yes,new delhi,0,0,0,1,0,0,0,0.20000000000000046
+26,1026,nikhil upadhyay,0,uttar pradesh,dropper,4,4,3,english,no,1,5,utsah2,non-dropper,4,3,2,english,yes,new delhi,0,0,0,1,0,0,0,0.20000000000000046
+40,1001,aakash rudra,5,bihar,dropper,4,3,2,english,no,1,5,utsah2,non-dropper,4,3,2,english,yes,new delhi,0,0,0,1,0,0,0,0.20000000000000046

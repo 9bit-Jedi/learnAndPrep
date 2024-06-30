@@ -17,13 +17,14 @@ class Mentor(models.Model):
   id = models.CharField(primary_key=True, max_length=200)
   Name = models.CharField(max_length=50)
   email = models.EmailField(max_length=254)
-  # mobile_no = models.PhoneNumberField(null=True, blank=True)
+  mobile_no = models.CharField(verbose_name="MobileNumber",max_length=15 , null=True)
   
   mentor_gender = models.CharField(max_length=12, choices=GENDER_CHOICES)
   profile_photo = models.ImageField(upload_to='mentor_pfp/', null=True, blank=True)
-  about = models.TextField(max_length=512, null=True, blank=True)
+  about = models.TextField(max_length=2000, null=True, blank=True)
   
   IIT = models.CharField(max_length=48)
+  branch = models.CharField(max_length=48, null=True)
   state = models.CharField(max_length=48)
   
   dropper_status = models.CharField(max_length=28, choices=DROPPER_CHOICES)

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from accounts.models import User
+from accounts.models import User, UserOTP
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 
 # Register your models here.
@@ -13,8 +13,8 @@ class UserAdmin(BaseUserAdmin):
     fieldsets = [
         ('User credential', {"fields": ["email", "password"]}),
         ("Personal info", {"fields": ["name" , "mobile_no"]}),
-        ("Student info", {"fields": ["student_class", "updated_at"]}),
-        ("Permissions", {"fields": ["is_admin", "is_active"]}),
+        ("Student info", {"fields": ["student_class", "create_at", "updated_at"]}),
+        ("Permissions", {"fields": ["is_active", "is_payment_done", "is_mentor_alloted", "is_admin"]}),
     ]
     readonly_fields = ("create_at", "updated_at",)
     # add_fieldsets is not a standard ModelAdmin attribute. UserAdmin
@@ -37,3 +37,4 @@ class UserAdmin(BaseUserAdmin):
 
 # Now register the new UserAdmin...
 admin.site.register(User, UserAdmin)
+admin.site.register(UserOTP)
