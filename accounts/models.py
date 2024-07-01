@@ -129,7 +129,17 @@ class UserOTP(models.Model):
     def is_otp_expired(self):  # Make it an instance method
         expiry_duration=timedelta(minutes=30)
         now = timezone.now()         
-        # print("Now (UTC):", now)                # Debugging statement
-        # print("OTP Created At (UTC):", self.otp_created_at)     # Debugging statement
-        # print("Expiry Duration:", expiry_duration)  # Debugging statement
         return (now - self.otp_created_at) > expiry_duration 
+
+# class UserMobileNoNumberOTP(models.Model):
+    
+    
+#     temp_user_data = models.TextField(null=True, blank=True)
+#     phone = models.CharField(max_length=128)
+#     otp = models.CharField(max_length=6, null=True, blank=True)
+#     otp_created_at = models.DateTimeField(null=True, blank=True)
+
+#     def is_otp_expired(self):  # Make it an instance method
+#         expiry_duration=timedelta(minutes=30)
+#         now = timezone.now()         
+#         return (now - self.otp_created_at) > expiry_duration 

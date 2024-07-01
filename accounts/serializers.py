@@ -47,7 +47,7 @@ class UserLoginSerializer(serializers.ModelSerializer):
 class UserProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['id' , 'email' , 'name' , 'mobile_no']        # student_class. {subject_rank} - design changes
+        fields = ['id' , 'email' , 'name' , 'mobile_no', 'student_class']
 
 
 class UserChangePasswordSerializer(serializers.Serializer):
@@ -157,3 +157,7 @@ class WebsiteUserRegestrationSerializer(serializers.ModelSerializer):
 class OTPVerificationSerializer(serializers.Serializer):
    otp = serializers.CharField(max_length=6)
 #    email = serializers.EmailField()
+
+# class MobileNoOTPVerificationSerializer(serializers.Serializer):
+#    otp = serializers.CharField(max_length=6)
+# #    email = serializers.EmailField()

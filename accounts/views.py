@@ -1,5 +1,5 @@
 import ast
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.contrib.auth import authenticate ,login
 from django.utils.http import urlsafe_base64_decode
 from django.contrib.auth.tokens import PasswordResetTokenGenerator
@@ -23,6 +23,7 @@ from .renderers import UserRenderer
 from .serializers import StudentClassSelectionSerializer, UserRegestrationSerializer,UserLoginSerializer,UserProfileSerializer,UserChangePasswordSerializer,SendPasswordResetEmailSerializer , UserPasswordResetSerializer
 
 from .serializers import OTPVerificationSerializer,WebsiteUserRegestrationSerializer
+# from .serializers import MobileNoOTPVerificationSerializer
 
 User = get_user_model()
 # Create your views here.
@@ -93,6 +94,19 @@ class UserLoginView(APIView):
             
         return Response(serializer.errors , status= status.HTTP_400_BAD_REQUEST)
 
+class UserLogoutView(APIView):
+    # permission_classes = [IsAuthenticated]
+    def post(self, request):
+        try:
+            refresh = request.data["refresh"]
+
+            # Blacklist the access token
+            refresh_token_obj = RefreshToken(refresh)
+            refresh_token_obj.blacklist()
+
+            return Response({"msg": "Logout successful"}, status=status.HTTP_205_RESET_CONTENT)
+        except Exception as e:
+            return Response({"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)
 
 class UserProfileView(APIView):
     renderer_classes = [UserRenderer]
@@ -243,23 +257,21 @@ class OTPVerificationView(APIView):
             
             try:
                 user_otp = UserOTP.objects.get(email=email)
-                # print(user_otp, user_otp.email, user_otp.temp_user_data)
+                print(user_otp, user_otp.email, user_otp.temp_user_data)
                 if user_otp.is_otp_expired(): 
                     return Response({'error': 'OTP expired'}, status=status.HTTP_400_BAD_REQUEST)
 
                 if user_otp.otp == otp:
                     temp_user_data = ast.literal_eval(user_otp.temp_user_data) 
-                    # print(temp_user_data)
                     # print(type(temp_user_data))
-                    user = User.objects.create(**temp_user_data)  
-                    user_otp.delete()  
-
-                    refresh = RefreshToken.for_user(user)
-                    return Response({
-                        'refresh': str(refresh),
-                        'access': str(refresh.access_token),
-                        'msg': 'OTP verified successfully. Registration completed.'
-                    }, status=status.HTTP_201_CREATED)
+                    serializer = UserRegestrationSerializer(data=temp_user_data)
+                    
+                    if serializer.is_valid():
+                        user = serializer.save()
+                        token = get_tokens_for_user(user)
+                        user_otp.delete()  
+                        
+                        return Response({'token': token, 'msg': 'Registration successful'}, status=status.HTTP_201_CREATED)
 
                 return Response({'error': 'Invalid OTP'}, status=status.HTTP_400_BAD_REQUEST)
             except UserOTP.DoesNotExist:
@@ -267,4 +279,40 @@ class OTPVerificationView(APIView):
 
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+# class PhoneNumberOTPVerificationView(APIView):
+#     permission_classes = [AllowAny]
+#     def post(self, request):
+
+#         mobile_no = request.data['params']['mobile_no']  
+#         id = request.data['params']['id']       
         
+#         print(id, mobile_no)
+#         serializer = MobileNoOTPVerificationSerializer(data=request.data)
+
+#         if serializer.is_valid():
+#             otp = serializer.validated_data.get('otp')
+            
+#             try:
+#                 user_mobile_no_otp = UserOTP.objects.get(mobile_no=mobile_no)
+#                 # print(user_otp, user_otp.email, user_otp.temp_user_data)
+#                 if user_mobile_no_otp.is_otp_expired(): 
+#                     return Response({'error': 'OTP expired'}, status=status.HTTP_400_BAD_REQUEST)
+                
+#                 if user_mobile_no_otp.otp == otp:
+                    
+#                     user = get_object_or_404(User, id=id)
+#                     user.mobile_no = mobile_no
+#                     user_mobile_no_otp.delete()  
+
+#                     refresh = RefreshToken.for_user(user)
+#                     return Response({
+#                         'refresh': str(refresh),
+#                         'access': str(refresh.access_token),
+#                         'msg': 'OTP verified successfully. Registration completed.'
+#                     }, status=status.HTTP_201_CREATED)
+
+#                 return Response({'error': 'Invalid OTP'}, status=status.HTTP_400_BAD_REQUEST)
+#             except UserOTP.DoesNotExist:
+#                 return Response({'error': 'Invalid email or OTP'}, status=status.HTTP_400_BAD_REQUEST)
+
+#         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

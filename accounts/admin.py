@@ -1,5 +1,5 @@
 from django.contrib import admin
-from accounts.models import User, UserOTP
+from accounts.models import *
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 
 # Register your models here.
@@ -38,3 +38,4 @@ class UserAdmin(BaseUserAdmin):
 # Now register the new UserAdmin...
 admin.site.register(User, UserAdmin)
 admin.site.register(UserOTP)
+# admin.site.register(UserMobileNoNumberOTP)
