@@ -14,7 +14,7 @@ class UserAdmin(BaseUserAdmin):
         ('User credential', {"fields": ["email", "password"]}),
         ("Personal info", {"fields": ["name" , "mobile_no"]}),
         ("Student info", {"fields": ["student_class", "create_at", "updated_at"]}),
-        ("Permissions", {"fields": ["is_active", "is_payment_done", "is_mentor_alloted", "is_admin"]}),
+        ("Permissions", {"fields": ["is_active", "is_mobile_no_verified", "is_payment_done", "is_mentor_alloted", "is_admin"]}),
     ]
     readonly_fields = ("create_at", "updated_at",)
     # add_fieldsets is not a standard ModelAdmin attribute. UserAdmin

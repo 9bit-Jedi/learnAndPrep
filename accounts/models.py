@@ -76,6 +76,7 @@ class User(AbstractBaseUser, PermissionsMixin ):
     is_admin = models.BooleanField(default=False)
     is_superuser = models.BooleanField(default=False)
     
+    is_mobile_no_verified = models.BooleanField(default=False)
     is_payment_done = models.BooleanField(default=False)
     is_mentor_alloted = models.BooleanField(default=False)
 
@@ -109,6 +110,7 @@ class User(AbstractBaseUser, PermissionsMixin ):
     class Meta :
         permissions= (
             ("is_admin", "Can check if user is admin"),
+            ("is_mobile_no_verified", "Can check if mobile number is verified"),
             ("is_payment_done", "Can check if payment is done"),
             ("is_mentor_alloted", "Can check if mentor is allotted"),
         )
@@ -134,7 +136,7 @@ class UserOTP(models.Model):
 class UserMobileNoOTP(models.Model):
     
     user_identifier = models.CharField(max_length=128, null=True, blank=True)
-    mobile_no = models.CharField(max_length=12)
+    mobile_no = models.CharField(max_length=15)
     otp = models.CharField(max_length=6, null=True, blank=True)
     otp_created_at = models.DateTimeField(null=True, blank=True)
 

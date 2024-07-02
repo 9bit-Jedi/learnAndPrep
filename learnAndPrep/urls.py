@@ -30,11 +30,16 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/user/' , include('accounts.urls')),
     path('mentorship/' , include('mentorship.urls')),
+    
     path('questions/', include('questions.urls')),
     path('notes/', include('notes.urls')),
-    path('upload/', include('uploader.urls')), 
     path('answer/', include('quiz.urls')),
+    
     # path('mock/', include('mockTest.urls')),
     # path('dpp/', include('mlAssist.urls')),
+    
+    path('contact/', include('contactUs.urls')),
+    
+    path('upload/', include('uploader.urls')), 
     path("__debug__/", include("debug_toolbar.urls")),
 ] + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

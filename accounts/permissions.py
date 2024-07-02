@@ -11,3 +11,8 @@ class IsMentorAlloted(BasePermission):
     message = 'No mentor has been alloted to you.' 
     def has_permission(self, request, view):
         return request.user.has_perm('accounts.is_mentor_alloted')
+    
+class MobileNoVerified(BasePermission):
+    message = 'Your Phone Number is not verified. Get it verified to perform this action.' 
+    def has_permission(self, request, view):
+        return request.user.has_perm('accounts.is_mobile_no_verified')

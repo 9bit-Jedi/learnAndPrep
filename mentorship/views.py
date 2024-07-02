@@ -12,12 +12,13 @@ from rest_framework.parsers import FormParser, MultiPartParser
 
 from accounts.models import User
 from accounts.permissions import IsPaymentDone, IsMentorAlloted
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, AllowAny
 
 from .models import Mentor, Mentee, MentorMenteeRelationship
 from .serializers import MentorSerializer, MenteeSerializer, MentorMenteeRelationshipSerializer, AllotedMentorRelationshipSerializer
 from .script_inference import main
 from .script_train import train
+from random import choice
 
 # Create your views here.
 
@@ -238,4 +239,11 @@ class getMentorView(APIView):
       # foo = pd.DataFrame([mentee_data3]) == pd.DataFrame([mentee_data2])
       # print(foo, " - CHECKING IF DATA IS SAME")
       # # print(main(mentee_data3, mentor_data), " - MENTOR FOR TEST USER 3")
-    
+
+class RandomMentorView(APIView):
+  permission_classes = [AllowAny]
+  def get(self, request, format=None):
+    mentors = Mentor.objects.all()
+    mentor = choice(mentors)
+    serializer = MentorSerializer(mentor)
+    return Response(serializer.data, status=status.HTTP_200_OK)

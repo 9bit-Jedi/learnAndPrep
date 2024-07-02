@@ -16,6 +16,7 @@ from rest_framework.permissions import IsAuthenticated, AllowAny
 import random
 from datetime import datetime, timedelta
 from django.utils import timezone
+import phonenumbers
 
 
 from .models import User, UserOTP, UserMobileNoOTP
@@ -309,8 +310,12 @@ class MobileNoOTPSendView(APIView):
             print(otp_object.mobile_no, otp_object.otp)
             
             # Send OTP to Facebook API
-            Util.send_whatsapp_otp(otp, mobile_no=mobile_no)
-            return Response({'msg': f"OTP sent to your mobile number {mobile_no}"}, status=status.HTTP_200_OK)
+            response = Util.send_whatsapp_otp(otp, mobile_no=mobile_no)
+            if response.status_code == 200:
+                return Response({'msg': f"OTP sent to your mobile number {mobile_no}"}, status=status.HTTP_200_OK)
+            else:
+                return Response({'error': 'Failed to send OTP'}, status=status.HTTP_400_BAD_REQUEST)
+            
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
         
@@ -338,7 +343,12 @@ class MobileNoOTPVerificationView(APIView):
                 
                 if user_mobile_no_otp.otp == otp:
                     user = get_object_or_404(User, id=user_identifier)
-                    user.mobile_no = mobile_no
+                    print(user)
+                    print(user.mobile_no )
+                    parsed_number = phonenumbers.parse(user_mobile_no_otp.mobile_no, "IN")
+                    user.mobile_no = phonenumbers.format_number(parsed_number, phonenumbers.PhoneNumberFormat.E164).lstrip("0")
+                    user.is_mobile_no_verified = True
+                    user.save()
                     
                     user_mobile_no_otp.delete()  
                     return Response({'msg': 'Mobile number verified'}, status=status.HTTP_200_OK)

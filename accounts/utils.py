@@ -1,9 +1,45 @@
 from django.core.mail import EmailMessage
 import os, requests
 from django.conf import settings
+
+import phonenumbers
+from phonenumbers.phonenumberutil import NumberParseException
+
 import random
 from datetime import datetime, timedelta
 from django.utils import timezone
+
+
+def normalize_phone_number(phone_number, default_country_code="IN"):
+    # parsed_number = phonenumbers.parse(phone_number, default_country_code)
+
+    try:
+        # Try parsing without explicit region first
+        parsed_number = phonenumbers.parse(phone_number)
+    except NumberParseException as e:
+        if e.error_type == NumberParseException.INVALID_COUNTRY_CODE:
+            # If no region is found, try with default_country_code
+            try:
+                parsed_number = phonenumbers.parse(phone_number, default_country_code)
+            except NumberParseException as e:
+                print("Invalid phone number: Missing or invalid country code", e )
+                return None
+        else:
+            # Other parsing errors
+            print(f"Invalid phone number: {e}")
+            return None
+    ##
+    
+    print(parsed_number)
+    if phonenumbers.is_valid_number(parsed_number):
+        # Format without '+' and remove leading zeros
+        return phonenumbers.format_number(parsed_number, phonenumbers.PhoneNumberFormat.E164)[1:].lstrip("0")
+    else:
+        print ("Invalid phone number")
+    # try:
+    # except phonenumbers.phonenumberutil.NumberParseException:
+    #     pass
+ 
 
 class Util:
     @staticmethod
@@ -37,13 +73,15 @@ class Util:
         """
         Send OTP via Whatsapp.
         """
-        # otp = Util.generate_otp()
+        # mobile_no = "9315117745" 
+        mobile_no = normalize_phone_number(mobile_no)
+        print(type(mobile_no), mobile_no) 
 
         url = f"https://graph.facebook.com/v19.0/{settings.PHONE_NUMBER_ID}/messages"
         headers = {'content-type': 'application/json', "Authorization": f"Bearer {settings.WHATSAPP_AUTH_TOKEN}"}
-        payload = {"messaging_product": "whatsapp", "to": mobile_no, "type": "template", "template": {"name": "otp", "language": {"code": "en"}, "components": [{"type": "body", "parameters": [{"type": "text", "text": otp}]}, {"type": "button", "sub_type": "Url", "index": 0, "parameters": [{"type": "payload", "payload": "copy_otp"}]}]}}
+        payload = {"messaging_product": "whatsapp", "to": mobile_no, "type": "template", "template": {"name": "otp", "language": {"code": "en"}, "components": [{"type": "body", "parameters": [{"type": "text", "text": otp}]}, {"type": "button", "sub_type": "Url", "index": 0, "parameters": [{"type": "payload", "payload": otp}]}]}}
 
         response = requests.post(url, json=payload, headers=headers)
         print(response.content)
-        return bool(response.ok)
+        return response
         

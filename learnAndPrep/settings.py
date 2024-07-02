@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     # 'mockTest.apps.MocktestConfig',
     'notes.apps.NotesConfig',
     # 'mentorship.apps.MentorshipConfig',
+    'contactUs.apps.ContactusConfig',
     'rest_framework',
     "debug_toolbar",
     'corsheaders',
@@ -173,8 +174,8 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.office365.com'
 EMAIL_PORT = 587
 
-OTP_EMAIL_USER = config('OTP_EMAIL_USER')
-OTP_EMAIL_PASSWORD = config('OTP_EMAIL_PASSWORD')
+EMAIL_HOST_USER = config('EMAIL_USER')
+EMAIL_HOST_PASSWORD = config('EMAIL_PASSWORD')
 EMAIL_USE_TLS = True
 
 DEFAULT_FROM_EMAIL = config('EMAIL_USER')
@@ -191,7 +192,7 @@ WHATSAPP_AUTH_TOKEN = config('WHATSAPP_AUTH_TOKEN')
 
 
 SIMPLE_JWT = {
-    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=1),
+    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=40),
     "REFRESH_TOKEN_LIFETIME": timedelta(days=30),
     'ROTATE_REFRESH_TOKENS': True,
     'BLACKLIST_AFTER_ROTATION': True,
