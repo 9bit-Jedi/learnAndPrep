@@ -6,7 +6,7 @@ from accounts.models import User
 
 # mentor model - from scratch 
 
-max_bandwidth = 5
+max_bandwidth = 5 
 class Mentor(models.Model):
   
   MEDIUM_CHOICES = [('English', 'English'), ('Hindi', 'Hindi')]
@@ -44,7 +44,7 @@ class Mentor(models.Model):
   
   def save(self, *args, **kwargs):
     self.bandwidth=self.relationships.count()
-    # check if bandwidth <= 5
+    # check if bandwidth <= max_bandwidth
     if self.bandwidth >= max_bandwidth:
       self.is_available = False
     super().save(*args, **kwargs)

@@ -18,12 +18,14 @@ from datetime import datetime, timedelta
 from django.utils import timezone
 
 
-from .models import User, UserOTP
+from .models import User, UserOTP, UserMobileNoOTP
 from .renderers import UserRenderer
 from .serializers import StudentClassSelectionSerializer, UserRegestrationSerializer,UserLoginSerializer,UserProfileSerializer,UserChangePasswordSerializer,SendPasswordResetEmailSerializer , UserPasswordResetSerializer
 
 from .serializers import OTPVerificationSerializer,WebsiteUserRegestrationSerializer
-# from .serializers import MobileNoOTPVerificationSerializer
+from .serializers import MobileNoOTPVerificationSerializer, MobileNoOTPSendSerializer
+from .models import UserOTP
+from .models import UserOTP
 
 User = get_user_model()
 # Create your views here.
@@ -129,7 +131,7 @@ class UserChangePasswordView(APIView):
 
 class SendPasswordResetEmailView(APIView):
     renderer_classes = [UserRenderer]
-    permission_classes = [ AllowAny]
+    # permission_classes = [ AllowAny]
     
     def post(self , request , formate = None):
         serializer = SendPasswordResetEmailSerializer(data=request.data)
@@ -139,7 +141,7 @@ class SendPasswordResetEmailView(APIView):
     
 class  UserPasswordResetView(APIView):
     renderer_classes = [ UserRenderer]
-    permission_classes = [ AllowAny]
+    # permission_classes = [ AllowAny]
     
     def post(self , request , uid, token ,formate = None):
         serializer = UserPasswordResetSerializer(data=request.data, context={'uid':uid, 'token':token})
@@ -279,40 +281,70 @@ class OTPVerificationView(APIView):
 
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-# class PhoneNumberOTPVerificationView(APIView):
-#     permission_classes = [AllowAny]
-#     def post(self, request):
 
-#         mobile_no = request.data['params']['mobile_no']  
-#         id = request.data['params']['id']       
-        
-#         print(id, mobile_no)
-#         serializer = MobileNoOTPVerificationSerializer(data=request.data)
-
-#         if serializer.is_valid():
-#             otp = serializer.validated_data.get('otp')
+class MobileNoOTPSendView(APIView):
+    # permission_classes = [AllowAny]
+    
+    def post(self, request):
+        serializer = MobileNoOTPSendSerializer(data=request.data)
+        if serializer.is_valid():
+            mobile_no = request.data.get('mobile_no')
+            # get_object_or_404(User, mobile_no=mobile_no)
+            user_identifier = request.user.id
             
-#             try:
-#                 user_mobile_no_otp = UserOTP.objects.get(mobile_no=mobile_no)
-#                 # print(user_otp, user_otp.email, user_otp.temp_user_data)
-#                 if user_mobile_no_otp.is_otp_expired(): 
-#                     return Response({'error': 'OTP expired'}, status=status.HTTP_400_BAD_REQUEST)
+            # Generate OTP
+            otp, otp_created_at = Util.generate_otp()
+            
+            otp_object = UserMobileNoOTP.objects.filter(user_identifier=user_identifier)
+            otp_object.delete() if otp_object.exists() else None
+            
+            # Save OTP and user identifier data
+            otp_object = UserMobileNoOTP.objects.create(
+                user_identifier=user_identifier,
+                mobile_no=mobile_no,
+                otp=otp,
+                otp_created_at = otp_created_at
+            )
+            otp_object.save()
+            print(otp_object.mobile_no, otp_object.otp)
+            
+            # Send OTP to Facebook API
+            Util.send_whatsapp_otp(otp, mobile_no=mobile_no)
+            return Response({'msg': f"OTP sent to your mobile number {mobile_no}"}, status=status.HTTP_200_OK)
+        else:
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        
+class MobileNoOTPVerificationView(APIView):
+    # permission_classes = [AllowAny]
+    def post(self, request):
+
+        mobile_no = request.data['params']['mobile_no']  
+        user_identifier = request.user.id   
+        # user identifier is user id
+        
+        print(mobile_no, user_identifier)
+        serializer = MobileNoOTPVerificationSerializer(data=request.data)
+
+        if serializer.is_valid():
+            otp = serializer.validated_data.get('otp')
+            
+            try:
+                user_mobile_no_otp = get_object_or_404(UserMobileNoOTP, user_identifier=user_identifier, mobile_no=mobile_no)
+                # user_mobile_no_otp = UserMobileNoOTP.objects.get(user_identifier=user_identifier, mobile_no=mobile_no)
+                print(user_mobile_no_otp, user_mobile_no_otp.mobile_no, user_mobile_no_otp.otp)
                 
-#                 if user_mobile_no_otp.otp == otp:
+                if user_mobile_no_otp.is_otp_expired(): 
+                    return Response({'error': 'OTP expired'}, status=status.HTTP_400_BAD_REQUEST)
+                
+                if user_mobile_no_otp.otp == otp:
+                    user = get_object_or_404(User, id=user_identifier)
+                    user.mobile_no = mobile_no
                     
-#                     user = get_object_or_404(User, id=id)
-#                     user.mobile_no = mobile_no
-#                     user_mobile_no_otp.delete()  
+                    user_mobile_no_otp.delete()  
+                    return Response({'msg': 'Mobile number verified'}, status=status.HTTP_200_OK)
 
-#                     refresh = RefreshToken.for_user(user)
-#                     return Response({
-#                         'refresh': str(refresh),
-#                         'access': str(refresh.access_token),
-#                         'msg': 'OTP verified successfully. Registration completed.'
-#                     }, status=status.HTTP_201_CREATED)
+                return Response({'error': 'Invalid OTP'}, status=status.HTTP_400_BAD_REQUEST)
+            except UserMobileNoOTP.DoesNotExist:
+                return Response({'error': 'Invalid phone or OTP'}, status=status.HTTP_400_BAD_REQUEST)
 
-#                 return Response({'error': 'Invalid OTP'}, status=status.HTTP_400_BAD_REQUEST)
-#             except UserOTP.DoesNotExist:
-#                 return Response({'error': 'Invalid email or OTP'}, status=status.HTTP_400_BAD_REQUEST)
-
-#         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

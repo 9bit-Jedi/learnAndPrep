@@ -54,7 +54,7 @@ class User(AbstractBaseUser, PermissionsMixin ):
     
 
     name = models.CharField(max_length=30 ,blank = False)
-    mobile_no = models.CharField(verbose_name="Mobile Number",max_length=15 , blank = False)
+    mobile_no = models.CharField(verbose_name="Mobile Number",max_length=15, blank = False)
     email = models.EmailField(
         verbose_name="Email",
         max_length=255,
@@ -127,19 +127,18 @@ class UserOTP(models.Model):
     otp_created_at = models.DateTimeField(null=True, blank=True)
 
     def is_otp_expired(self):  # Make it an instance method
-        expiry_duration=timedelta(minutes=30)
+        expiry_duration=timedelta(minutes=10)
         now = timezone.now()         
         return (now - self.otp_created_at) > expiry_duration 
 
-# class UserMobileNoNumberOTP(models.Model):
+class UserMobileNoOTP(models.Model):
     
-    
-#     temp_user_data = models.TextField(null=True, blank=True)
-#     phone = models.CharField(max_length=128)
-#     otp = models.CharField(max_length=6, null=True, blank=True)
-#     otp_created_at = models.DateTimeField(null=True, blank=True)
+    user_identifier = models.CharField(max_length=128, null=True, blank=True)
+    mobile_no = models.CharField(max_length=12)
+    otp = models.CharField(max_length=6, null=True, blank=True)
+    otp_created_at = models.DateTimeField(null=True, blank=True)
 
-#     def is_otp_expired(self):  # Make it an instance method
-#         expiry_duration=timedelta(minutes=30)
-#         now = timezone.now()         
-#         return (now - self.otp_created_at) > expiry_duration 
+    def is_otp_expired(self):  # Make it an instance method
+        expiry_duration=timedelta(minutes=10)
+        now = timezone.now()         
+        return (now - self.otp_created_at) > expiry_duration 

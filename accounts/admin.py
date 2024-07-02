@@ -38,4 +38,5 @@ class UserAdmin(BaseUserAdmin):
 # Now register the new UserAdmin...
 admin.site.register(User, UserAdmin)
 admin.site.register(UserOTP)
+admin.site.register(UserMobileNoOTP)
 # admin.site.register(UserMobileNoNumberOTP)

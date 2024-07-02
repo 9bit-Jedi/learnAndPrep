@@ -12,6 +12,7 @@ from rest_framework.parsers import FormParser, MultiPartParser
 
 from accounts.models import User
 from accounts.permissions import IsPaymentDone, IsMentorAlloted
+from rest_framework.permissions import IsAuthenticated
 
 from .models import Mentor, Mentee, MentorMenteeRelationship
 from .serializers import MentorSerializer, MenteeSerializer, MentorMenteeRelationshipSerializer, AllotedMentorRelationshipSerializer
@@ -56,7 +57,7 @@ def ImportMentor(file_path):
       return HttpResponse({"message":"nahhh ! bad mentor data"}, status=status.HTTP_400_BAD_REQUEST)
   return HttpResponse({"message":"populated all mentors into database successfully"}, status=status.HTTP_201_CREATED)
 
-
+# HELPER FUNCTION #
 def SaveMenteeDetails(student_data, user):
   try:
     mentee = Mentee.objects.get(user=user)
@@ -84,6 +85,7 @@ def SaveMenteeDetails(student_data, user):
     print("new mentee object created !")
   return mentee
 
+# HELPER FUNCTION #
 def SaveRelationshipDetails(mentors, mentee):
   extra_mentors = mentors[1]
 
@@ -126,7 +128,7 @@ def SaveRelationshipDetails(mentors, mentee):
 
 class getMentorView(APIView):
   parser_classes = [FormParser, MultiPartParser]
-  permission_classes = [IsPaymentDone, IsMentorAlloted]
+  permission_classes = [IsAuthenticated, IsPaymentDone]
   
   def get(self, request, format=None):
     
@@ -148,6 +150,7 @@ class getMentorView(APIView):
     # MENTOR DATA
     
     queryset = Mentor.objects.filter(is_available=True)
+    print(queryset.count(), " ------------------------------- MENTOR COUNT")
     serializer = MentorSerializer(queryset, many=True)
     mentor_data = pd.DataFrame(serializer.data)
     
@@ -160,65 +163,79 @@ class getMentorView(APIView):
       'student_id': mentee.id,
       'student_name': mentee.user.name,
       'student_dropper': mentee.dropper_status,
-      'student_maths_rank': mentee.maths_rank,
-      'student_physics_rank': mentee.physics_rank,
-      'student_chemistry_rank': mentee.chemistry_rank,
+      'student_maths_rank': int(mentee.maths_rank),
+      'student_physics_rank': int(mentee.physics_rank),
+      'student_chemistry_rank': int(mentee.chemistry_rank),
       'student_medium': mentee.medium,
       'student_medium_change': mentee.did_you_change,
       'student_state': mentee.state,
       'student_gender': mentee.student_gender
     }
     
-    # print(pd.DataFrame([mentee_data])) 
-    
+    print(pd.DataFrame([mentee_data])) 
     mentor = main(mentee_data, mentor_data)     # returned tuple of (dict, df)
+    
     # will save mentor for the sake of bandwidth
     alloted_mentor = Mentor.objects.get(id = mentor[0]['mentor_id'])
     print(alloted_mentor, " - alloted mentor by mentor_id from model")
-    # print(mentor[0])
-    # print(mentor[1])
     
     try:
       relationship = SaveRelationshipDetails(mentor, mentee)
             
       # if bt with saving MentorMenteeRelationship Model - it already exists (Integrity error) or anything else
       if str(type(relationship)) == r"<class 'tuple'>":
-        # replicating  my GET request code in this case
-        # user = request.user
         mentee = request.user.mentee
 
         relationship = get_object_or_404(MentorMenteeRelationship, mentee=mentee)
-        # relationship = MentorMenteeRelationship.objects.get(mentee=mentee)
         serializer = MentorMenteeRelationshipSerializer(relationship)
-        
         # alloted_mentor.save()
         print(relationship.alloted_mentor,  " - relationship alloted_mentor (already alloted mentor)")
         return Response({"message": "Mentor has already been alloted", "data":serializer.data}, status=status.HTTP_200_OK)
       
       # code if new mentor alloted
-
       serializer = MentorMenteeRelationshipSerializer(relationship)
       alloted_mentor.save()
       print(alloted_mentor, " - New mentor alloted successfully")
-      return Response({"message": "Mentor has been alloted successfully !", "data":serializer.data}, status=status.HTTP_200_OK) 
+
+
+      return Response({"message": "New Mentor has been alloted successfully !", "data":serializer.data}, status=status.HTTP_200_OK) 
     
     except IntegrityError as e:
       return Response({"error": "You have already taken the Compatibility Test", "error_message": str(e)}, status=status.HTTP_400_BAD_REQUEST)
 
-    # testing \
-    
-    mentee_data2 = {
-      'student_id': mentee.id,
-      'student_name': "test",
-      'student_dropper': "Dropper",
-      'student_maths_rank': 2,
-      'student_physics_rank': 5,
-      'student_chemistry_rank': 4,
-      'student_medium': "English",
-      'student_medium_change': "NO",
-      'student_state': "New Delhi",
-      'student_gender': "male" 
-    }
-    print(pd.DataFrame([mentee_data2])) 
-    print(main(mentee_data2, mentor_data))
+      ## TESTING ##
+
+      # data = request.data
+      
+      # mentee_data2 = {
+      #   'student_id': mentee.id,  
+      #   'student_name': "test user 2", 
+      #   'student_dropper': user.mentee.dropper_status,  
+      #   'student_maths_rank': int(data.get('maths_rank')),  
+      #   'student_physics_rank': int(data.get('physics_rank')), 
+      #   'student_chemistry_rank': int(data.get('chemistry_rank')), 
+      #   'student_medium': data.get('medium'), 
+      #   'student_medium_change': data.get('medium_change'), 
+      #   'student_state': data.get('state'), 
+      #   'student_gender': data.get('gender')  
+      # }
+      # print(pd.DataFrame([mentee_data2]).student_maths_rank) 
+      # # print(main(mentee_data2, mentor_data), " - MENTOR FOR TEST USER 2")
+      
+      # mentee_data3 = {
+      #   'student_id': mentee.id,
+      #   'student_name': "test user 3",
+      #   'student_dropper': "Non-dropper",
+      #   'student_maths_rank': 4,
+      #   'student_physics_rank': 3,
+      #   'student_chemistry_rank': 2,
+      #   'student_medium': "English",
+      #   'student_medium_change': "YES",
+      #   'student_state': "New Delhi",
+      #   'student_gender': "female" 
+      # }
+      # print(pd.DataFrame([mentee_data3]).student_maths_rank) 
+      # foo = pd.DataFrame([mentee_data3]) == pd.DataFrame([mentee_data2])
+      # print(foo, " - CHECKING IF DATA IS SAME")
+      # # print(main(mentee_data3, mentor_data), " - MENTOR FOR TEST USER 3")
     

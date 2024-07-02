@@ -1,6 +1,6 @@
 from django.urls import path
 from accounts.views import SendPasswordResetEmailView, UserChangePasswordView, UserLoginView, UserLogoutView, UserProfileView, UserRegestrationView , UserPasswordResetView , StudentClassSelectionView, UserUnregisterView, VerifyOTPView 
-from .views import WebsiteUserRegestrationView, OTPVerificationView
+from .views import WebsiteUserRegestrationView, OTPVerificationView, MobileNoOTPSendView, MobileNoOTPVerificationView
 
 from rest_framework_simplejwt.views import (
     TokenRefreshView,
@@ -24,4 +24,7 @@ urlpatterns = [
     
     path('website-register/', WebsiteUserRegestrationView.as_view(), name='website-user-register'),
     path('website-verify-otp/', OTPVerificationView.as_view(), name='website-verify-otp'),
+
+    path('mobile-otp/', MobileNoOTPSendView.as_view(), name='send otp to whatsapp for mobile no verification'),
+    path('mobile-verify-otp/', MobileNoOTPVerificationView.as_view(), name='verify mobile otp'),
 ]
