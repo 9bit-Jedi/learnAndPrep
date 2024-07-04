@@ -44,7 +44,7 @@ def get_tokens_for_user(user):
 # register user function 
 class UserRegestrationView(APIView):
     renderer_classes = [UserRenderer]
-    permission_classes = [AllowAny]
+    # permission_classes = [AllowAny]
 
     def post(self, request , formate =None):
         serializer= UserRegestrationSerializer(data=request.data)
@@ -80,7 +80,7 @@ class UserRegestrationView(APIView):
 
 class UserLoginView(APIView):
     renderer_classes = [UserRenderer]
-    permission_classes = [AllowAny]
+    # permission_classes = [AllowAny]
     
     def post(self, request , formate = None):
         
@@ -98,7 +98,8 @@ class UserLoginView(APIView):
         return Response(serializer.errors , status= status.HTTP_400_BAD_REQUEST)
 
 class UserLogoutView(APIView):
-    # permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated]
+    
     def post(self, request):
         try:
             refresh = request.data["refresh"]
@@ -113,7 +114,7 @@ class UserLogoutView(APIView):
 
 class UserProfileView(APIView):
     renderer_classes = [UserRenderer]
-    # permission_classes = [IsAuthenticated]        # dedault permission class set to IsAuthenticated
+    permission_classes = [IsAuthenticated] 
 
     def get(self, request , formate = None):
         serializer = UserProfileSerializer(request.user)
@@ -122,7 +123,8 @@ class UserProfileView(APIView):
 
 class UserChangePasswordView(APIView):
     renderer_classes = [UserRenderer]
-    # permission_classes = [AllowAny]        # dedault permission class set to IsAuthenticated
+    permission_classes = [IsAuthenticated] 
+    
     def post(self, request , formate = None):
         serializer = UserChangePasswordSerializer(data= request.data , context = {'user' : request.user})
         if serializer.is_valid(raise_exception=True):
@@ -132,7 +134,7 @@ class UserChangePasswordView(APIView):
 
 class SendPasswordResetEmailView(APIView):
     renderer_classes = [UserRenderer]
-    # permission_classes = [ AllowAny]
+    permission_classes = [IsAuthenticated]
     
     def post(self , request , formate = None):
         serializer = SendPasswordResetEmailSerializer(data=request.data)
@@ -142,7 +144,7 @@ class SendPasswordResetEmailView(APIView):
     
 class  UserPasswordResetView(APIView):
     renderer_classes = [ UserRenderer]
-    # permission_classes = [ AllowAny]
+    permission_classes = [ IsAuthenticated]
     
     def post(self , request , uid, token ,formate = None):
         serializer = UserPasswordResetSerializer(data=request.data, context={'uid':uid, 'token':token})
@@ -151,7 +153,7 @@ class  UserPasswordResetView(APIView):
 
 class StudentClassSelectionView (APIView):
     renderer_classes = [UserRenderer]
-    # permission_classes = [IsAuthenticated]        # dedault permission class set to IsAuthenticated
+    permission_classes = [IsAuthenticated] 
 
     def post(self, request , formate = None):
         serializer = StudentClassSelectionSerializer(data=request.data, instance=request.user)
@@ -164,8 +166,7 @@ class StudentClassSelectionView (APIView):
 
 class UserUnregisterView(APIView):
     renderer_classes = [UserRenderer]
-    # permission_classes = [IsAuthenticated]        # dedault permission class set to IsAuthenticated
-    
+    permission_classes = [IsAuthenticated]  
     def delete(self, request, format=None):
         user = request.user
         user.delete()
@@ -173,7 +174,7 @@ class UserUnregisterView(APIView):
     
 
 class VerifyOTPView(APIView):
-    permission_classes = [AllowAny]
+    
     def post(self, request, format=None):
         # print(request.session['temp_user_data'])
         
@@ -203,7 +204,7 @@ class VerifyOTPView(APIView):
 # DRY principles ki {seedhe maut}
 class WebsiteUserRegestrationView(APIView):
     renderer_classes = [UserRenderer]
-    permission_classes = [AllowAny]
+    # permission_classes = [AllowAny]
     
     def post(self, request , formate =None):
         serializer= WebsiteUserRegestrationSerializer(data=request.data)
@@ -247,7 +248,7 @@ class WebsiteUserRegestrationView(APIView):
 
 
 class OTPVerificationView(APIView):
-    permission_classes = [AllowAny]
+    # permission_classes = [AllowAny]
     def post(self, request):
 
         email = request.data['params']['email']         
@@ -284,7 +285,7 @@ class OTPVerificationView(APIView):
 
 
 class MobileNoOTPSendView(APIView):
-    # permission_classes = [AllowAny]
+    permission_classes = [IsAuthenticated]
     
     def post(self, request):
         serializer = MobileNoOTPSendSerializer(data=request.data)
@@ -320,7 +321,8 @@ class MobileNoOTPSendView(APIView):
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
         
 class MobileNoOTPVerificationView(APIView):
-    # permission_classes = [AllowAny]
+    permission_classes = [IsAuthenticated]
+
     def post(self, request):
 
         mobile_no = request.data['params']['mobile_no']  

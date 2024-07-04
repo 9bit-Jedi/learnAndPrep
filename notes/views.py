@@ -15,6 +15,7 @@ from .serializers import NotesSerializer
 # Create your views here.
 
 class ListNotes(APIView):
+  permission_classes = [IsAuthenticated]  
   
   def get(self, request, subject_id, format=None):
     

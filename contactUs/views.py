@@ -14,7 +14,7 @@ from rest_framework.response import Response
 from .serializers import ContactUsSerializer
 
 class ContactusView(APIView):
-  permission_classes = [AllowAny]
+  # permission_classes = [AllowAny]
 
   def post(self, request):
     print(request.data)
