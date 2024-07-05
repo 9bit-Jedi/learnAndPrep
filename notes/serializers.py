@@ -1,9 +1,11 @@
 from rest_framework import serializers
 from .models import Notes  
+from questions.serializers import ChapterSerializer
   
 class NotesSerializer(serializers.ModelSerializer):
 
   pdf_url = serializers.SerializerMethodField()
+  chapter = ChapterSerializer()
   class Meta:
     model = Notes
     fields = ['id','title', 'pdf_url', 'chapter']
