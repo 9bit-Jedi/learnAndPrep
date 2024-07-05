@@ -3,11 +3,11 @@
 ## Tech stack
 
 - *Framework* : Django (Python)
-- *Database* : TBD (currently sqlite3)
+- *Database* : AWS PostgreSQL Instance (currently sqlite3)
 - *API Layer* : Django REST Framework (DRF)
 - *Authentication* : Django build-in authentication
 - *Virtual Environment* : venv (built-in to Python)
-- *Docker* : now Dockerised
+- *Docker* : now Dockerised using python defacto base image
 
 ## Git Pull
 
