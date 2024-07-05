@@ -1,50 +1,52 @@
-from django.http import FileResponse, Http404, HttpResponse, JsonResponse
-from django.shortcuts import render
-from django.shortcuts import get_object_or_404
-from rest_framework import generics, status
+import json
+from django.shortcuts import render, get_object_or_404
+from django.http import Http404, HttpResponse
+from django.core.exceptions import ValidationError
+from django.db import IntegrityError 
+
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from rest_framework import generics, status, permissions
 from rest_framework.permissions import IsAuthenticated
-from rest_framework.exceptions import NotFound
-from django.core.exceptions import ObjectDoesNotExist
+from accounts.permissions import IsPaymentDone, IsMentorAlloted
 
+from questions.models import Chapter, Question, AnswerIntegerType, AnswerMmcq, AnswerSmcq, AnswerSubjective
+from questions.serializers import QuestionSerializer, AnswerMmcqSerializer, AnswerIntegerTypeSerializer, AnswerSmcqSerializer, AnswerSubjectiveSerializer
 
-# from .serializers import SubjectSerializer, ChapterSerializer, QuestionSerializer, AnswerSmcqSerializer, AnswerMmcqSerializer, AnswerIntegerTypeSerializer
-from .models import Test, LiveTest, TestAttempt, TestQuestion, TestQuestionAttempt
-from questions.models import Question, AnswerIntegerType, AnswerMmcq, AnswerSmcq
-from .serializers import TestSerializer
-
-# from django.core import serializers
+from .models import *
+from .serializers import *
 
 # Create your views here.
 
-# test list
+      
+class AvailableTestsList(APIView):
+    permission_classes = [IsAuthenticated, IsPaymentDone]  # Uncomment to require authentication
 
-class TestList(APIView):
-  
-  # permission_classes = [IsAuthenticated]
-  
-  def get(request, format=None):
-    user = request.user
-    print(user)
-    # queryset = Test.objects.all()
-    queryset = Test.objects.filter(user_id = user.id)
-    serializer = TestSerializer(queryset)
-    return HttpResponse(serializer.data, status=status.HTTP_200_OK)
+    def get(self, request, format=None):
+        now = timezone.now()
 
+        # Get live tests that are currently active
+        live_tests = LiveTest.objects.all()
+        live_test_serialized = LiveTestSerializer(live_tests, many=True).data
+        attempted_tests = []
+        # Get regular tests (excluding those already attempted by the user)
+        if request.user.is_authenticated:
+            attempted_tests = TestAttempt.objects.filter(user=request.user)
+            
+            attempted_tests_ids=[]
+            for attempted_test in attempted_tests:
+                attempted_tests_ids.append(attempted_test.test.id)
+            
+            tests = Test.objects.exclude(id__in=live_tests.values_list('id', flat=True)).exclude(id__in=attempted_tests_ids)
+        else:
+            tests = Test.objects.exclude(id__in=live_tests.values_list('id', flat=True))  # All tests if not authenticated
+        test_serialized = TestSerializer(tests, many=True).data
+        attempted_test_serialized = TestAttemptSerializer(attempted_tests, many=True).data
 
-# admin side - post - create new mock test by ui
-# admin side - post - create new LIVE mock test by ui
-
-# start mock test - post - create attempt object
-    # if mock test is LIVE - check start_time
-class StartTest(APIView):
-  def post(self, request, format=None):
-    test_id = self.request.POST.get_query_params("test_id")
-    # user_id = self.request.POST.get_query_params("user_id")
-    user = request.user
-    print(test_id, user)
-
-    return Response(status=status.HTTP_200_OK)
-
-# submit mock test - put - test attempt end time update
+        data = {
+            'live_tests': live_test_serialized,
+            'tests': test_serialized,
+            'attempts': attempted_test_serialized,
+        }
+        
+        return Response(data, status=status.HTTP_200_OK)
