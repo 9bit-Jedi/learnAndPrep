@@ -318,6 +318,9 @@ class MobileNoOTPSendView(APIView):
             
             # Send OTP to Facebook API
             response = Util.send_whatsapp_otp(otp, mobile_no=mobile_no)
+            # response = Util.send_quick_sms_otp(otp, mobile_no=mobile_no)
+            # response = Util.send_dlt_sms_otp(otp, mobile_no=mobile_no)
+
             if response.status_code == 200:
                 return Response({'msg': f"OTP sent to your mobile number {mobile_no}"}, status=status.HTTP_200_OK)
             else:

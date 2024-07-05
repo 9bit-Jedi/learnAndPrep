@@ -9,6 +9,7 @@ import random
 from datetime import datetime, timedelta
 from django.utils import timezone
 
+from decouple import config
 
 def normalize_phone_number(phone_number, default_country_code="IN"):
     # parsed_number = phonenumbers.parse(phone_number, default_country_code)
@@ -85,3 +86,45 @@ class Util:
         print(response.content)
         return response
         
+    @staticmethod
+    def send_quick_sms_otp(otp, mobile_no):
+        """
+        Send OTP via Quick SMS using fast2sms service.
+        """
+        url = "https://www.fast2sms.com/dev/bulkV2"
+        querystring = {
+            "authorization": config('FAST2SMS_AUTH_TOKEN'),
+            "route": "q",
+            "message": f"Your verification OTP is: {otp}. Do not share this OTP with anyone for security reasons.",
+            "flash": "0",
+            "numbers": mobile_no,
+        }
+        headers = {
+            'cache-control': "no-cache"
+        }
+        response = requests.request("GET", url, headers=headers, params=querystring)
+        print (response.text)
+        return response
+
+    
+    @staticmethod
+    def send_dlt_sms_otp(otp, mobile_no):
+        """
+        Send OTP via DLT using fast2sms service.
+        """
+        url = "https://www.fast2sms.com/dev/bulkV2"
+        querystring = {
+            "authorization": config('FAST2SMS_AUTH_TOKEN'),
+            "route": "dlt",
+            "sender_id": config('FAST2SMS_SENDER_ID'),
+            "message": "template_name",
+            "variables_values": otp,
+            "flash": "0",
+            "numbers": mobile_no,
+        }
+        headers = {
+            'cache-control': "no-cache"
+        }
+        response = requests.request("GET", url, headers=headers, params=querystring)
+        print(response.text)
+        return response
