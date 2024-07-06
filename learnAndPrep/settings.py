@@ -28,7 +28,7 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['192.168.104.59', 'localhost', '127.0.0.1'] 
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '52.72.21.105', 'stage.vjnucleus.com'] 
 
 
 # Application definition
@@ -144,12 +144,6 @@ USE_I18N = True
 
 USE_TZ = True
 
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/5.0/howto/static-files/
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-STATIC_URL = 'static/'
-
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
@@ -223,16 +217,47 @@ CORS_ALLOWED_ORIGINS = [
     'http://127.0.0.1:8000',
     'http://localhost:8000',
 ]
-CORS_ALLOW_ALL_ORIGINS = True
+# CORS_ALLOW_ALL_ORIGINS = True
 
 # Managing Media
+##
+
+# # AWS Configuration
+# AWS_ACCESS_KEY_ID = config('YOUR_AWS_ACCESS_KEY_ID')
+# AWS_SECRET_ACCESS_KEY = config('YOUR_AWS_SECRET_ACCESS_KEY')
+# AWS_STORAGE_BUCKET_NAME = 'vjn-staging-bucket'  # Bucket for static and media
+# AWS_S3_REGION_NAME = 'us-east-1'  
+
+# AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
+# STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/static/' 
+# MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/media/'
+
+# STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+# DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage' 
+# STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles') 
+
+# static files & media in root dir
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_URL = '/static/'
+
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
+##
+
 TIME_ZONE = 'Asia/Kolkata'
 
-
+# HTTPS SETTINGS
 SESSION_COOKIE_SECURE = False               # Set to True if you are using HTTPS (recommended)
+CSRF_COOKIE_SECURE = False
+SECURE_SSL_REDIRECT = False                 # Set to True if you are using HTTPS (recommended)
+
+# HSTS SETTINGS
+# SECURE_HSTS_SECONDS = 31536000              # Set to 0 if you are not using HTTPS
+# SECURE_HSTS_PRELOAD = True 
+# SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+
 SESSION_COOKIE_SAMESITE = 'Lax'             # Adjust if needed, depending on your specific requirements
 CSRF_COOKIE_SAMESITE = 'Lax'
 CSRF_COOKIE_HTTPONLY = False                # Set to False to allow frontend access to the CSRF token

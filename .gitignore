@@ -5,6 +5,7 @@ __pycache__
 # questions/questions
 # questions/img
 .env
+.env.dev
 .env.staging
 .env.production
 
