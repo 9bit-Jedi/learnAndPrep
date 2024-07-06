@@ -5,6 +5,9 @@ __pycache__
 # questions/questions
 # questions/img
 .env
+.env.staging
+.env.production
+
 *.ps1
 
 sqlite3.exe
