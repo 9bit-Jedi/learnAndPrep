@@ -106,7 +106,7 @@ DATABASES = {
         'USER': config('PGUSER'),
         'PASSWORD': config('PGPASSWORD'),
         'HOST': config('PGHOST'),
-        'PORT': config('PGPORT', 5432),
+        'PORT': config('PGPORT'),
         'OPTIONS': {
             'sslmode': 'require',
         },
