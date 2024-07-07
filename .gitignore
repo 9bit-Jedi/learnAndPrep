@@ -4,6 +4,9 @@ __pycache__
 # uploader/img
 # questions/questions
 # questions/img
+
+.vscode
+
 .env
 .env.dev
 .env.staging
