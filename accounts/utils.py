@@ -8,8 +8,9 @@ from phonenumbers.phonenumberutil import NumberParseException
 import random
 from datetime import datetime, timedelta
 from django.utils import timezone
-
 from decouple import config
+
+from django.core.mail import send_mail
 
 def normalize_phone_number(phone_number, default_country_code="IN"):
     # parsed_number = phonenumbers.parse(phone_number, default_country_code)
@@ -57,14 +58,25 @@ class Util:
 
     @staticmethod
     def send_mail(data):
-        email = EmailMessage(
-            subject=data['subject'],
-            body= data['body'],
-            from_email=settings.DEFAULT_FROM_EMAIL,
-            to=[data['to_email']],
+        # using office365
+        
+        # email = EmailMessage(
+        #     subject=data['subject'],
+        #     body= data['body'],
+        #     from_email=settings.DEFAULT_FROM_EMAIL,
+        #     to=[data['to_email']],
        
+        # )
+        # email.send()
+
+        # using AWS SES
+        
+        send_mail(
+            data['subject'],
+            data['body'],
+            settings.DEFAULT_FROM_EMAIL,
+            [data['to_email']]
         )
-        email.send()
 
     # def generate_otp():
     #     return str(random.randint(100000, 999999))
