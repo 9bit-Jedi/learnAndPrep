@@ -217,6 +217,7 @@ CORS_ALLOWED_ORIGINS = [
     'http://127.0.0.1:8000',
     'http://localhost:8000',
     'http://localhost:5173',
+    'http://52.72.21.105',
     'http://stage.vjnucleus.com',
     'http://www.stage.vjnucleus.com',
     'http://vjn-staging-bucket.s3-website-us-east-1.amazonaws.com'

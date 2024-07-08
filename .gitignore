@@ -5,7 +5,8 @@ __pycache__
 # questions/questions
 # questions/img
 
-.vscode
+.vscode/*
+media
 
 .env
 .env.dev
