@@ -75,7 +75,7 @@ class User(AbstractBaseUser, PermissionsMixin):
   is_superuser = models.BooleanField(default=False)
 
   is_mobile_no_verified = models.BooleanField(default=False)
-  is_payment_done = models.BooleanField(default=False)
+  is_payment_done = models.BooleanField(default=True)
   is_mentor_alloted = models.BooleanField(default=False)
 
   # CREATING OBJECT OF USER MANAGER
