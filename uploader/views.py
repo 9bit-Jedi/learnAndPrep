@@ -88,6 +88,7 @@ class CsvUploadView(APIView):
         for chunk in file.chunks():
           temp_file.write(chunk)
         try:
+          file_path = temp_file.name
           df = pd.read_csv(file_path, delimiter=',')
         except FileNotFoundError:
           return HttpResponse({'error': "File not found."}, status=status.HTTP_400_BAD_REQUEST)
@@ -111,7 +112,7 @@ class CsvUploadView(APIView):
 
     except Exception as e:
       print(e)
-      return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+      return HttpResponse({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
 def ImportSubject(df):

@@ -9,6 +9,9 @@ __pycache__
 
 .vscode/*
 media
+staticfiles
+
+mentorship/csv
 
 .env
 .env.dev

@@ -109,6 +109,8 @@ def SaveRelationshipDetails(mentors, mentee):
       extra_mentor_3 = Mentor.objects.get(id=extra_mentor3['mentor_id']),
       extra_mentor_3_compatibility= extra_mentor3['compatibility_score']
     )
+    mentee.user.is_mentor_alloted = True
+    mentee.user.save()
     print("saved new allotment : ", relationship)
     return relationship
   except (Mentor.DoesNotExist, IndexError, KeyError, IntegrityError) as e:
