@@ -10,7 +10,9 @@ from datetime import datetime, timedelta
 from django.utils import timezone
 from decouple import config
 
-from django.core.mail import send_mail
+from django.core.mail import send_mail, EmailMessage
+from .email_backends import OtpEmailBackend, SupportEmailBackend
+
 
 def normalize_phone_number(phone_number, default_country_code="IN"):
     # parsed_number = phonenumbers.parse(phone_number, default_country_code)
@@ -41,7 +43,6 @@ def normalize_phone_number(phone_number, default_country_code="IN"):
     # try:
     # except phonenumbers.phonenumberutil.NumberParseException:
     #     pass
- 
 
 class Util:
     @staticmethod
@@ -57,30 +58,29 @@ class Util:
         return (now - datetime.fromisoformat(otp_created_at)) > expiry_duration
 
     @staticmethod
-    def send_mail(data):
-        # using office365
-        
-        # email = EmailMessage(
-        #     subject=data['subject'],
-        #     body= data['body'],
-        #     from_email=settings.DEFAULT_FROM_EMAIL,
-        #     to=[data['to_email']],
-       
-        # )
-        # email.send()
+    def send_otp_mail(data):
 
-        # using AWS SES
-        
-        send_mail(
+        mail = EmailMessage(
             data['subject'],
             data['body'],
-            settings.DEFAULT_FROM_EMAIL,
+            settings.OTP_EMAIL_HOST_USER,
             [data['to_email']]
         )
+        mail.connection = OtpEmailBackend()
+        mail.send()
 
-    # def generate_otp():
-    #     return str(random.randint(100000, 999999))
-    
+    @staticmethod
+    def send_support_mail(data):
+
+        mail = EmailMessage(
+            data['subject'],
+            data['body'],
+            settings.EMAIL_HOST_USER,
+            [data['to_email']]
+        )
+        mail.connection = SupportEmailBackend()
+        mail.send()
+
     @staticmethod
     def send_whatsapp_otp(otp, mobile_no):
         """

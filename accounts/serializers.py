@@ -91,7 +91,7 @@ class SendPasswordResetEmailSerializer(serializers.Serializer):
                 'body' : body ,
                 'to_email' : user.email
             }
-            Util.send_mail(data)
+            Util.send_otp_mail(data)
             return attrs
         else:
             raise serializers.ValidationError("User with this email does not exist.")

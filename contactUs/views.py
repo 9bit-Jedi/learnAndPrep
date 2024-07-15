@@ -32,7 +32,7 @@ class ContactusView(APIView):
       team_email_data = {
           'subject': f"Support Request - {subject}",
           'body': f"Hello Team,\n\nA new contact request has been received. Here are the details:\n\nName: {name}\nEmail: {email}\nMobile Number: {mobile_no}\nSubject: {subject}\nMessage: {message}\n\nPlease review and take the necessary action.\n\nBest,\nYour Automated System",
-          'to_email': 'utsah470@gmail.com'
+          'to_email': 'support@vjnucleus.com'
       }
       email_data = {
           'subject': f"Thank you for contacting us, {name}!",
@@ -41,8 +41,8 @@ class ContactusView(APIView):
       }
       
       try:
-          Util.send_mail(team_email_data)
-          Util.send_mail(email_data)
+          Util.send_support_mail(team_email_data)
+          Util.send_support_mail(email_data)
           return Response({'msg': 'Email has been sent to your email address.'}, status=status.HTTP_200_OK)
       except Exception as e:
           print(e)     
