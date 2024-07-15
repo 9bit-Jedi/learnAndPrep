@@ -4,7 +4,15 @@ __pycache__
 # uploader/img
 # questions/questions
 # questions/img
+
+.vscode/*
+media
+
 .env
+.env.dev
+.env.staging
+.env.production
+
 *.ps1
 
 sqlite3.exe

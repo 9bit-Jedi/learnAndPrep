@@ -175,6 +175,7 @@ def ImportChapter(file_path):
   # # bulk create all instances
   # with transaction.atomic():
   #   Chapter.objects.bulk_create(model_instances)
+  return HttpResponse({'message':"populated all chapters into database successfully"}, status=status.HTTP_201_CREATED)
     
 def ImportQuestion(file_path):
   df = pd.read_csv(file_path, delimiter=',')  # csv to dataframe
