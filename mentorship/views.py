@@ -22,9 +22,8 @@ from random import choice
 
 # Create your views here.
 
-def ImportMentor(file_path):
-  df = pd.read_csv(file_path, delimiter=',')  # csv to dataframe
-
+def ImportMentor(df):
+  
   print(df)
   for index, row in df.iterrows():
         

@@ -169,36 +169,6 @@ REST_FRAMEWORK = {
     # ]
 }
 
-AUTH_USER_MODEL = 'accounts.User'
-
-PASSWORD_RESET_TIMEOUT = 900
-
-# EMAIL CONFIGURATTION
-
-EMAIL_BACKEND = 'django_ses.SESBackend'
-AWS_ACCESS_KEY_ID = config('AWS_ACCESS_KEY_ID')
-AWS_SECRET_ACCESS_KEY = config('AWS_SECRET_ACCESS_KEY')
-
-# EMAIL_HOST = 'smtp.office365.com'
-# EMAIL_PORT = 587
-
-# EMAIL_HOST_USER = config('EMAIL_USER')
-# EMAIL_HOST_PASSWORD = config('EMAIL_PASSWORD')
-# EMAIL_USE_TLS = True
-
-DEFAULT_FROM_EMAIL = config('EMAIL_USER')
-
-# CONTACT US CONFIGURATION
-
-# CONTACT_EMAIL_USER = config('CONTACT_EMAIL_USER')
-# CONTACT_EMAIL_PASSWORD = config('CONTACT_EMAIL_PASSWORD')
-
-# WHATSAPP OTP CONFIGURATION
-
-PHONE_NUMBER_ID = config('PHONE_NUMBER_ID')
-WHATSAPP_AUTH_TOKEN = config('WHATSAPP_AUTH_TOKEN')
-
-
 SIMPLE_JWT = {
     "ACCESS_TOKEN_LIFETIME": timedelta(minutes=40),
     "REFRESH_TOKEN_LIFETIME": timedelta(days=30),
@@ -215,6 +185,52 @@ SIMPLE_JWT = {
     'JTI_CLAIM':'jti',
     }
 
+AUTH_USER_MODEL = 'accounts.User'
+
+PASSWORD_RESET_TIMEOUT = 900
+
+# [STAGE/PROD] AWS Configuration
+
+# AWS_ACCESS_KEY_ID = config('AWS_ACCESS_KEY_ID')
+# AWS_SECRET_ACCESS_KEY = config('AWS_SECRET_ACCESS_KEY')
+
+# AWS_S3_REGION_NAME = 'us-east-1' 
+
+# # AWS_DEFAULT_ACL = 'public-read'
+# AWS_S3_OBJECT_PARAMETERS = {'CacheControl': 'max-age=86400'}
+# AWS_QUERYSTRING_AUTH = False
+# AWS_S3_FILE_OVERWRITE = False 
+
+# AWS_S3_CUSTOM_DOMAIN = config('AWS_S3_CUSTOM_DOMAIN')
+# STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/static/' 
+# MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/media/'
+
+# DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage' 
+# STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+
+# [DEV] static files & media in root dir
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_URL = '/static/'
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
+
+# EMAIL SETTINGS
+
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+
+EMAIL_HOST_USER = config('EMAIL_USER')
+EMAIL_HOST_PASSWORD = config('EMAIL_PASSWORD')
+EMAIL_USE_TLS = True
+
+DEFAULT_FROM_EMAIL = config('EMAIL_USER')
+
+#######
+
+PHONE_NUMBER_ID = config('PHONE_NUMBER_ID')
+WHATSAPP_AUTH_TOKEN = config('WHATSAPP_AUTH_TOKEN')
 
 CORS_ALLOWED_ORIGINS = [
     'http://127.0.0.1:8000',
@@ -226,39 +242,6 @@ CORS_ALLOWED_ORIGINS = [
     'http://vjn-staging-bucket.s3-website-us-east-1.amazonaws.com'
 ]
 # CORS_ALLOW_ALL_ORIGINS = True
-
-# Managing Media
-##
-
-# # AWS Configuration
-# AWS_ACCESS_KEY_ID = config('YOUR_AWS_ACCESS_KEY_ID')
-# AWS_SECRET_ACCESS_KEY = config('YOUR_AWS_SECRET_ACCESS_KEY')
-# AWS_STORAGE_BUCKET_NAME = 'vjn-staging-bucket'  # Bucket for static and media
-# AWS_S3_REGION_NAME = 'us-east-1' 
-
-# AWS_DEFAULT_ACL = 'public-read'
-# AWS_S3_OBJECT_PARAMETERS = {'CacheControl': 'max-age=86400'}
-# AWS_QUERYSTRING_AUTH = False
-# AWS_S3_FILE_OVERWRITE = False 
-
-# AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
-# STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/static/' 
-# MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/media/'
-
-# DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage' 
-# STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-# STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles') 
-# MEDIA_ROOT = os.path.join(BASE_DIR, 'media') 
-
-# static files & media in root dir
-
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-STATIC_URL = '/static/'
-
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-MEDIA_URL = '/media/'
-
-##
 
 TIME_ZONE = 'Asia/Kolkata'
 
