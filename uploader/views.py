@@ -78,29 +78,43 @@ class CsvUploadView(APIView):
     # checks for content type
     print(request.data['contentType'])
     
-    if(request.data['contentType']=='subject'):
-      return ImportSubject(obj.file.path)
-    elif(request.data['contentType']=='chapter'):
-      return ImportChapter(obj.file.path)
-    elif(request.data['contentType']=='question'):
-      return ImportQuestion(obj.file.path)
-    elif(request.data['contentType']=='answer'):
-      return ImportAnswer(obj.file.path)
-    elif(request.data['contentType']=='mentor'):
-      return ImportMentor(obj.file.path)
-    # passing file object to Import function
+    # Ensure pandas is installed
+    import pandas as pd
+    import tempfile
+
+    try:
+      # Temporary file creation (recommended)
+      with tempfile.NamedTemporaryFile(delete=False) as temp_file:
+        for chunk in file.chunks():
+          temp_file.write(chunk)
+        try:
+          df = pd.read_csv(file_path, delimiter=',')
+        except FileNotFoundError:
+          return HttpResponse({'error': "File not found."}, status=status.HTTP_400_BAD_REQUEST)
+        except pd.errors.EmptyDataError:  
+          return HttpResponse({'error': "File is empty."}, status=status.HTTP_400_BAD_REQUEST)
+        except pd.errors.ParserError:
+          return HttpResponse({'error': "Error parsing the CSV file."}, status=status.HTTP_400_BAD_REQUEST)
+
+      print(df)
+        
+      if(request.data['contentType']=='subject'):
+        return ImportSubject(df)
+      elif(request.data['contentType']=='chapter'):
+        return ImportChapter(df)
+      elif(request.data['contentType']=='question'):
+        return ImportQuestion(df)
+      elif(request.data['contentType']=='answer'):
+        return ImportAnswer(df)
+      elif(request.data['contentType']=='mentor'):
+        return ImportMentor(df)  # Pass DataFrame for processing
+
+    except Exception as e:
+      print(e)
+      return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
-def ImportSubject(file_path):
-  # read csv
-  try:
-    df = pd.read_csv(file_path, delimiter=',')
-  except FileNotFoundError:
-    return HttpResponse({'error': "File not found."}, status=status.HTTP_400_BAD_REQUEST)
-  except pd.errors.EmptyDataError:  
-    return HttpResponse({'error': "File is empty."}, status=status.HTTP_400_BAD_REQUEST)
-  except pd.errors.ParserError:
-    return HttpResponse({'error': "Error parsing the CSV file."}, status=status.HTTP_400_BAD_REQUEST)
+def ImportSubject(df):
 
   model_instances = []
   invalid_rows = []
