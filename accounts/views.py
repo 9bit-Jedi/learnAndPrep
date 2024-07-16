@@ -67,7 +67,7 @@ class UserRegestrationView(APIView):
                 'to_email': email
             }
             try:
-                Util.send_mail(email_data)
+                Util.send_otp_mail(email_data)
                 # print(otp, email)
                 return Response({'msg': 'OTP sent to your email. Please verify to complete registration.'}, status=status.HTTP_200_OK)
             except Exception as e:
@@ -244,7 +244,7 @@ class WebsiteUserRegestrationView(APIView):
                 'body': f'Your OTP for registration is: {otp}',
                 'to_email': validated_data['email']
             }
-            Util.send_mail(email_data)
+            Util.send_otp_mail(email_data)
             
             context = {'msg':'OTP sent to your email. Please verify to complete registration.', 'email':validated_data['email']}
             return  Response(context, status=status.HTTP_201_CREATED)
