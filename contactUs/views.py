@@ -3,7 +3,7 @@ from django.shortcuts import render
 # Create your views here.
 from django.views import View
 from django.http import HttpResponse  # Import Response class
-from .models import ContactUs
+from .models import contactus
 from accounts.utils import Util
 
 from rest_framework import status
@@ -25,7 +25,7 @@ class ContactusView(APIView):
       mobile_no = serializer.validated_data['mobile_no']
       subject = serializer.validated_data['subject']
       message = serializer.validated_data['message']
-      contact = ContactUs(name=name, email=email, mobile_no=mobile_no, subject=subject, message=message)
+      contact = contactus(name=name, email=email, mobile_no=mobile_no, subject=subject, message=message)
       contact.save()
       
       # Send OTP to the user's email
