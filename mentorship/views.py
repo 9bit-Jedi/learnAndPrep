@@ -191,6 +191,7 @@ class getMentorView(APIView):
         relationship = get_object_or_404(MentorMenteeRelationship, mentee=mentee)
         serializer = MentorMenteeRelationshipSerializer(relationship)
         # alloted_mentor.save()
+        # relationship.delete()
         print(relationship.alloted_mentor,  " - relationship alloted_mentor (already alloted mentor)")
         return Response({"message": "Mentor has already been alloted", "data":serializer.data}, status=status.HTTP_200_OK)
       

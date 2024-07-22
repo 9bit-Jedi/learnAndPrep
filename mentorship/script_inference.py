@@ -25,9 +25,9 @@ def gender_code(gender):
         return None
 
 def load_model():
-    with open(os.path.join(settings.BASE_DIR, 'mentorship/models/model_saved.pkl'), 'rb') as f:
+    with open(os.path.join(settings.BASE_DIR, 'mentorship/models/model_saved_mediumchange_priority.pkl'), 'rb') as f:
         model = pickle.load(f)
-    with open(os.path.join(settings.BASE_DIR, 'mentorship/models/mentor_encoder.pkl'), 'rb') as f:
+    with open(os.path.join(settings.BASE_DIR, 'mentorship/models/mentor_encoder_mediumchange_priority.pkl'), 'rb') as f:
         mentor_encoder = pickle.load(f)
     return model, mentor_encoder
 
@@ -141,10 +141,10 @@ def main(new_student, mentors):
 
         if filtered_mentors:
             # If there are mentors of the same gender, randomly select one
-            allocated_mentor = random.choice(filtered_mentors)
+            allocated_mentor = max(filtered_mentors, key=lambda x: x['compatibility_score'])
         else:
             # If no mentor of the same gender, randomly select from all mentors
-            allocated_mentor = random.choice(my_mentor)
+            allocated_mentor = max(my_mentor, key=lambda x: x['compatibility_score'])
 
         return allocated_mentor
 
