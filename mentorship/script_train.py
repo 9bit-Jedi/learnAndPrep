@@ -24,11 +24,11 @@ from django.conf import settings
 def calculate_compatibility(combined_features):
     weights = {
         "strongest_subject_match": 0.1,
-        "weak_subject_match": 0.3,
-        "medium_match": 0.2,
+        "weak_subject_match": 0.2,
+        "medium_match": 0.05,
         "dropper_match": 0.1,
-        "medium_change_match": 0.2,
-        "state_match": 0.1
+        "medium_change_match": 0.5,
+        "state_match": 0.05
     }
     student_strongest = combined_features[["student_maths_rank", "student_physics_rank", "student_chemistry_rank"]].idxmax(axis=1).replace({
         "student_maths_rank": "maths",
@@ -69,7 +69,7 @@ def train(mentors):
     
     print(type(mentors), mentors)
     # students = pd.read_csv("csv/students.csv") 
-    students = pd.read_csv(os.path.join(settings.BASE_DIR, 'mentorship/csv/students.csv')) 
+    students = pd.read_csv('./csv/students.csv') 
     
     students = students[['id','Name','dropper_status', 'state','physics','chemistry','maths','medium','did_you_change ','student_gender']]
     mentors = mentors[['id','Name', 'IIT','state','dropper_status','physics_rank','chemistry_rank','maths_rank','medium','did_you_change','mentor_gender']]
@@ -140,11 +140,11 @@ def train(mentors):
     print("mse for test:", mse_test)
     print("mse for train:", mse_train)
 
-    with open(os.path.join(settings.BASE_DIR, 'mentorship/models/model_saved.pkl'), 'wb') as f:
+    with open('./models/model_saved_mediumchange_priority.pkl', 'wb') as f:
         pickle.dump(model, f)
-    with open(os.path.join(settings.BASE_DIR, 'mentorship/models/mentor_encoder.pkl'), 'wb') as f:
+    with open('./models/mentor_encoder_mediumchange_priority.pkl', 'wb') as f:
         pickle.dump(mentor_encoder, f)
 
 # if __name__ == "__main__":
-#     mentors_final = pd.read_csv("csv/mentors_final.csv") 
+#     mentors_final = pd.read_csv("csv/Mentors_Database (corrected).csv") 
 #     train(mentors_final)
