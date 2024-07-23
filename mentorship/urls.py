@@ -1,5 +1,6 @@
 from django.urls import path
 from .views import *
+# from .views_admin import *
 
 urlpatterns = [
     path('get-mentor', getMentorView.as_view(), name='get-mentor'),
@@ -10,4 +11,5 @@ urlpatterns = [
     # list of all mentees (meaning have taken mentopship)
     # List of all enrolled students (paid 5k)
     # list of all students onboard (all)
+    # path('list-students', UserListView.as_view(), name='list-students')
 ]

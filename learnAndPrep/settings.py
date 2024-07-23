@@ -300,8 +300,11 @@ CORS_ALLOWED_ORIGINS = [
     'http://localhost:5173',
     'http://13.202.87.212',
     'http://vjnucleus.com',
+    'https://vjnucleus.com',
     'http://www.vjnucleus.com',
-    'http://vjn-prod-s3.s3-website.ap-south-1.amazonaws.com'
+    'https://www.vjnucleus.com',
+    'http://vjn-prod-s3.s3-website.ap-south-1.amazonaws.com',
+    'https://vjn-prod-s3.s3-website.ap-south-1.amazonaws.com'
 ]
 # CORS_ALLOW_ALL_ORIGINS = True
 
@@ -311,6 +314,7 @@ TIME_ZONE = 'Asia/Kolkata'
 SESSION_COOKIE_SECURE = False               # Set to True if you are using HTTPS (recommended)
 CSRF_COOKIE_SECURE = False
 SECURE_SSL_REDIRECT = False                 # Set to True if you are using HTTPS (recommended)
+CSRF_TRUSTED_ORIGINS = ['https://vjnucleus.com', 'http://vjnucleus.com', 'https://www.vjnucleus.com', 'http://www.vjnucleus.com']
 
 # HSTS SETTINGS
 # SECURE_HSTS_SECONDS = 31536000              # Set to 0 if you are not using HTTPS

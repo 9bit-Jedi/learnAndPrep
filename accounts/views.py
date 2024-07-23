@@ -10,8 +10,9 @@ from django.contrib.auth import get_user_model
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.views import APIView
-from rest_framework_simplejwt.tokens import RefreshToken
+from rest_framework_simplejwt.tokens import RefreshToken, AccessToken
 from rest_framework.permissions import IsAuthenticated, AllowAny
+from rest_framework_simplejwt.exceptions import TokenError
 
 import random
 from datetime import datetime, timedelta
@@ -21,7 +22,7 @@ import phonenumbers
 
 from .models import User, UserOTP, UserMobileNoOTP
 from .renderers import UserRenderer
-from .serializers import StudentClassSelectionSerializer, UserRegestrationSerializer,UserLoginSerializer,UserProfileSerializer,UserChangePasswordSerializer,SendPasswordResetEmailSerializer , UserPasswordResetSerializer
+from .serializers import StudentClassSelectionSerializer, UserRegestrationSerializer,UserLoginSerializer,UserProfileSerializer,UserChangePasswordSerializer,SendPasswordResetEmailSerializer , UserPasswordResetSerializer, TokenVerificationSerializer, TokenVerificationSerializer
 
 from .serializers import OTPVerificationSerializer,WebsiteUserRegestrationSerializer
 from .serializers import MobileNoOTPVerificationSerializer, MobileNoOTPSendSerializer
@@ -368,4 +369,36 @@ class MobileNoOTPVerificationView(APIView):
             except UserMobileNoOTP.DoesNotExist:
                 return Response({'error': 'Invalid phone or OTP'}, status=status.HTTP_400_BAD_REQUEST)
 
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class VerifyTokenView(APIView):
+    permission_classes = [AllowAny]
+
+    def post(self, request, format=None):
+        serializer = TokenVerificationSerializer(data=request.data)
+        if serializer.is_valid():
+            token = serializer.validated_data['token']
+            try:
+                # Decode the token to ensure it is valid
+                AccessToken(token)
+                return Response({'valid': True}, status=status.HTTP_200_OK)
+            except TokenError:
+                print(e)
+                return Response({'valid': False, 'msg': 'Invalid or expired token'}, status=status.HTTP_400_BAD_REQUEST)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+    
+class VerifyRefreshTokenView(APIView):
+    permission_classes = [AllowAny]
+
+    def post(self, request, format=None):
+        serializer = TokenVerificationSerializer(data=request.data)
+        if serializer.is_valid():
+            token = serializer.validated_data['token']
+            try:
+                # Decode the token to ensure it is valid
+                RefreshToken(token)
+                return Response({'valid': True}, status=status.HTTP_200_OK)
+            except TokenError:
+                return Response({'valid': False, 'msg': 'Invalid or expired token'}, status=status.HTTP_400_BAD_REQUEST)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

@@ -2,6 +2,8 @@ from rest_framework import serializers
 from .models import Mentor, Mentee, MentorMenteeRelationship
 from accounts.serializers import UserProfileSerializer
 
+# from accounts.model import User
+
 # your serializers here
   
 class MentorSerializer(serializers.ModelSerializer):
@@ -37,3 +39,7 @@ class AllotedMentorRelationshipSerializer(serializers.ModelSerializer):
     # fields = ('__all__')
     fields = ('mentee','alloted_mentor','alloted_mentor_compatibility')
 
+# class UserSerializer(serializer.ModelSerializer):
+#   class Meta:
+#     model = User
+#     fields=('__all__')
