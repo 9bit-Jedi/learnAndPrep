@@ -1,15 +1,13 @@
 from django.urls import path
 from .views import *
-# from .views_admin import *
+from .views_admin import *
 
 urlpatterns = [
     path('get-mentor', getMentorView.as_view(), name='get-mentor'),
     path('random-mentor', RandomMentorView.as_view(), name='random-mentor'),
     
-    # my mentor : name, branch, clg, phone, mail, description, is_dropper
-    # list of all mentors
-    # list of all mentees (meaning have taken mentopship)
-    # List of all enrolled students (paid 5k)
-    # list of all students onboard (all)
-    # path('list-students', UserListView.as_view(), name='list-students')
+    path('list-users', UserListView.as_view(), name='list-students'),
+    path('list-mentees', MenteeListView.as_view(), name='list-mentee'),
+    path('list-mentors', MentorListView2.as_view(), name='list-mentor-with-allotments-only'),
+    path('list-allotments', AllotmentsListView.as_view(), name='list-allotments') 
 ]

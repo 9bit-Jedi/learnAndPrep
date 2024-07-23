@@ -2,7 +2,7 @@ from rest_framework import serializers
 from .models import Mentor, Mentee, MentorMenteeRelationship
 from accounts.serializers import UserProfileSerializer
 
-# from accounts.model import User
+from accounts.models import User
 
 # your serializers here
   
@@ -38,8 +38,28 @@ class AllotedMentorRelationshipSerializer(serializers.ModelSerializer):
     model = MentorMenteeRelationship
     # fields = ('__all__')
     fields = ('mentee','alloted_mentor','alloted_mentor_compatibility')
+  
+class UserSerializer(serializers.ModelSerializer):
+  class Meta:
+    model = User
+    fields=('name', 'mobile_no', 'email', 'student_class', 'is_payment_done', 'is_mentor_alloted')
 
-# class UserSerializer(serializer.ModelSerializer):
-#   class Meta:
-#     model = User
-#     fields=('__all__')
+class MentorSerializer2(serializers.ModelSerializer):
+  class Meta:
+    model = Mentor
+    # fields = ('__all__')
+    fields = ('Name','email', 'mobile_no', 'IIT','bandwidth')
+
+class MenteeSerializer2(serializers.ModelSerializer):
+  user = UserSerializer()
+  class Meta:
+    model = Mentee
+    # fields = ('__all__')
+    fields = ('user',) 
+
+class AllotmentsListSerializer(serializers.ModelSerializer):
+  mentee = MenteeSerializer2()
+  alloted_mentor = MentorSerializer2()
+  class Meta:
+    model = MentorMenteeRelationship
+    fields=('mentee','alloted_mentor')
