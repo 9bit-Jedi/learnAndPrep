@@ -73,7 +73,7 @@ class CsvUploadView(APIView):
 
   def post(self, request, format=None):    
     file = request.data['csv']
-    obj = File.objects.create(file=file)
+    # obj = File.objects.create(file=file)
     
     # checks for content type
     print(request.data['contentType'])
@@ -87,14 +87,33 @@ class CsvUploadView(APIView):
       with tempfile.NamedTemporaryFile(delete=False) as temp_file:
         for chunk in file.chunks():
           temp_file.write(chunk)
-        try:
+          temp_file.flush()
           file_path = temp_file.name
-          df = pd.read_csv(file_path, delimiter=',')
+          print(file_path)
+        try:
+          # with open(file_path, 'r') as f:
+          #   content = f.read()
+          #   print("File content:")
+          #   print(content)
+
+        # Try reading the file with pandas
+          try:
+            df = pd.read_csv(file_path, delimiter=',')
+            print("DataFrame content:")
+            print(df)
+          except Exception as e:
+            print("Error reading CSV with pandas:", e)
+              
+
+
         except FileNotFoundError:
+          print('file not found')
           return HttpResponse({'error': "File not found."}, status=status.HTTP_400_BAD_REQUEST)
         except pd.errors.EmptyDataError:  
+          print('empty data (file is empty)')
           return HttpResponse({'error': "File is empty."}, status=status.HTTP_400_BAD_REQUEST)
         except pd.errors.ParserError:
+          print('parsing error')
           return HttpResponse({'error': "Error parsing the CSV file."}, status=status.HTTP_400_BAD_REQUEST)
 
       print(df)
@@ -102,6 +121,7 @@ class CsvUploadView(APIView):
       if(request.data['contentType']=='subject'):
         return ImportSubject(df)
       elif(request.data['contentType']=='chapter'):
+        print("requesting")
         return ImportChapter(df)
       elif(request.data['contentType']=='question'):
         return ImportQuestion(df)
@@ -140,8 +160,8 @@ def ImportSubject(df):
   
   return HttpResponse({'messsage':"success"}, status=status.HTTP_201_CREATED)
 
-def ImportChapter(file_path):
-  df = pd.read_csv(file_path, delimiter=',')  # csv to dataframe
+def ImportChapter(df):
+  # df = pd.read_csv(file_path, delimiter=',')  # csv to dataframe
   
   # getting queryset of Subjects for each PH, CH, MA
   try:

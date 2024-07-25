@@ -164,3 +164,6 @@ class MobileNoOTPSendSerializer(serializers.Serializer):
 class MobileNoOTPVerificationSerializer(serializers.Serializer):
    otp = serializers.CharField(max_length=6)
 #    email = serializers.EmailField()
+
+class TokenVerificationSerializer(serializers.Serializer):
+    token = serializers.CharField()

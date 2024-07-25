@@ -2,7 +2,7 @@ from django.db import models
 
 # Create your models here.
 
-class ContactUs(models.Model):
+class contactus(models.Model):
     sno = models.AutoField(primary_key=True)
     name = models.CharField(max_length=64)
     email = models.EmailField()

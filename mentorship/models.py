@@ -8,7 +8,7 @@ from accounts.models import User
 
 # mentor model - from scratch
 
-max_bandwidth = 5
+max_bandwidth = 15
 
 
 class Mentor(models.Model):
