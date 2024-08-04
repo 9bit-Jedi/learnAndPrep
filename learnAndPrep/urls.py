@@ -39,6 +39,7 @@ urlpatterns = [
     # path('dpp/', include('mlAssist.urls')),
     
     path('api/contact/', include('contactUs.urls')),
+    path('api/payments/', include('payments.urls')),
     
     path('api/upload/', include('uploader.urls')), 
     # path("__debug__/", include("debug_toolbar.urls")),

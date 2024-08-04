@@ -212,9 +212,9 @@ def ImportChapter(df):
   #   Chapter.objects.bulk_create(model_instances)
   return HttpResponse({'message':"populated all chapters into database successfully"}, status=status.HTTP_201_CREATED)
     
-def ImportQuestion(file_path):
-  df = pd.read_csv(file_path, delimiter=',')  # csv to dataframe
-  creator = User.objects.get(name='utsah')
+def ImportQuestion(df):
+  # df = pd.read_csv(file_path, delimiter=',')  # csv to dataframe
+  creator = User.objects.get(name='admin')
   # print("df created !")
   
   invalid_rows = []
@@ -233,7 +233,7 @@ def ImportQuestion(file_path):
     
     try:
       image = ImageFile(open(row['image_path'], 'rb'))
-    except FileNotFoundError:
+    except FileNotFoundError as e:
       invalid_rows.append({'row':index, 'error': f"image file not found : {e}"})
       # return HttpResponse({'error': "question image file not found."}, status=status.HTTP_404_NOT_FOUND)
   

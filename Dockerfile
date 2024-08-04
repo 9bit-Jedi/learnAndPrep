@@ -1,5 +1,7 @@
 FROM python
 
+ENV DJANGO_SETTINGS_MODULE=learnAndPrep.settings_prod
+
 WORKDIR /app
 
 RUN pip install --upgrade pip
