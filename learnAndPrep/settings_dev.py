@@ -4,7 +4,7 @@ from .settings_base import *
 
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1'] 
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '299f-103-37-201-176.ngrok-free.app'] 
 
 
 DATABASES = {
