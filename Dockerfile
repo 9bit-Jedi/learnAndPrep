@@ -1,6 +1,6 @@
 FROM python
 
-ENV DJANGO_SETTINGS_MODULE=learnAndPrep.settings_prod
+# ENV DJANGO_SETTINGS_MODULE=learnAndPrep.settings_prod
 
 WORKDIR /app
 

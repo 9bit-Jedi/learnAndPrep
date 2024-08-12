@@ -1,4 +1,4 @@
-from .settings_base import *
+from .settings import *
 
 DEBUG = False
 
@@ -49,5 +49,7 @@ CORS_ALLOWED_ORIGINS = [
     'http://vjn-prod-s3.s3-website.ap-south-1.amazonaws.com',
     'https://vjn-prod-s3.s3-website.ap-south-1.amazonaws.com'
 ]
+
+BASE_URL = 'https://vjnucleus.com'
 
 print("using prod settings")

@@ -1,10 +1,10 @@
 
-from .settings_base import *
+from .settings import *
 
 
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', '299f-103-37-201-176.ngrok-free.app'] 
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'f805-103-37-201-178.ngrok-free.app'] 
 
 
 DATABASES = {
@@ -38,3 +38,5 @@ CORS_ALLOWED_ORIGINS = [
 ]
 
 print("using dev settings")
+
+BASE_URL = 'http://127.0.0.1:8000'

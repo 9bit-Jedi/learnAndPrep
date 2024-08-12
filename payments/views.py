@@ -12,6 +12,9 @@ from cashfree_pg.api_client import Cashfree
 from cashfree_pg.models.customer_details import CustomerDetails
 import phonenumbers
 
+from django.template.loader import render_to_string
+from django.utils.html import strip_tags
+
 from accounts.models import User
 from .utils import Util
 from .models import Order
@@ -44,8 +47,9 @@ class CreateOrderView(APIView):
     mobile_no = parsed_phone.national_number
 
     customerDetails = CustomerDetails(customer_id=f"USER{user.id}", customer_phone=f"{mobile_no}", customer_email=user.email)
-    orderMeta = OrderMeta(return_url=request.data['return_url'])
+    orderMeta = OrderMeta(return_url=request.data['return_url'], notify_url=f'{settings.BASE_URL}/api/payments/webhook/')
     createOrderRequest = CreateOrderRequest(order_amount=request.data['amount'], order_currency="INR", customer_details=customerDetails, order_meta=orderMeta)
+    print('webhook url : ', f'{settings.BASE_URL}/api/payments/webhook/')
     try:
       api_response = Cashfree().PGCreateOrder(x_api_version, createOrderRequest, None, None) 
     except Exception as e:
@@ -70,6 +74,8 @@ class PaymentWebhookView(APIView):
     except Exception as e:
       print("Error while finding user : ", e)
       return Response({'success':False,'message': 'User not found'}, status=status.HTTP_404_NOT_FOUND)
+
+    # Create Order object in db
     
     try:
       order = Order.objects.create(
@@ -86,13 +92,35 @@ class PaymentWebhookView(APIView):
       return Response({'success':False, 'message': f"Order not saved. Error : {e}"}, status=status.HTTP_400_BAD_REQUEST)
     
     # Send Payment webhook to the user's email
-    email_data = get_email_data(user, data, order)
-    try:
-      Util.send_payments_mail(email_data)
-    except Exception as e:
-      print(e)
+
+    context = {
+      'user': user,
+      'order': order,
+      'payment': data['data']['payment']
+    }
+    
+    if data['data']['payment']['payment_status'] == 'SUCCESS':
+      html_message = render_to_string("success_email.html", context=context)
+      email_data = {
+      'subject': 'Payment Successful - VJ Nucleus Mentorship',
+      'body': strip_tags(html_message),
+      'to_email': user.email,
+      'template_name': 'success_email.html', 
+    }
+    else:
+      html_message = render_to_string("failure_email.html", context=context)
+      email_data = {
+      'subject': 'Payment Unsuccessful - VJ Nucleus Mentorship',
+      'body': strip_tags(html_message),
+      'to_email': user.email,
+      'template_name': 'failure_email.html', 
+    }
+
+    Util.send_payments_mail(email_data, context)
     
     #  send message on whatsapp for confirmation    # later (sent message template request on whatsapp)
+
+    # Update user payment status (in User model)
 
     try:
       if data['data']['payment']['payment_status'] == 'SUCCESS':
@@ -104,42 +132,3 @@ class PaymentWebhookView(APIView):
       return Response({'success':False,'message': 'User not updated'}, status=status.HTTP_400_BAD_REQUEST)
 
     return Response({'success':True,'message': 'Webhook Received'}, status=status.HTTP_200_OK)
-
-
-# UTILS 
-
-def get_email_data(user, data, order):
-  body_success = (
-      f'Dear {user.name},\n\n'
-      f'Thank you for your payment of {data["data"]["payment"]["payment_amount"]} {data["data"]["payment"]["payment_currency"]}. '
-      f'Your payment has been successfully received.\n\n'
-      f'Order Details:\n'
-      f'Order ID: {data["data"]["order"]["order_id"]}\n'
-      f'You will receive further instructions shortly on how to access the course.\n\n'
-      f'If you have any questions, feel free to reach out to us at support@vjucleus.com.\n\n'
-      f'Best regards,\n'
-      f'The VJucleus Team'
-    ),
-  body_failure = (
-      f'Dear {user.name},\n\n'
-      f'Thank you for your payment attempt of {data["data"]["payment"]["payment_amount"]} {data["data"]["payment"]["payment_currency"]}. '
-      f'Your payment was unsuccessful.\n\n'
-      f'Order Details:\n'
-      f'Order ID: {data["data"]["order"]["order_id"]}\n'
-      f'Please try again or reach out to us at support@vjnucleus.com for further assistance.\n\n'
-      f'Best regards,\n'
-      f'The VJucleus Team'
-    )
-  if data['data']['payment']['payment_status'] == 'SUCCESS':
-    email_data = {
-      'subject': 'Payment Successful - VJ Nucleus Mentorship',
-      'body': body_success,
-      'to_email': user.email
-    }
-  else: 
-    email_data = {
-      'subject': 'Payment Unsuccessful - VJ Nucleus Mentorship',
-      'body': body_failure,
-      'to_email': user.email
-    }
-  return email_data

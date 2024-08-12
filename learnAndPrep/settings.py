@@ -180,15 +180,15 @@ OTP_EMAIL_HOST_PASSWORD = config('OTP_EMAIL_PASSWORD')
 SUPPORT_EMAIL_HOST_USER = config('SUPPORT_EMAIL_USER')
 SUPPORT_EMAIL_HOST_PASSWORD = config('SUPPORT_EMAIL_PASSWORD')
 
-PAYMENTS_EMAIL_HOST_USER = config('SUPPORT_EMAIL_USER')
-PAYMENTS_EMAIL_HOST_PASSWORD = config('SUPPORT_EMAIL_PASSWORD')
+PAYMENTS_EMAIL_HOST_USER = config('PAYMENTS_EMAIL_USER')
+PAYMENTS_EMAIL_HOST_PASSWORD = config('PAYMENTS_EMAIL_PASSWORD')
 
 DEFAULT_FROM_EMAIL = SUPPORT_EMAIL_HOST_USER
 
 #######
 
-print('auth token : ', os.getenv('WHATSAPP_AUTH_TOKEN'))
-print('phone number id : ', os.getenv('PHONE_NUMBER_ID'))
+# print('auth token : ', os.getenv('WHATSAPP_AUTH_TOKEN'))
+# print('phone number id : ', os.getenv('PHONE_NUMBER_ID'))
 PHONE_NUMBER_ID = config('PHONE_NUMBER_ID')
 WHATSAPP_AUTH_TOKEN = config('WHATSAPP_AUTH_TOKEN')
 # print('Loading environment variables from:', os.getenv('DOTENV_PATH'))
@@ -210,3 +210,9 @@ CSRF_TRUSTED_ORIGINS = ['https://vjnucleus.com', 'http://vjnucleus.com', 'https:
 SESSION_COOKIE_SAMESITE = 'Lax'             # Adjust if needed, depending on your specific requirements
 CSRF_COOKIE_SAMESITE = 'Lax'
 CSRF_COOKIE_HTTPONLY = False                # Set to False to allow frontend access to the CSRF token
+
+
+if config('PRODUCTION'):
+    from .settings_dev import *
+else:
+    from .settings_prod import *
