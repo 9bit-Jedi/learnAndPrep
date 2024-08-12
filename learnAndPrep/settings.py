@@ -213,6 +213,6 @@ CSRF_COOKIE_HTTPONLY = False                # Set to False to allow frontend acc
 
 
 if config('PRODUCTION'):
-    from .settings_dev import *
-else:
     from .settings_prod import *
+else:
+    from .settings_dev import *
