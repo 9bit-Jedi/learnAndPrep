@@ -88,11 +88,10 @@ class Util:
         """
         # mobile_no = "9315117745" 
         mobile_no = normalize_phone_number(mobile_no)
-        print(type(mobile_no), mobile_no) 
 
         url = f"https://graph.facebook.com/v19.0/{settings.PHONE_NUMBER_ID}/messages"
         headers = {'content-type': 'application/json', "Authorization": f"Bearer {settings.WHATSAPP_AUTH_TOKEN}"}
-        payload = {"messaging_product": "whatsapp", "to": mobile_no, "type": "template", "template": {"name": "otp", "language": {"code": "en"}, "components": [{"type": "body", "parameters": [{"type": "text", "text": otp}]}, {"type": "button", "sub_type": "Url", "index": 0, "parameters": [{"type": "payload", "payload": otp}]}]}}
+        payload = {"messaging_product": "whatsapp", "to": mobile_no, "type": "template", "template": {"name": "vjn_otp", "language": {"code": "en"}, "components": [{"type": "body", "parameters": [{"type": "text", "text": otp}]}, {"type": "button", "sub_type": "Url", "index": 0, "parameters": [{"type": "payload", "payload": otp}]}]}}
 
         response = requests.post(url, json=payload, headers=headers)
         print(response.content)

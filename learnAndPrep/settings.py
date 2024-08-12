@@ -19,17 +19,8 @@ from datetime import timedelta
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
-
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = config('SECRET_KEY')
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
-
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', '13.202.87.212', 'vjnucleus.com'] 
-
 
 # Application definition
 
@@ -57,6 +48,7 @@ INSTALLED_APPS = [
     'accounts',
     'mentorship',
     'storages',
+    'payments',
 
 ]
 
@@ -95,24 +87,6 @@ WSGI_APPLICATION = 'learnAndPrep.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
-
-DATABASES = {
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.sqlite3',
-    #     'NAME': BASE_DIR / 'db.sqlite3',
-    # },
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'HOST': config('PGHOST'),
-        'NAME': config('PGDATABASE'),
-        'USER': config('PGUSER'),
-        'PASSWORD': config('PGPASSWORD'),
-        'PORT': config('PGPORT'),
-        'OPTIONS': {
-            'sslmode': 'require',
-        },
-  }
-}
 
 
 # Password validation
@@ -190,86 +164,6 @@ AUTH_USER_MODEL = 'accounts.User'
 
 PASSWORD_RESET_TIMEOUT = 900
 
-# [STAGE/PROD] AWS Configuration
-
-AWS_ACCESS_KEY_ID = config('AWS_ACCESS_KEY_ID')
-AWS_SECRET_ACCESS_KEY = config('AWS_SECRET_ACCESS_KEY')
-
-AWS_STORAGE_BUCKET_NAME = 'vjn-prod-s3'
-AWS_S3_REGION_NAME = 'ap-south-1' 
-
-# AWS_DEFAULT_ACL = 'public-read'
-AWS_S3_OBJECT_PARAMETERS = {'CacheControl': 'max-age=86400'}
-AWS_QUERYSTRING_AUTH = False
-AWS_S3_FILE_OVERWRITE = False 
-
-
-AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
-STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/static/' 
-MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/media/'
-
-DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-
-## 2
-# AWS_ACCESS_KEY_ID = config('AWS_ACCESS_KEY_ID')
-# AWS_SECRET_ACCESS_KEY = config('AWS_SECRET_ACCESS_KEY')
-
-# AWS_S3_REGION_NAME = 'ap-south-1' 
-
-# # AWS_DEFAULT_ACL = 'public-read'
-# AWS_S3_OBJECT_PARAMETERS = {'CacheControl': 'max-age=86400'}
-# AWS_QUERYSTRING_AUTH = False
-# AWS_S3_FILE_OVERWRITE = False 
-
-# AWS_S3_CUSTOM_DOMAIN = config('AWS_S3_CUSTOM_DOMAIN')
-# STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/static/' 
-# MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/media/'
-
-# DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage' 
-# STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-
-
-# #3
-
-# # ########## 
-# AWS_ACCESS_KEY_ID = config('AWS_ACCESS_KEY_ID')
-# AWS_SECRET_ACCESS_KEY = config('AWS_SECRET_ACCESS_KEY')
-# AWS_STORAGE_BUCKET_NAME = 'buckv2v2v2'
-# # AWS_STORAGE_BUCKET_NAME = 'vjn-prod-s3'
-# AWS_S3_REGION_NAME = 'ap-south-1'  # e.g., us-east-1
-# AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
-
-# # For serving static files directly from S3
-# AWS_S3_URL_PROTOCOL = 'https'
-# AWS_S3_USE_SSL = True
-# AWS_S3_VERIFY = True
-
-# # Static and media file configuration
-# STATIC_URL = f'/static/'
-# STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-
-# MEDIA_URL = f'/media/'
-# DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-
-
-# ##########
-
-# # STATICFILES_DIRS = [
-# #     os.path.join(STATIC_URL, 'static'),
-# # ]
-
-# STATIC_ROOT = os.path.join(STATIC_URL, 'static')
-# MEDIA_ROOT = os.path.join(MEDIA_URL, 'media')
-
-
-# [DEV] static files & media in root dir
-
-# STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-# STATIC_URL = '/static/'
-
-# MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-# MEDIA_URL = '/media/'
 
 # EMAIL SETTINGS
 
@@ -286,27 +180,19 @@ OTP_EMAIL_HOST_PASSWORD = config('OTP_EMAIL_PASSWORD')
 SUPPORT_EMAIL_HOST_USER = config('SUPPORT_EMAIL_USER')
 SUPPORT_EMAIL_HOST_PASSWORD = config('SUPPORT_EMAIL_PASSWORD')
 
+PAYMENTS_EMAIL_HOST_USER = config('PAYMENTS_EMAIL_USER')
+PAYMENTS_EMAIL_HOST_PASSWORD = config('PAYMENTS_EMAIL_PASSWORD')
+
 DEFAULT_FROM_EMAIL = SUPPORT_EMAIL_HOST_USER
 
 #######
 
+# print('auth token : ', os.getenv('WHATSAPP_AUTH_TOKEN'))
+# print('phone number id : ', os.getenv('PHONE_NUMBER_ID'))
 PHONE_NUMBER_ID = config('PHONE_NUMBER_ID')
 WHATSAPP_AUTH_TOKEN = config('WHATSAPP_AUTH_TOKEN')
+# print('Loading environment variables from:', os.getenv('DOTENV_PATH'))
 
-CORS_ALLOWED_ORIGINS = [
-    'http://127.0.0.1:8000',
-    'http://172.18.96.1:5500',
-    'http://localhost:8000',
-    'http://localhost:5173',
-    'http://13.202.87.212',
-    'http://vjnucleus.com',
-    'https://vjnucleus.com',
-    'http://www.vjnucleus.com',
-    'https://www.vjnucleus.com',
-    'http://vjn-prod-s3.s3-website.ap-south-1.amazonaws.com',
-    'https://vjn-prod-s3.s3-website.ap-south-1.amazonaws.com'
-]
-# CORS_ALLOW_ALL_ORIGINS = True
 
 TIME_ZONE = 'Asia/Kolkata'
 
@@ -324,3 +210,9 @@ CSRF_TRUSTED_ORIGINS = ['https://vjnucleus.com', 'http://vjnucleus.com', 'https:
 SESSION_COOKIE_SAMESITE = 'Lax'             # Adjust if needed, depending on your specific requirements
 CSRF_COOKIE_SAMESITE = 'Lax'
 CSRF_COOKIE_HTTPONLY = False                # Set to False to allow frontend access to the CSRF token
+
+
+if config('PRODUCTION'):
+    from .settings_prod import *
+else:
+    from .settings_dev import *
