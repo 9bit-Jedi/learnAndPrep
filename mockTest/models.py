@@ -143,10 +143,10 @@ class TestQuestionAttempt(models.Model):
     ('Attempted', 'Attempted'),
     ('Unattempted', 'Unattempted'),
     ('Skipped', 'not visited'),
+    ('Marked', 'Marked for Review'),
   }
   
   id = ShortUUIDField(primary_key=True, editable=False, max_length=22)
-  user = models.ForeignKey(to=User, on_delete=models.CASCADE)
   test_attempt = models.ForeignKey(to=TestAttempt, on_delete=models.CASCADE, related_name="question_attempts")
   test_question = models.ForeignKey(to=TestQuestion, on_delete=models.CASCADE) 
   
