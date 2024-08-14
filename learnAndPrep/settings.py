@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'mentorship',
     'storages',
     'payments',
+    'mockTest',
 
 ]
 
@@ -212,7 +213,7 @@ CSRF_COOKIE_SAMESITE = 'Lax'
 CSRF_COOKIE_HTTPONLY = False                # Set to False to allow frontend access to the CSRF token
 
 
-if config('PRODUCTION'):
+if config('PRODUCTION')==True:
     from .settings_prod import *
 else:
     from .settings_dev import *

@@ -1,0 +1,66 @@
+{
+  "live_tests": [
+      {
+          "id": "w7bKcyE8LnetAcmpbgxiRa",
+          "creator": {
+              "name": "utsah",
+              "email": "utsah470@gmail.com"
+          },
+          "name": "test mock test liveee",
+          "duration": "00:30:00",
+          "instructions": {
+              "id": "uYvpgGHAkvvczRdQwjh2a6",
+              "test_syllabus": ".",
+              "general_instructions": ".",
+              "navigation_instructions": ".",
+              "answering_a_question": ".",
+              "declaration": "."
+          },
+          "icon": {
+              "id": "MA11",
+              "icon_url": "/media/icons/MA11.png"
+          },
+          "start_time": "2024-06-29T13:28:27+05:30",
+          "end_time": "2024-06-29T04:16:39+05:30",
+          "is_active": false 
+      }
+  ],
+  "tests": [],
+  "attempts": [
+      {
+          "id": "5_pYRdyfTJSwxLuCc7M6Aotk",
+          "user": {
+              "name": "utsah3",
+              "email": "utsah4700@gmail.com"
+          },
+          "test": {
+              "id": "pYRdyfTJSwxLuCc7M6Aotk",
+              "creator": {
+                  "name": "utsah",
+                  "email": "utsah470@gmail.com"
+              },
+              "name": "test mock test1",
+              "duration": "00:00:10",
+              "instructions": {
+                  "id": "uYvpgGHAkvvczRdQwjh2a6",
+                  "test_syllabus": ".",
+                  "general_instructions": ".",
+                  "navigation_instructions": ".",
+                  "answering_a_question": ".",
+                  "declaration": "."
+              },
+              "icon": {
+                  "id": "CHI",
+                  "icon_url": "/media/icons/CHI.png"
+              }
+          },
+          "correct": 0,
+          "incorrect": 0,
+          "skipped": 0,
+          "start_time": "2024-06-29T14:18:12.646772+05:30",
+          "is_submitted": true,
+          "submission_time": "2024-06-29T14:18:10+05:30",
+          "score": 0
+      }
+  ]
+}
