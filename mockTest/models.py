@@ -8,7 +8,7 @@ from accounts.models import User
 from django.shortcuts import get_object_or_404
 from django.core.validators import MinLengthValidator, RegexValidator
 
-from questions.models import Question, Icon
+from questions.models import Question, Icon, Chapter
 
 # Create your models here.
 
@@ -48,10 +48,25 @@ class LiveTest(Test):
     now = timezone.now()
     return self.start_time <= now <= self.end_time
 
+  @property
+  def status(self):
+    now = timezone.now()
+    if now < self.start_time:
+      return "Upcoming"
+    elif self.start_time <= now <= self.end_time:
+      return "Live"
+    else:
+      return "Ended"
+
   def save(self, *args, **kwargs):
     if not self.end_time:
       self.end_time = self.start_time + self.duration
     super().save(*args, **kwargs)
+
+class CustomTest(Test):
+  start_time = models.DateTimeField(blank=True)   # has to be set beforehand # views have to check if the test attempt is valid or not (also list test should show 'live' test ka availability )
+  end_time = models.DateTimeField(blank=True)
+  syllabus = models.ManyToManyField(to=Chapter, related_name='tests')
 
 class TestSection(models.Model):
 
@@ -75,7 +90,7 @@ class TestQuestion(models.Model):
 
   id = ShortUUIDField(primary_key=True, editable=False, max_length=22)
 
-  test = models.ForeignKey(to=Test, on_delete=models.CASCADE, related_name='questions')
+  # test = models.ForeignKey(to=BaseTest, on_delete=models.CASCADE, related_name='questions')
   section = models.ForeignKey(to=TestSection, on_delete=models.CASCADE, related_name='questions', null=True)  
   question = models.ForeignKey(to=Question, on_delete=models.CASCADE)
 
@@ -89,7 +104,7 @@ class TestQuestion(models.Model):
     super().save(*args, **kwargs)
     
   class Meta:
-    unique_together = ('test', 'order')
+    # unique_together = ('test', 'order')
     ordering = ['order']
   
   def __str__(self):

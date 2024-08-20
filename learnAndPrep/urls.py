@@ -35,7 +35,7 @@ urlpatterns = [
     path('api/notes/', include('notes.urls')),
     path('api/answer/', include('quiz.urls')),
     
-    # path('mock/', include('mockTest.urls')),
+    path('api/mocktest/', include('mockTest.urls')),
     # path('dpp/', include('mlAssist.urls')),
     
     path('api/contact/', include('contactUs.urls')),

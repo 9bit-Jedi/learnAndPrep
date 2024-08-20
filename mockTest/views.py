@@ -20,7 +20,7 @@ from .serializers import *
 
       
 class AvailableTestsList(APIView):
-    permission_classes = [IsAuthenticated, IsPaymentDone]  # Uncomment to require authentication
+    # permission_classes = [IsAuthenticated, IsPaymentDone]  # Uncomment to require authentication
 
     def get(self, request, format=None):
         now = timezone.now()
@@ -50,3 +50,70 @@ class AvailableTestsList(APIView):
         }
         
         return Response(data, status=status.HTTP_200_OK)
+    
+class StartTest(APIView):
+    permission_classes = [IsAuthenticated, IsPaymentDone]
+
+    def post(self, request, format=None):
+        test_id = request.data.get('test_id', None)
+        if test_id is None:
+            return Response({'error': 'test_id not provided'}, status=status.HTTP_400_BAD_REQUEST)
+        
+        test = get_object_or_404(Test, id=test_id)
+        if LiveTest.objects.filter(id=test_id).exists():
+            live_test = LiveTest.objects.get(id=test_id)
+            if not live_test.is_active:
+                return Response({'error': 'Test is not live'}, status=status.HTTP_400_BAD_REQUEST)
+        else:
+            return Response({'error': 'Test not found'}, status=status.HTTP_404_NOT_FOUND)
+        
+        question_attempt = TestAttempt.objects.filter(user=request.user, test=test)
+        if question_attempt.exists():
+            question_attempt = question_attempt.first()
+            question_attempt_serialized = TestAttemptSerializer(question_attempt).data
+            return Response(question_attempt_serialized, status=status.HTTP_200_OK)
+        
+        question_attempt = TestAttempt.objects.create(user=request.user, test=test)
+        question_attempt_serialized = TestAttemptSerializer(question_attempt).data
+        return Response(question_attempt_serialized, status=status.HTTP_201_CREATED)
+
+class SubmitTest(APIView):
+    permission_classes = [IsAuthenticated, IsPaymentDone]
+
+    def post(self, request, format=None):
+        test_id = request.data.get('test_id', None)
+        if test_id is None:
+            return Response({'error': 'test_id not provided'}, status=status.HTTP_400_BAD_REQUEST)
+        
+        test = get_object_or_404(Test, id=test_id)
+        if LiveTest.objects.filter(id=test_id).exists():
+            live_test = LiveTest.objects.get(id=test_id)
+            if not live_test.is_active:
+                return Response({'error': 'Test is not live'}, status=status.HTTP_400_BAD_REQUEST)
+        else:
+            return Response({'error': 'Test not found'}, status=status.HTTP_404_NOT_FOUND)
+        
+        for question_attempt in request.data.get('question_attempts', []):
+            question_attempt = TestAttempt.objects.filter(user=request.user, test=test)
+            if not question_attempt.exists():
+                return Response({'error': 'Test not started'}, status=status.HTTP_400_BAD_REQUEST)
+            
+            question_attempt = question_attempt.first()
+            question_attempt_serialized = TestAttemptSerializer(question_attempt).data
+            
+            question_attempt.is_submitted = True
+            question_attempt.save()
+        return Response(question_attempt_serialized, status=status.HTTP_200_OK)
+
+class MyResults(APIView):
+    permission_classes = [IsAuthenticated, IsPaymentDone]
+
+    def get(self, request, test_id, format=None):
+        test = get_object_or_404(Test, id=test_id)
+        question_attempt = TestAttempt.objects.filter(user=request.user, test=test)
+        if not question_attempt.exists():
+            return Response({'error': 'Test not started'}, status=status.HTTP_400_BAD_REQUEST)
+        
+        question_attempt = question_attempt.first()
+        question_attempt_serialized = TestAttemptSerializer(question_attempt).data
+        return Response(question_attempt_serialized, status=status.HTTP_200_OK)
