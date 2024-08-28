@@ -5,7 +5,7 @@ from .models import (
     TestAttempt, TestQuestionAttempt
 )
 from questions.models import Question, AnswerIntegerType, AnswerMmcq, AnswerSmcq, AnswerSubjective
-from questions.serializers import IconSerializer  
+from questions.serializers import IconSerializer, QuestionSerializer
 
 
 
@@ -18,15 +18,27 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = [ 'name', 'email']
+        
+class TestQuestionSerializer(serializers.ModelSerializer):
+    question = QuestionSerializer()
+    class Meta:
+        model = TestQuestion
+        fields = '__all__'
 
+class TestSectionSerializer(serializers.ModelSerializer):
+    questions = TestQuestionSerializer(many=True)
+    class Meta:
+        model = TestSection
+        fields = '__all__'
 
 class TestSerializer(serializers.ModelSerializer):
   icon = IconSerializer()
   instructions = InstructionsSerializer()
   creator = UserSerializer()
+  sections = TestSectionSerializer(many=True)
   class Meta:
       model = Test
-      fields = ['id', 'creator', 'name', 'duration', 'instructions', 'icon']
+      fields = ['id', 'creator', 'name', 'duration', 'instructions', 'icon', 'sections']
       # depth = 1
 
 class LiveTestSerializer(serializers.ModelSerializer):
@@ -38,17 +50,6 @@ class LiveTestSerializer(serializers.ModelSerializer):
     class Meta:
         model = LiveTest
         fields = list(TestSerializer.Meta.fields) + ['start_time', 'end_time', 'is_active'] 
-
-class TestSectionSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = TestSection
-        fields = '__all__'
-
-
-class TestQuestionSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = TestQuestion
-        fields = '__all__'
 
 
 class TestAttemptSerializer(serializers.ModelSerializer):
@@ -70,8 +71,6 @@ class TestAttemptSerializer(serializers.ModelSerializer):
     class Meta:
         model = TestAttempt
         fields = '__all__'
-        
-        
 
 class QuestionSerializer(serializers.ModelSerializer):
     answer = serializers.SerializerMethodField()
@@ -124,6 +123,16 @@ class TestQuestionAttemptSerializer(serializers.ModelSerializer):
 
 
 
+
+
+class TestSubmissionSerializer(serializers.Serializer):
+    sections = serializers.ListField(
+        child=serializers.DictField(
+            child=serializers.ListField(
+                child=TestQuestionAttemptSerializer()
+            )
+        )
+    )
 
 # from rest_framework import serializers
 # from .models import Test, LiveTest, TestAttempt, TestQuestion

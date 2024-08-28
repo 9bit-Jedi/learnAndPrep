@@ -23,8 +23,8 @@ class Instructions(models.Model):
   declaration = models.TextField(max_length=1024)
 
 
-  def __str__(self):
-    return f"Instructions for Test ID: {self.id}"  # More informative string representation
+  # def __str__(self):
+  #   return f"Instructions for Test ID: {self.id}"  # More informative string representation
 
 class Test(models.Model):
   
@@ -71,13 +71,13 @@ class CustomTest(Test):
 class TestSection(models.Model):
 
   id = ShortUUIDField(primary_key=True, editable=False, max_length=22)
-  test = models.ForeignKey(to=Test, on_delete=models.CASCADE)
+  test = models.ForeignKey(to=Test, on_delete=models.CASCADE, related_name='sections')
   title = models.CharField(max_length=64)
   order = models.PositiveIntegerField()
     
-  def save(self, *args, **kwargs):
-    self.id = f"{self.test.id}_{self.question.id}"
-    super().save(*args, **kwargs)
+  # def save(self, *args, **kwargs):
+  #   self.id = f"{self.test.id}_{self.question.id}"
+  #   super().save(*args, **kwargs)
   
   class Meta:
       unique_together = ('test', 'order')
@@ -99,16 +99,16 @@ class TestQuestion(models.Model):
   positive_marks = models.IntegerField(default=4)
   negative_marks = models.IntegerField(default=1)
     
-  def save(self, *args, **kwargs):
-    self.id = f"{self.section.test.name}_{self.question.id}"
-    super().save(*args, **kwargs)
+  # def save(self, *args, **kwargs):
+  #   self.id = f"{self.section.test.name}_{self.question.id}"
+  #   super().save(*args, **kwargs)
     
   class Meta:
     # unique_together = ('test', 'order')
     ordering = ['order']
   
-  def __str__(self):
-    return f"{self.test.name} - Q{self.order} ({self.section}): {self.question.id}"
+  # def __str__(self):
+  #   return f"{self.test.name} - Q{self.order} ({self.section}): {self.question.id}"
   
 
 class TestAttempt(models.Model):

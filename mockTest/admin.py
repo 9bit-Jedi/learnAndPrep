@@ -5,6 +5,7 @@ from .models import *
 
 admin.site.register(Instructions)
 admin.site.register(LiveTest)
+admin.site.register(Test)
 admin.site.register(CustomTest)
 admin.site.register(TestSection)
 admin.site.register(TestQuestion)
