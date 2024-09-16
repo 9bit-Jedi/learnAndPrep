@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     # 'mentorship.apps.MentorshipConfig',
     'contactUs.apps.ContactusConfig',
     'rest_framework',
-    # "debug_toolbar",
+    "debug_toolbar",
     'corsheaders',
     'rest_framework_simplejwt',
     'rest_framework_simplejwt.token_blacklist',
@@ -62,7 +62,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'corsheaders.middleware.CorsMiddleware',
-    # "debug_toolbar.middleware.DebugToolbarMiddleware",
+    "debug_toolbar.middleware.DebugToolbarMiddleware",
 ]
 
 ROOT_URLCONF = 'learnAndPrep.urls'

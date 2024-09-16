@@ -69,6 +69,7 @@ class CreateRandomTest(APIView):
         test_instructions = Instructions.objects.all().first()
         
         test = Test.objects.create(name=test_name, duration=test_duration)
+        # test = LiveTest.objects.create(name=test_name, duration=test_duration,start_time=timezone.now(), end_time=timezone.now()+test_duration)
         test.instructions = test_instructions
         test.save()
 
@@ -81,7 +82,6 @@ class CreateRandomTest(APIView):
             # questions_list = section.get('questions', [])
             test_section = TestSection.objects.create(test=test, title=section_name, order=i)
 
-            # questions_list = Question.objects.all().order_by('?')[:10]
             if section_name.lower() == 'physics':
                 questions_list = Question.objects.filter(chapter_id__subject_id__id='PH').order_by('?')[:10]
                 print("Physics")
@@ -108,9 +108,9 @@ class CreateRandomTest(APIView):
         test_serialized['sections'] = sections_serialized
 
         # questions = TestQuestion.objects.filter(section__test=test)
-        questions = TestQuestion.objects.all()
-        questions_serialized = TestQuestionSerializer(questions, many=True).data
-        test_serialized['questions'] = questions_serialized
+        # questions = TestQuestion.objects.filter(section__test=test)
+        # questions = TestQuestion.objects.all()
+        # questions_serialized = TestQuestionSerializer(questions, many=True).data
 
         return Response(test_serialized, status=status.HTTP_201_CREATED)
 
@@ -130,16 +130,16 @@ class StartTest(APIView):
                 return Response({'error': 'Test is not live'}, status=status.HTTP_400_BAD_REQUEST)
         
         # if test is being resumed - toh i will send the attempt data in response
-        question_attempt = TestAttempt.objects.filter(user=request.user, test=test)
-        if question_attempt.exists():
-            question_attempt = question_attempt.first()
-            question_attempt_serialized = TestAttemptSerializer(question_attempt).data
-            return Response(question_attempt_serialized, status=status.HTTP_200_OK)
+        test_attempt = TestAttempt.objects.filter(user=request.user, test=test)
+        if test_attempt.exists():
+            test_attempt = test_attempt.first()
+            test_attempt_serialized = TestAttemptSerializer(test_attempt).data
+            return Response(test_attempt_serialized, status=status.HTTP_200_OK)
         
         # if test is being started for the first time
-        question_attempt = TestAttempt.objects.create(user=request.user, test=test)
-        question_attempt_serialized = TestAttemptSerializer(question_attempt).data
-        return Response(question_attempt_serialized, status=status.HTTP_201_CREATED)
+        test_attempt = TestAttempt.objects.create(user=request.user, test=test)
+        test_attempt_serialized = TestAttemptSerializer(test_attempt).data
+        return Response(test_attempt_serialized, status=status.HTTP_201_CREATED)
 
 class SubmitTest(APIView):
     permission_classes = [IsAuthenticated, IsPaymentDone]

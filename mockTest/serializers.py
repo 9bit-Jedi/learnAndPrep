@@ -46,6 +46,7 @@ class LiveTestSerializer(serializers.ModelSerializer):
     instructions = InstructionsSerializer()
     creator = UserSerializer()
     is_active = serializers.BooleanField(read_only=True)  
+    sections = TestSectionSerializer(many=True)
  
     class Meta:
         model = LiveTest
