@@ -31,11 +31,20 @@ class TestSectionSerializer(serializers.ModelSerializer):
         model = TestSection
         fields = '__all__'
 
-class TestSerializer(serializers.ModelSerializer):
+class TestSerializerFull(serializers.ModelSerializer):
   icon = IconSerializer()
   instructions = InstructionsSerializer()
   creator = UserSerializer()
   sections = TestSectionSerializer(many=True)
+  class Meta:
+      model = Test
+      fields = ['id', 'creator', 'name', 'duration', 'instructions', 'icon', 'sections']
+      # depth = 1
+class TestSerializer(serializers.ModelSerializer):
+  icon = IconSerializer()
+  instructions = InstructionsSerializer()
+  creator = UserSerializer()
+#   sections = TestSectionSerializer(many=True)
   class Meta:
       model = Test
       fields = ['id', 'creator', 'name', 'duration', 'instructions', 'icon', 'sections']
@@ -46,32 +55,22 @@ class LiveTestSerializer(serializers.ModelSerializer):
     instructions = InstructionsSerializer()
     creator = UserSerializer()
     is_active = serializers.BooleanField(read_only=True)  
+    # sections = TestSectionSerializer(many=True)
+ 
+    class Meta:
+        model = LiveTest
+        fields = list(TestSerializerFull.Meta.fields) + ['start_time', 'end_time', 'is_active'] 
+class LiveTestSerializerFull(serializers.ModelSerializer):
+    icon = IconSerializer()
+    instructions = InstructionsSerializer()
+    creator = UserSerializer()
+    is_active = serializers.BooleanField(read_only=True)  
     sections = TestSectionSerializer(many=True)
  
     class Meta:
         model = LiveTest
-        fields = list(TestSerializer.Meta.fields) + ['start_time', 'end_time', 'is_active'] 
+        fields = list(TestSerializerFull.Meta.fields) + ['start_time', 'end_time', 'is_active'] 
 
-
-class TestAttemptSerializer(serializers.ModelSerializer):
-    user = UserSerializer()
-    test = TestSerializer()
-    correct = serializers.SerializerMethodField()
-    incorrect = serializers.SerializerMethodField()
-    skipped = serializers.SerializerMethodField()
-    
-    def get_correct(self, obj):
-        return obj.get_correct_count()
-
-    def get_incorrect(self, obj):
-        return obj.get_incorrect_count()
-
-    def get_skipped(self, obj):
-        return obj.get_skipped_count()
-
-    class Meta:
-        model = TestAttempt
-        fields = '__all__'
 
 class QuestionSerializer(serializers.ModelSerializer):
     answer = serializers.SerializerMethodField()
@@ -122,17 +121,50 @@ class TestQuestionAttemptSerializer(serializers.ModelSerializer):
         model = TestQuestionAttempt
         fields = '__all__'
 
+class TestAttemptSerializer(serializers.ModelSerializer):
+    user = UserSerializer()
+    test = TestSerializerFull()
+    class Meta:
+        model = TestAttempt
+        fields = '__all__'
 
+class TestAttemptSerializerFull(serializers.ModelSerializer):
+    user = UserSerializer()
+    # test = TestSerializer()
+    correct = serializers.SerializerMethodField()
+    incorrect = serializers.SerializerMethodField()
+    skipped = serializers.SerializerMethodField()
+    question_attempts = TestQuestionAttemptSerializer(many=True)
+    
+    def get_correct(self, obj):
+        return obj.get_correct_count()
 
+    def get_incorrect(self, obj):
+        return obj.get_incorrect_count()
 
+    def get_skipped(self, obj):
+        return obj.get_skipped_count()
+
+    class Meta:
+        model = TestAttempt
+        fields = '__all__'
+
+class TestQuestionAttemptSerializer(serializers.Serializer):
+    test_question = serializers.CharField()         # uuid of question
+    status = serializers.CharField() 
+    time_taken = serializers.DurationField() 
+    selected_option = serializers.CharField(allow_null=True, required=False)  
+
+class SectionSerializer(serializers.Serializer):
+    title = serializers.CharField(max_length=128, required=False) 
+    id = serializers.CharField()                    # uuid of section
+    questions = serializers.ListField(
+        child=TestQuestionAttemptSerializer()  
+    )
 
 class TestSubmissionSerializer(serializers.Serializer):
     sections = serializers.ListField(
-        child=serializers.DictField(
-            child=serializers.ListField(
-                child=TestQuestionAttemptSerializer()
-            )
-        )
+        child=SectionSerializer() 
     )
 
 # from rest_framework import serializers

@@ -83,7 +83,7 @@ class TestSection(models.Model):
       unique_together = ('test', 'order')
       
   def __str__(self):
-    return f"{self.test.name} - Section {self.order}: {self.title}"
+    return f"{self.test.name} - {self.title}"
   
 
 class TestQuestion(models.Model):
@@ -176,4 +176,4 @@ class TestQuestionAttempt(models.Model):
     super().save(*args, **kwargs)
   
   def __str__(self):
-    return f"Test Attempt {self.test_attempt} - Q{self.test_question.order}"
+    return f"Test Attempt {self.test_question.section} Q{self.test_question.order}" 

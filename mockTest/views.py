@@ -12,9 +12,17 @@ from accounts.permissions import IsPaymentDone, IsMentorAlloted
 
 # from questions.models import Chapter, Question, AnswerIntegerType, AnswerMmcq, AnswerSmcq, AnswerSubjective
 # from questions.serializers import QuestionSerializer, AnswerMmcqSerializer, AnswerIntegerTypeSerializer, AnswerSmcqSerializer, AnswerSubjectiveSerializer
+from questions.utils import check_answer
 
 from .models import *
 from .serializers import *
+
+from datetime import timedelta
+import itertools
+
+from django.db import connection
+from .utils import QueryLogger
+ql = QueryLogger()
 
 # Create your views here.
 
@@ -49,10 +57,8 @@ class AvailableTestsList(APIView):
             'attempts': attempted_test_serialized,
         }
         
-        return Response(data, status=status.HTTP_200_OK)
+        return Response({"success":True, "message":"Test list fetched successfully", "data":data}, status=status.HTTP_200_OK)
 
-from datetime import timedelta
-import itertools
 class CreateRandomTest(APIView):
     # permission_classes = [IsAuthenticated, IsMentorAlloted]
 
@@ -99,7 +105,7 @@ class CreateRandomTest(APIView):
                 TestQuestion.objects.create(section=test_section, question=question, order=i)
 
         # test.question.add(*Question.objects.all().order_by('?')[:10])
-        test_serialized = TestSerializer(test).data
+        test_serialized = TestSerializerFull(test).data
         test_serialized = dict(test_serialized)
         print(type(test_serialized))
         
@@ -123,111 +129,118 @@ class StartTest(APIView):
         if test_id is None:
             return Response({'error': 'test_id not provided'}, status=status.HTTP_400_BAD_REQUEST)
         
-        test = get_object_or_404(Test, id=test_id)
         if LiveTest.objects.filter(id=test_id).exists():
             test = LiveTest.objects.get(id=test_id)
             if not test.is_active:
-                return Response({'error': 'Test is not live'}, status=status.HTTP_400_BAD_REQUEST)
+                return Response({'success':False,'message': 'Test is not live'}, status=status.HTTP_400_BAD_REQUEST)
+        test = get_object_or_404(Test, id=test_id)
         
-        # if test is being resumed - toh i will send the attempt data in response
+        ## if test is being resumed - toh i will send the attempt data in response
         test_attempt = TestAttempt.objects.filter(user=request.user, test=test)
         if test_attempt.exists():
             test_attempt = test_attempt.first()
             test_attempt_serialized = TestAttemptSerializer(test_attempt).data
-            return Response(test_attempt_serialized, status=status.HTTP_200_OK)
+            return Response({"success":True, "message":"Test resumed successfully", "data":test_attempt_serialized}, status=status.HTTP_200_OK)
         
-        # if test is being started for the first time
+        ## if test is being started for the first time
         test_attempt = TestAttempt.objects.create(user=request.user, test=test)
         test_attempt_serialized = TestAttemptSerializer(test_attempt).data
-        return Response(test_attempt_serialized, status=status.HTTP_201_CREATED)
+        return Response({"success":True, "message":"Test started successfully", "data":test_attempt_serialized}, status=status.HTTP_200_OK)
 
 class SubmitTest(APIView):
     permission_classes = [IsAuthenticated, IsPaymentDone]
 
     def post(self, request, test_id, format=None):
-        # test_id = request.data.get('test_id', None)
-        if test_id is None:
-            return Response({'error': 'test_id not provided'}, status=status.HTTP_400_BAD_REQUEST)
         
-        test = get_object_or_404(Test, id=test_id)
-        if LiveTest.objects.filter(id=test_id).exists():
-            live_test = LiveTest.objects.get(id=test_id)
-            if not live_test.is_active:
-                return Response({'error': 'Test is not live'}, status=status.HTTP_400_BAD_REQUEST)
-            # edge case if the live test was over before the user submitted ? tb ky krega ??
-        
-        # BT dedo - if test already attempted
-        if TestAttempt.objects.filter(user=request.user, test=test).exists():
-            return Response({'error': 'Test already submitted'}, status=status.HTTP_400_BAD_REQUEST)
-        else :
-            test_attempt = TestAttempt.objects.create(user=request.user, test=test)
-        
+        # # check if the data is in correct format & I have all the required fields : test_id
+        # # check if the test is live
+        # # check if the test is already attempted (if not, save attempt)
+        # go to each section and each question and perform the following operations : evaluate correctness, save attempt, foreign key to test_attempt
+        # return the test_attempt data in response
+
         serializer = TestSubmissionSerializer(data=request.data)
         if not serializer.is_valid():
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
+        # (+) I also want to check if the number of questions attempted is equal to the number of questions in the test
         
-        for section in request.data.get('sections', []):
-            section = TestSection.objects.filter(test=test, title=section.get('title', None))
+        if LiveTest.objects.filter(id=test_id).exists():
+            test = LiveTest.objects.get(id=test_id)
+            if not test.is_active:
+                return Response({"success":False, "message":"Test is not live."}, status=status.HTTP_400_BAD_REQUEST)
+            # edge case if the live test was over before the user submitted ? tb ky krega ??
+        test = get_object_or_404(Test, id=test_id)
+
+        # BT dedo - if test already attempted (and submitted)
+        if TestAttempt.objects.filter(user=request.user, test=test).exists():
+            test_attempt = TestAttempt.objects.get(user=request.user, test=test)        # I am not using get_or_create because i dont want to return error if attempt exists
+            if test_attempt.is_submitted:
+                return Response({"success":False, "message":"Test already submitted."}, status=status.HTTP_400_BAD_REQUEST)
+        else :
+            # test_attempt = TestAttempt.objects.create(user=request.user, test=test)
+            return Response({"success":False, "message":"Test not started."}, status=status.HTTP_400_BAD_REQUEST)
+        print(test_attempt)
+
+        bad_section_ids = []
+        bad_question_ids = []
+
+        # iterate over sections
+        for section_data in request.data.get('sections', []):
+
+            section = TestSection.objects.filter(test=test, id=section_data.get('id'))
             if not section.exists():
-                return Response({'error': 'Section not found'}, status=status.HTTP_400_BAD_REQUEST)
-            
+                bad_section_ids.append(section_data.get('id'))
+                continue
             section = section.first()
-            for question in section.questions.all():
-                test_question_id = question.get('test_question')
-                selected_option = question.get('selected_option')
-                time_taken = question.get('time_taken')
 
-                question_attempt = TestQuestion.objects.filter(section=section, question=question)
-                if not question_attempt.exists():
-                    return Response({'error': f'Question {test_question_id} not found'}, status=status.HTTP_400_BAD_REQUEST)
+            # iterate over questions 
+            for question_data in section_data["questions"]:
                 
-                question_attempt = question_attempt.first()
-                question_attempt_serialized = TestQuestionSerializer(question_attempt).data
-                
-
-                question_attempt.is_attempted = True
-                question_attempt.save()
-                
+                test_question = TestQuestion.objects.filter(section=section, id=question_data.get('test_question'))
+                if not test_question.exists():
+                    bad_question_ids.append(question_data.get('id'))
+                    continue
+                test_question = test_question.first()
 
                 # Evaluate if the answer is correct based on the selected option
-                correct_option = question_attempt.question.correct_option
-                is_correct = (selected_option == correct_option)
+                try:
+                    is_correct = check_answer(test_question.question.id, question_data)          # calls function form questions.utils file
+                except Exception as e:
+                    print(e)
+                    is_correct = False
+                    bad_question_ids.append(test_question.id)
 
+                import dateutil.parser
+                print(type(question_data["time_taken"]))
+                print(dateutil.parser.parse(question_data["time_taken"]))
                 # Update the attempt with the user's selected option, status, and correctness
-                question_attempt.status = question.get('status')
-                question_attempt.is_correct = is_correct
-                question_attempt.time_taken = time_taken
-                question_attempt.save()
-
-                question_attempt, created = TestQuestionAttempt.objects.get_or_create(
+                question_attempt = TestQuestionAttempt.objects.create(
                     test_attempt=test_attempt,
                     test_question=test_question,
-                    defaults={'status': question_data.get('status'), 'time_taken': time_taken}
+                    status=question_data["status"],
+                    # time_taken=question_data["time_taken"],
+                    is_correct=is_correct
                 )
-        ###############################
+                question_attempt.save()
 
-        for question_attempt in request.data.get('question_attempts', []):
-            question_attempt = TestAttempt.objects.filter(user=request.user, test=test)
-            if not question_attempt.exists():
-                return Response({'error': 'Test not started'}, status=status.HTTP_400_BAD_REQUEST)
-            
-            question_attempt = question_attempt.first()
-            question_attempt_serialized = TestAttemptSerializer(question_attempt).data
-            
-            question_attempt.is_submitted = True
-            question_attempt.save()
-        return Response(question_attempt_serialized, status=status.HTTP_200_OK)
+        print(bad_section_ids) 
+        print(bad_question_ids)
+
+        test_attempt.is_submitted = True
+        test_attempt.save()
+        test_attempt_serialized = TestAttemptSerializerFull(test_attempt)
+    
+        return Response({"success":True, "message":"Test submitted successfully", "data":test_attempt_serialized.data}, status=status.HTTP_200_OK)
+
 
 class MyResults(APIView):
     permission_classes = [IsAuthenticated, IsPaymentDone]
 
     def get(self, request, test_id, format=None):
         test = get_object_or_404(Test, id=test_id)
-        question_attempt = TestAttempt.objects.filter(user=request.user, test=test)
-        if not question_attempt.exists():
-            return Response({'error': 'Test not started'}, status=status.HTTP_400_BAD_REQUEST)
+        test_attempt = TestAttempt.objects.filter(user=request.user, test=test)
+        if not test_attempt.exists():
+            return Response({"success":False,'message': 'Test not started'}, status=status.HTTP_400_BAD_REQUEST)
         
-        question_attempt = question_attempt.first()
-        question_attempt_serialized = TestAttemptSerializer(question_attempt).data
-        return Response(question_attempt_serialized, status=status.HTTP_200_OK)
+        test_attempt = test_attempt.first()
+        test_attempt_serialized = TestAttemptSerializerFull(test_attempt).data
+        return Response({"success":True, "message":"Test Result fetched succcessfully", "data":test_attempt_serialized}, status=status.HTTP_200_OK)
