@@ -26,7 +26,23 @@ ql = QueryLogger()
 
 # Create your views here.
 
-      
+class AvailableTestSeriesList(APIView):
+    # permission_classes = [IsAuthenticated, IsPaymentDone]  # Uncomment to require authentication
+
+    def get(self, request, format=None):
+        test_series = TestSeries.objects.all()
+        test_series_serialized = TestSeriesSerializer(test_series, many=True).data
+        return Response({"success":True, "message":"Test series list fetched successfully", "data":test_series_serialized}, status=status.HTTP_200_OK)
+
+class TestsFromSeriesList(APIView):
+    # permission_classes = [IsAuthenticated, IsPaymentDone]  # Uncomment to require authentication
+
+    def get(self, request, series_id, format=None):
+        test_series = get_object_or_404(TestSeries, id=series_id)
+        tests = Test.objects.filter(series=test_series)
+        test_serialized = TestSerializer(tests, many=True).data
+        return Response({"success":True, "message":"Test list fetched successfully", "data":test_serialized}, status=status.HTTP_200_OK)
+
 class AvailableTestsList(APIView):
     # permission_classes = [IsAuthenticated, IsPaymentDone]  # Uncomment to require authentication
 

@@ -26,10 +26,21 @@ class Instructions(models.Model):
   # def __str__(self):
   #   return f"Instructions for Test ID: {self.id}"  # More informative string representation
 
+class TestSeries(models.Model):
+  id = ShortUUIDField(primary_key=True, editable=False, max_length=22)
+  name = models.CharField(max_length=128)
+  description = models.TextField(max_length=1024, blank=True)
+  # icon - fk to questions.models.icon
+  icon = models.ForeignKey(to=Icon, null=True, on_delete=models.SET_NULL)
+  
+  def __str__(self):
+    return self.name
+
 class Test(models.Model):
   
   id = ShortUUIDField(max_length=22, editable=False, primary_key=True)
   name = models.CharField(max_length=128)
+  series = models.ForeignKey(TestSeries, on_delete=models.DO_NOTHING, related_name='tests')
   creator = models.ForeignKey(to=User, null=True, on_delete=models.SET_NULL)
   duration = models.DurationField()
   instructions = models.ForeignKey(to=Instructions, null=True, on_delete=models.SET_NULL)
@@ -37,7 +48,7 @@ class Test(models.Model):
   icon = models.ForeignKey(to=Icon, null=True, on_delete=models.SET_NULL)
     
   def __str__(self):
-      return self.name
+      return f"{self.series} - {self.name}"
 
 class LiveTest(Test):
   start_time = models.DateTimeField()   # has to be set beforehand # views have to check if the test attempt is valid or not (also list test should show 'live' test ka availability )

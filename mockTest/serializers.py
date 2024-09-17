@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from accounts.models import User
 from .models import (
-    Instructions, Test, LiveTest, TestSection, TestQuestion, 
+    Instructions, TestSeries, Test, LiveTest, TestSection, TestQuestion, 
     TestAttempt, TestQuestionAttempt
 )
 from questions.models import Question, AnswerIntegerType, AnswerMmcq, AnswerSmcq, AnswerSubjective
@@ -18,6 +18,11 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = [ 'name', 'email']
+
+class TestSeriesSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = TestSeries
+        fields = '__all__'
         
 class TestQuestionSerializer(serializers.ModelSerializer):
     question = QuestionSerializer()
