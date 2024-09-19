@@ -17,7 +17,8 @@ from django.utils.html import strip_tags
 
 from accounts.models import User
 from .utils import Util
-from .models import Order
+from .models import Order, Coupon
+from .serializers import CouponSerializer
 
 # CASHFREE CONFIG
 
@@ -33,6 +34,24 @@ x_api_version = "2023-08-01"
 
 # VIEWS
 
+class ApplyCouponView(APIView):
+  def post(self, request):
+    # coupon_code = request.data['coupon_code']
+    coupon_code = request.data.get('coupon_code', None)
+    try:
+      coupon_code = Coupon.objects.get(code=coupon_code)
+      serializer = CouponSerializer(coupon_code)
+      if coupon_code.is_valid():
+        amount = request.data.get('amount', 5000)
+        # amount = 4999
+        amount = int(amount*(100 - coupon_code.discount)/100)
+        return Response({'success':True, 'message': 'Coupon is valid', 'coupon_details': serializer.data, 'order_total':amount}, status=status.HTTP_200_OK)
+      else:
+        return Response({'success':False, 'message': 'Coupon is invalid or expired'}, status=status.HTTP_400_BAD_REQUEST)
+    except Coupon.DoesNotExist as e:  
+      print("Error while finding coupon : " , e)
+      return Response({'success':False, 'message': 'Coupon not found'}, status=status.HTTP_404_NOT_FOUND)
+
 class CreateOrderView(APIView):
   def post(self, request):
     try:
@@ -46,10 +65,29 @@ class CreateOrderView(APIView):
     parsed_phone = phonenumbers.parse(user.mobile_no, None)
     mobile_no = parsed_phone.national_number
 
+    # decide order amout based on coupon code
+
+    amount = 4999 
+    # amount = request.data.get('amount', 5000)
+    
+    if request.data['coupon_code']:
+      coupon_code = request.data['coupon_code']
+      # coupon_code = request.data.get('coupon_code', None)
+      try:
+        coupon_code = Coupon.objects.get(code=coupon_code)
+        if coupon_code.is_valid():
+          amount = int(amount*(100 - coupon_code.discount)/100)
+        else:
+          return Response({'success':False,'message': 'Coupon is invalid or expired'}, status=status.HTTP_400_BAD_REQUEST)
+      except Coupon.DoesNotExist as e:  
+        print("Error while finding coupon : " , e)
+        return Response({'success':False,'message': 'Coupon not found'}, status=status.HTTP_404_NOT_FOUND)
+
     customerDetails = CustomerDetails(customer_id=f"USER{user.id}", customer_phone=f"{mobile_no}", customer_email=user.email)
     orderMeta = OrderMeta(return_url=request.data['return_url'], notify_url=f'{settings.BASE_URL}/api/payments/webhook/')
-    createOrderRequest = CreateOrderRequest(order_amount=request.data['amount'], order_currency="INR", customer_details=customerDetails, order_meta=orderMeta)
+    createOrderRequest = CreateOrderRequest(order_amount=amount, order_currency="INR", customer_details=customerDetails, order_meta=orderMeta)
     print('webhook url : ', f'{settings.BASE_URL}/api/payments/webhook/')
+    print("amount : ", amount)
     try:
       api_response = Cashfree().PGCreateOrder(x_api_version, createOrderRequest, None, None) 
     except Exception as e:
