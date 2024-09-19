@@ -35,7 +35,7 @@ x_api_version = "2023-08-01"
 # VIEWS
 
 class ApplyCouponView(APIView):
-  def get(self, request):
+  def post(self, request):
     # coupon_code = request.data['coupon_code']
     coupon_code = request.data.get('coupon_code', None)
     try:
