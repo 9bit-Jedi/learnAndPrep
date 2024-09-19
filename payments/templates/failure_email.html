@@ -1,0 +1,144 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Payment Confirmation</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f7;
+        color: #333333;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+      .container {
+        max-width: 600px;
+        background-color: #ffffff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+
+        color: #333333;
+      }
+      
+      .greeting {
+        font-size: 16px;
+        margin-bottom: 20px;
+      }
+      .payment-info {
+        font-size: 16px;
+        line-height: 1.5;
+        margin-bottom: 30px;
+      }
+      .payment-info strong {
+        color: #911212;
+      }
+      .order-details{
+        background-color: #de484814;
+        padding: 20px;
+        border-radius: 6px;
+        margin-bottom: 30px;
+        text-align: center;
+      }
+      .order-details h3 {
+        font-size: 20px;
+        color: #911212;
+        margin-bottom: 15px;
+      }
+      .order-details ul {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+        margin-bottom: 30px;
+      }
+      .order-details li {
+        font-size: 16px;
+        margin-bottom: 10px;
+      }
+      .order-details strong {
+        color: #444444;
+      }
+      .instructions {
+        font-size: 16px;
+        margin-bottom: 30px;
+      }
+      .contact-info {
+        font-size: 16px;
+        margin-bottom: 30px;
+      }
+      .contact-info a {
+        color: #911212;
+        text-decoration: none;
+      }
+      .contact-info a:hover {
+        text-decoration: underline;
+      }
+      .footer-text {
+        font-size: 12px;
+        color: #999999;
+        line-height: 1.5;
+      }
+      .footer-text a {
+        color: #911212;
+        text-decoration: none;
+      }
+      .footer-text a:hover {
+        text-decoration: underline;
+      }
+      @media (max-width: 7000px) {
+        .container {
+          max-width: 90%;
+        }
+  
+        .order-details ul {
+          margin-bottom: 20px;
+        }
+  
+        .order-details li {
+          margin-bottom: 5px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <p class="greeting">Dear {{user.name}},</p>
+      <p class="payment-info">
+        Thank you for your payment attempt of <strong>{{order.order_amount}} {{order.order_currency}}</strong>.
+        Your payment was unsuccessful.
+      </p>
+      <div class="order-details">
+        <h3>ORDER DETAILS</h3>
+        <ul>
+          <li><strong>Order ID:</strong> {{order.cf_order_id}}</li>
+          <li><strong>Course:</strong> VJ Nucleus Mentorship Program</li>
+          <li><strong>Payment Amount:</strong> {{order.order_amount}} {{order.order_currency}}</li>
+          <li><strong>Payment Date:</strong> {{order.created_at}}</li>
+        </ul>
+      </div>
+      
+      <p class="instructions">
+        Please try again or reach out to us at <a href="mailto:support@vjnucleus.com">support@vjnucleus.com</a> for further assistance.
+      </p>
+
+      <hr />
+
+      <p class="footer-text">
+        <p class="refund-policy">Once you have subscribed and made the payment, the subscription is final. You cannot change or cancel your subscription plan after subscribing.
+          For more details, please review our <a href="https://vjnucleus.com/RefundPolicy">Refund Policy</a>.
+        </p>
+        This message was produced and distributed by VJ Nucleus Pvt. Ltd. © All rights reserved. VJ Nucleus is a registered trademark of 
+        <a href="https://vjnucleus.com" target="_blank">VJ Nucleus Pvt. Ltd.</a>. View
+        our <a href="https://vjnucleus.com/privacypolicy" target="_blank">privacy policy</a> and 
+        our <a href="https://vjnucleus.com/Terms&condition" target="_blank">terms of use</a>.
+      </p>
+    </div>
+  </body>
+</html>

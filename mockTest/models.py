@@ -8,7 +8,7 @@ from accounts.models import User
 from django.shortcuts import get_object_or_404
 from django.core.validators import MinLengthValidator, RegexValidator
 
-from questions.models import Question, Icon
+from questions.models import Question, Icon, Chapter
 
 # Create your models here.
 
@@ -23,13 +23,24 @@ class Instructions(models.Model):
   declaration = models.TextField(max_length=1024)
 
 
+  # def __str__(self):
+  #   return f"Instructions for Test ID: {self.id}"  # More informative string representation
+
+class TestSeries(models.Model):
+  id = ShortUUIDField(primary_key=True, editable=False, max_length=22)
+  name = models.CharField(max_length=128)
+  description = models.TextField(max_length=1024, blank=True)
+  # icon - fk to questions.models.icon
+  icon = models.ForeignKey(to=Icon, null=True, on_delete=models.SET_NULL)
+  
   def __str__(self):
-    return f"Instructions for Test ID: {self.id}"  # More informative string representation
+    return self.name
 
 class Test(models.Model):
   
   id = ShortUUIDField(max_length=22, editable=False, primary_key=True)
   name = models.CharField(max_length=128)
+  series = models.ForeignKey(TestSeries, on_delete=models.DO_NOTHING, related_name='tests')
   creator = models.ForeignKey(to=User, null=True, on_delete=models.SET_NULL)
   duration = models.DurationField()
   instructions = models.ForeignKey(to=Instructions, null=True, on_delete=models.SET_NULL)
@@ -37,7 +48,7 @@ class Test(models.Model):
   icon = models.ForeignKey(to=Icon, null=True, on_delete=models.SET_NULL)
     
   def __str__(self):
-      return self.name
+      return f"{self.series} - {self.name}"
 
 class LiveTest(Test):
   start_time = models.DateTimeField()   # has to be set beforehand # views have to check if the test attempt is valid or not (also list test should show 'live' test ka availability )
@@ -48,34 +59,49 @@ class LiveTest(Test):
     now = timezone.now()
     return self.start_time <= now <= self.end_time
 
+  @property
+  def status(self):
+    now = timezone.now()
+    if now < self.start_time:
+      return "Upcoming"
+    elif self.start_time <= now <= self.end_time:
+      return "Live"
+    else:
+      return "Ended"
+
   def save(self, *args, **kwargs):
     if not self.end_time:
       self.end_time = self.start_time + self.duration
     super().save(*args, **kwargs)
 
+class CustomTest(Test):
+  start_time = models.DateTimeField(blank=True)   # has to be set beforehand # views have to check if the test attempt is valid or not (also list test should show 'live' test ka availability )
+  end_time = models.DateTimeField(blank=True)
+  syllabus = models.ManyToManyField(to=Chapter, related_name='tests')
+
 class TestSection(models.Model):
 
   id = ShortUUIDField(primary_key=True, editable=False, max_length=22)
-  test = models.ForeignKey(to=Test, on_delete=models.CASCADE)
+  test = models.ForeignKey(to=Test, on_delete=models.CASCADE, related_name='sections')
   title = models.CharField(max_length=64)
   order = models.PositiveIntegerField()
     
-  def save(self, *args, **kwargs):
-    self.id = f"{self.test.id}_{self.question.id}"
-    super().save(*args, **kwargs)
+  # def save(self, *args, **kwargs):
+  #   self.id = f"{self.test.id}_{self.question.id}"
+  #   super().save(*args, **kwargs)
   
   class Meta:
       unique_together = ('test', 'order')
       
   def __str__(self):
-    return f"{self.test.name} - Section {self.order}: {self.title}"
+    return f"{self.test.name} - {self.title}"
   
 
 class TestQuestion(models.Model):
 
   id = ShortUUIDField(primary_key=True, editable=False, max_length=22)
 
-  test = models.ForeignKey(to=Test, on_delete=models.CASCADE, related_name='questions')
+  # test = models.ForeignKey(to=BaseTest, on_delete=models.CASCADE, related_name='questions')
   section = models.ForeignKey(to=TestSection, on_delete=models.CASCADE, related_name='questions', null=True)  
   question = models.ForeignKey(to=Question, on_delete=models.CASCADE)
 
@@ -84,16 +110,16 @@ class TestQuestion(models.Model):
   positive_marks = models.IntegerField(default=4)
   negative_marks = models.IntegerField(default=1)
     
-  def save(self, *args, **kwargs):
-    self.id = f"{self.section.test.name}_{self.question.id}"
-    super().save(*args, **kwargs)
+  # def save(self, *args, **kwargs):
+  #   self.id = f"{self.section.test.name}_{self.question.id}"
+  #   super().save(*args, **kwargs)
     
   class Meta:
-    unique_together = ('test', 'order')
+    # unique_together = ('test', 'order')
     ordering = ['order']
   
-  def __str__(self):
-    return f"{self.test.name} - Q{self.order} ({self.section}): {self.question.id}"
+  # def __str__(self):
+  #   return f"{self.test.name} - Q{self.order} ({self.section}): {self.question.id}"
   
 
 class TestAttempt(models.Model):
@@ -143,10 +169,10 @@ class TestQuestionAttempt(models.Model):
     ('Attempted', 'Attempted'),
     ('Unattempted', 'Unattempted'),
     ('Skipped', 'not visited'),
+    ('Marked', 'Marked for Review'),
   }
   
   id = ShortUUIDField(primary_key=True, editable=False, max_length=22)
-  user = models.ForeignKey(to=User, on_delete=models.CASCADE)
   test_attempt = models.ForeignKey(to=TestAttempt, on_delete=models.CASCADE, related_name="question_attempts")
   test_question = models.ForeignKey(to=TestQuestion, on_delete=models.CASCADE) 
   
@@ -161,4 +187,4 @@ class TestQuestionAttempt(models.Model):
     super().save(*args, **kwargs)
   
   def __str__(self):
-    return f"Test Attempt {self.test_attempt} - Q{self.test_question.order}"
+    return f"Test Attempt {self.test_question.section} Q{self.test_question.order}" 

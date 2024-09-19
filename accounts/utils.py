@@ -8,8 +8,11 @@ from phonenumbers.phonenumberutil import NumberParseException
 import random
 from datetime import datetime, timedelta
 from django.utils import timezone
-
 from decouple import config
+
+from django.core.mail import send_mail, EmailMessage
+from .email_backends import OtpEmailBackend, SupportEmailBackend
+
 
 def normalize_phone_number(phone_number, default_country_code="IN"):
     # parsed_number = phonenumbers.parse(phone_number, default_country_code)
@@ -40,7 +43,6 @@ def normalize_phone_number(phone_number, default_country_code="IN"):
     # try:
     # except phonenumbers.phonenumberutil.NumberParseException:
     #     pass
- 
 
 class Util:
     @staticmethod
@@ -56,19 +58,29 @@ class Util:
         return (now - datetime.fromisoformat(otp_created_at)) > expiry_duration
 
     @staticmethod
-    def send_mail(data):
-        email = EmailMessage(
-            subject=data['subject'],
-            body= data['body'],
-            from_email=settings.DEFAULT_FROM_EMAIL,
-            to=[data['to_email']],
-       
-        )
-        email.send()
+    def send_otp_mail(data):
 
-    # def generate_otp():
-    #     return str(random.randint(100000, 999999))
-    
+        mail = EmailMessage(
+            data['subject'],
+            data['body'],
+            settings.OTP_EMAIL_HOST_USER,
+            [data['to_email']]
+        )
+        mail.connection = OtpEmailBackend()
+        mail.send()
+
+    @staticmethod
+    def send_support_mail(data):
+
+        mail = EmailMessage(
+            data['subject'],
+            data['body'],
+            settings.EMAIL_HOST_USER,
+            [data['to_email']]
+        )
+        mail.connection = SupportEmailBackend()
+        mail.send()
+
     @staticmethod
     def send_whatsapp_otp(otp, mobile_no):
         """
@@ -76,11 +88,10 @@ class Util:
         """
         # mobile_no = "9315117745" 
         mobile_no = normalize_phone_number(mobile_no)
-        print(type(mobile_no), mobile_no) 
 
         url = f"https://graph.facebook.com/v19.0/{settings.PHONE_NUMBER_ID}/messages"
         headers = {'content-type': 'application/json', "Authorization": f"Bearer {settings.WHATSAPP_AUTH_TOKEN}"}
-        payload = {"messaging_product": "whatsapp", "to": mobile_no, "type": "template", "template": {"name": "otp", "language": {"code": "en"}, "components": [{"type": "body", "parameters": [{"type": "text", "text": otp}]}, {"type": "button", "sub_type": "Url", "index": 0, "parameters": [{"type": "payload", "payload": otp}]}]}}
+        payload = {"messaging_product": "whatsapp", "to": mobile_no, "type": "template", "template": {"name": "vjn_otp", "language": {"code": "en"}, "components": [{"type": "body", "parameters": [{"type": "text", "text": otp}]}, {"type": "button", "sub_type": "Url", "index": 0, "parameters": [{"type": "payload", "payload": otp}]}]}}
 
         response = requests.post(url, json=payload, headers=headers)
         print(response.content)

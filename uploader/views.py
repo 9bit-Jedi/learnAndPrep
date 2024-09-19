@@ -73,34 +73,69 @@ class CsvUploadView(APIView):
 
   def post(self, request, format=None):    
     file = request.data['csv']
-    obj = File.objects.create(file=file)
+    # obj = File.objects.create(file=file)
     
     # checks for content type
     print(request.data['contentType'])
     
-    if(request.data['contentType']=='subject'):
-      return ImportSubject(obj.file.path)
-    elif(request.data['contentType']=='chapter'):
-      return ImportChapter(obj.file.path)
-    elif(request.data['contentType']=='question'):
-      return ImportQuestion(obj.file.path)
-    elif(request.data['contentType']=='answer'):
-      return ImportAnswer(obj.file.path)
-    elif(request.data['contentType']=='mentor'):
-      return ImportMentor(obj.file.path)
-    # passing file object to Import function
+    # Ensure pandas is installed
+    import pandas as pd
+    import tempfile
+
+    try:
+      # Temporary file creation (recommended)
+      with tempfile.NamedTemporaryFile(delete=False) as temp_file:
+        for chunk in file.chunks():
+          temp_file.write(chunk)
+          temp_file.flush()
+          file_path = temp_file.name
+          print(file_path)
+        try:
+          # with open(file_path, 'r') as f:
+          #   content = f.read()
+          #   print("File content:")
+          #   print(content)
+
+        # Try reading the file with pandas
+          try:
+            df = pd.read_csv(file_path, delimiter=',')
+            print("DataFrame content:")
+            print(df)
+          except Exception as e:
+            print("Error reading CSV with pandas:", e)
+              
 
 
-def ImportSubject(file_path):
-  # read csv
-  try:
-    df = pd.read_csv(file_path, delimiter=',')
-  except FileNotFoundError:
-    return HttpResponse({'error': "File not found."}, status=status.HTTP_400_BAD_REQUEST)
-  except pd.errors.EmptyDataError:  
-    return HttpResponse({'error': "File is empty."}, status=status.HTTP_400_BAD_REQUEST)
-  except pd.errors.ParserError:
-    return HttpResponse({'error': "Error parsing the CSV file."}, status=status.HTTP_400_BAD_REQUEST)
+        except FileNotFoundError:
+          print('file not found')
+          return HttpResponse({'error': "File not found."}, status=status.HTTP_400_BAD_REQUEST)
+        except pd.errors.EmptyDataError:  
+          print('empty data (file is empty)')
+          return HttpResponse({'error': "File is empty."}, status=status.HTTP_400_BAD_REQUEST)
+        except pd.errors.ParserError:
+          print('parsing error')
+          return HttpResponse({'error': "Error parsing the CSV file."}, status=status.HTTP_400_BAD_REQUEST)
+
+      print(df)
+        
+      if(request.data['contentType']=='subject'):
+        return ImportSubject(df)
+      elif(request.data['contentType']=='chapter'):
+        print("requesting")
+        return ImportChapter(df)
+      elif(request.data['contentType']=='question'):
+        return ImportQuestion(df)
+      elif(request.data['contentType']=='answer'):
+        return ImportAnswer(df)
+      elif(request.data['contentType']=='mentor'):
+        return ImportMentor(df)  # Pass DataFrame for processing
+
+    except Exception as e:
+      print(e)
+      return HttpResponse({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
+def ImportSubject(df):
 
   model_instances = []
   invalid_rows = []
@@ -125,8 +160,8 @@ def ImportSubject(file_path):
   
   return HttpResponse({'messsage':"success"}, status=status.HTTP_201_CREATED)
 
-def ImportChapter(file_path):
-  df = pd.read_csv(file_path, delimiter=',')  # csv to dataframe
+def ImportChapter(df):
+  # df = pd.read_csv(file_path, delimiter=',')  # csv to dataframe
   
   # getting queryset of Subjects for each PH, CH, MA
   try:
@@ -175,10 +210,11 @@ def ImportChapter(file_path):
   # # bulk create all instances
   # with transaction.atomic():
   #   Chapter.objects.bulk_create(model_instances)
+  return HttpResponse({'message':"populated all chapters into database successfully"}, status=status.HTTP_201_CREATED)
     
-def ImportQuestion(file_path):
-  df = pd.read_csv(file_path, delimiter=',')  # csv to dataframe
-  creator = User.objects.get(name='utsah')
+def ImportQuestion(df):
+  # df = pd.read_csv(file_path, delimiter=',')  # csv to dataframe
+  creator = User.objects.get(name='admin')
   # print("df created !")
   
   invalid_rows = []
@@ -197,7 +233,7 @@ def ImportQuestion(file_path):
     
     try:
       image = ImageFile(open(row['image_path'], 'rb'))
-    except FileNotFoundError:
+    except FileNotFoundError as e:
       invalid_rows.append({'row':index, 'error': f"image file not found : {e}"})
       # return HttpResponse({'error': "question image file not found."}, status=status.HTTP_404_NOT_FOUND)
   
