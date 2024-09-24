@@ -1,4 +1,4 @@
-id,Name,Mobile no.,dropper_status,physics_rank,chemistry_rank,maths_rank,medium,did_you_change ,state,hello,hello2,hello3,hello4,hello5,student_gender,,,,
+id,Name,Mobile no.,dropper_status,physics,chemistry,maths,medium,did_you_change ,state,hello,hello2,hello3,hello4,hello5,student_gender,,,,
 1001,sana,n/a,Dropper,3,2,4,English,NO,Aasam,n/a,n/a,n/a,n/a,n/a,female,,,,
 1002,zoya,n/a,Dropper,4,3,2,English,NO,Madhya Pradesh,n/a,n/a,n/a,n/a,n/a,female,,,,
 1003,anya,n/a,Non-Dropper,3,2,1,hindi,NO,Delhi,n/a,n/a,n/a,n/a,n/a,female,,,,

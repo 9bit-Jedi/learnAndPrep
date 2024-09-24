@@ -27,19 +27,27 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     
-    path('admin/', admin.site.urls),
+    path('api/admin/', admin.site.urls),
     path('api/user/' , include('accounts.urls')),
-    path('mentorship/' , include('mentorship.urls')),
+    path('api/mentorship/' , include('mentorship.urls')),
     
-    path('questions/', include('questions.urls')),
-    path('notes/', include('notes.urls')),
-    path('answer/', include('quiz.urls')),
+    path('api/questions/', include('questions.urls')),
+    path('api/notes/', include('notes.urls')),
+    path('api/answer/', include('quiz.urls')),
     
-    # path('mock/', include('mockTest.urls')),
+    path('api/mocktest/', include('mockTest.urls')),
     # path('dpp/', include('mlAssist.urls')),
     
-    path('contact/', include('contactUs.urls')),
+    path('api/contact/', include('contactUs.urls')),
+    path('api/payments/', include('payments.urls')),
     
-    path('upload/', include('uploader.urls')), 
-    path("__debug__/", include("debug_toolbar.urls")),
-] + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
+    path('api/upload/', include('uploader.urls')), 
+    # path("__debug__/", include("debug_toolbar.urls")),
+] +static(settings.STATIC_URL, document_root = settings.STATIC_ROOT)+ static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
+
+if settings.DEBUG:
+    import debug_toolbar
+
+    urlpatterns += [
+        path(r'^__debug__/', include(debug_toolbar.urls)),
+    ]

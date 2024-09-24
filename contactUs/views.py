@@ -3,7 +3,7 @@ from django.shortcuts import render
 # Create your views here.
 from django.views import View
 from django.http import HttpResponse  # Import Response class
-from .models import ContactUs
+from .models import contactus
 from accounts.utils import Util
 
 from rest_framework import status
@@ -25,14 +25,14 @@ class ContactusView(APIView):
       mobile_no = serializer.validated_data['mobile_no']
       subject = serializer.validated_data['subject']
       message = serializer.validated_data['message']
-      contact = ContactUs(name=name, email=email, mobile_no=mobile_no, subject=subject, message=message)
+      contact = contactus(name=name, email=email, mobile_no=mobile_no, subject=subject, message=message)
       contact.save()
       
       # Send OTP to the user's email
       team_email_data = {
           'subject': f"Support Request - {subject}",
           'body': f"Hello Team,\n\nA new contact request has been received. Here are the details:\n\nName: {name}\nEmail: {email}\nMobile Number: {mobile_no}\nSubject: {subject}\nMessage: {message}\n\nPlease review and take the necessary action.\n\nBest,\nYour Automated System",
-          'to_email': 'utsah470@gmail.com'
+          'to_email': 'support@vjnucleus.com'
       }
       email_data = {
           'subject': f"Thank you for contacting us, {name}!",
@@ -41,8 +41,8 @@ class ContactusView(APIView):
       }
       
       try:
-          Util.send_mail(team_email_data)
-          Util.send_mail(email_data)
+          Util.send_support_mail(team_email_data)
+          Util.send_support_mail(email_data)
           return Response({'msg': 'Email has been sent to your email address.'}, status=status.HTTP_200_OK)
       except Exception as e:
           print(e)     

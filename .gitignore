@@ -1,10 +1,24 @@
+.venv
 __pycache__
 # db.sqlite3
 # uploader/files
 # uploader/img
 # questions/questions
 # questions/img
+
+.prettierrc
+
+.vscode/*
+media
+staticfiles
+
+mentorship/csv
+
 .env
+.env.dev
+.env.staging
+.env.production
+
 *.ps1
 
 sqlite3.exe

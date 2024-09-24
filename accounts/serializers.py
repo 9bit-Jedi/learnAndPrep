@@ -91,7 +91,7 @@ class SendPasswordResetEmailSerializer(serializers.Serializer):
                 'body' : body ,
                 'to_email' : user.email
             }
-            Util.send_mail(data)
+            Util.send_otp_mail(data)
             return attrs
         else:
             raise serializers.ValidationError("User with this email does not exist.")
@@ -164,3 +164,6 @@ class MobileNoOTPSendSerializer(serializers.Serializer):
 class MobileNoOTPVerificationSerializer(serializers.Serializer):
    otp = serializers.CharField(max_length=6)
 #    email = serializers.EmailField()
+
+class TokenVerificationSerializer(serializers.Serializer):
+    token = serializers.CharField()

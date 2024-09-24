@@ -1,0 +1,124 @@
+{
+    "sections": [
+        {
+            "id": "zkjHfQ949VQEjfPsQR73fp",
+            "questions": [
+                {
+                    "test_question": "xVEuXLkqNyZApUz2m2UiDb",
+                    "status": "Attempted",
+                    "time_taken": "00:02:30",
+                    "is_O1_marked":true,
+                    "is_O2_marked":true,
+                    "is_O3_marked":false,
+                    "is_O4_marked":false
+                },
+                {
+                    "test_question": "aT3W9uz3G7qyuQftATYwWd",
+                    "status": "Attempted",
+                    "time_taken": "00:01:45",
+                    "marked_option": "B"
+                },
+                {
+                    "test_question": "vUWZnJAtEE3VM5Z8mqT4XV",
+                    "status": "Attempted",
+                    "time_taken": "00:03:10",
+                    "marked_option": "C"
+                },
+                {
+                    "test_question": "tMdeeRQLsNhNh5CcfagRQD",
+                    "status": "Skipped",
+                    "time_taken": "00:00:00",
+                    "marked_option": null
+                },
+                {
+                    "test_question": "MQpphParSUKs8a2xU3no3U",
+                    "status": "Attempted",
+                    "time_taken": "00:02:15",
+                    "marked_option": "D"
+                }
+            ],
+            "title": "sect1",
+            "order": 0,
+            "test": "r65LcYSVZYSAePaUPTyttQ"
+        },
+        {
+            "id": "knLndKj4YMDKKoPzPiPEQN",
+            "questions": [
+                {
+                    "test_question": "yALUtKoG9wyVLUkNGPYRqF",
+                    "status": "Attempted",
+                    "time_taken": "00:02:30",
+                    "marked_option": "A"
+                },
+                {
+                    "test_question": "wuHn2jwYkCxom6j88XRSMc",
+                    "status": "Attempted",
+                    "time_taken": "00:01:45",
+                    "marked_answer": 20
+                },
+                {
+                    "test_question": "bi9DqQXvvCqqz4PnfiB5Yv",
+                    "status": "Attempted",
+                    "time_taken": "00:03:10",
+                    "is_O1_marked":true,
+                    "is_O2_marked":true,
+                    "is_O3_marked":false,
+                    "is_O4_marked":false
+                },
+                {
+                    "test_question": "bZvjqp2rx8Xw3KUTM8jfmE",
+                    "status": "Skipped",
+                    "time_taken": "00:00:00",
+                    "marked_option": null
+                },
+                {
+                    "test_question": "KTUAyBKedViEjcN8BoJRBv",
+                    "status": "Attempted",
+                    "time_taken": "00:02:15",
+                    "marked_option": "D"
+                }
+            ],
+            "title": "sect2",
+            "order": 1,
+            "test": "r65LcYSVZYSAePaUPTyttQ"
+        }
+    ]
+}
+
+
+//////////////////// sample question request body //////////////////////
+
+// single correct
+{
+    "test_question": "KTUAyBKedViEjcN8BoJRBv",
+    "status": "Attempted",
+    "time_taken": "00:02:15",
+    "marked_option": "D"
+}
+
+// multi correct
+{
+    "test_question": "bi9DqQXvvCqqz4PnfiB5Yv",
+    "status": "Attempted",
+    "time_taken": "00:03:10",
+    "is_O1_marked":true,
+    "is_O2_marked":true,
+    "is_O3_marked":false,
+    "is_O4_marked":false
+},
+
+// integer type
+{
+    "test_question": "wuHn2jwYkCxom6j88XRSMc",
+    "status": "Attempted",
+    "time_taken": "00:01:45",
+    "marked_answer": 20
+},
+
+// skipped 
+{
+    "test_question": "bZvjqp2rx8Xw3KUTM8jfmE",
+    "status": "Skipped",
+    "time_taken": "00:00:00",
+    "marked_option": null
+},
