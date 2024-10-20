@@ -170,9 +170,9 @@ def calculate_test_attempt_score(test_attempt):
     score = 0
     for test_question_attempt in test_attempt.question_attempts.all():
         # print(test_question_attempt)
-        if test_question_attempt.status == "Attempted" and test_question_attempt.is_correct:
+        if (test_question_attempt.status == "Attempted" or test_question_attempt.status == "SaveMarked") and test_question_attempt.is_correct:
             score = score + test_question_attempt.test_question.positive_marks
-        elif test_question_attempt.status == "Attempted" and not test_question_attempt.is_correct:
+        elif (test_question_attempt.status == "Attempted" or test_question_attempt.status == "SaveMarked") and not test_question_attempt.is_correct:
             score = score - test_question_attempt.test_question.negative_marks
         else :
             pass
