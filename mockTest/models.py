@@ -144,13 +144,13 @@ class TestAttempt(models.Model):
   #   return self.get_skipped_count()
   
   def get_correct_count(self):
-    return self.question_attempts.filter(is_correct=True).count()
+    return self.question_attempts.filter(is_correct=True, status__in=["Attempted", "SaveMarked"]).count()
 
   def get_incorrect_count(self):
-    return self.question_attempts.filter(is_correct=False, status="Attempted").count()
+    return self.question_attempts.filter(is_correct=False, status__in=["Attempted", "SaveMarked"]).count()
   
   def get_skipped_count(self):
-    return self.question_attempts.filter(status="Skipped").count()
+    return self.question_attempts.filter(status__in=["Skipped", "Marked"]).count() 
 
   
   def save(self, *args, **kwargs):
@@ -170,6 +170,7 @@ class TestQuestionAttempt(models.Model):
     ('Unattempted', 'Unattempted'),
     ('Skipped', 'not visited'),
     ('Marked', 'Marked for Review'),
+    ('SaveMarked', 'Saved and Marked for Review')
   }
   
   id = ShortUUIDField(primary_key=True, editable=False, max_length=22)

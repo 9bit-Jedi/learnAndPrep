@@ -4,6 +4,10 @@ def check_answer(question_id, body):
 
     if body['status'].lower()=='skipped':
         return False
+    if body['status'].lower()=='unattempted':
+        return False
+    if body['status'].lower()=='marked':
+        return False
     
     question = Question.objects.get(id=question_id)
 
@@ -11,6 +15,7 @@ def check_answer(question_id, body):
     if question.type == 'SMCQ':
         answer = AnswerSmcq.objects.get(question_id=question)
         is_correct = True if body['marked_option'] == answer.correct_option else False
+        print(body['marked_option'], answer.correct_option, is_correct)
         return is_correct
 
     # Multiple Correct 
@@ -31,6 +36,7 @@ def check_answer(question_id, body):
     elif question.type == 'INT':
         answer = AnswerIntegerType.objects.get(question_id=question)
         is_correct = True if body['marked_answer'] == answer.correct_answer else False
+        print(body['marked_answer'], answer.correct_answer, is_correct)
         return is_correct
         
     # Subjective Type 
