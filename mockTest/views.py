@@ -163,6 +163,23 @@ class StartTest(APIView):
         test_attempt_serialized = TestAttemptSerializer(test_attempt).data
         return Response({"success":True, "message":"Test started successfully", "data":test_attempt_serialized}, status=status.HTTP_200_OK)
 
+def calculate_test_attempt_score(test_attempt):
+    # test_attempt = TestAttempt.objects.get(id=id)
+    print(test_attempt)
+    
+    score = 0
+    for test_question_attempt in test_attempt.question_attempts.all():
+        # print(test_question_attempt)
+        if test_question_attempt.status == "Attempted" and test_question_attempt.is_correct:
+            score = score + test_question_attempt.test_question.positive_marks
+        elif test_question_attempt.status == "Attempted" and not test_question_attempt.is_correct:
+            score = score - test_question_attempt.test_question.negative_marks
+        else :
+            pass
+        test_attempt.score = score
+        test_attempt.save()
+    return score
+    
 class SubmitTest(APIView):
     permission_classes = [IsAuthenticated, IsPaymentDone]
 
@@ -242,6 +259,8 @@ class SubmitTest(APIView):
         print(bad_question_ids)
 
         test_attempt.is_submitted = True
+        test_attempt.score = calculate_test_attempt_score(test_attempt)
+        test_attempt.submission_time = timezone.now()
         test_attempt.save()
         test_attempt_serialized = TestAttemptSerializerFull(test_attempt)
     
