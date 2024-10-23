@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     # 'mentorship.apps.MentorshipConfig',
     'contactUs.apps.ContactusConfig',
     'rest_framework',
-    # "debug_toolbar",
+    "debug_toolbar",
     'corsheaders',
     'rest_framework_simplejwt',
     'rest_framework_simplejwt.token_blacklist',
@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'mentorship',
     'storages',
     'payments',
+    'mockTest',
 
 ]
 
@@ -61,7 +62,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'corsheaders.middleware.CorsMiddleware',
-    # "debug_toolbar.middleware.DebugToolbarMiddleware",
+    "debug_toolbar.middleware.DebugToolbarMiddleware",
 ]
 
 ROOT_URLCONF = 'learnAndPrep.urls'
@@ -145,7 +146,7 @@ REST_FRAMEWORK = {
 }
 
 SIMPLE_JWT = {
-    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=40),
+    "ACCESS_TOKEN_LIFETIME": timedelta(hours=12),
     "REFRESH_TOKEN_LIFETIME": timedelta(days=30),
     'ROTATE_REFRESH_TOKENS': True,
     'BLACKLIST_AFTER_ROTATION': True,
@@ -212,7 +213,7 @@ CSRF_COOKIE_SAMESITE = 'Lax'
 CSRF_COOKIE_HTTPONLY = False                # Set to False to allow frontend access to the CSRF token
 
 
-if config('PRODUCTION'):
+if config('PRODUCTION')==True:
     from .settings_prod import *
 else:
     from .settings_dev import *

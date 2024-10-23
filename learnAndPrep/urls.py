@@ -35,7 +35,7 @@ urlpatterns = [
     path('api/notes/', include('notes.urls')),
     path('api/answer/', include('quiz.urls')),
     
-    # path('mock/', include('mockTest.urls')),
+    path('api/mocktest/', include('mockTest.urls')),
     # path('dpp/', include('mlAssist.urls')),
     
     path('api/contact/', include('contactUs.urls')),
@@ -44,3 +44,10 @@ urlpatterns = [
     path('api/upload/', include('uploader.urls')), 
     # path("__debug__/", include("debug_toolbar.urls")),
 ] +static(settings.STATIC_URL, document_root = settings.STATIC_ROOT)+ static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
+
+if settings.DEBUG:
+    import debug_toolbar
+
+    urlpatterns += [
+        path(r'^__debug__/', include(debug_toolbar.urls)),
+    ]
