@@ -123,7 +123,7 @@ class TestQuestion(models.Model):
   
 
 class TestAttempt(models.Model):
-  id = ShortUUIDField(primary_key=True, max_length=22, editable=False)
+  id = ShortUUIDField(primary_key=True, max_length=48, editable=False)
   user = models.ForeignKey(to=User, on_delete=models.CASCADE, related_name='test_attempts')
   test = models.ForeignKey(to=Test, on_delete=models.CASCADE, related_name='test_attempts')
 
@@ -173,7 +173,7 @@ class TestQuestionAttempt(models.Model):
     ('SaveMarked', 'Saved and Marked for Review')
   }
   
-  id = ShortUUIDField(primary_key=True, editable=False, max_length=22)
+  id = ShortUUIDField(primary_key=True, editable=False, max_length=48)
   test_attempt = models.ForeignKey(to=TestAttempt, on_delete=models.CASCADE, related_name="question_attempts")
   test_question = models.ForeignKey(to=TestQuestion, on_delete=models.CASCADE) 
   

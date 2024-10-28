@@ -7,7 +7,7 @@ from django.core.exceptions import ValidationError
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import generics, status, permissions
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from accounts.permissions import IsPaymentDone, IsMentorAlloted
 
 # from questions.models import Chapter, Question, AnswerIntegerType, AnswerMmcq, AnswerSmcq, AnswerSubjective
@@ -35,13 +35,45 @@ class AvailableTestSeriesList(APIView):
         return Response({"success":True, "message":"Test series list fetched successfully", "data":test_series_serialized}, status=status.HTTP_200_OK)
 
 class TestsFromSeriesList(APIView):
-    # permission_classes = [IsAuthenticated, IsPaymentDone]  # Uncomment to require authentication
+    permission_classes = [IsAuthenticated, IsPaymentDone]  # Uncomment to require authentication
 
     def get(self, request, series_id, format=None):
+        # test_series = get_object_or_404(TestSeries, id=series_id)
+        # tests = Test.objects.filter(series=test_series)
+        # test_serialized = TestSerializer(tests, many=True).data
+        # return Response({"success":True, "message":"Test list fetched successfully", "data":test_serialized}, status=status.HTTP_200_OK)
+        
+        now = timezone.now()
+
+        # Get live tests that are currently active
         test_series = get_object_or_404(TestSeries, id=series_id)
-        tests = Test.objects.filter(series=test_series)
+        live_tests = LiveTest.objects.filter(series=test_series)
+        live_test_serialized = LiveTestSerializer(live_tests, many=True).data
+        
+        attempted_tests = []
+        # Get regular tests (excluding those already attempted by the user)
+        if request.user is not None:
+            print(request.user)
+            attempted_tests = TestAttempt.objects.filter(user=request.user)
+            print("attempted testsss -------> ",attempted_tests)
+            
+            attempted_tests_ids=[]
+            for attempted_test in attempted_tests:
+                attempted_tests_ids.append(attempted_test.test.id)
+            
+            tests = Test.objects.exclude(id__in=live_tests.values_list('id', flat=True)).exclude(id__in=attempted_tests_ids)
+        else:
+            tests = Test.objects.exclude(id__in=live_tests.values_list('id', flat=True))  # All tests if not authenticated
         test_serialized = TestSerializer(tests, many=True).data
-        return Response({"success":True, "message":"Test list fetched successfully", "data":test_serialized}, status=status.HTTP_200_OK)
+        attempted_test_serialized = TestAttemptSerializer(attempted_tests, many=True).data
+
+        data = {
+            'live_tests': live_test_serialized,
+            'tests': test_serialized,
+            'attempts': attempted_test_serialized,
+        }
+        
+        return Response({"success":True, "message":"Test list fetched successfully", "data":data}, status=status.HTTP_200_OK)
 
 class AvailableTestsList(APIView):
     # permission_classes = [IsAuthenticated, IsPaymentDone]  # Uncomment to require authentication
@@ -76,10 +108,13 @@ class AvailableTestsList(APIView):
         return Response({"success":True, "message":"Test list fetched successfully", "data":data}, status=status.HTTP_200_OK)
 
 class CreateRandomTest(APIView):
-    # permission_classes = [IsAuthenticated, IsMentorAlloted]
+    # permission_classes = [IsAuthenticated, IsAdminUser]
 
     def post(self, request, format=None):
+        series_id = request.data.get('series_id')
+        series = TestSeries.objects.get(id=series_id)
         test_name = request.data.get('name', None)
+        print(test_name)
         if test_name is None:
             return Response({'error': 'name not provided'}, status=status.HTTP_400_BAD_REQUEST)
         
@@ -90,7 +125,7 @@ class CreateRandomTest(APIView):
         
         test_instructions = Instructions.objects.all().first()
         
-        test = Test.objects.create(name=test_name, duration=test_duration)
+        test = Test.objects.create(name=test_name, series=series, duration=test_duration)
         # test = LiveTest.objects.create(name=test_name, duration=test_duration,start_time=timezone.now(), end_time=timezone.now()+test_duration)
         test.instructions = test_instructions
         test.save()
@@ -105,13 +140,13 @@ class CreateRandomTest(APIView):
             test_section = TestSection.objects.create(test=test, title=section_name, order=i)
 
             if section_name.lower() == 'physics':
-                questions_list = Question.objects.filter(chapter_id__subject_id__id='PH').order_by('?')[:10]
+                questions_list = Question.objects.filter(chapter_id__subject_id__id='PH').order_by('id')[:30]
                 print("Physics")
             elif section_name.lower() == 'chemistry':
-                questions_list = Question.objects.filter(chapter_id__subject_id__id='CH').order_by('?')[:10]
+                questions_list = Question.objects.filter(chapter_id__subject_id__id='CH').order_by('id')[:30]
                 print("Chemistry")
             elif section_name.lower() == 'mathematics':
-                questions_list = Question.objects.filter(chapter_id__subject_id__id='MA').order_by('?')[:10]
+                questions_list = Question.objects.filter(chapter_id__subject_id__id='MA').order_by('id')[:30]
                 print("Mathsss")
             else:
                 questions_list = Question.objects.all().order_by('?')[:30]
@@ -156,7 +191,10 @@ class StartTest(APIView):
         if test_attempt.exists():
             test_attempt = test_attempt.first()
             test_attempt_serialized = TestAttemptSerializer(test_attempt).data
-            return Response({"success":True, "message":"Test resumed successfully", "data":test_attempt_serialized}, status=status.HTTP_200_OK)
+            if test_attempt.is_submitted:
+                return Response({"success":False, "message":"Test already submitted by the user", "data":test_attempt_serialized}, status=status.HTTP_400_BAD_REQUEST)
+            else:
+                return Response({"success":True, "message":"Test resumed successfully", "data":test_attempt_serialized}, status=status.HTTP_200_OK)
         
         ## if test is being started for the first time
         test_attempt = TestAttempt.objects.create(user=request.user, test=test)
