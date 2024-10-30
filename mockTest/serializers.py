@@ -60,11 +60,12 @@ class LiveTestSerializer(serializers.ModelSerializer):
     instructions = InstructionsSerializer()
     creator = UserSerializer()
     is_active = serializers.BooleanField(read_only=True)  
+    status = serializers.CharField(read_only=True)
     # sections = TestSectionSerializer(many=True)
  
     class Meta:
         model = LiveTest
-        fields = list(TestSerializerFull.Meta.fields) + ['start_time', 'end_time', 'is_active'] 
+        fields = list(TestSerializerFull.Meta.fields) + ['start_time', 'end_time', 'is_active', 'status'] 
 class LiveTestSerializerFull(serializers.ModelSerializer):
     icon = IconSerializer()
     instructions = InstructionsSerializer()
