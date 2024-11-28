@@ -81,7 +81,7 @@ class SendPasswordResetEmailSerializer(serializers.Serializer):
             print('encoded uid ' , uid)
             token = PasswordResetTokenGenerator().make_token(user)
             print('password reset token' , token)
-            reset_link = f"http://localhost:3000/api/user/reset/{uid}/{token}/"
+            reset_link = f"https://vjnucleus.com/reset-password-form/{uid}/{token}/"
             print('password reset link' , reset_link)
             # send email
             body = 'click the link for reset your password' + reset_link
