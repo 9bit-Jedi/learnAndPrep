@@ -12,9 +12,9 @@ class QuestionAdmin(admin.ModelAdmin):
   inlines = [SmcqAdmin, MmcqAdmin, IntegerTypeAdmin]
   
 
-admin.site.register(Subject)
-admin.site.register(Chapter)
-admin.site.register(Icon)
+# admin.site.register(Subject)
+# admin.site.register(Chapter)
+# admin.site.register(Icon)
 
 admin.site.register(Question)
 admin.site.register(AnswerIntegerType)
