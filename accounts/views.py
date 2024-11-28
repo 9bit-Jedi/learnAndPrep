@@ -141,7 +141,7 @@ class UserChangePasswordView(APIView):
 
 class SendPasswordResetEmailView(APIView):
     renderer_classes = [UserRenderer]
-    permission_classes = [IsAuthenticated]
+    # permission_classes = [IsAuthenticated]
     
     def post(self , request , formate = None):
         serializer = SendPasswordResetEmailSerializer(data=request.data)
@@ -151,7 +151,7 @@ class SendPasswordResetEmailView(APIView):
     
 class  UserPasswordResetView(APIView):
     renderer_classes = [ UserRenderer]
-    permission_classes = [ IsAuthenticated]
+    # permission_classes = [ IsAuthenticated]
     
     def post(self , request , uid, token ,formate = None):
         serializer = UserPasswordResetSerializer(data=request.data, context={'uid':uid, 'token':token})
