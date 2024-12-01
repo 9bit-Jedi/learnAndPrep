@@ -1,8 +1,14 @@
+from datetime import timedelta
+import itertools
 import re
+import os
 import pandas as pd
+import tempfile
+import zipfile
 from django import views
 from django.http import HttpResponse
 from django.db import IntegrityError, transaction
+from requests import Response
 from rest_framework import status
 from rest_framework.parsers import MultiPartParser, FormParser
 from rest_framework.views import APIView
@@ -13,6 +19,9 @@ from accounts.models import User
 from accounts.permissions import IsPaymentDone, IsMentorAlloted
 from rest_framework.permissions import AllowAny
 
+from learnAndPrep import settings
+from mockTest.models import Instructions, Test, TestQuestion, TestSection, TestSeries
+from mockTest.serializers import TestSectionSerializer, TestSerializerFull
 from questions.models import Subject, Chapter, Question, Icon, AnswerIntegerType, AnswerMmcq, AnswerSmcq, AnswerSubjective
 from questions.serializers import SubjectSerializer, ChapterSerializer
 from mentorship.views import ImportMentor
@@ -71,17 +80,13 @@ class CsvUploadView(APIView):
   parser_classes = [MultiPartParser, FormParser]
   permission_classes = [AllowAny]
 
-  def post(self, request, format=None):    
+  def post(self, request, format=None):
     file = request.data['csv']
     # obj = File.objects.create(file=file)
     
     # checks for content type
     print(request.data['contentType'])
     
-    # Ensure pandas is installed
-    import pandas as pd
-    import tempfile
-
     try:
       # Temporary file creation (recommended)
       with tempfile.NamedTemporaryFile(delete=False) as temp_file:
@@ -133,6 +138,122 @@ class CsvUploadView(APIView):
     except Exception as e:
       print(e)
       return HttpResponse({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
+
+class CreateTestView(APIView):
+  parser_classes = [MultiPartParser, FormParser]
+  permission_classes = [AllowAny]
+
+  def post(self, request, format=None):
+    
+    series_id = request.data.get('series_id')
+    series = TestSeries.objects.get(id=series_id)
+    test_name = request.data.get('name', None) 
+    
+    file = request.data.get('zip')
+    # if not file:
+    #   return HttpResponse({'error': "No file was selected."}, status=status.HTTP_400_BAD_REQUEST)
+    print("hellos")
+    
+    print(test_name)
+    if test_name is None:
+        return Response({'error': 'name not provided'}, status=status.HTTP_400_BAD_REQUEST)
+    
+    # sorting basic details : 
+    #   test series, test name, test duration, test instructions, test sections
+    
+    test_duration = request.data.get('duration', None)
+    test_duration = timedelta(minutes=int(test_duration))
+    if test_duration is None:
+        return Response({'error': 'duration not provided'}, status=status.HTTP_400_BAD_REQUEST)
+    
+    test_instructions = Instructions.objects.all().first()
+    
+    test = Test.objects.create(name=test_name, series=series, duration=test_duration, instructions = test_instructions)
+    ## test = LiveTest.objects.create(name=test_name, duration=test_duration,start_time=timezone.now(), end_time=timezone.now()+test_duration)
+    
+    
+    # temporary directory after unzipping
+    with tempfile.TemporaryDirectory() as temp_dir:
+      # temp_dir = '/home/utsah/Desktop/learnAndPrep/temp'
+      temp_dir = 'media/temp/'
+      with zipfile.ZipFile(file, 'r') as zip_ref:
+        zip_ref.extractall(temp_dir)
+        # files = os.listdir(os.path.join(temp_dir, 'questions'))
+        # print(files)
+        df = pd.read_csv(os.path.join(temp_dir, 'questions', 'questions.csv'), delimiter=',', encoding='ISO-8859-1')
+        print(df)
+        
+        # populating questions 
+        # df -> df(0:25)
+        ph_ids = ImportQuestion(df[0:25], f'{temp_dir}/questions')   # (success tuple) returns list of PH question ids
+        print(ph_ids)
+        
+        ch_ids = ImportQuestion(df[25:50], f'{temp_dir}/questions')   # (success tuple) returns list of PH question ids
+        print(ch_ids)
+        
+        ma_ids = ImportQuestion(df[50:75], f'{temp_dir}/questions')   # (success tuple) returns list of PH question ids
+        print(ma_ids)
+        
+    sections_list = [
+      {"title": "Physics"},
+      {"title": "Chemistry"},
+      {"title": "Mathematics"}
+    ]
+    print(sections_list)
+    
+    for section, i in zip(sections_list, itertools.count()):
+        section_name = section.get('title', None)
+        if section_name is None:
+            return Response({'error': 'section name not provided'}, status=status.HTTP_400_BAD_REQUEST)
+        
+        # questions_list = section.get('questions', [])
+        test_section = TestSection.objects.create(test=test, title=section_name, order=i)
+
+        if section_name.lower() == 'physics':
+            questions_list = Question.objects.filter(id__in=ph_ids).order_by('id')
+            print("Physics")
+        elif section_name.lower() == 'chemistry':
+            questions_list = Question.objects.filter(id__in=ch_ids).order_by('id')
+            print("Chemistry")
+        elif section_name.lower() == 'mathematics':
+            questions_list = Question.objects.filter(id__in=ma_ids).order_by('id')
+            print("Mathsss")
+        else:
+            questions_list = Question.objects.all().order_by('?')[:25]
+            print("alll l ll ll")
+
+        for question, i in zip(questions_list, itertools.count()):
+            TestQuestion.objects.create(section=test_section, question=question, order=i)
+
+    # test.question.add(*Question.objects.all().order_by('?')[:10])
+    test_serialized = TestSerializerFull(test).data
+    test_serialized = dict(test_serialized)
+    print(type(test_serialized))
+    
+    sections = TestSection.objects.filter(test=test)
+    sections_serialized = TestSectionSerializer(sections, many=True).data
+    test_serialized['sections'] = sections_serialized
+        
+    return HttpResponse(test_serialized, status=status.HTTP_201_CREATED)
+    
+    
+
+
+# class CreateRandomTest(APIView):
+#   # permission_classes = [IsAuthenticated, IsAdminUser]
+
+#   def post(self, request, format=None):
+
+#     # sections_list = request.data.get('sections', [])
+
+#     # questions = TestQuestion.objects.filter(section__test=test)
+#     # questions = TestQuestion.objects.filter(section__test=test)
+#     # questions = TestQuestion.objects.all()
+#     # questions_serialized = TestQuestionSerializer(questions, many=True).data
+
+#     return Response(test_serialized, status=status.HTTP_201_CREATED)
 
 
 def ImportSubject(df):
@@ -211,48 +332,154 @@ def ImportChapter(df):
   # with transaction.atomic():
   #   Chapter.objects.bulk_create(model_instances)
   return HttpResponse({'message':"populated all chapters into database successfully"}, status=status.HTTP_201_CREATED)
-    
-def ImportQuestion(df):
+
+
+def ImportQuestion(df, temp_path):
   # df = pd.read_csv(file_path, delimiter=',')  # csv to dataframe
   creator = User.objects.get(name='admin')
-  # print("df created !")
+  print("df created !")
   
   invalid_rows = []
+  question_ids = []
   
   for index, row in df.iterrows():
-    question_id = row['question_id']
+    print(index)
+    # if 'question_id' not in row:
+    #   return HttpResponse({'error': "CSV file is missing 'question_id' column."}, status=status.HTTP_400_BAD_REQUEST)
     # subject_id = Subject.objects.get(id=question_id[0:2])
-    try:
-      chapter_id = Chapter.objects.get(id=question_id[0:4])
-    except Chapter.DoesNotExist as e:
-      invalid_rows.append({'row':index, 'error': f"Chapter id not found : {e}"})
-      
-    print(row['question_id'])
-    if Question.objects.filter(id=row['question_id']).count():
-      continue;
+    chapter = Chapter.objects.get(id=row['chapter_id'])
+    # print(chapter)
+    
+    # Get the last question id for the given chapter_id
+    # last_question = Question.objects.filter(chapter_id=chapter_id).order_by('id').last()
+    # if last_question:
+    #   last_question_id = last_question.id
+    #   new_question_number = int(last_question_id[-2:]) + 1
+    #   question_id = f"{chapter_id}{new_question_number}"
+    # else:
+    #   question_id = f"{chapter_id}01"
     
     try:
-      image = ImageFile(open(row['image_path'], 'rb'))
+      file_path = os.path.join(temp_path, row['file_name'])
+      
+      # file_path = os.path.join('media/temp/', row['file_name'])
+      # if not file_path.startswith(temp_path):
+      #   raise ValueError(f"Path traversal detected: {file_path}")
+      
+      print(file_path)
+      image = ImageFile(open(file_path, 'rb'))
     except FileNotFoundError as e:
       invalid_rows.append({'row':index, 'error': f"image file not found : {e}"})
+      print("hello",str(e))
+      continue
       # return HttpResponse({'error': "question image file not found."}, status=status.HTTP_404_NOT_FOUND)
   
     try:
-      Question.objects.create(
-        id= row['question_id'],
-        chapter_id= chapter_id,
-        type= row['type'],
-        source= row['source'],
-        question= image,
-        creator= creator
+      question = Question.objects.create(
+        # id = question_id,
+        chapter_id = chapter,
+        type = row['type'],
+        source = row['source'],
+        question = image,
+        creator = creator
       )
-      print(f"Created question id : {row['question_id']}") 
-    except Exception as e:
-      print(f"error : {str(e)}")
-      invalid_rows.append({'row':index, 'error': f"image file not found : {e}"})
-      # return HttpResponse({'error':f"{e}", "invalid_rows" : invalid_rows}, status=status.HTTP_400_BAD_REQUEST)
+      print(f"Created question id : {question.id}") 
+      question_ids.append(question.id)
       
-  return HttpResponse({"message":"populated all questions into database successfully", "invalid_rows" : invalid_rows}, status=status.HTTP_201_CREATED)
+      row['question_id'] = question.id
+      importAnswer2(row)
+    except Exception as e:
+      print("hmm ",str(e))
+      invalid_rows.append({'row':index, 'error': f"image file not found : {e}"})
+      
+      # return HttpResponse({'error':f"{e}", "invalid_rows" : invalid_rows}, status=status.HTTP_400_BAD_REQUEST)
+  return question_ids
+  # return HttpResponse({"message":"populated all questions into database successfully", "invalid_rows" : invalid_rows}, status=status.HTTP_201_CREATED)
+
+
+def importAnswer2(row):
+  
+  type = row['type']
+  print(row['question_id'])
+  question = Question.objects.get(id=row['question_id'])
+  try:
+    if type=='SMCQ':
+      # if answer object already exists
+      print(type)
+      # if AnswerSmcq.objects.filter(question_id=row['question_id']).count():
+        # continue;
+      # if it does not exists create it
+      AnswerSmcq.objects.create(
+        id= f"{row['question_id']}A",
+        question_id= question,
+        correct_option = row['correct_answer']
+      )
+      
+    if type=='MMCQ':
+      # if answer object already exists
+      print(type)
+      # if AnswerMmcq.objects.filter(question_id=row['question_id']).count():
+      #   continue;
+      # if it does not exists create it
+      # write logic for 4 options
+      if "A" in row['correct_answer']:
+        is_O1_correct = True
+      else:
+        is_O1_correct = False
+      if "B" in row['correct_answer']:
+        is_O2_correct = True
+      else:
+        is_O2_correct = False
+      if "C" in row['correct_answer']:
+        is_O3_correct = True
+      else:
+        is_O3_correct = False
+      if "D" in row['correct_answer']:
+        is_O4_correct = True
+      else:
+        is_O4_correct = False
+      
+      AnswerMmcq.objects.create(
+        id= f"{row['question_id']}A",
+        question_id= question,
+        is_O1_correct = is_O1_correct,
+        is_O2_correct = is_O2_correct,
+        is_O3_correct = is_O3_correct,
+        is_O4_correct = is_O4_correct
+      )
+      
+    if type=='INT':
+      # if answer object already exists
+      print(row['question_id'])
+      print(type)
+      # if AnswerIntegerType.objects.filter(question_id=row['question_id']).count():
+      #   continue;
+      # if it does not exists create it
+      AnswerIntegerType.objects.create(
+        id= f"{row['question_id']}A",
+        question_id= question,
+        correct_answer = row['correct_answer']
+      )
+      
+    if type=='SUBJ':
+      # if answer object already exists
+      print(row['question_id'])
+      print(type)
+      # if AnswerSubjective.objects.filter(question_id=row['question_id']).count():
+      #   continue;
+      # if it does not exists create it
+      AnswerSubjective.objects.create(
+        id= f"{row['question_id']}A",
+        question_id= question,
+        correct_answer = row['correct_answer']
+      )
+    print(f"answer id : {row['question_id']}A") 
+    print(type)
+  except Exception as e:
+    print(f"error : {str(e)}")
+    
+
+
 
 def ImportAnswer(file_path):
   df = pd.read_csv(file_path, delimiter=',')  # csv to dataframe

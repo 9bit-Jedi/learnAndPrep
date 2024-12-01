@@ -20,6 +20,7 @@ mentorship/csv
 .env.production
 
 *.ps1
+*.json
 
 sqlite3.exe
 sqldiff.exe
