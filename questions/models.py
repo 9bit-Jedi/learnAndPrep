@@ -1,13 +1,8 @@
 from django.db import models
 from django.conf import settings
-User = settings.AUTH_USER_MODEL
-
-from django.shortcuts import get_object_or_404
 from django.core.validators import MinLengthValidator, RegexValidator
 
-# from django.contrib.contenttypes.fields import GenericForeignKey
-# from django.contrib.contenttypes.models import ContentType
-# from django.contrib.contenttypes.fields import GenericRelation
+User = settings.AUTH_USER_MODEL
 
 # Create your models here.
 class Subject(models.Model):
@@ -16,7 +11,7 @@ class Subject(models.Model):
         ('CH', 'Chemistry'),
         ('MA', 'Mathematics'),
     ]
-    id = models.CharField(max_length=2, primary_key=True)  
+    id = models.CharField(max_length=2, primary_key=True, choices=SUBJECT_CHOICES)  
     subject_name = models.CharField(max_length=24)
     
     def __str__(self):
@@ -76,19 +71,36 @@ class Question(models.Model):
     question = models.ImageField(upload_to='')
     creator = models.ForeignKey(to=User, on_delete=models.SET_NULL, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
-    
-    
-OPTION_CHOICES = [('A', 'A'),('B', 'B'),('C', 'C'),('D', 'D'),]
+
+    def save(self, *args, **kwargs):
+        if not self.id:
+            # Fetch last question in this chapter
+            last_question = Question.objects.filter(chapter_id=self.chapter_id).order_by('-id').first()
+            if last_question:
+                last_number = int(last_question.id[4:])
+            else:
+                last_number = 0
+            self.id = f"{self.chapter_id.id}{last_number + 1:03}"
+        super().save(*args, **kwargs)
+
+    def __str__(self):
+        return f"{self.id} - {self.type}"
+
+
+OPTION_CHOICES = [('A', 'A'), ('B', 'B'), ('C', 'C'), ('D', 'D')]
+
 
 class AbstractAnswer(models.Model):
-    id = models.CharField(max_length=8, primary_key=True)
+    id = models.CharField(max_length=10, primary_key=True)
     question_id = models.OneToOneField(Question, on_delete=models.CASCADE, related_query_name="question_answer")
-    explanation = models.ImageField(upload_to='explanations/', null=True)
+    explanation = models.ImageField(upload_to='explanations/', null=True, blank=True)
+
     class Meta:
         abstract = True
     
     def save(self, *args, **kwargs):
-        self.id = self.question_id.id + 'A'
+        if not self.id:
+            self.id = f"{self.question_id.id}A"
         super().save(*args, **kwargs)
 
     def __str__(self):
@@ -108,4 +120,4 @@ class AnswerIntegerType(AbstractAnswer):
     correct_answer = models.FloatField()
     
 class AnswerSubjective(AbstractAnswer):
-    correct_answer = models.CharField(max_length=512, null=True)
+    correct_answer = models.CharField(max_length=512, null=True, blank=True)
