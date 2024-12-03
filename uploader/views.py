@@ -17,7 +17,7 @@ from django.core.files.images import ImageFile
 
 from accounts.models import User
 from accounts.permissions import IsPaymentDone, IsMentorAlloted
-from rest_framework.permissions import AllowAny
+from rest_framework.permissions import AllowAny, IsAdminUser, IsAuthenticated
 
 from learnAndPrep import settings
 from mockTest.models import Instructions, Test, TestQuestion, TestSection, TestSeries
@@ -143,7 +143,7 @@ class CsvUploadView(APIView):
 
 class CreateTestView(APIView):
   parser_classes = [MultiPartParser, FormParser]
-  permission_classes = [AllowAny]
+  permission_classes = [IsAdminUser]
 
   def post(self, request, format=None):
     
