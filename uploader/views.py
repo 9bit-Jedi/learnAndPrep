@@ -17,7 +17,7 @@ from django.core.files.images import ImageFile
 
 from accounts.models import User
 from accounts.permissions import IsPaymentDone, IsMentorAlloted
-from rest_framework.permissions import AllowAny
+from rest_framework.permissions import AllowAny, IsAdminUser, IsAuthenticated
 
 from learnAndPrep import settings
 from mockTest.models import Instructions, Test, TestQuestion, TestSection, TestSeries
@@ -143,7 +143,7 @@ class CsvUploadView(APIView):
 
 class CreateTestView(APIView):
   parser_classes = [MultiPartParser, FormParser]
-  permission_classes = [AllowAny]
+  permission_classes = [IsAdminUser]
 
   def post(self, request, format=None):
     
@@ -212,13 +212,13 @@ class CreateTestView(APIView):
         test_section = TestSection.objects.create(test=test, title=section_name, order=i)
 
         if section_name.lower() == 'physics':
-            questions_list = Question.objects.filter(id__in=ph_ids).order_by('id')
+            questions_list = Question.objects.filter(id__in=ph_ids)
             print("Physics")
         elif section_name.lower() == 'chemistry':
-            questions_list = Question.objects.filter(id__in=ch_ids).order_by('id')
+            questions_list = Question.objects.filter(id__in=ch_ids)
             print("Chemistry")
         elif section_name.lower() == 'mathematics':
-            questions_list = Question.objects.filter(id__in=ma_ids).order_by('id')
+            questions_list = Question.objects.filter(id__in=ma_ids)
             print("Mathsss")
         else:
             questions_list = Question.objects.all().order_by('?')[:25]
