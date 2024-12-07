@@ -126,7 +126,7 @@ class UserPermissionView(APIView):
     
     def get(self, request):
         user = request.user
-        return Response({'is_mobile_no_verified': user.is_mobile_no_verified, 'is_payment_done': user.is_payment_done, 'is_mentor_alloted': user.is_mentor_alloted}, status=status.HTTP_200_OK)
+        return Response({'is_admin': user.is_admin, 'is_mobile_no_verified': user.is_mobile_no_verified, 'is_payment_done': user.is_payment_done, 'is_mentor_alloted': user.is_mentor_alloted}, status=status.HTTP_200_OK)
 
 class UserChangePasswordView(APIView):
     renderer_classes = [UserRenderer]
