@@ -1,7 +1,9 @@
 from datetime import timedelta
+from datetime import datetime
 import itertools
 import re
 import os
+import uuid
 import pandas as pd
 import tempfile
 import zipfile
@@ -27,6 +29,7 @@ from questions.serializers import SubjectSerializer, ChapterSerializer
 from mentorship.views import ImportMentor
 
 from .models import File, Img
+import shutil
 
 # Create your views here.
 
@@ -152,10 +155,6 @@ class CreateTestView(APIView):
     test_name = request.data.get('name', None) 
     
     file = request.data.get('zip')
-    # if not file:
-    #   return HttpResponse({'error': "No file was selected."}, status=status.HTTP_400_BAD_REQUEST)
-    print("hellos")
-    
     print(test_name)
     if test_name is None:
         return Response({'error': 'name not provided'}, status=status.HTTP_400_BAD_REQUEST)
@@ -170,31 +169,51 @@ class CreateTestView(APIView):
     
     test_instructions = Instructions.objects.all().first()
     
-    test = Test.objects.create(name=test_name, series=series, duration=test_duration, instructions = test_instructions)
+    test = Test.objects.create(name=test_name, series=series, duration=test_duration, instructions = test_instructions, creator=request.user)
     ## test = LiveTest.objects.create(name=test_name, duration=test_duration,start_time=timezone.now(), end_time=timezone.now()+test_duration)
     
     
     # temporary directory after unzipping
     with tempfile.TemporaryDirectory() as temp_dir:
-      # temp_dir = '/home/utsah/Desktop/learnAndPrep/temp'
-      temp_dir = 'media/temp/'
+      subdir_name = f"temp_{datetime.now().strftime('%Y%m%d%H%M%S')}_{uuid.uuid4().hex}"
+      temp_dir = os.path.join('media/', subdir_name)
+      
       with zipfile.ZipFile(file, 'r') as zip_ref:
-        zip_ref.extractall(temp_dir)
-        # files = os.listdir(os.path.join(temp_dir, 'questions'))
-        # print(files)
-        df = pd.read_csv(os.path.join(temp_dir, 'questions', 'questions.csv'), delimiter=',', encoding='ISO-8859-1')
+        zip_ref.extractall(os.path.join(temp_dir))
+        
+        riyal_temp_dir = temp_dir
+        temp_dir = os.path.join(temp_dir, os.listdir(temp_dir)[0])
+        
+        csv_file = [ filename for filename in os.listdir(temp_dir) if filename.endswith( '.csv' ) ][0]
+        if csv_file is None:
+            return Response({'error': 'CSV file not found'}, status=status.HTTP_400_BAD_REQUEST)
+
+        df = pd.read_csv(os.path.join(temp_dir, csv_file), delimiter=',', encoding='ISO-8859-1')
+        # Clean up the dataframe to remove spaces from chapter id
+        df['chapter_id'] = df['chapter_id'].str.strip(' ')
+        df['source'] = df['source'].str.strip(' ')
+        df['file_name'] = df['file_name'].str.strip(' ')
+        df['type'] = df['type'].str.strip(' ')
+        df['correct_answer'] = df['correct_answer'].str.strip(' ')
         print(df)
         
+        df_ph = df[df['chapter_id'].str.contains('PH')]
+        df_ch = df[df['chapter_id'].str.contains('CH')]
+        df_ma = df[df['chapter_id'].str.contains('MA')]
+                
         # populating questions 
         # df -> df(0:25)
-        ph_ids = ImportQuestion(df[0:25], f'{temp_dir}/questions')   # (success tuple) returns list of PH question ids
+        ph_ids = ImportQuestion(df[0:25], f'{temp_dir}')   # (success tuple) returns list of PH question ids
         print(ph_ids)
         
-        ch_ids = ImportQuestion(df[25:50], f'{temp_dir}/questions')   # (success tuple) returns list of PH question ids
+        ch_ids = ImportQuestion(df[25:50], f'{temp_dir}')   # (success tuple) returns list of PH question ids
         print(ch_ids)
         
-        ma_ids = ImportQuestion(df[50:75], f'{temp_dir}/questions')   # (success tuple) returns list of PH question ids
+        ma_ids = ImportQuestion(df[50:75], f'{temp_dir}')   # (success tuple) returns list of PH question ids
         print(ma_ids)
+        
+        
+        shutil.rmtree(riyal_temp_dir)
         
     sections_list = [
       {"title": "Physics"},
@@ -237,23 +256,7 @@ class CreateTestView(APIView):
     test_serialized['sections'] = sections_serialized
         
     return HttpResponse(test_serialized, status=status.HTTP_201_CREATED)
-    
-    
 
-
-# class CreateRandomTest(APIView):
-#   # permission_classes = [IsAuthenticated, IsAdminUser]
-
-#   def post(self, request, format=None):
-
-#     # sections_list = request.data.get('sections', [])
-
-#     # questions = TestQuestion.objects.filter(section__test=test)
-#     # questions = TestQuestion.objects.filter(section__test=test)
-#     # questions = TestQuestion.objects.all()
-#     # questions_serialized = TestQuestionSerializer(questions, many=True).data
-
-#     return Response(test_serialized, status=status.HTTP_201_CREATED)
 
 
 def ImportSubject(df):

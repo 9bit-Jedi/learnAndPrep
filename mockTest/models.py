@@ -5,8 +5,7 @@ from django.db import models
 # from django.conf import settings
 # User = settings.AUTH_USER_MODEL
 from accounts.models import User
-from django.shortcuts import get_object_or_404
-from django.core.validators import MinLengthValidator, RegexValidator
+# from django.core.validators import MinLengthValidator, RegexValidator
 
 from questions.models import Question, Icon, Chapter
 

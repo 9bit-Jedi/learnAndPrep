@@ -1,5 +1,5 @@
 import json
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import get_object_or_404
 from django.http import Http404, HttpResponse
 from django.core.exceptions import ValidationError
 # from django.db import IntegrityError 
@@ -20,9 +20,9 @@ from .serializers import *
 from datetime import timedelta
 import itertools
 
-from django.db import connection
-from .utils import QueryLogger
-ql = QueryLogger()
+# from django.db import connection
+# from .utils import QueryLogger
+# ql = QueryLogger()
 
 # Create your views here.
 
@@ -223,6 +223,8 @@ class SubmitTest(APIView):
 
     def post(self, request, test_id, format=None):
         
+        print(request.data)
+        
         # # check if the data is in correct format & I have all the required fields : test_id
         # # check if the test is live
         # # check if the test is already attempted (if not, save attempt)
@@ -282,13 +284,18 @@ class SubmitTest(APIView):
 
                 import dateutil.parser
                 print(type(question_data["time_taken"]))
-                print(dateutil.parser.parse(question_data["time_taken"]))
+                try:
+                    time_taken = timedelta(seconds=float(question_data["time_taken"]))
+                    print(time_taken)
+                except Exception as e:
+                    time_taken = timedelta(seconds=0)
+                
                 # Update the attempt with the user's selected option, status, and correctness
                 question_attempt = TestQuestionAttempt.objects.create(
                     test_attempt=test_attempt,
                     test_question=test_question,
                     status=question_data["status"],
-                    # time_taken=question_data["time_taken"],
+                    time_taken=time_taken,
                     is_correct=is_correct
                 )
                 question_attempt.save()
