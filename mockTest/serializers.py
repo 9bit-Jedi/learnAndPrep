@@ -4,7 +4,7 @@ from .models import (
     Instructions, TestSeries, Test, LiveTest, TestSection, TestQuestion, 
     TestAttempt, TestQuestionAttempt
 )
-from questions.models import Question, AnswerIntegerType, AnswerMmcq, AnswerSmcq, AnswerSubjective
+from questions.models import Question, AnswerIntegerType, AnswerMmcq, AnswerSmcq, AnswerSubjective, AbstractAnswer
 from questions.serializers import IconSerializer, QuestionSerializer
 
 
@@ -43,7 +43,7 @@ class TestSerializerFull(serializers.ModelSerializer):
   sections = TestSectionSerializer(many=True)
   class Meta:
       model = Test
-      fields = ['id', 'creator', 'name', 'duration', 'instructions', 'icon', 'sections']
+      fields = ['id', 'creator', 'name', 'duration', 'instructions', 'icon', 'sections', 'maximun_score']
       # depth = 1
 class TestSerializer(serializers.ModelSerializer):
   icon = IconSerializer()
@@ -52,7 +52,7 @@ class TestSerializer(serializers.ModelSerializer):
 #   sections = TestSectionSerializer(many=True)
   class Meta:
       model = Test
-      fields = ['id', 'creator', 'name', 'duration', 'instructions', 'icon', 'sections']
+      fields = ['id', 'creator', 'name', 'duration', 'instructions', 'icon', 'sections', 'maximun_score']
       # depth = 1
 
 class LiveTestSerializer(serializers.ModelSerializer):
@@ -123,9 +123,30 @@ class AnswerSubjectiveSerializer(serializers.ModelSerializer):
         fields = ['correct_answer', 'explanation']
 
 class TestQuestionAttemptSerializer(serializers.ModelSerializer):
+    correct_answer = serializers.SerializerMethodField()
+    question_image = serializers.SerializerMethodField()
+
     class Meta:
         model = TestQuestionAttempt
-        fields = '__all__'
+        fields = ['test_question', 'question_image', 'status', 'time_taken', 'selected_answer', 'correct_answer', 'is_correct']
+
+    def get_question_image(self, obj):
+        return obj.test_question.question.question.url
+
+    def get_correct_answer(self, obj):
+        question_id = obj.test_question.question.id
+        answer_type = obj.test_question.question.type
+        if answer_type == "INT":
+            return AnswerIntegerType.objects.get(question_id=question_id).correct_answer
+        if answer_type == "SMCQ":
+            return AnswerSmcq.objects.get(question_id=question_id).correct_option
+        if answer_type == "MMCQ":
+            ans = AnswerMmcq.objects.get(question_id=question_id)
+            return [ans.is_O1_correct, ans.is_O2_correct, ans.is_O3_correct, ans.is_O4_correct]
+        if answer_type == "SUBJ":
+            return AnswerSubjective.objects.get(question_id=question_id).correct_answer
+        else:
+            return None
 
 class TestAttemptSerializer(serializers.ModelSerializer):
     user = UserSerializer()
@@ -136,7 +157,7 @@ class TestAttemptSerializer(serializers.ModelSerializer):
 
 class TestAttemptSerializerFull(serializers.ModelSerializer):
     user = UserSerializer()
-    # test = TestSerializer()
+    test = TestSerializer()
     correct = serializers.SerializerMethodField()
     incorrect = serializers.SerializerMethodField()
     skipped = serializers.SerializerMethodField()
@@ -159,7 +180,7 @@ class TestQuestionAttemptSerializer(serializers.Serializer):
     test_question = serializers.CharField()         # uuid of question
     status = serializers.CharField() 
     time_taken = serializers.DurationField() 
-    selected_option = serializers.CharField(allow_null=True, required=False)  
+    selected_answer = serializers.CharField(allow_null=True, required=False)  
 
 class SectionSerializer(serializers.Serializer):
     title = serializers.CharField(max_length=128, required=False) 

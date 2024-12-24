@@ -1,14 +1,10 @@
-import json
 from django.shortcuts import get_object_or_404
-from django.http import Http404, HttpResponse
-from django.core.exceptions import ValidationError
-# from django.db import IntegrityError 
 
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework import generics, status, permissions
+from rest_framework import status
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
-from accounts.permissions import IsPaymentDone, IsMentorAlloted
+from accounts.permissions import IsPaymentDone
 
 # from questions.models import Chapter, Question, AnswerIntegerType, AnswerMmcq, AnswerSmcq, AnswerSubjective
 # from questions.serializers import QuestionSerializer, AnswerMmcqSerializer, AnswerIntegerTypeSerializer, AnswerSmcqSerializer, AnswerSubjectiveSerializer
@@ -283,12 +279,23 @@ class SubmitTest(APIView):
                     bad_question_ids.append(test_question.id)
 
                 import dateutil.parser
-                print(type(question_data["time_taken"]))
                 try:
                     time_taken = timedelta(seconds=float(question_data["time_taken"]))
                     print(time_taken)
                 except Exception as e:
                     time_taken = timedelta(seconds=0)
+                    
+                marked_answer = None
+                print(question_data)
+                # try:
+                #     marked_answer = question_data['marked_option']
+                # except Exception as e:
+                #     marked_answer = question_data['marked_answer']
+                
+                # MMCQ not handled - sry :(
+                marked_answer = question_data.get('marked_option')
+                if marked_answer is None:
+                    marked_answer = question_data.get('marked_answer')
                 
                 # Update the attempt with the user's selected option, status, and correctness
                 question_attempt = TestQuestionAttempt.objects.create(
@@ -296,6 +303,7 @@ class SubmitTest(APIView):
                     test_question=test_question,
                     status=question_data["status"],
                     time_taken=time_taken,
+                    selected_answer = marked_answer,
                     is_correct=is_correct
                 )
                 question_attempt.save()
@@ -303,7 +311,7 @@ class SubmitTest(APIView):
         print(bad_section_ids) 
         print(bad_question_ids)
 
-        test_attempt.is_submitted = True
+        # test_attempt.is_submitted = True
         test_attempt.score = calculate_test_attempt_score(test_attempt)
         test_attempt.submission_time = timezone.now()
         test_attempt.save()

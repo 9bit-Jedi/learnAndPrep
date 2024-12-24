@@ -42,6 +42,7 @@ class Test(models.Model):
   series = models.ForeignKey(TestSeries, on_delete=models.DO_NOTHING, related_name='tests')
   creator = models.ForeignKey(to=User, null=True, on_delete=models.SET_NULL)
   duration = models.DurationField()
+  maximun_score = models.IntegerField(default=300)
   instructions = models.ForeignKey(to=Instructions, null=True, on_delete=models.SET_NULL)
   # icon - fk to questions.models.icon
   icon = models.ForeignKey(to=Icon, null=True, on_delete=models.SET_NULL)
@@ -176,7 +177,7 @@ class TestQuestionAttempt(models.Model):
   test_attempt = models.ForeignKey(to=TestAttempt, on_delete=models.CASCADE, related_name="question_attempts")
   test_question = models.ForeignKey(to=TestQuestion, on_delete=models.CASCADE) 
   
-  # selected_option = models.CharField(max_length=1, choices=Question.OPTION_CHOICES, null=True, blank=True)
+  selected_answer = models.CharField(max_length=10, null=True, blank=True)
   status = models.CharField(max_length=64, choices=STATUS_CHOICES, null=True)
   is_correct = models.BooleanField(default=False)
   time_taken = models.DurationField(null=True)
